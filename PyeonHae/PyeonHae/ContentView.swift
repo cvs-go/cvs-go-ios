@@ -14,6 +14,12 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+                .font(.pretendard(.extraBold, 24))
+                .foregroundColor(.green)
+            
+            Text("Hello, world!")
+                .font(.pretendard(.extraBold, 24))
+                .foregroundColor(.systemGreen)
         }
         .padding()
     }

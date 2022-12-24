@@ -17,6 +17,7 @@
 		5403AEE12957252B00FB7253 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5403AED82957252B00FB7253 /* Pretendard-ExtraLight.ttf */; };
 		5403AEE22957252B00FB7253 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5403AED92957252B00FB7253 /* Pretendard-SemiBold.ttf */; };
 		5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5403AEE72957275B00FB7253 /* FontExtension.swift */; };
+		5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5403AEE9295729C500FB7253 /* ColorExtension.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11E829571E52007DAD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E729571E52007DAD20 /* ContentView.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		5403AED82957252B00FB7253 /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
 		5403AED92957252B00FB7253 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		5403AEE72957275B00FB7253 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
+		5403AEE9295729C500FB7253 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E729571E52007DAD20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				5403AEE72957275B00FB7253 /* FontExtension.swift */,
+				5403AEE9295729C500FB7253 /* ColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
+				5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
