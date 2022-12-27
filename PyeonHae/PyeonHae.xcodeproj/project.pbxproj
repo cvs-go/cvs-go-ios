@@ -22,6 +22,7 @@
 		54126CB82958356D009D5A09 /* SecureFieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB72958356D009D5A09 /* SecureFieldWithTitle.swift */; };
 		54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB929584327009D5A09 /* ImageExtension.swift */; };
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
+		545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AC7D3295B3A23002D6853 /* InputPasswordView.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11E829571E52007DAD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E729571E52007DAD20 /* ContentView.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		54126CB72958356D009D5A09 /* SecureFieldWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureFieldWithTitle.swift; sourceTree = "<group>"; };
 		54126CB929584327009D5A09 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		54126CC029585BD6009D5A09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		545AC7D3295B3A23002D6853 /* InputPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPasswordView.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E729571E52007DAD20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				54126CC029585BD6009D5A09 /* LoginView.swift */,
+				545AC7D3295B3A23002D6853 /* InputPasswordView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54126CB82958356D009D5A09 /* SecureFieldWithTitle.swift in Sources */,
@@ -386,6 +390,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -416,6 +421,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
