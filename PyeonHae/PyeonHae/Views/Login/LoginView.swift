@@ -20,7 +20,8 @@ struct LoginView: View {
                         TextFieldWithTitle(
                             title: "아이디",
                             placeholder: "이메일을 입력해주세요.",
-                            isSecure: false
+                            isSecure: false,
+                            type: .email
                         )
                         .focused($isFocused)
                         .padding(.horizontal, 20)
@@ -56,12 +57,14 @@ struct LoginView: View {
                         }
                     }
                 }
-                Text("계속하기")
-                    .font(.pretendard(.bold, 18))
-                    .foregroundColor(.white)
-                    .frame(width: UIWindow().screen.bounds.width, height: 50)
-                    .background(Color.red100)
-                    .opacity(isFocused ? 1 : 0)
+                NavigationLink(destination: InputPasswordView()) {
+                    Text("계속하기")
+                        .font(.pretendard(.bold, 18))
+                        .foregroundColor(.white)
+                        .frame(width: UIWindow().screen.bounds.width, height: 50)
+                        .background(Color.red100)
+                        .opacity(isFocused ? 1 : 0)
+                }
             }
         }
     }

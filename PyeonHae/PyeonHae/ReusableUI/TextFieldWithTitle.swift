@@ -14,11 +14,13 @@ struct TextFieldWithTitle: View {
     let title: String
     let placeholder: String
     let isSecure: Bool
+    let type: TextFieldType
     
-    init(title: String, placeholder: String, isSecure: Bool) {
+    init(title: String, placeholder: String, isSecure: Bool, type: TextFieldType) {
         self.title = title
         self.placeholder = placeholder
         self.isSecure = isSecure
+        self.type = type
     }
     
     var body: some View {
@@ -86,4 +88,11 @@ struct TextFieldWithTitle: View {
             .cornerRadius(10)
         }
     }
+}
+
+enum TextFieldType {
+    case email
+    case password
+    case checkPassword
+    case nickname
 }

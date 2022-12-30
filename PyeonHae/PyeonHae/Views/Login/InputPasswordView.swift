@@ -25,7 +25,8 @@ struct InputPasswordView: View {
                     TextFieldWithTitle(
                         title: "비밀번호",
                         placeholder: "비밀번호를 입력해주세요.",
-                        isSecure: true
+                        isSecure: true,
+                        type: .password
                     )
                     .focused($isFocused)
                     Spacer()
