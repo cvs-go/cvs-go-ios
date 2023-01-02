@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var loginViewModel = LoginViewModel()
+//    @Binding var email: String
     @FocusState private var isFocused
+//    @State var state: TextFieldState = .normal
+    
+//    init(email: Binding<String> = .constant(String())) {
+//        self._email = email
+//    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -18,22 +26,29 @@ struct LoginView: View {
                         .frame(width: UIWindow().screen.bounds.width - 40, height: 300)
                     VStack {
                         TextFieldWithTitle(
+                            text: $loginViewModel.email,
                             title: "아이디",
                             placeholder: "이메일을 입력해주세요.",
                             isSecure: false,
-                            type: .email
+                            type: .email,
+                            state: $loginViewModel.textFieldState
                         )
                         .focused($isFocused)
                         .padding(.horizontal, 20)
                         Spacer().frame(height: 10)
                         if !isFocused {
-                            NavigationLink(destination: InputPasswordView()) {
+                            NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel)) {
                                 Text("계속하기")
                                     .font(.pretendard(.bold, 18))
                                     .foregroundColor(.white)
                                     .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
-                                    .background(Color.red100)
+                                    .background(loginViewModel.textFieldState == .checkEmail
+                                                || loginViewModel.email == String()
+                                                ? Color.grayscale50
+                                                : Color.red100
+                                    )
                                     .cornerRadius(10)
+                                
                             }
                             Spacer().frame(height: 29)
                             Text("간편 로그인")
@@ -57,12 +72,16 @@ struct LoginView: View {
                         }
                     }
                 }
-                NavigationLink(destination: InputPasswordView()) {
+                NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel)) {
                     Text("계속하기")
                         .font(.pretendard(.bold, 18))
                         .foregroundColor(.white)
                         .frame(width: UIWindow().screen.bounds.width, height: 50)
-                        .background(Color.red100)
+                        .background(loginViewModel.textFieldState == .checkEmail
+                                    || loginViewModel.email == String()
+                                    ? Color.grayscale50
+                                    : Color.red100
+                        )
                         .opacity(isFocused ? 1 : 0)
                 }
             }

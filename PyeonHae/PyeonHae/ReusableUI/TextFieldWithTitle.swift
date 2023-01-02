@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct TextFieldWithTitle: View {
-    @State var text = String()
     @FocusState var isFocused: Bool
     @State var showPassword = false
+    @Binding var text: String
     let title: String
     let placeholder: String
     let isSecure: Bool
     let type: TextFieldType
+    @Binding var state: TextFieldState
     
-    init(title: String, placeholder: String, isSecure: Bool, type: TextFieldType) {
+    init(text: Binding<String>,
+         title: String,
+         placeholder: String,
+         isSecure: Bool,
+         type: TextFieldType,
+         state: Binding<TextFieldState>
+    ) {
+        self._text = text
         self.title = title
         self.placeholder = placeholder
         self.isSecure = isSecure
         self.type = type
+        self._state = state
     }
     
     var body: some View {
@@ -78,14 +87,18 @@ struct TextFieldWithTitle: View {
             .padding(.horizontal, 10)
             .frame(height: 50)
             .overlay(
-                   RoundedRectangle(cornerRadius: 10)
-                       .stroke(lineWidth: 1)
-                       .foregroundColor(.grayscale30)
-                       .opacity(isFocused ? 1 : 0)
-               )
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundColor(.grayscale30)
+                    .opacity(isFocused ? 1 : 0)
+            )
             .font(.pretendard(.regular, 18))
             .background(Color.grayscale10)
             .cornerRadius(10)
+            
+            Text(state.rawValue)
+                .font(.pretendard(.regular, 14))
+                .foregroundColor(.systemRed)
         }
     }
 }

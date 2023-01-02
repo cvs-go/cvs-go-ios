@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct InputPasswordView: View {
+    @ObservedObject var loginViewModel: LoginViewModel
+//    @Binding var password: String
     @FocusState private var isFocused
+    
+//    init(password: Binding<String> = .constant(String())) {
+//        self._password = password
+//    }
+    
     var body: some View {
         VStack {
             ScrollView {
@@ -23,10 +30,12 @@ struct InputPasswordView: View {
                         .padding(.leading, 2)
                     Spacer().frame(height: 31)
                     TextFieldWithTitle(
+                        text: $loginViewModel.password,
                         title: "비밀번호",
                         placeholder: "비밀번호를 입력해주세요.",
                         isSecure: true,
-                        type: .password
+                        type: .password,
+                        state: $loginViewModel.textFieldState
                     )
                     .focused($isFocused)
                     Spacer()
