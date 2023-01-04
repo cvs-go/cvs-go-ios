@@ -37,19 +37,16 @@ struct LoginView: View {
                         .padding(.horizontal, 20)
                         Spacer().frame(height: 10)
                         if !isFocused {
-                            NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel)) {
+                            NavigationLink(destination: getDestination) {
                                 Text("계속하기")
                                     .font(.pretendard(.bold, 18))
                                     .foregroundColor(.white)
                                     .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
-                                    .background(loginViewModel.textFieldState == .checkEmail
-                                                || loginViewModel.email == String()
-                                                ? Color.grayscale50
-                                                : Color.red100
-                                    )
+                                    .background(backgroundColor)
                                     .cornerRadius(10)
                                 
                             }
+                            .disabled(isDisabled)
                             Spacer().frame(height: 29)
                             Text("간편 로그인")
                                 .font(.pretendard(.bold, 14))
@@ -72,19 +69,39 @@ struct LoginView: View {
                         }
                     }
                 }
-                NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel)) {
+                NavigationLink(destination: getDestination) {
                     Text("계속하기")
                         .font(.pretendard(.bold, 18))
                         .foregroundColor(.white)
                         .frame(width: UIWindow().screen.bounds.width, height: 50)
-                        .background(loginViewModel.textFieldState == .checkEmail
-                                    || loginViewModel.email == String()
-                                    ? Color.grayscale50
-                                    : Color.red100
-                        )
+                        .background(backgroundColor)
+                        .background(Color.red100)
                         .opacity(isFocused ? 1 : 0)
                 }
+                .disabled(isDisabled)
             }
+        }
+    }
+    
+    var backgroundColor: Color {
+        return loginViewModel.textFieldState == .checkEmail
+        || loginViewModel.email == String()
+        ? Color.grayscale50
+        : Color.red100
+    }
+    
+    var isDisabled: Bool {
+        return loginViewModel.textFieldState == .checkEmail
+        || loginViewModel.email == String()
+        ? true
+        : false
+    }
+    
+    func getDestination() -> AnyView {
+        if loginViewModel.checkEmail() {
+            return AnyView(InputPasswordView(loginViewModel: loginViewModel))
+        } else {
+            return AnyView(SignupPasswordView(loginViewModel: loginViewModel))
         }
     }
 }

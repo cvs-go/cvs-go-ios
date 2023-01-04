@@ -105,7 +105,8 @@ struct TextFieldWithTitle: View {
 
 enum TextFieldType {
     case email
-    case password
-    case checkPassword
+    case loginPassword
+    case signupPassword
+    case signupCheckPassword
     case nickname
 }

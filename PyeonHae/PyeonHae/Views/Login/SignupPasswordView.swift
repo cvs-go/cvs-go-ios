@@ -1,20 +1,15 @@
 //
-//  InputPasswordView.swift
+//  SignupPasswordView.swift
 //  PyeonHae
 //
-//  Created by 정건호 on 2022/12/27.
+//  Created by koochowon on 2023/01/04.
 //
 
 import SwiftUI
 
-struct InputPasswordView: View {
+struct SignupPasswordView: View {
     @ObservedObject var loginViewModel: LoginViewModel
-//    @Binding var password: String
     @FocusState private var isFocused
-    
-//    init(password: Binding<String> = .constant(String())) {
-//        self._password = password
-//    }
     
     var body: some View {
         VStack {
@@ -24,17 +19,17 @@ struct InputPasswordView: View {
                         .font(.pretendard(.medium, 24))
                         .foregroundColor(.grayscale100)
                     Spacer().frame(height: 8)
-                    Text("‘사용자 아이디@gmail.com’로 로그인합니다.")
+                    Text("‘사용자 아이디@gmail.com’로 서비스에 가입합니다.")
                         .font(.pretendard(.regular, 14))
                         .foregroundColor(.grayscale85)
                         .padding(.leading, 2)
                     Spacer().frame(height: 31)
                     TextFieldWithTitle(
                         text: $loginViewModel.password,
-                        title: "비밀번호",
-                        placeholder: "비밀번호를 입력해주세요.",
+                        title: "비밀번호 확인",
+                        placeholder: "영문+숫자+특수기호 포함 10자 이상",
                         isSecure: true,
-                        type: .loginPassword,
+                        type: .signupPassword,
                         state: $loginViewModel.textFieldState
                     )
                     .focused($isFocused)
