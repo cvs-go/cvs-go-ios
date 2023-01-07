@@ -37,13 +37,19 @@ struct SignupPasswordView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
+            NavigationLink(destination: SignupCheckPasswordView(loginViewModel: loginViewModel)) {
+                Text("다음")
+                    .font(.pretendard(.bold, 18))
+                    .foregroundColor(.white)
+                    .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                    .background(Color.red100)
+                    .cornerRadius(isFocused ? 0 : 10)
+            }
+            Spacer().frame(height: isFocused ? 0 : 52)
         }
-        Text("로그인")
-            .font(.pretendard(.bold, 18))
-            .foregroundColor(.white)
-            .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-            .background(Color.red100)
-            .cornerRadius(isFocused ? 0 : 10)
-        Spacer().frame(height: isFocused ? 0 : 52)
+        .onAppear {
+            self.loginViewModel.textFieldType = .signupPassword
+            self.loginViewModel.textFieldState = .normal
+        }
     }
 }

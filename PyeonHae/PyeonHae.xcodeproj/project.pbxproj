@@ -23,6 +23,7 @@
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
 		545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AC7D3295B3A23002D6853 /* InputPasswordView.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
+		54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11E829571E52007DAD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E729571E52007DAD20 /* ContentView.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		54126CC029585BD6009D5A09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		545AC7D3295B3A23002D6853 /* InputPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPasswordView.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCheckPasswordView.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E729571E52007DAD20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				54126CC029585BD6009D5A09 /* LoginView.swift */,
 				545AC7D3295B3A23002D6853 /* InputPasswordView.swift */,
 				668CC38729659B9200416C2F /* SignupPasswordView.swift */,
+				54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
+				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,

@@ -10,14 +10,34 @@ import Combine
 
 class LoginViewModel: ObservableObject {
     @Published var textFieldState: TextFieldState = .normal
+    @Published var textFieldType: TextFieldType = .email
     @Published var email: String = String()
     @Published var password: String = String()
+    @Published var checkPassword: String = String()
+    @Published var nickname: String = String()
     var bag = Set<AnyCancellable>()
     
     init() {
-        $email.sink { text in
-            self.state(textFieldType: .email)
+        $email
+            .filter { _ in self.textFieldType == .email }
+            .sink { text in
+                self.state(textFieldType: self.textFieldType)
         }.store(in: &bag)
+        
+        $password
+            .filter { _ in
+                self.textFieldType == .signupPassword
+                || self.textFieldType == .signupCheckPassword
+            }
+            .sink { text in
+                self.state(textFieldType: self.textFieldType)
+        }.store(in: &bag)
+        
+        $checkPassword
+            .filter { _ in self.textFieldType == .signupCheckPassword }
+            .sink { text in
+                self.state(textFieldType: self.textFieldType)
+            }.store(in: &bag)
     }
     func state(textFieldType: TextFieldType) {
         switch textFieldType {
@@ -27,17 +47,27 @@ class LoginViewModel: ObservableObject {
             } else {
                 textFieldState = .checkEmail
             }
-//        case .password:
-//            if password.isValidPassword() || password.isEmpty {
-//                textFieldState = .normal
-//            } else {
-//                textFieldState = .wrongPassword
-//            }
+        case .loginPassword:
+            if password.isValidPassword() || password.isEmpty {
+                textFieldState = .normal
+            } else {
+                textFieldState = .wrongPassword
+            }
         case .signupPassword:
-            if password.isValidPassword() {
+            if password.isEmpty {
+                textFieldState = .normal
+            } else if password.isValidPassword() {
                 textFieldState = .availablePassword
             } else {
                 textFieldState = .checkPassword
+            }
+        case .signupCheckPassword:
+            if checkPassword.isEmpty {
+                textFieldState = .normal
+            } else if password == checkPassword {
+                textFieldState = .normal
+            } else {
+                textFieldState = .differentPassword
             }
         default:
             textFieldState = .normal
@@ -60,4 +90,6 @@ enum TextFieldState: String {
     case wrongPassword = "정확한 비밀번호를 입력해주세요." // 틀린 비밀번호로 로그인 버튼 클릭 시
     case checkPassword = "영문+숫자+특수기호 포함 10자 이상만 가능합니다."
     case availablePassword = "사용할 수 있는 비밀번호입니다."
+    case availableNickname = "사용할 수 있는 닉네임입니다."
+    case differentPassword = "비밀번호가 일치하지 않습니다."
 }

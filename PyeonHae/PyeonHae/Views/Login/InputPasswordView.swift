@@ -9,12 +9,7 @@ import SwiftUI
 
 struct InputPasswordView: View {
     @ObservedObject var loginViewModel: LoginViewModel
-//    @Binding var password: String
     @FocusState private var isFocused
-    
-//    init(password: Binding<String> = .constant(String())) {
-//        self._password = password
-//    }
     
     var body: some View {
         VStack {
@@ -42,13 +37,19 @@ struct InputPasswordView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
+            Text("로그인")
+                .font(.pretendard(.bold, 18))
+                .foregroundColor(.white)
+                .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                .background(Color.red100)
+                .cornerRadius(isFocused ? 0 : 10)
+            Spacer().frame(height: isFocused ? 0 : 52)
         }
-        Text("로그인")
-            .font(.pretendard(.bold, 18))
-            .foregroundColor(.white)
-            .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-            .background(Color.red100)
-            .cornerRadius(isFocused ? 0 : 10)
-        Spacer().frame(height: isFocused ? 0 : 52)
+        .onAppear {
+            self.loginViewModel.textFieldType = .loginPassword
+        }
+        .onDisappear {
+            self.loginViewModel.textFieldType = .email
+        }
     }
 }

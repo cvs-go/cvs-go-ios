@@ -9,13 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var loginViewModel = LoginViewModel()
-//    @Binding var email: String
     @FocusState private var isFocused
-//    @State var state: TextFieldState = .normal
-    
-//    init(email: Binding<String> = .constant(String())) {
-//        self._email = email
-//    }
     
     var body: some View {
         NavigationView {
@@ -80,7 +74,12 @@ struct LoginView: View {
                 }
                 .disabled(isDisabled)
             }
+            .onAppear {
+                self.loginViewModel.textFieldType = .email
+                self.loginViewModel.textFieldState = .normal
+            }
         }
+        .navigationViewStyle(.stack)
     }
     
     var backgroundColor: Color {

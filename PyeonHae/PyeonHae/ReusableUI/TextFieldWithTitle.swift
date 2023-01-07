@@ -89,7 +89,7 @@ struct TextFieldWithTitle: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
-                    .foregroundColor(.grayscale30)
+                    .foregroundColor(textFieldBorderColor())
                     .opacity(isFocused ? 1 : 0)
             )
             .font(.pretendard(.regular, 18))
@@ -98,7 +98,45 @@ struct TextFieldWithTitle: View {
             
             Text(state.rawValue)
                 .font(.pretendard(.regular, 14))
-                .foregroundColor(.systemRed)
+                .foregroundColor(textFieldGuideColor())
+        }
+    }
+    
+    func textFieldBorderColor() -> Color {
+        switch state {
+        case .normal:
+            return .grayscale30
+        case .checkEmail:
+            return .systemRed
+        case .wrongPassword:
+            return .systemRed
+        case .checkPassword:
+            return .systemRed
+        case .availablePassword:
+            return .grayscale30
+        case .availableNickname:
+            return .grayscale30
+        case .differentPassword:
+            return .systemRed
+        }
+    }
+    
+    func textFieldGuideColor() -> Color {
+        switch state {
+        case .normal:
+            return .white
+        case .checkEmail:
+            return .systemRed
+        case .wrongPassword:
+            return .systemRed
+        case .checkPassword:
+            return .systemRed
+        case .availablePassword:
+            return .systemGreen
+        case .availableNickname:
+            return .systemGreen
+        case .differentPassword:
+            return .systemRed
         }
     }
 }
