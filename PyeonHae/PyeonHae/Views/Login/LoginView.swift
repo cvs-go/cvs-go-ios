@@ -78,6 +78,9 @@ struct LoginView: View {
                 self.loginViewModel.textFieldType = .email
                 self.loginViewModel.textFieldState = .normal
             }
+            .onDisappear{
+                self.isFocused = false
+            }
         }
         .navigationViewStyle(.stack)
     }

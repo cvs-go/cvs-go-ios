@@ -35,18 +35,36 @@ struct SignupCheckPasswordView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
-            Text("다음")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.white)
-                .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-                .background(Color.red100)
-                .cornerRadius(isFocused ? 0 : 10)
+            NavigationLink(destination: SignupNicknameView(loginViewModel: loginViewModel)) {
+                Text("다음")
+                    .font(.pretendard(.bold, 18))
+                    .foregroundColor(.white)
+                    .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                    .background(backgroundColor)
+                    .cornerRadius(isFocused ? 0 : 10)
+            }
+            .disabled(isDisabled)
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {
             self.loginViewModel.textFieldType = .signupCheckPassword
+            self.isFocused = true
         }
     }
+    var backgroundColor: Color {
+        return loginViewModel.textFieldState == .differentPassword
+        || loginViewModel.checkPassword.isEmpty
+        ? Color.grayscale50
+        : Color.red100
+    }
+    
+    var isDisabled: Bool {
+        return loginViewModel.textFieldState == .differentPassword
+        || loginViewModel.checkPassword.isEmpty
+        ? true
+        : false
+    }
+    
 //
 //    var attributedString: AttributedString {
 //        var fullString: AttributedString = "‘다음’버튼을 누르시면 이용약관과 개인정보처리방침에 \n모두 동의한 것으로 간주합니다."

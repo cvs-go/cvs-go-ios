@@ -38,6 +38,12 @@ class LoginViewModel: ObservableObject {
             .sink { text in
                 self.state(textFieldType: self.textFieldType)
             }.store(in: &bag)
+        
+        $nickname
+            .filter { _ in self.textFieldType == .nickname }
+            .sink { text in
+                self.state(textFieldType: self.textFieldType)
+            }.store(in: &bag)
     }
     func state(textFieldType: TextFieldType) {
         switch textFieldType {
@@ -69,8 +75,12 @@ class LoginViewModel: ObservableObject {
             } else {
                 textFieldState = .differentPassword
             }
-        default:
-            textFieldState = .normal
+        case .nickname:
+            if nickname.count < 2 || nickname.count > 8 {
+                textFieldState = .normal
+            } else {
+                textFieldState = .availableNickname
+            }
         }
     }
     

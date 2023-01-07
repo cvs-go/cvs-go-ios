@@ -19,7 +19,7 @@ struct SignupPasswordView: View {
                         .font(.pretendard(.medium, 24))
                         .foregroundColor(.grayscale100)
                     Spacer().frame(height: 8)
-                    Text("‘사용자 아이디@gmail.com’로 서비스에 가입합니다.")
+                    Text("‘\(loginViewModel.email)’로 서비스에 가입합니다.")
                         .font(.pretendard(.regular, 14))
                         .foregroundColor(.grayscale85)
                         .padding(.leading, 2)
@@ -42,14 +42,26 @@ struct SignupPasswordView: View {
                     .font(.pretendard(.bold, 18))
                     .foregroundColor(.white)
                     .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-                    .background(Color.red100)
+                    .background(backgroundColor)
                     .cornerRadius(isFocused ? 0 : 10)
             }
+            .disabled(isDisabled)
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {
+            self.isFocused = true
             self.loginViewModel.textFieldType = .signupPassword
-            self.loginViewModel.textFieldState = .normal
         }
+    }
+    var backgroundColor: Color {
+        return loginViewModel.password.isValidPassword()
+        ? Color.red100
+        : Color.grayscale50
+    }
+    
+    var isDisabled: Bool {
+        return loginViewModel.password.isValidPassword()
+        ? false
+        : true
     }
 }

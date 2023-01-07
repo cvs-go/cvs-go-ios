@@ -1,13 +1,13 @@
 //
-//  InputPasswordView.swift
+//  SignupNicknameView.swift
 //  PyeonHae
 //
-//  Created by 정건호 on 2022/12/27.
+//  Created by 정건호 on 2023/01/08.
 //
 
 import SwiftUI
 
-struct InputPasswordView: View {
+struct SignupNicknameView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     @FocusState private var isFocused
     
@@ -15,21 +15,16 @@ struct InputPasswordView: View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text("비밀번호를\n입력해주세요.")
+                    Text("사용할 닉네임을\n입력해 주세요.")
                         .font(.pretendard(.medium, 24))
                         .foregroundColor(.grayscale100)
-                    Spacer().frame(height: 8)
-                    Text("‘\(loginViewModel.email)’로 로그인합니다.")
-                        .font(.pretendard(.regular, 14))
-                        .foregroundColor(.grayscale85)
-                        .padding(.leading, 2)
-                    Spacer().frame(height: 31)
+                    Spacer().frame(height: 56)
                     TextFieldWithTitle(
-                        text: $loginViewModel.password,
-                        title: "비밀번호",
-                        placeholder: "비밀번호를 입력해주세요.",
-                        isSecure: true,
-                        type: .loginPassword,
+                        text: $loginViewModel.nickname,
+                        title: "닉네임",
+                        placeholder: "8자 이내의 닉네임을 입력해주세요.",
+                        isSecure: false,
+                        type: .nickname,
                         state: $loginViewModel.textFieldState
                     )
                     .focused($isFocused)
@@ -37,7 +32,7 @@ struct InputPasswordView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
-            Text("로그인")
+            Text("다음")
                 .font(.pretendard(.bold, 18))
                 .foregroundColor(.white)
                 .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
@@ -47,22 +42,18 @@ struct InputPasswordView: View {
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {
-            self.loginViewModel.textFieldType = .loginPassword
             self.isFocused = true
-        }
-        .onDisappear {
-            self.loginViewModel.textFieldType = .email
+            self.loginViewModel.textFieldType = .nickname
         }
     }
-    
     var backgroundColor: Color {
-        return loginViewModel.password.isValidPassword()
+        return loginViewModel.textFieldState == .availableNickname
         ? Color.red100
         : Color.grayscale50
     }
     
     var isDisabled: Bool {
-        return loginViewModel.password.isValidPassword()
+        return loginViewModel.textFieldState == .availableNickname
         ? false
         : true
     }
