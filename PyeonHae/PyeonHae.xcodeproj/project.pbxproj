@@ -32,6 +32,7 @@
 		54D0101B295F3E5800FACB90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101A295F3E5800FACB90 /* Constants.swift */; };
 		54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101C295F3E9400FACB90 /* RegexConstants.swift */; };
 		54D0101F295F412600FACB90 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101E295F412600FACB90 /* StringExtension.swift */; };
+		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		54D0101A295F3E5800FACB90 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		54D0101C295F3E9400FACB90 /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		54D0101E295F412600FACB90 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyView.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +139,7 @@
 				668CC38729659B9200416C2F /* SignupPasswordView.swift */,
 				54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */,
 				54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */,
+				54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
+				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
 				5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */,
 				54D0101F295F412600FACB90 /* StringExtension.swift in Sources */,
 				54D0101B295F3E5800FACB90 /* Constants.swift in Sources */,
