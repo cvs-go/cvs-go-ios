@@ -30,7 +30,7 @@ struct SignupCheckPasswordView: View {
                     )
                     .focused($isFocused)
                     Spacer().frame(height: 17)
-                    Text("‘다음’버튼을 누르시면 이용약관과 개인정보처리방침에 \n모두 동의한 것으로 간주합니다.")
+                    Text(attributedText())
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale85)
                     Spacer().frame(height: 8)
@@ -75,6 +75,21 @@ struct SignupCheckPasswordView: View {
         || loginViewModel.checkPassword.isEmpty
         ? true
         : false
+    }
+    
+    func attributedText() -> AttributedString {
+        var fullText = AttributedString("‘다음’버튼을 누르시면 이용약관과 개인정보처리방침에 \n모두 동의한 것으로 간주합니다.")
+        fullText.font = .pretendard(.regular, 12)
+        fullText.foregroundColor = .grayscale85
+        
+        if let termsOfUseText = fullText.range(of: "이용약관") {
+            fullText[termsOfUseText].font = .pretendard(.bold, 12)
+        }
+        if let privacyAndPolicy = fullText.range(of: "개인정보처리방침") {
+            fullText[privacyAndPolicy].font = .pretendard(.bold, 12)
+        }
+        
+        return fullText
     }
     
 //

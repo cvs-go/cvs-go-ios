@@ -37,4 +37,6 @@ extension Color {
     
     static let systemGreen = Color(hex: "#08BE25")
     static let systemRed = Color(hex: "#E00D00")
+    
+    static let mineGray100 = Color(hex: "F6F6F6")
 }
