@@ -91,14 +91,4 @@ struct SignupCheckPasswordView: View {
         
         return fullText
     }
-    
-//
-//    var attributedString: AttributedString {
-//        var fullString: AttributedString = "‘다음’버튼을 누르시면 이용약관과 개인정보처리방침에 \n모두 동의한 것으로 간주합니다."
-//        var privacyAndPolicy: AttributedString = "개인정보처리방침"
-//        fullString.font = .pretendard(.regular, 14)
-//        let font = AttributeContainer.font(.pretendard(.medium, 14))
-//        fullString.replaceAttributes(termsOfUse, with: font)
-//        fullString.replaceAttributes(privacyAndPolicy, with: font)
-//    }
 }

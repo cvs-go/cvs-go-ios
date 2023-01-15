@@ -114,8 +114,8 @@ struct TextFieldWithTitle: View {
             return .systemRed
         case .availablePassword:
             return .grayscale30
-        case .availableNickname:
-            return .grayscale30
+        case .unavailableNickname:
+            return .systemRed
         case .differentPassword:
             return .systemRed
         }
@@ -133,8 +133,8 @@ struct TextFieldWithTitle: View {
             return .systemRed
         case .availablePassword:
             return .systemGreen
-        case .availableNickname:
-            return .systemGreen
+        case .unavailableNickname:
+            return .systemRed
         case .differentPassword:
             return .systemRed
         }

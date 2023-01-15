@@ -44,6 +44,10 @@ struct InputPasswordView: View {
                 .background(backgroundColor)
                 .cornerRadius(isFocused ? 0 : 10)
                 .disabled(isDisabled)
+                .onTapGesture {
+                    // TODO: 로그인 성공 시, 화면 전환 어떻게 할지 의논해보기
+                    loginViewModel.tryToLogin()
+                }
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {

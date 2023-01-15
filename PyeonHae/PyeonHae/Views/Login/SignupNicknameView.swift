@@ -10,6 +10,7 @@ import SwiftUI
 struct SignupNicknameView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     @FocusState private var isFocused
+    @State var canMoveNextPage = false
     
     var body: some View {
         VStack {
@@ -32,13 +33,21 @@ struct SignupNicknameView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
-            Text("다음")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.white)
-                .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-                .background(backgroundColor)
-                .cornerRadius(isFocused ? 0 : 10)
-                .disabled(isDisabled)
+
+            NavigationLink(
+                destination: SignupSelectTagView(loginViewModel: loginViewModel),
+                isActive: $canMoveNextPage) {
+                    Text("다음")
+                        .font(.pretendard(.bold, 18))
+                        .foregroundColor(.white)
+                        .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                        .background(backgroundColor)
+                        .cornerRadius(isFocused ? 0 : 10)
+                        .disabled(isDisabled)
+                        .onTapGesture {
+                            canMoveNextPage = loginViewModel.checkNickname()
+                        }
+                }
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {
@@ -47,13 +56,13 @@ struct SignupNicknameView: View {
         }
     }
     var backgroundColor: Color {
-        return loginViewModel.textFieldState == .availableNickname
+        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count < 8
         ? Color.red100
         : Color.grayscale50
     }
     
     var isDisabled: Bool {
-        return loginViewModel.textFieldState == .availableNickname
+        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count < 8
         ? false
         : true
     }

@@ -38,7 +38,6 @@ struct LoginView: View {
                                     .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
                                     .background(backgroundColor)
                                     .cornerRadius(10)
-                                
                             }
                             .disabled(isDisabled)
                             Spacer().frame(height: 29)
