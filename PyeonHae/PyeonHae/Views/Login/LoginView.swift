@@ -7,43 +7,102 @@
 
 import SwiftUI
 
-// TODO: 추후 이미지 추가 예정, 키보드 위 버튼 추가
-
 struct LoginView: View {
+    @ObservedObject var loginViewModel = LoginViewModel()
+    @FocusState private var isFocused
+    
     var body: some View {
-        VStack {
-            TextFieldWithTitle(title: "아이디", placeholder: "이메일을 입력해주세요.", isSecure: false)
-                .padding(.horizontal, 20)
-            Spacer().frame(height: 10)
-            Button(action: {
-                print("다음 화면")
-            }) {
-                Text("계속하기")
-                    .font(.pretendard(.bold, 18))
-                    .foregroundColor(.white)
+        NavigationView {
+            VStack {
+                ScrollView {
+                    // TODO: 추후 이미지 추가 예정
+                    Text("대략적인 이미지 크기")
+                        .frame(width: UIWindow().screen.bounds.width - 40, height: 300)
+                    VStack {
+                        TextFieldWithTitle(
+                            text: $loginViewModel.email,
+                            title: "아이디",
+                            placeholder: "이메일을 입력해주세요.",
+                            isSecure: false,
+                            type: .email,
+                            state: $loginViewModel.textFieldState
+                        )
+                        .focused($isFocused)
+                        .padding(.horizontal, 20)
+                        Spacer().frame(height: 10)
+                        if !isFocused {
+                            NavigationLink(destination: getDestination) {
+                                Text("계속하기")
+                                    .font(.pretendard(.bold, 18))
+                                    .foregroundColor(.white)
+                                    .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
+                                    .background(backgroundColor)
+                                    .cornerRadius(10)
+                            }
+                            .disabled(isDisabled)
+                            Spacer().frame(height: 29)
+                            Text("간편 로그인")
+                                .font(.pretendard(.bold, 14))
+                                .foregroundColor(.grayscale100)
+                            Spacer().frame(height: 20)
+                            HStack(spacing: 16) {
+                                Image(name: .kakaoLogin)
+                                    .onTapGesture {
+                                        print("kakaoLogin")
+                                    }
+                                Image(name: .naverLogin)
+                                    .onTapGesture {
+                                        print("naverLogin")
+                                    }
+                                Image(name: .appleLogin)
+                                    .onTapGesture {
+                                        print("appleLogin")
+                                    }
+                            }
+                        }
+                    }
+                }
+                NavigationLink(destination: getDestination) {
+                    Text("계속하기")
+                        .font(.pretendard(.bold, 18))
+                        .foregroundColor(.white)
+                        .frame(width: UIWindow().screen.bounds.width, height: 50)
+                        .background(backgroundColor)
+                        .background(Color.red100)
+                        .opacity(isFocused ? 1 : 0)
+                }
+                .disabled(isDisabled)
             }
-            .frame(maxWidth: UIWindow().screen.bounds.width - 40, maxHeight: 50)
-            .background(Color.red100)
-            .cornerRadius(10)
-            Spacer().frame(height: 29)
-            Text("간편 로그인")
-                .font(.pretendard(.bold, 14))
-                .foregroundColor(.grayscale100)
-            Spacer().frame(height: 20)
-            HStack(spacing: 16) {
-                Image(name: .kakaoLogin)
-                    .onTapGesture {
-                        print("kakaoLogin")
-                    }
-                Image(name: .naverLogin)
-                    .onTapGesture {
-                        print("naverLogin")
-                    }
-                Image(name: .appleLogin)
-                    .onTapGesture {
-                        print("appleLogin")
-                    }
+            .onAppear {
+                self.loginViewModel.textFieldType = .email
+                self.loginViewModel.textFieldState = .normal
             }
+            .onDisappear{
+                self.isFocused = false
+            }
+        }
+        .navigationViewStyle(.stack)
+    }
+    
+    var backgroundColor: Color {
+        return loginViewModel.textFieldState == .checkEmail
+        || loginViewModel.email == String()
+        ? Color.grayscale50
+        : Color.red100
+    }
+    
+    var isDisabled: Bool {
+        return loginViewModel.textFieldState == .checkEmail
+        || loginViewModel.email == String()
+        ? true
+        : false
+    }
+    
+    func getDestination() -> AnyView {
+        if loginViewModel.checkEmail() {
+            return AnyView(InputPasswordView(loginViewModel: loginViewModel))
+        } else {
+            return AnyView(SignupPasswordView(loginViewModel: loginViewModel))
         }
     }
 }

@@ -14,6 +14,9 @@ extension Image {
         case kakaoLogin = "kakaoLogin"
         case naverLogin = "naverLogin"
         case appleLogin = "appleLogin"
+        case close = "close"
+        case arrowDown = "arrowDown"
+        case arrowUp = "arrowUp"
     }
     
     init(name imageName: ImageName) {
