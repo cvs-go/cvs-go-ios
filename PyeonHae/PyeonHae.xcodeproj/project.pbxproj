@@ -34,6 +34,10 @@
 		54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101C295F3E9400FACB90 /* RegexConstants.swift */; };
 		54D0101F295F412600FACB90 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101E295F412600FACB90 /* StringExtension.swift */; };
 		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
+		54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A4297BF45800D7E450 /* MainBanner.swift */; };
+		54F981A7297BF48400D7E450 /* EventProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A6297BF48400D7E450 /* EventProductCell.swift */; };
+		54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A8297BF4B600D7E450 /* PopularProductCell.swift */; };
+		54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AA297BF4D700D7E450 /* ReviewCell.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +71,10 @@
 		54D0101C295F3E9400FACB90 /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		54D0101E295F412600FACB90 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyView.swift; sourceTree = "<group>"; };
+		54F981A4297BF45800D7E450 /* MainBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBanner.swift; sourceTree = "<group>"; };
+		54F981A6297BF48400D7E450 /* EventProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProductCell.swift; sourceTree = "<group>"; };
+		54F981A8297BF4B600D7E450 /* PopularProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularProductCell.swift; sourceTree = "<group>"; };
+		54F981AA297BF4D700D7E450 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +136,10 @@
 		54126CBC29585BA3009D5A09 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				54F981A3297BF39700D7E450 /* 4 */,
+				54F981A2297BF39500D7E450 /* 3 */,
+				54F981A1297BF39300D7E450 /* 2 */,
+				54F981A0297BF39000D7E450 /* 1 */,
 				54126CBD29585BA7009D5A09 /* Login */,
 			);
 			path = Views;
@@ -213,6 +225,38 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		54F981A0297BF39000D7E450 /* 1 */ = {
+			isa = PBXGroup;
+			children = (
+				54F981A4297BF45800D7E450 /* MainBanner.swift */,
+			);
+			path = 1;
+			sourceTree = "<group>";
+		};
+		54F981A1297BF39300D7E450 /* 2 */ = {
+			isa = PBXGroup;
+			children = (
+				54F981A6297BF48400D7E450 /* EventProductCell.swift */,
+			);
+			path = 2;
+			sourceTree = "<group>";
+		};
+		54F981A2297BF39500D7E450 /* 3 */ = {
+			isa = PBXGroup;
+			children = (
+				54F981A8297BF4B600D7E450 /* PopularProductCell.swift */,
+			);
+			path = 3;
+			sourceTree = "<group>";
+		};
+		54F981A3297BF39700D7E450 /* 4 */ = {
+			isa = PBXGroup;
+			children = (
+				54F981AA297BF4D700D7E450 /* ReviewCell.swift */,
+			);
+			path = 4;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -295,6 +339,7 @@
 				668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */,
 				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
 				54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */,
+				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
@@ -304,9 +349,12 @@
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
+				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
+				54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */,
 				5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */,
+				54F981A7297BF48400D7E450 /* EventProductCell.swift in Sources */,
 				54D0101F295F412600FACB90 /* StringExtension.swift in Sources */,
 				54D0101B295F3E5800FACB90 /* Constants.swift in Sources */,
 			);
