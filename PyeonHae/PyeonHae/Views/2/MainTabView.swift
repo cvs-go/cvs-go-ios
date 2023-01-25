@@ -20,6 +20,7 @@ struct MainTabView: View {
                 getTabView(type: type)
             }
         }
+        .navigationViewStyle(.stack)
     }
     
     @ViewBuilder
