@@ -17,8 +17,6 @@ extension Image {
         case close = "close"
         case arrowDown = "arrowDown"
         case arrowUp = "arrowUp"
-<<<<<<< Updated upstream
-=======
         case arrowRight = "arrowRight"
         case logoCU = "logoCU"
         case logoGS = "logoGS"
@@ -36,7 +34,6 @@ extension Image {
         case searchIcon = "searchIcon"
         case profileIcon = "profileIcon"
         case banner1 = "banner1"
->>>>>>> Stashed changes
     }
     
     init(name imageName: ImageName) {
