@@ -38,6 +38,9 @@
 		54F981A7297BF48400D7E450 /* EventProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A6297BF48400D7E450 /* EventProductCell.swift */; };
 		54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A8297BF4B600D7E450 /* PopularProductCell.swift */; };
 		54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AA297BF4D700D7E450 /* ReviewCell.swift */; };
+		54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AC297E4E3500D7E450 /* EventProducts.swift */; };
+		54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AE297E635B00D7E450 /* PopularProducts.swift */; };
+		54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981B0297E72E200D7E450 /* MainTabView.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +78,9 @@
 		54F981A6297BF48400D7E450 /* EventProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProductCell.swift; sourceTree = "<group>"; };
 		54F981A8297BF4B600D7E450 /* PopularProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularProductCell.swift; sourceTree = "<group>"; };
 		54F981AA297BF4D700D7E450 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		54F981AC297E4E3500D7E450 /* EventProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProducts.swift; sourceTree = "<group>"; };
+		54F981AE297E635B00D7E450 /* PopularProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularProducts.swift; sourceTree = "<group>"; };
+		54F981B0297E72E200D7E450 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +165,13 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		54192BC6298177DF0048235C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		547BE29529631F310069828A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +207,7 @@
 		54CC11E429571E52007DAD20 /* PyeonHae */ = {
 			isa = PBXGroup;
 			children = (
+				54192BC6298177DF0048235C /* Utils */,
 				54126CBC29585BA3009D5A09 /* Views */,
 				547BE29529631F310069828A /* ViewModels */,
 				54D01019295F3E2600FACB90 /* Constants */,
@@ -237,6 +251,8 @@
 			isa = PBXGroup;
 			children = (
 				54F981A6297BF48400D7E450 /* EventProductCell.swift */,
+				54F981AC297E4E3500D7E450 /* EventProducts.swift */,
+				54F981B0297E72E200D7E450 /* MainTabView.swift */,
 			);
 			path = 2;
 			sourceTree = "<group>";
@@ -245,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				54F981A8297BF4B600D7E450 /* PopularProductCell.swift */,
+				54F981AE297E635B00D7E450 /* PopularProducts.swift */,
 			);
 			path = 3;
 			sourceTree = "<group>";
@@ -342,9 +359,12 @@
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
+				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
+				54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
+				54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */,
 				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
