@@ -33,6 +33,7 @@ extension Image {
         case reviewIcon = "reviewIcon"
         case searchIcon = "searchIcon"
         case profileIcon = "profileIcon"
+        case banner1 = "banner1"
     }
     
     init(name imageName: ImageName) {
