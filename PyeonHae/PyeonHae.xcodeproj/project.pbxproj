@@ -39,6 +39,7 @@
 		54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A8297BF4B600D7E450 /* PopularProductCell.swift */; };
 		54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AA297BF4D700D7E450 /* ReviewCell.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
+		D509BE92298259CF00C4492C /* PopularReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D509BE91298259CF00C4492C /* PopularReview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		54F981A8297BF4B600D7E450 /* PopularProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularProductCell.swift; sourceTree = "<group>"; };
 		54F981AA297BF4D700D7E450 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
+		D509BE91298259CF00C4492C /* PopularReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularReview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				54F981AA297BF4D700D7E450 /* ReviewCell.swift */,
+				D509BE91298259CF00C4492C /* PopularReview.swift */,
 			);
 			path = 4;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
+				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
 				54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */,
@@ -485,7 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
@@ -516,7 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
