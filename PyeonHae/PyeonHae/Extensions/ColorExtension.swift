@@ -39,4 +39,10 @@ extension Color {
     static let systemRed = Color(hex: "#E00D00")
     
     static let mineGray100 = Color(hex: "F6F6F6")
+<<<<<<< Updated upstream
+=======
+    static let borderColor = Color(hex: "#000000").opacity(0.05)
+    
+    static let rollingBannerColor = Color(hex: "#242424").opacity(0.5)
+>>>>>>> Stashed changes
 }

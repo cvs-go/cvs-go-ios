@@ -11,7 +11,11 @@ import SwiftUI
 struct PyeonHaeApp: App {
     var body: some Scene {
         WindowGroup {
+<<<<<<< Updated upstream
             LoginView()
+=======
+            MainBanner()
+>>>>>>> Stashed changes
         }
     }
 }
