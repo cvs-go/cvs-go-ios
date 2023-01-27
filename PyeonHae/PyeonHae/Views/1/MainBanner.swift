@@ -22,7 +22,7 @@ struct MainBanner: View {
     }
     @State private var contentOffsetX: CGFloat = 0
     @State private var titleViewWidth: CGFloat = 0
-    let spacing: CGFloat = 20
+    let spacing: CGFloat = 10
     
     var body: some View {
         GeometryReader { geo in
@@ -34,13 +34,15 @@ struct MainBanner: View {
                                 Group {
                                     ForEach(-1..<images.count + 1, id: \.self) { i in
                                         images[i < 0 ? images.count - 1 : (i >= images.count ? 0 : i)]
-                                            .frame(width: titleViewWidth)
-                                        
+                                            .resizable()
+                                            .frame(width: titleViewWidth, height: 200)
+                                            .cornerRadius(10)
                                     }
                                 }
                             }
-                            .offset(x: contentOffsetX, y: 0)
+                            .offset(x: contentOffsetX - 20, y: 0)
                         }
+                        .offset(x: 20)
                         .scrollDisabled(true)
                     } else {
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -59,12 +61,13 @@ struct MainBanner: View {
                 }
                 ZStack(alignment: .center) {
                     RoundedRectangle(cornerRadius: 100)
-                    Text("\(currentIndex+1)|\(images.count)")
+                    Text("\(currentIndex+1) | \(images.count)")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.white)
                 }
                 .foregroundColor(.rollingBannerColor)
-                .frame(width: 50, height: 30)
+                .frame(width: 51, height: 20)
+                .offset(x: -(geo.size.width / 2) + 51, y: 9)
             }
             .gesture(
                 DragGesture()
@@ -75,7 +78,7 @@ struct MainBanner: View {
                             currentIndex -= 1
                         }
                         timer.upstream.connect().cancel()
-                        timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+                        timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
                     }
             )
             .onAppear {
