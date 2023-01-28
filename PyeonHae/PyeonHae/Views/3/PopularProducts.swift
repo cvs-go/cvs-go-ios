@@ -10,6 +10,7 @@ import SwiftUI
 struct PopularProducts: View {
     var body: some View {
         VStack {
+            Spacer().frame(height: 16)
             HStack {
                 Spacer().frame(width: 20)
                 Text("인기 상품")
@@ -25,7 +26,9 @@ struct PopularProducts: View {
                 PopularProductCell()
                     .padding(.bottom, 16)
             }
+            Spacer().frame(height: 8)
         }
+        .background(Color.white)
     }
 }
 

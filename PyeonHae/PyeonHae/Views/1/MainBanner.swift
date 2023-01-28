@@ -41,7 +41,6 @@ struct MainBanner: View {
                         }
                         .offset(x: contentOffsetX - 20, y: 0)
                     }
-                    .scrollEnabled(false)
                     .offset(x: 20)
                 }
                 ZStack(alignment: .center) {
@@ -75,6 +74,9 @@ struct MainBanner: View {
                 currentIndex += 1
             }
         }
+        .frame(height: 200)
+        .padding(.vertical, 20)
+        .background(Color.white)
     }
     
     private func scrollToCurrentPage() {

@@ -27,7 +27,7 @@ struct MainTabView: View {
     func getTabView(type: TabType) -> some View {
         switch type {
         case .home:
-            Text("홈")
+            HomeView()
         case .review:
             Text("리뷰")
         case .search:

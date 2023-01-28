@@ -27,13 +27,17 @@ extension Image {
         case logoOnePlusOne = "logoOnePlusOne"
         case logoTwoPlusOne = "logoTwoPlusOne"
         case infoCircle = "infoCircle"
-        case star = "star"
+        case redStar = "redStar"
+        case yellowStar = "yellowStar"
         case rectengle = "rectengle"
         case homeIcon = "homeIcon"
         case reviewIcon = "reviewIcon"
         case searchIcon = "searchIcon"
         case profileIcon = "profileIcon"
         case banner1 = "banner1"
+        case notification = "notification"
+        case bookmark = "bookmark"
+        case like = "like"
     }
     
     init(name imageName: ImageName) {
