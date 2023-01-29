@@ -41,6 +41,7 @@ struct MainBanner: View {
                         }
                         .offset(x: contentOffsetX - 20, y: 0)
                     }
+                    .disabled(true)
                     .offset(x: 20)
                 }
                 ZStack(alignment: .center) {
