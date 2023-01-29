@@ -50,13 +50,13 @@ struct TabItemView: View {
     var body: some View {
         VStack {
             Image(name: data.image)
-                .foregroundColor(isSelected ? .grayscale85 : .grayscale50)
+                .foregroundColor(isSelected ? .grayscale85 : .grayscale85.opacity(0.3))
             
             Spacer().frame(height: 4)
             
             Text(data.title)
                 .font(.pretendard(.medium, 11))
-                .foregroundColor(isSelected ? .grayscale85 : .grayscale50)
+                .foregroundColor(isSelected ? .grayscale85 : .grayscale85.opacity(0.3))
         }
     }
 }
