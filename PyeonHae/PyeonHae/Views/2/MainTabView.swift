@@ -27,7 +27,7 @@ struct MainTabView: View {
     func getTabView(type: TabType) -> some View {
         switch type {
         case .home:
-            Text("홈")
+            HomeView()
         case .review:
             Text("리뷰")
         case .search:
@@ -50,13 +50,13 @@ struct TabItemView: View {
     var body: some View {
         VStack {
             Image(name: data.image)
-                .foregroundColor(isSelected ? .grayscale85 : .grayscale50)
+                .foregroundColor(isSelected ? .grayscale85 : .grayscale85.opacity(0.3))
             
             Spacer().frame(height: 4)
             
             Text(data.title)
                 .font(.pretendard(.medium, 11))
-                .foregroundColor(isSelected ? .grayscale85 : .grayscale50)
+                .foregroundColor(isSelected ? .grayscale85 : .grayscale85.opacity(0.3))
         }
     }
 }

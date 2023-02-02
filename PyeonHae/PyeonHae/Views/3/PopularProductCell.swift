@@ -30,7 +30,7 @@ struct PopularProductCell: View {
                     .font(.pretendard(.medium, 16))
                     .foregroundColor(.grayscale85)
                 HStack {
-                    Image(name: .star)
+                    Image(name: .redStar)
                     Text("4.5")
                         .font(.pretendard(.semiBold, 14))
                         .foregroundColor(.grayscale100)

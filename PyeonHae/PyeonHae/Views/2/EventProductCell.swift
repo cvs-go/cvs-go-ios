@@ -32,7 +32,7 @@ struct EventProductCell: View {
                 .foregroundColor(.grayscale100)
             Spacer().frame(height: 8)
             Image(name: .logoOnePlusOne)
-            Spacer()
+            Spacer().frame(height: 24)
         }
     }
 }
