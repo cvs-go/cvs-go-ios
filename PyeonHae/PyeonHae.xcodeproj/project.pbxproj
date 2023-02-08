@@ -45,6 +45,10 @@
 		54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981B0297E72E200D7E450 /* MainTabView.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
 		D509BE92298259CF00C4492C /* PopularReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D509BE91298259CF00C4492C /* PopularReview.swift */; };
+		D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCAE29938B8C00F25941 /* UserPageView.swift */; };
+		D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB02993966A00F25941 /* UserInfoView.swift */; };
+		D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */; };
+		D5D1BCB529939AA800F25941 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB429939AA800F25941 /* ReviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +92,10 @@
 		54F981B0297E72E200D7E450 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
 		D509BE91298259CF00C4492C /* PopularReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularReview.swift; sourceTree = "<group>"; };
+		D5D1BCAE29938B8C00F25941 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
+		D5D1BCB02993966A00F25941 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewsView.swift; sourceTree = "<group>"; };
+		D5D1BCB429939AA800F25941 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,7 @@
 		54126CBC29585BA3009D5A09 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D5D1BCAD29938B6D00F25941 /* UserPage */,
 				54F80D1E2985478000102772 /* Home */,
 				54F981A3297BF39700D7E450 /* 4 */,
 				54F981A2297BF39500D7E450 /* 3 */,
@@ -287,8 +296,19 @@
 			children = (
 				54F981AA297BF4D700D7E450 /* ReviewCell.swift */,
 				D509BE91298259CF00C4492C /* PopularReview.swift */,
+				D5D1BCB429939AA800F25941 /* ReviewView.swift */,
 			);
 			path = 4;
+			sourceTree = "<group>";
+		};
+		D5D1BCAD29938B6D00F25941 /* UserPage */ = {
+			isa = PBXGroup;
+			children = (
+				D5D1BCAE29938B8C00F25941 /* UserPageView.swift */,
+				D5D1BCB02993966A00F25941 /* UserInfoView.swift */,
+				D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */,
+			);
+			path = UserPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,15 +403,19 @@
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
 				54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */,
+				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
 				54F80D1D2985275F00102772 /* ViewExtension.swift in Sources */,
 				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
+				D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
+				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
+				D5D1BCB529939AA800F25941 /* ReviewView.swift in Sources */,
 				54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */,
 				5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */,
 				54F981A7297BF48400D7E450 /* EventProductCell.swift in Sources */,

@@ -12,29 +12,10 @@ struct ReviewCell: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
             VStack(alignment: .leading) {
-                HStack {
-                    Circle()
-                        .fill(Color.grayscale30)
-                        .frame(width: 36, height: 36)
-                    VStack(alignment: .leading) {
-                        Text("작성자 닉네임")
-                            .font(.pretendard(.semiBold, 14))
-                            .foregroundColor(.grayscale100)
-                        HStack {
-                            ForEach(0..<3){ cell in
-                                Text("#매른이")
-                                    .font(.pretendard(.medium, 12))
-                                    .foregroundColor(.red100)
-                            }
-                        }
-                    }
-                }
-                .padding(.top, 10)
                 Text("타이틀 제목이 들어갑니다.")
                     .lineLimit(1)
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
-                    .padding(.top, 17)
                 HStack(spacing: 0) {
                     ForEach(0..<5) { cell in
                         Image(name: .yellowStar)
@@ -71,12 +52,11 @@ struct ReviewCell: View {
                     }
                 }
                 .foregroundColor(.white)
-                .padding(.bottom, 13)
             }
             .padding(.horizontal, 12)
+            .padding(.vertical, 16)
         }
         .foregroundColor(Color.grayscale10)
-        .frame(width: 310, height: 264)
     }
 }
 
