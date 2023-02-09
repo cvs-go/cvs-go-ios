@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UserInfoView: View {
+    @State var followCheck: Bool = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -33,15 +35,25 @@ struct UserInfoView: View {
                 Spacer()
             }
             Button(action: {
-                //add action
+                followCheck.toggle()
             }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                    Text("팔로우")
-                        .font(.pretendard(.bold, 18))
-                        .foregroundColor(.white)
+                if(followCheck) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                        Text("팔로우")
+                            .font(.pretendard(.bold, 18))
+                            .foregroundColor(.white)
+                    }
+                    .foregroundColor(Color.grayscale50)
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                        Text("팔로우")
+                            .font(.pretendard(.bold, 18))
+                            .foregroundColor(.white)
+                    }
+                    .foregroundColor(Color.red100)
                 }
-                .foregroundColor(Color.red100)
             }
         }
         .padding(.all, 20)
