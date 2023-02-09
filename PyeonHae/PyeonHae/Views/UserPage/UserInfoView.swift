@@ -37,23 +37,13 @@ struct UserInfoView: View {
             Button(action: {
                 followCheck.toggle()
             }) {
-                if(followCheck) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                         Text("팔로우")
                             .font(.pretendard(.bold, 18))
                             .foregroundColor(.white)
                     }
-                    .foregroundColor(Color.grayscale50)
-                } else {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                        Text("팔로우")
-                            .font(.pretendard(.bold, 18))
-                            .foregroundColor(.white)
-                    }
-                    .foregroundColor(Color.red100)
-                }
+                    .foregroundColor(followCheck ? Color.red100 : Color.grayscale50)
             }
         }
         .padding(.all, 20)

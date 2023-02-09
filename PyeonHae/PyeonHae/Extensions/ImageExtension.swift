@@ -41,6 +41,8 @@ extension Image {
         case statistics = "statistics"
         case emptyImage = "emptyImage"
         case fillLike = "fillLike"
+        case plusButton = "plusButton"
+        case addPhoto = "addPhoto"
     }
     
     init(name imageName: ImageName) {
