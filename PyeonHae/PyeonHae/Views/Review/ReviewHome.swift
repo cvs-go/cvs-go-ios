@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: 정렬, 필터, 상단탭바, 리뷰셀 넓이
+
 struct ReviewHome: View {
     @State private var selectedTap: ReviewTapType = .all
     @State private var showFilter = false
@@ -24,9 +26,37 @@ struct ReviewHome: View {
         VStack(spacing: 0) {
             navigationBar
             customTapView()
-            Spacer().frame(height: 20)
-            filterButton()
-            Spacer()
+            ScrollView {
+                VStack(spacing: 0) {
+                    Spacer().frame(height: 10)
+                    filterButton()
+                    HStack {
+                        Spacer().frame(width: 20)
+                        Text("새로운 리뷰 14개")
+                            .font(.pretendard(.regular, 12))
+                            .foregroundColor(.grayscale85)
+                        Spacer()
+                        HStack(spacing: 6) {
+                            Text("최신순")
+                                .font(.pretendard(.regular, 12))
+                                .foregroundColor(.grayscale85)
+                            Image(name: .invertedTriangle)
+                        }
+                        .frame(width: 64.5, height: 26)
+                        .background(Color.grayscale10)
+                        .cornerRadius(10)
+                        Spacer().frame(width: 20)
+                    }
+                    .frame(height: 40)
+                }
+                VStack {
+                    ReviewCell()
+                    ReviewCell()
+                    ReviewCell()
+                    ReviewCell()
+                    ReviewCell()
+                }
+            }
         }
     }
     
@@ -84,10 +114,10 @@ struct ReviewHome: View {
             Image(name: showFilter ? .arrowUp : .arrowDown)
             Spacer()
         }
+        .frame(height: 32)
         .onTapGesture {
             showFilter.toggle()
         }
-        .padding(.vertical, 7)
         if showFilter {
             filterView()
                 .background(Color.grayscale10)
@@ -95,18 +125,28 @@ struct ReviewHome: View {
     }
     
     private func filterView() -> some View {
-        ForEach(filterDatas, id: \.self) { data in
-            VStack(alignment: .leading) {
-                Text(data.category)
-                    .font(.pretendard(.bold, 12))
-                    .foregroundColor(.grayscale85)
-                HStack {
-                    ForEach(data.elements, id: \.self) { element in
-                        customButton(element)
+        VStack(spacing: 0) {
+            ForEach(Array(filterDatas.enumerated()), id: \.element) { index, data in
+                VStack(alignment: .leading) {
+                    Text(data.category)
+                        .font(.pretendard(.bold, 12))
+                        .foregroundColor(.grayscale85)
+                    HStack(alignment: .center) {
+                        ForEach(data.elements, id: \.self) { element in
+                            customButton(element)
+                        }
                     }
                 }
+                .padding(
+                    EdgeInsets(
+                        top: index == 0 ? 16 : 20,
+                        leading: 20,
+                        bottom: index == filterDatas.count - 1 ? 16 : 0,
+                        trailing: 20
+                    )
+                )
             }
-            .frame(width: UIWindow().screen.bounds.width)
+            .frame(width: UIWindow().screen.bounds.width, alignment: .leading)
         }
     }
     
@@ -115,6 +155,10 @@ struct ReviewHome: View {
             .font(.pretendard(.regular, 14))
             .foregroundColor(.grayscale100)
             .padding(EdgeInsets(top: 7.5, leading: 10, bottom: 7.5, trailing: 10))
+            .cornerRadius(100)
+            .background(
+                RoundedRectangle(cornerRadius: 100).fill(Color.white)
+            )
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
                     .stroke(Color.grayscale30, lineWidth: 1)

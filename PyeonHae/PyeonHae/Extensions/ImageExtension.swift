@@ -39,6 +39,7 @@ extension Image {
         case bookmark = "bookmark"
         case like = "like"
         case addSquare = "addSquare"
+        case invertedTriangle = "invertedTriangle"
     }
     
     init(name imageName: ImageName) {
