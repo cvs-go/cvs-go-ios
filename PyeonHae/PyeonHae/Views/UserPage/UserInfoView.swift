@@ -37,7 +37,7 @@ struct UserInfoView: View {
             Button(action: {
                 followCheck.toggle()
             }) {
-                if(followCheck) {
+                if(!followCheck) {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                         Text("팔로우")

@@ -18,7 +18,6 @@ struct UserPageView: View {
                 }
                 .background(Color.grayscale10)
             }
-           
         }
     }
 }
