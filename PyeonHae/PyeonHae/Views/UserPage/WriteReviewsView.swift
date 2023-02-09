@@ -30,7 +30,7 @@ struct WriteReviewsView: View {
                 }
             }
         }
-                    .padding(.top, 14)
+        .padding(.top, 14)
         .padding(.horizontal, 20)
         .background(Color.white)
     }
