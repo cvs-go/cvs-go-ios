@@ -40,6 +40,7 @@ extension Image {
         case like = "like"
         case addSquare = "addSquare"
         case invertedTriangle = "invertedTriangle"
+        case grayCircle = "grayCircle"
     }
     
     init(name imageName: ImageName) {

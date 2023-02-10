@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-// TODO: 정렬, 필터, 상단탭바, 리뷰셀 넓이
+// TODO: 정렬, 상단탭바, 리뷰셀 넓이
 
 struct ReviewHome: View {
+    @State private var selectedElements: [String] = []
     @State private var selectedTap: ReviewTapType = .all
     @State private var showFilter = false
     
@@ -19,8 +20,7 @@ struct ReviewHome: View {
         FilterData(category: "제품", elements: ["간편식사", "즉석요리", "과자&빵", "아이스크림", "신선식품", "유제품", "음료", "기타"]),
         FilterData(category: "유저", elements: ["맵부심", "맵찔이", "초코러버", "비건", "다이어터", "대식가", "소식가", "기타"]),
         FilterData(category: "이벤트", elements: ["1+1", "2+1", "3+1", "증정"]),
-        
-                   ]
+    ]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -113,6 +113,24 @@ struct ReviewHome: View {
                 .foregroundColor(.grayscale100)
             Image(name: showFilter ? .arrowUp : .arrowDown)
             Spacer()
+            ForEach(Array(selectedElements.enumerated()), id: \.element) { index, element in
+                if index < 3 {
+                    if index != 0 {
+                        Image(name: .grayCircle)
+                            .padding(.horizontal, 8)
+                    }
+                    Text(element)
+                        .font(.pretendard(.bold, 12))
+                        .foregroundColor(.grayscale85)
+                }
+            }
+            if selectedElements.count > 3 {
+                Text("외\(selectedElements.count - 3)")
+                    .font(.pretendard(.regular, 12))
+                    .foregroundColor(.grayscale85)
+                    .padding(.leading, 8)
+            }
+            Spacer().frame(width: 20)
         }
         .frame(height: 32)
         .onTapGesture {
@@ -152,17 +170,29 @@ struct ReviewHome: View {
     
     private func customButton(_ text: String) -> some View {
         Text(text)
-            .font(.pretendard(.regular, 14))
-            .foregroundColor(.grayscale100)
+            .font(.pretendard(isSelectedElement(text) ? .semiBold : .regular, 14))
+            .foregroundColor(isSelectedElement(text) ? Color.red100 : Color.grayscale100)
             .padding(EdgeInsets(top: 7.5, leading: 10, bottom: 7.5, trailing: 10))
             .cornerRadius(100)
             .background(
-                RoundedRectangle(cornerRadius: 100).fill(Color.white)
+                RoundedRectangle(cornerRadius: 100)
+                    .fill(isSelectedElement(text) ? Color.red100.opacity(0.1) : Color.white)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
-                    .stroke(Color.grayscale30, lineWidth: 1)
+                    .stroke(isSelectedElement(text) ? Color.red100 : Color.grayscale30, lineWidth: 1)
             )
+            .onTapGesture {
+                if selectedElements.contains(text) {
+                    selectedElements.removeAll(where: { $0 == text })
+                } else {
+                    selectedElements.append(text)
+                }
+            }
+    }
+    
+    private func isSelectedElement(_ element: String) -> Bool {
+        return selectedElements.contains(element)
     }
 }
 
