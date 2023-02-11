@@ -24,6 +24,7 @@
 		545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AC7D3295B3A23002D6853 /* InputPasswordView.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */; };
+		54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8F6A82997722D00E19FFF /* WrappingHStack */; };
 		54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */; };
 		54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
@@ -97,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +320,9 @@
 			dependencies = (
 			);
 			name = PyeonHae;
+			packageProductDependencies = (
+				54B8F6A82997722D00E19FFF /* WrappingHStack */,
+			);
 			productName = PyeonHae;
 			productReference = 54CC11E229571E52007DAD20 /* PyeonHae.app */;
 			productType = "com.apple.product-type.application";
@@ -346,6 +351,9 @@
 				Base,
 			);
 			mainGroup = 54CC11D929571E52007DAD20;
+			packageReferences = (
+				54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -613,6 +621,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		54B8F6A82997722D00E19FFF /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 54CC11DA29571E52007DAD20 /* Project object */;
 }
