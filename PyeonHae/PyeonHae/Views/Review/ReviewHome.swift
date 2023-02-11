@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
-// TODO: 정렬, 상단탭바, 리뷰셀 넓이
+// TODO: 상단탭바, 리뷰셀 넓이
 
 struct ReviewHome: View {
     @State private var selectedElements: [String] = []
@@ -149,10 +150,8 @@ struct ReviewHome: View {
                     Text(data.category)
                         .font(.pretendard(.bold, 12))
                         .foregroundColor(.grayscale85)
-                    HStack(alignment: .center) {
-                        ForEach(data.elements, id: \.self) { element in
-                            customButton(element)
-                        }
+                    WrappingHStack(data.elements, id: \.self, lineSpacing: 6) { element in
+                        customButton(element)
                     }
                 }
                 .padding(
