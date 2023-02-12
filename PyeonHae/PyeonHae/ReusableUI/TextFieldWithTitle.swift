@@ -17,12 +17,13 @@ struct TextFieldWithTitle: View {
     let type: TextFieldType
     @Binding var state: TextFieldState
     
-    init(text: Binding<String>,
-         title: String,
-         placeholder: String,
-         isSecure: Bool,
-         type: TextFieldType,
-         state: Binding<TextFieldState>
+    init(
+        text: Binding<String>,
+        title: String,
+        placeholder: String,
+        isSecure: Bool,
+        type: TextFieldType,
+        state: Binding<TextFieldState>
     ) {
         self._text = text
         self.title = title

@@ -1,10 +1,10 @@
-////
-////  TopTabBar.swift
-////  PyeonHae
-////
-////  Created by 정건호 on 2023/02/11.
-////
 //
+//  TopTabBar.swift
+//  PyeonHae
+//
+//  Created by 정건호 on 2023/02/11.
+//
+
 import SwiftUI
 
 struct TopTabBar: View {
@@ -12,8 +12,9 @@ struct TopTabBar: View {
     private let contents: [AnyView]
     @State private var selectedTab: Int = 0
     
-    init(tabItems: [String],
-         contents: [AnyView]
+    init(
+        tabItems: [String],
+        contents: [AnyView]
     ) {
         self.tabItems = tabItems
         self.contents = contents
@@ -41,7 +42,6 @@ struct TopTabBar: View {
                     }
                     .onTapGesture {
                         self.selectedTab = index
-                        print(index)
                     }
                 }
             }.zIndex(1)
