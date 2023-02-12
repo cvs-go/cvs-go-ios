@@ -8,11 +8,11 @@
 import SwiftUI
 import WrappingHStack
 
-// TODO: 상단탭바, 리뷰셀 넓이
+// TODO: 리뷰셀 넓이
 
 struct ReviewHome: View {
+    @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
-    @State private var selectedTap: ReviewTapType = .all
     @State private var showFilter = false
     
     // 임시 데이터
@@ -26,38 +26,13 @@ struct ReviewHome: View {
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
-            customTapView()
-            ScrollView {
-                VStack(spacing: 0) {
-                    Spacer().frame(height: 10)
-                    filterButton()
-                    HStack {
-                        Spacer().frame(width: 20)
-                        Text("새로운 리뷰 14개")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                        Spacer()
-                        HStack(spacing: 6) {
-                            Text("최신순")
-                                .font(.pretendard(.regular, 12))
-                                .foregroundColor(.grayscale85)
-                            Image(name: .invertedTriangle)
-                        }
-                        .frame(width: 64.5, height: 26)
-                        .background(Color.grayscale10)
-                        .cornerRadius(10)
-                        Spacer().frame(width: 20)
-                    }
-                    .frame(height: 40)
-                }
-                VStack {
-                    ReviewCell()
-                    ReviewCell()
-                    ReviewCell()
-                    ReviewCell()
-                    ReviewCell()
-                }
-            }
+            TopTabBar(
+                tabItems: tabItems,
+                contents: [
+                    AnyView(allReviewTab()),
+                    AnyView(followReviewTab())
+                ]
+            )
         }
     }
     
@@ -80,29 +55,45 @@ struct ReviewHome: View {
     }
     
     @ViewBuilder
-    private func customTapView() -> some View {
-        VStack(spacing: 0) {
-            HStack {
-                ForEach(ReviewTapType.allCases, id: \.self) { item in
-                    VStack(spacing: 4) {
-                        Text(item.rawValue)
-                            .font(.pretendard(.semiBold, 16))
-                            .frame(maxWidth: .infinity, minHeight: 28)
-                            .foregroundColor(selectedTap == item ? .grayscale100 : .grayscale100.opacity(0.3))
-                        
-                        Rectangle()
-                            .foregroundColor(selectedTap == item ? .red100 : .grayscale30)
-                            .frame(width: 82, height: selectedTap == item ? 2 : 0)
+    private func allReviewTab() -> some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                Spacer().frame(height: 10)
+                filterButton()
+                HStack {
+                    Spacer().frame(width: 20)
+                    Text("새로운 리뷰 14개")
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(.grayscale85)
+                    Spacer()
+                    HStack(spacing: 6) {
+                        Text("최신순")
+                            .font(.pretendard(.regular, 12))
+                            .foregroundColor(.grayscale85)
+                        Image(name: .invertedTriangle)
                     }
-                    .onTapGesture {
-                        self.selectedTap = item
-                    }
+                    .frame(width: 64.5, height: 26)
+                    .background(Color.grayscale10)
+                    .cornerRadius(10)
+                    Spacer().frame(width: 20)
                 }
-            }.zIndex(1)
-            Color.grayscale30.frame(height: 1)
-                .offset(y: -1)
+                .frame(height: 40)
+            }
+            VStack {
+                ReviewCell()
+                ReviewCell()
+                ReviewCell()
+                ReviewCell()
+                ReviewCell()
+            }
         }
-        .frame(height: 44)
+    }
+    
+    private func followReviewTab() -> some View {
+        VStack {
+            Text("팔로우 탭")
+            Spacer()
+        }
     }
     
     @ViewBuilder
@@ -203,10 +194,4 @@ struct FilterData: Hashable {
         self.category = category
         self.elements = elements
     }
-}
-
-
-enum ReviewTapType: String, CaseIterable {
-    case all = "전체"
-    case follow = "팔로우"
 }
