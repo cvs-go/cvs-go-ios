@@ -24,6 +24,7 @@
 		542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542F03A52997893A00DBF9C8 /* TopTabBar.swift */; };
 		544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40A2998BE5200EA9223 /* FilterView.swift */; };
 		544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40C2998D67E00EA9223 /* SelectableButton.swift */; };
+		544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */; };
 		545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AC7D3295B3A23002D6853 /* InputPasswordView.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */; };
@@ -79,6 +80,7 @@
 		542F03A52997893A00DBF9C8 /* TopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = PyeonHae/TopTabBar.swift; sourceTree = SOURCE_ROOT; };
 		544CE40A2998BE5200EA9223 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		544CE40C2998D67E00EA9223 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
+		544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUserInfo.swift; sourceTree = "<group>"; };
 		545AC7D3295B3A23002D6853 /* InputPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPasswordView.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				542F03A52997893A00DBF9C8 /* TopTabBar.swift */,
 				544CE40A2998BE5200EA9223 /* FilterView.swift */,
 				544CE40C2998D67E00EA9223 /* SelectableButton.swift */,
+				544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */,
 				D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */,
 				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
+				544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */,
 				54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */,
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,

@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-// TODO: 리뷰셀 넓이
-
 struct ReviewHome: View {
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
@@ -82,12 +80,14 @@ struct ReviewHome: View {
                 }
                 .frame(height: 40)
             }
-            VStack {
-                ReviewCell()
-                ReviewCell()
-                ReviewCell()
-                ReviewCell()
-                ReviewCell()
+            ForEach(0..<10) { _ in
+                VStack {
+                    ReviewUserInfo(reviewType: .normal)
+                    ReviewCell()
+                }
+                .padding(.horizontal, 19)
+                Color.grayscale30.opacity(0.5).frame(height: 1)
+                    .padding(.bottom, 16)
             }
         }
     }
