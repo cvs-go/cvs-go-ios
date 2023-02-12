@@ -41,6 +41,11 @@ extension Image {
         case addSquare = "addSquare"
         case invertedTriangle = "invertedTriangle"
         case grayCircle = "grayCircle"
+        case statistics = "statistics"
+        case emptyImage = "emptyImage"
+        case fillLike = "fillLike"
+        case plusButton = "plusButton"
+        case addPhoto = "addPhoto"
     }
     
     init(name imageName: ImageName) {

@@ -23,7 +23,7 @@ struct PopularReview: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(0..<10){ cell in
-                        ReviewCell()
+                        ReviewView()
                     }
                 }
                 .padding(.horizontal, 20)
