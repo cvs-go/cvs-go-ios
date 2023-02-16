@@ -19,6 +19,7 @@ struct HomeView: View {
                 Image(name: .notification)
                 Spacer().frame(width: 18)
             }
+            .frame(height: 44)
             ScrollView {
                 VStack(spacing: 0) {
                     MainBanner()

@@ -29,7 +29,7 @@ struct MainTabView: View {
         case .home:
             HomeView()
         case .review:
-            Text("리뷰")
+            ReviewHome()
         case .search:
             Text("탐색")
         case .myPage:
