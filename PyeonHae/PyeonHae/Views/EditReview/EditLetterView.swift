@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EditLetterView: View {
     @State private var title: String = ""
-    @State var text: String = ""
-    let textPlaceholder: String = "리뷰는 100자 이상 부터 등록 가능하며,\n리뷰를 5개 이상 등록하면 정회원으로 승급됩니다.\n정회원이 되시면 모든 리뷰를 감상하실 수 있습니다."
+    @State private var text: String = ""
+    private let textPlaceholder: String = "리뷰는 100자 이상 부터 등록 가능하며,\n리뷰를 5개 이상 등록하면 정회원으로 승급됩니다.\n정회원이 되시면 모든 리뷰를 감상하실 수 있습니다."
     
     var body: some View {
         VStack {
