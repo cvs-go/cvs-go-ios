@@ -45,6 +45,7 @@
 		54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981B0297E72E200D7E450 /* MainTabView.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
 		D509BE92298259CF00C4492C /* PopularReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D509BE91298259CF00C4492C /* PopularReview.swift */; };
+		D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D41299E2F42001D3276 /* ImagePicker.swift */; };
 		D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE22994FA650034B250 /* EditReviewView.swift */; };
 		D5409FE52994FA9A0034B250 /* SelectProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE42994FA9A0034B250 /* SelectProductView.swift */; };
 		D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE6299502AC0034B250 /* EditLetterView.swift */; };
@@ -96,6 +97,7 @@
 		54F981B0297E72E200D7E450 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
 		D509BE91298259CF00C4492C /* PopularReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularReview.swift; sourceTree = "<group>"; };
+		D5291D41299E2F42001D3276 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D5409FE22994FA650034B250 /* EditReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReviewView.swift; sourceTree = "<group>"; };
 		D5409FE42994FA9A0034B250 /* SelectProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProductView.swift; sourceTree = "<group>"; };
 		D5409FE6299502AC0034B250 /* EditLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLetterView.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				D5409FE42994FA9A0034B250 /* SelectProductView.swift */,
 				D5409FE6299502AC0034B250 /* EditLetterView.swift */,
 				D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */,
+				D5291D41299E2F42001D3276 /* ImagePicker.swift */,
 			);
 			path = EditReview;
 			sourceTree = "<group>";
@@ -431,6 +434,7 @@
 				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */,
+				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
@@ -573,7 +577,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
@@ -604,7 +608,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;

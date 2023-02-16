@@ -28,7 +28,7 @@ struct SelectProductView: View {
                         }
                     }
                     .background(Color.grayscale10)
-                    .padding(.horizontal, 28)
+                    .padding(.horizontal, 12)
                     .frame(height: 64)
                 } else {
                     ZStack {
