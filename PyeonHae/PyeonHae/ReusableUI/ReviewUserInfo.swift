@@ -24,11 +24,7 @@ struct ReviewUserInfo: View {
                     ForEach(0..<3){ cell in
                         Text("#매른이")
                             .font(.pretendard(.medium, 12))
-                            .foregroundColor(
-                                reviewType == .normal
-                                ? .iris100
-                                : .red100
-                            )
+                            .foregroundColor(.iris100)
                     }
                 }
             }

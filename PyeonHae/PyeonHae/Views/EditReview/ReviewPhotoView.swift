@@ -39,7 +39,9 @@ struct ReviewPhotoView: View {
                             Spacer()
                             VStack {
                                 Button(action: {
-                                    imageSelection.images.remove(at: index)
+                                    if imageSelection.images[safe: index] != nil {
+                                        imageSelection.images.remove(at: index)
+                                    }
                                 }) {
                                     Image(name: .deletePhoto)
                                         .padding([.top, .trailing], 4)
