@@ -13,4 +13,16 @@ extension View {
             UIScrollView.appearance().isScrollEnabled = enabled
         }
     }
+    
+    func toast(message: String,
+               isShowing: Binding<Bool>,
+               config: ToastMessage.Config) -> some View {
+        self.modifier(
+            ToastMessage(
+                message: message,
+                isShowing: isShowing,
+                config: config
+            )
+        )
+    }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PopularProducts: View {
+    @State private var showToolTip = false
+    
     var body: some View {
         VStack {
             Spacer().frame(height: 16)
@@ -16,7 +18,17 @@ struct PopularProducts: View {
                 Text("인기 상품")
                     .font(.pretendard(.bold, 18))
                     .foregroundColor(.grayscale100)
-                Image(name: .infoCircle)
+                ZStack(alignment: .leading) {
+                    toolTip
+                        .fixedSize(horizontal: false, vertical: true)
+                        .offset(y: -32)
+                        .opacity(showToolTip ? 1 : 0)
+                    Image(name: .infoCircle)
+                        .onTapGesture {
+                            showToolTip.toggle()
+                        }
+                }
+                .frame(height: 16)
                 Spacer()
                 Image(name: .arrowRight)
                 Spacer().frame(width: 16)
@@ -29,6 +41,15 @@ struct PopularProducts: View {
             Spacer().frame(height: 8)
         }
         .background(Color.white)
+    }
+    
+    var toolTip: some View {
+        Text("리뷰 개수, 좋아요 개수, 상품 평점을\n종합적으로 반영하여 인기상품을 선별합니다.")
+            .font(.pretendard(.regular, 12))
+            .foregroundColor(.white)
+            .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
+            .background(Color.grayscale85.opacity(0.8))
+            .cornerRadius(10)
     }
 }
 

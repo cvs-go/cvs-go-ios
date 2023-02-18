@@ -11,6 +11,7 @@ struct ReviewHome: View {
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
+    @State private var showWriteView = false
     
     // 임시 데이터
     let filterDatas: [FilterData] = [
@@ -31,6 +32,9 @@ struct ReviewHome: View {
                 ]
             )
         }
+        .fullScreenCover(isPresented: $showWriteView) {
+            EditReviewView(showWriteView: $showWriteView)
+        }
     }
     
     @ViewBuilder
@@ -42,9 +46,10 @@ struct ReviewHome: View {
                     .font(.pretendard(.bold, 20))
                     .foregroundColor(.grayscale100)
                 Spacer()
-                Image(name: .notification)
-                Spacer().frame(width: 16)
                 Image(name: .addSquare)
+                    .onTapGesture {
+                        showWriteView = true
+                    }
                 Spacer().frame(width: 18)
             }
         }
