@@ -8,19 +8,20 @@
 import SwiftUI
 import PhotosUI
 
-class ImageSelection: ObservableObject {
-    @Published var images: [UIImage] = []
-}
-
 struct ReviewPhotoView: View {
-    @StateObject private var imageSelection = ImageSelection()
+    @StateObject var imageSelection: ImageSelection
+    @Binding var showToast: Bool
     @State private var showImagePicker = false
     
     var body: some View {
         VStack {
             HStack {
                 Button(action: {
-                    showImagePicker.toggle()
+                    if imageSelection.images.count < 3 {
+                        showImagePicker = true
+                    } else {
+                        showToast = true
+                    }
                 }) {
                     Image(name: .addPhoto)
                         .resizable()
@@ -61,12 +62,6 @@ struct ReviewPhotoView: View {
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(images: $imageSelection.images)
         }
-    }
-}
-
-struct ReviewPhotoView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewPhotoView()
     }
 }
 

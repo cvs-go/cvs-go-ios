@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+class ImageSelection: ObservableObject {
+    @Published var images: [UIImage] = []
+}
+
 struct EditReviewView: View {
+    @StateObject var imageSelection = ImageSelection()
     @Binding var showWriteView: Bool
+    @State private var showToast = false
     
     var body: some View {
         GeometryReader { geo in
@@ -19,9 +25,10 @@ struct EditReviewView: View {
                     .frame(height: 14)
                     .foregroundColor(Color.grayscale10)
                 EditLetterView()
-                ReviewPhotoView()
+                ReviewPhotoView(imageSelection: imageSelection, showToast: $showToast)
             }
             .background(Color.white)
+            .toast(message: "사진은 최대 3장까지 추가할 수 있습니다.", isShowing: $showToast, config: .init())
         }
     }
     
