@@ -58,6 +58,8 @@
 		D5409FE52994FA9A0034B250 /* SelectProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE42994FA9A0034B250 /* SelectProductView.swift */; };
 		D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE6299502AC0034B250 /* EditLetterView.swift */; };
 		D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */; };
+		D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25229A4CCA40018E8FB /* SearchResultView.swift */; };
+		D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25429A4D0480018E8FB /* SearchResultItemView.swift */; };
 		D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCAE29938B8C00F25941 /* UserPageView.swift */; };
 		D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB02993966A00F25941 /* UserInfoView.swift */; };
 		D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */; };
@@ -117,6 +119,8 @@
 		D5409FE42994FA9A0034B250 /* SelectProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProductView.swift; sourceTree = "<group>"; };
 		D5409FE6299502AC0034B250 /* EditLetterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLetterView.swift; sourceTree = "<group>"; };
 		D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPhotoView.swift; sourceTree = "<group>"; };
+		D560E25229A4CCA40018E8FB /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
+		D560E25429A4D0480018E8FB /* SearchResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemView.swift; sourceTree = "<group>"; };
 		D5D1BCAE29938B8C00F25941 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		D5D1BCB02993966A00F25941 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewsView.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		54126CBC29585BA3009D5A09 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D560E25129A4CC8C0018E8FB /* SearchResultView */,
 				54F981B0297E72E200D7E450 /* MainTabView.swift */,
 				54126CBD29585BA7009D5A09 /* Login */,
 				54F80D1E2985478000102772 /* Home */,
@@ -355,6 +360,15 @@
 			path = EditReview;
 			sourceTree = "<group>";
 		};
+		D560E25129A4CC8C0018E8FB /* SearchResultView */ = {
+			isa = PBXGroup;
+			children = (
+				D560E25229A4CCA40018E8FB /* SearchResultView.swift */,
+				D560E25429A4D0480018E8FB /* SearchResultItemView.swift */,
+			);
+			path = SearchResultView;
+			sourceTree = "<group>";
+		};
 		D5D1BCAD29938B6D00F25941 /* UserDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -463,10 +477,12 @@
 				D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
+				D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */,
 				5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */,
 				54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
+				D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
 				544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */,
 				54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */,
