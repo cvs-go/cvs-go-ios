@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SearchResultView: View {
-    @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var showWriteView = false
