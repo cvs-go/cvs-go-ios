@@ -36,7 +36,7 @@ extension Image {
         case profileIcon = "profileIcon"
         case banner1 = "banner1"
         case notification = "notification"
-        case bookmark = "bookmark"
+        case bookMark = "bookMark"
         case like = "like"
         case addSquare = "addSquare"
         case invertedTriangle = "invertedTriangle"
@@ -47,6 +47,9 @@ extension Image {
         case plusButton = "plusButton"
         case addPhoto = "addPhoto"
         case deletePhoto = "deletePhoto"
+        case bookMarkFill = "bookMarkFill"
+        case heartMark = "heartMark"
+        case heartMarkFill = "heartMarkFill"
     }
     
     init(name imageName: ImageName) {
