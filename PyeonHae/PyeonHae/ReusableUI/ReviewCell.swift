@@ -51,7 +51,7 @@ struct ReviewCell: View {
                             .foregroundColor(.grayscale85)
                     }
                     Spacer()
-                    Image(name: .bookmark)
+                    Image(name: .bookMark)
                     Spacer().frame(width: 13)
                 }
             }
