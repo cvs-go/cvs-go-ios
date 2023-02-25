@@ -33,6 +33,7 @@
 		54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8F6A82997722D00E19FFF /* WrappingHStack */; };
 		54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */; };
 		54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */; };
+		54C71D4C29A9E8B400FAFDCD /* SearchProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11E829571E52007DAD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E729571E52007DAD20 /* ContentView.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
@@ -93,6 +94,7 @@
 		54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagView.swift; sourceTree = "<group>"; };
 		54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCheckPasswordView.swift; sourceTree = "<group>"; };
 		54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNicknameView.swift; sourceTree = "<group>"; };
+		54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductView.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E729571E52007DAD20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				D5409FE6299502AC0034B250 /* EditLetterView.swift */,
 				D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */,
 				D5291D41299E2F42001D3276 /* ImagePicker.swift */,
+				54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */,
 			);
 			path = EditReview;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
 				D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */,
+				54C71D4C29A9E8B400FAFDCD /* SearchProductView.swift in Sources */,
 				5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */,
 				54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,

@@ -15,12 +15,13 @@ struct EditReviewView: View {
     @StateObject var imageSelection = ImageSelection()
     @Binding var showWriteView: Bool
     @State private var showToast = false
+    @State private var showSearchProductView = false
     
     var body: some View {
         GeometryReader { geo in
             VStack(spacing: 0) {
                 reviewTopBar
-                SelectProductView()
+                SelectProductView(showSearchProductView: $showSearchProductView)
                 Rectangle()
                     .frame(height: 14)
                     .foregroundColor(Color.grayscale10)
@@ -29,6 +30,9 @@ struct EditReviewView: View {
             }
             .background(Color.white)
             .toast(message: "사진은 최대 3장까지 추가할 수 있습니다.", isShowing: $showToast, config: .init())
+        }
+        .bottomSheet(isPresented: $showSearchProductView) {
+            SearchProductView(showSearchProductView: $showSearchProductView)
         }
     }
     
