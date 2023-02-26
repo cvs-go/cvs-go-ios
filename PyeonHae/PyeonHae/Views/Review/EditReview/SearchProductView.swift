@@ -16,15 +16,14 @@ struct SearchProductView: View {
             Spacer().frame(height: 31)
             searchBar
                 .padding(.horizontal, 20)
-            List {
-                ForEach(0..<10) { _ in
-                    VStack {
+            ScrollView {
+                VStack {
+                    ForEach(0..<10) { _ in
                         SearchResultItemView()
                     }
                     .padding(.vertical, 10)
                 }
             }
-            .listStyle(.plain)
         }
     }
     
@@ -51,7 +50,7 @@ struct SearchProductView: View {
             TextField(
                 String(),
                 text: $searchText,
-                prompt: Text("검색할 제품을 입력해주세요!")
+                prompt: Text("찾고싶은 상품을 입력하세요.")
                     .font(.pretendard(.regular, 14))
                     .foregroundColor(.grayscale50)
             )

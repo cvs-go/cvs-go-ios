@@ -25,4 +25,23 @@ extension View {
             )
         )
     }
+    
+    func bottomSheet<Content: View>(
+        isPresented: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Content) -> some View {
+        self.overlay(
+            Group {
+                if isPresented.wrappedValue {
+                    BottomSheet(
+                        isPresented: isPresented,
+                        content: content
+                    )
+                }
+            }
+        )
+    }
+    
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape(RoundedCorner(radius: radius, corners: corners))
+    }
 }

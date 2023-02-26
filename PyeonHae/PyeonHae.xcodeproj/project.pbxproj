@@ -34,6 +34,8 @@
 		54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */; };
 		54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */; };
 		54C71D4C29A9E8B400FAFDCD /* SearchProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */; };
+		54C71D4E29AB559E00FAFDCD /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */; };
+		54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11E829571E52007DAD20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E729571E52007DAD20 /* ContentView.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
@@ -95,6 +97,8 @@
 		54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCheckPasswordView.swift; sourceTree = "<group>"; };
 		54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNicknameView.swift; sourceTree = "<group>"; };
 		54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductView.swift; sourceTree = "<group>"; };
+		54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E729571E52007DAD20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				544CE40C2998D67E00EA9223 /* SelectableButton.swift */,
 				544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */,
 				5462B77929A0DF830063C450 /* ToastMessage.swift */,
+				54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 		54192BC6298177DF0048235C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */,
 				D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */,
+				54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */,
 				D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */,
 				54CC11E829571E52007DAD20 /* ContentView.swift in Sources */,
 				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
@@ -496,6 +503,7 @@
 				542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */,
+				54C71D4E29AB559E00FAFDCD /* RoundedCorner.swift in Sources */,
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
