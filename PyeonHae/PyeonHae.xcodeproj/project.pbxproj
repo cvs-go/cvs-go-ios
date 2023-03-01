@@ -55,6 +55,10 @@
 		54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981AE297E635B00D7E450 /* PopularProducts.swift */; };
 		54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981B0297E72E200D7E450 /* MainTabView.swift */; };
 		668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668CC38729659B9200416C2F /* SignupPasswordView.swift */; };
+		D506C05D29AF24D100B9EA96 /* DetailItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506C05C29AF24D100B9EA96 /* DetailItemView.swift */; };
+		D506C05F29AF32AB00B9EA96 /* ItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506C05E29AF32AB00B9EA96 /* ItemDetailView.swift */; };
+		D506C06129AF3A1900B9EA96 /* ReviewTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506C06029AF3A1900B9EA96 /* ReviewTextCell.swift */; };
+		D506C06329AF3AB800B9EA96 /* DetailItemReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D506C06229AF3AB800B9EA96 /* DetailItemReviewsView.swift */; };
 		D509BE92298259CF00C4492C /* PopularReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D509BE91298259CF00C4492C /* PopularReview.swift */; };
 		D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5291D41299E2F42001D3276 /* ImagePicker.swift */; };
 		D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE22994FA650034B250 /* EditReviewView.swift */; };
@@ -119,6 +123,10 @@
 		54F981AE297E635B00D7E450 /* PopularProducts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularProducts.swift; sourceTree = "<group>"; };
 		54F981B0297E72E200D7E450 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		668CC38729659B9200416C2F /* SignupPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupPasswordView.swift; sourceTree = "<group>"; };
+		D506C05C29AF24D100B9EA96 /* DetailItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemView.swift; sourceTree = "<group>"; };
+		D506C05E29AF32AB00B9EA96 /* ItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailView.swift; sourceTree = "<group>"; };
+		D506C06029AF3A1900B9EA96 /* ReviewTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTextCell.swift; sourceTree = "<group>"; };
+		D506C06229AF3AB800B9EA96 /* DetailItemReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailItemReviewsView.swift; sourceTree = "<group>"; };
 		D509BE91298259CF00C4492C /* PopularReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularReview.swift; sourceTree = "<group>"; };
 		D5291D41299E2F42001D3276 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		D5409FE22994FA650034B250 /* EditReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReviewView.swift; sourceTree = "<group>"; };
@@ -194,6 +202,7 @@
 				544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */,
 				5462B77929A0DF830063C450 /* ToastMessage.swift */,
 				54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */,
+				D506C06029AF3A1900B9EA96 /* ReviewTextCell.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -201,6 +210,7 @@
 		54126CBC29585BA3009D5A09 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D506C05B29AF24B600B9EA96 /* DetailItemView */,
 				D560E25129A4CC8C0018E8FB /* SearchResultView */,
 				54F981B0297E72E200D7E450 /* MainTabView.swift */,
 				54126CBD29585BA7009D5A09 /* Login */,
@@ -356,6 +366,16 @@
 			path = PopularReview;
 			sourceTree = "<group>";
 		};
+		D506C05B29AF24B600B9EA96 /* DetailItemView */ = {
+			isa = PBXGroup;
+			children = (
+				D506C05C29AF24D100B9EA96 /* DetailItemView.swift */,
+				D506C05E29AF32AB00B9EA96 /* ItemDetailView.swift */,
+				D506C06229AF3AB800B9EA96 /* DetailItemReviewsView.swift */,
+			);
+			path = DetailItemView;
+			sourceTree = "<group>";
+		};
 		D5409FE12994FA4F0034B250 /* EditReview */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +497,7 @@
 				668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */,
 				D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */,
 				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
+				D506C06329AF3AB800B9EA96 /* DetailItemReviewsView.swift in Sources */,
 				544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */,
 				54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */,
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
@@ -493,6 +514,7 @@
 				54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
+				D506C05F29AF32AB00B9EA96 /* ItemDetailView.swift in Sources */,
 				D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
 				544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */,
@@ -503,6 +525,7 @@
 				542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
 				D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */,
+				D506C06129AF3A1900B9EA96 /* ReviewTextCell.swift in Sources */,
 				54C71D4E29AB559E00FAFDCD /* RoundedCorner.swift in Sources */,
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
@@ -513,6 +536,7 @@
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
 				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
+				D506C05D29AF24D100B9EA96 /* DetailItemView.swift in Sources */,
 				D5D1BCB529939AA800F25941 /* ReviewView.swift in Sources */,
 				54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */,
 				5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */,
