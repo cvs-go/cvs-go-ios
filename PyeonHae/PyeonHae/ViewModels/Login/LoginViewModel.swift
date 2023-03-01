@@ -7,14 +7,21 @@
 
 import Foundation
 import Combine
+import Alamofire
 
 class LoginViewModel: ObservableObject {
+    private let apiManager = APIManager()
+    
     @Published var textFieldState: TextFieldState = .normal
     @Published var textFieldType: TextFieldType = .email
     @Published var email: String = String()
     @Published var password: String = String()
     @Published var checkPassword: String = String()
     @Published var nickname: String = String()
+    
+    // Tags
+    @Published var tags: [TagModel] = []
+    @Published var selectedTags: [TagModel] = []
     
     var bag = Set<AnyCancellable>()
     
@@ -45,6 +52,8 @@ class LoginViewModel: ObservableObject {
             .sink { text in
                 self.textFieldState = .normal
             }.store(in: &bag)
+        
+        getTags()
     }
     
     func state(textFieldType: TextFieldType) {
@@ -105,6 +114,19 @@ class LoginViewModel: ObservableObject {
             self.textFieldState = .wrongPassword
             return false
         }
+    }
+    
+    func getTags() {
+        apiManager.request(api: LoginAPI.getTags)
+            .sink { (result: Result<TagsModel, Error>) in
+                switch result {
+                case .success(let data):
+                    self.tags = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &bag)
     }
 }
 
