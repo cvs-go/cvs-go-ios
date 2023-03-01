@@ -35,3 +35,31 @@ struct SelectProductView: View {
         .background(Color.white)
     }
 }
+
+//제품 선택된 이후에 보여줄 뷰도 필요해서 삭제하면 안될듯
+//ZStack {
+//    RoundedRectangle(cornerRadius: 10)
+//        .stroke(Color.grayscale30, lineWidth: 1)
+//    HStack {
+//        Image(name: .sampleImage)
+//            .resizable()
+//            .frame(width: 52, height: 52)
+//            .padding(.leading, 6)
+//        VStack(alignment: .leading) {
+//            Text("코카콜라")
+//                .font(.pretendard(.regular, 12))
+//                .foregroundColor(.grayscale50)
+//            Text("제품 이름 한줄에서 끝내자")
+//                .font(.pretendard(.semiBold, 14))
+//                .foregroundColor(.grayscale85)
+//        }
+//        Spacer()
+//        Button(action: {
+//            isSelectProduct.toggle()
+//        }) {
+//            Image(name: .close)
+//                .resizable()
+//                .frame(width: 24, height: 24)
+//                .padding(.trailing, 16)
+//        }
+//    }
