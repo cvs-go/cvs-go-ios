@@ -56,7 +56,7 @@ struct ReviewPhotoView: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
-            .padding(.top, 16)
+            .padding(.vertical, 16)
         }
         .background(Color.white)
         .sheet(isPresented: $showImagePicker) {
