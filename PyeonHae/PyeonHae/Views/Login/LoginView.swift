@@ -30,13 +30,19 @@ struct LoginView: View {
                 Spacer().frame(height: 10)
                 if !isFocused {
                     VStack {
-                        NavigationLink(destination: getDestination) {
+                        NavigationLink(
+                            destination: getDestination(),
+                            isActive: $loginViewModel.endCheckEmail
+                        ) {
                             Text("계속하기")
                                 .font(.pretendard(.bold, 18))
                                 .foregroundColor(.white)
                                 .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
                                 .background(backgroundColor)
                                 .cornerRadius(10)
+                                .onTapGesture {
+                                    loginViewModel.checkEmail()
+                                }
                         }
                         .disabled(isDisabled)
                         Spacer().frame(height: 29)
@@ -97,8 +103,8 @@ struct LoginView: View {
         : false
     }
     
-    func getDestination() -> AnyView {
-        if loginViewModel.checkEmail() {
+    func getDestination() -> some View {
+        if loginViewModel.checkEmailValue {
             return AnyView(InputPasswordView(loginViewModel: loginViewModel))
         } else {
             return AnyView(SignupPasswordView(loginViewModel: loginViewModel))

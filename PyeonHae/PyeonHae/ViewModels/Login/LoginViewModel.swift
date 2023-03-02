@@ -23,6 +23,13 @@ class LoginViewModel: ObservableObject {
     @Published var tags: [TagModel] = []
     @Published var selectedTags: [TagModel] = []
     
+    // Check Email
+    @Published var endCheckEmail: Bool = false
+    @Published var checkEmailValue: Bool = false
+    
+    // Check Nickname
+    @Published var checkNicknameValue: Bool = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
@@ -88,22 +95,40 @@ class LoginViewModel: ObservableObject {
     }
     
     // 존재하는 id인지 아닌지 판별하는 api
-    func checkEmail() -> Bool {
-        if email == "dghj6739@naver.com" {
-            return true
-        } else {
-            return false
-        }
+    func checkEmail() {
+        apiManager.request(api: LoginAPI.checkEmail(email: email))
+            .sink { (result: Result<CheckEmail, Error>) in
+                switch result {
+                case .success(let data):
+                    if data.data {
+                        self.endCheckEmail = true
+                        self.checkEmailValue = true
+                    } else {
+                        self.endCheckEmail = true
+                        self.checkEmailValue = false
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
     
     // 닉네임 중복 검사 api
-    func checkNickname() -> Bool {
-        if nickname == "정건호" { // 중복된 닉네임이 있으면 false 던지고 텍스트필드 state 변경
-            self.textFieldState = .unavailableNickname
-            return false
-        } else { // 없으면 true 던지고 다음 페이지로
-            return true
-        }
+    func checkNickname() {
+        apiManager.request(api: LoginAPI.checkNickname(nickname: nickname))
+            .sink { (result: Result<CheckNickname, Error>) in
+                switch result {
+                case .success(let data):
+                    if data.data {
+                        self.textFieldState = .unavailableNickname
+                        self.checkNicknameValue = false
+                    } else {
+                        self.checkNicknameValue = true
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
     
     // 비밀번호 검사하는 api
@@ -125,8 +150,25 @@ class LoginViewModel: ObservableObject {
                 case .failure(let error):
                     print(error)
                 }
-            }
-            .store(in: &bag)
+            }.store(in: &bag)
+    }
+    
+    func requestSignUp() {
+        let parameters: [String: Any]? = [
+            "email" : email,
+            "password" : password,
+            "nickname" : nickname,
+            "tagIds" : selectedTags.map { $0.id }
+        ]
+        apiManager.request(api: LoginAPI.signUp(parameters))
+            .sink { (result: Result<SignUpModel, Error>) in
+                switch result {
+                case .success(let data):
+                    print("가입 축하!!!", data)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }
 

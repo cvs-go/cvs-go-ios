@@ -12,7 +12,7 @@ protocol API {
     var baseURL: String { get }
     var path: String { get }
     var method: HTTPMethod { get }
-    var parameters: [String : String]? { get }
+    var parameters: [String : Any]? { get }
     var encoding: ParameterEncoding { get }
     var fullURL: URL { get }
 }

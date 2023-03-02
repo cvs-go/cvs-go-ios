@@ -53,6 +53,9 @@ struct SignupSelectTagView: View {
                 .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
                 .background(Color.red100)
                 .cornerRadius(10)
+                .onTapGesture {
+                    loginViewModel.requestSignUp()
+                }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 20)
