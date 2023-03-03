@@ -51,8 +51,8 @@
 		54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3C3E7298C025200C10FF5 /* ReviewHome.swift */; };
 		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
 		54F6B33029AF562C00914889 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B32F29AF562C00914889 /* API.swift */; };
-		54F6B33229AF991000914889 /* CheckEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B33129AF991000914889 /* CheckEmail.swift */; };
-		54F6B33429AF9FA500914889 /* CheckNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B33329AF9FA500914889 /* CheckNickname.swift */; };
+		54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B33129AF991000914889 /* CheckEmailModel.swift */; };
+		54F6B33429AF9FA500914889 /* CheckNicknameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */; };
 		54F80D1D2985275F00102772 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F80D1C2985275F00102772 /* ViewExtension.swift */; };
 		54F80D202985478A00102772 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F80D1F2985478A00102772 /* HomeView.swift */; };
 		54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F981A4297BF45800D7E450 /* MainBanner.swift */; };
@@ -126,8 +126,8 @@
 		54F3C3E7298C025200C10FF5 /* ReviewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHome.swift; sourceTree = "<group>"; };
 		54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyView.swift; sourceTree = "<group>"; };
 		54F6B32F29AF562C00914889 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		54F6B33129AF991000914889 /* CheckEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmail.swift; sourceTree = "<group>"; };
-		54F6B33329AF9FA500914889 /* CheckNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNickname.swift; sourceTree = "<group>"; };
+		54F6B33129AF991000914889 /* CheckEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailModel.swift; sourceTree = "<group>"; };
+		54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNicknameModel.swift; sourceTree = "<group>"; };
 		54F80D1C2985275F00102772 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		54F80D1F2985478A00102772 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		54F981A4297BF45800D7E450 /* MainBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBanner.swift; sourceTree = "<group>"; };
@@ -278,8 +278,8 @@
 			isa = PBXGroup;
 			children = (
 				54AFA1F029ACFFB50058DB39 /* TagsModel.swift */,
-				54F6B33129AF991000914889 /* CheckEmail.swift */,
-				54F6B33329AF9FA500914889 /* CheckNickname.swift */,
+				54F6B33129AF991000914889 /* CheckEmailModel.swift */,
+				54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */,
 				54070B6029B0EF5E00D87F51 /* SignUpModel.swift */,
 			);
 			path = Model;
@@ -540,7 +540,7 @@
 				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
 				D506C06329AF3AB800B9EA96 /* DetailItemReviewsView.swift in Sources */,
 				544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */,
-				54F6B33429AF9FA500914889 /* CheckNickname.swift in Sources */,
+				54F6B33429AF9FA500914889 /* CheckNicknameModel.swift in Sources */,
 				54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */,
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
@@ -561,7 +561,7 @@
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
 				544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */,
 				54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */,
-				54F6B33229AF991000914889 /* CheckEmail.swift in Sources */,
+				54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */,
 				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
 				54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */,
 				54F80D1D2985275F00102772 /* ViewExtension.swift in Sources */,

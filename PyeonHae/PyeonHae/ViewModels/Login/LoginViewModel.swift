@@ -24,8 +24,8 @@ class LoginViewModel: ObservableObject {
     @Published var selectedTags: [TagModel] = []
     
     // Check Email
-    @Published var endCheckEmail: Bool = false
-    @Published var checkEmailValue: Bool = false
+    @Published var pushToLogin: Bool = false
+    @Published var pushToSignUp: Bool = false
     
     // Check Nickname
     @Published var checkNicknameValue: Bool = false
@@ -97,15 +97,13 @@ class LoginViewModel: ObservableObject {
     // 존재하는 id인지 아닌지 판별하는 api
     func checkEmail() {
         apiManager.request(api: LoginAPI.checkEmail(email: email))
-            .sink { (result: Result<CheckEmail, Error>) in
+            .sink { (result: Result<CheckEmailModel, Error>) in
                 switch result {
                 case .success(let data):
                     if data.data {
-                        self.endCheckEmail = true
-                        self.checkEmailValue = true
+                        self.pushToLogin = true
                     } else {
-                        self.endCheckEmail = true
-                        self.checkEmailValue = false
+                        self.pushToSignUp = true
                     }
                 case .failure(let error):
                     print(error)
@@ -116,7 +114,7 @@ class LoginViewModel: ObservableObject {
     // 닉네임 중복 검사 api
     func checkNickname() {
         apiManager.request(api: LoginAPI.checkNickname(nickname: nickname))
-            .sink { (result: Result<CheckNickname, Error>) in
+            .sink { (result: Result<CheckNicknameModel, Error>) in
                 switch result {
                 case .success(let data):
                     if data.data {
