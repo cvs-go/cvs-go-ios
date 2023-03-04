@@ -14,9 +14,9 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
-                // TODO: 추후 이미지 추가 예정
-                Text("대략적인 이미지 크기")
-                    .frame(width: UIWindow().screen.bounds.width - 40, height: 300)
+                Spacer().frame(height: 120)
+                Image(name: .pyeonHaeImage)
+                Spacer()
                 TextFieldWithTitle(
                     text: $loginViewModel.email,
                     title: "아이디",
@@ -27,18 +27,19 @@ struct LoginView: View {
                 )
                 .focused($isFocused)
                 .padding(.horizontal, 20)
-                Spacer().frame(height: 10)
+                Spacer().frame(height: isFocused ? 30 : 10)
                 if !isFocused {
                     VStack {
-                        NavigationLink(destination: getDestination) {
-                            Text("계속하기")
-                                .font(.pretendard(.bold, 18))
-                                .foregroundColor(.white)
-                                .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
-                                .background(backgroundColor)
-                                .cornerRadius(10)
-                        }
-                        .disabled(isDisabled)
+                        Text("계속하기")
+                            .font(.pretendard(.bold, 18))
+                            .foregroundColor(.white)
+                            .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
+                            .background(backgroundColor)
+                            .cornerRadius(10)
+                            .onTapGesture {
+                                loginViewModel.checkEmail()
+                            }
+                            .disabled(isDisabled)
                         Spacer().frame(height: 29)
                         Text("간편 로그인")
                             .font(.pretendard(.bold, 14))
@@ -59,18 +60,28 @@ struct LoginView: View {
                                 }
                         }
                     }
+                    Spacer()
                 }
-                Spacer()
-                NavigationLink(destination: getDestination) {
-                    Text("계속하기")
-                        .font(.pretendard(.bold, 18))
-                        .foregroundColor(.white)
-                        .frame(width: UIWindow().screen.bounds.width, height: 50)
-                        .background(backgroundColor)
-                        .background(Color.red100)
-                        .opacity(isFocused ? 1 : 0)
+                Text("계속하기")
+                    .font(.pretendard(.bold, 18))
+                    .foregroundColor(.white)
+                    .frame(width: UIWindow().screen.bounds.width, height: 50)
+                    .background(backgroundColor)
+                    .background(Color.red100)
+                    .opacity(isFocused ? 1 : 0)
+                    .onTapGesture {
+                        loginViewModel.checkEmail()
+                    }
+                    .disabled(isDisabled)
+                
+                // 존재하는 이메일인 경우 로그인 화면으로 푸시
+                NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel), isActive: $loginViewModel.pushToLogin) {
+                    EmptyView()
                 }
-                .disabled(isDisabled)
+                // 존재하지 않는 이메일인 경우 회원가입 화면으로 푸시
+                NavigationLink(destination: SignupPasswordView(loginViewModel: loginViewModel), isActive: $loginViewModel.pushToSignUp) {
+                    EmptyView()
+                }
             }
             .onAppear {
                 self.loginViewModel.textFieldType = .email
@@ -95,14 +106,6 @@ struct LoginView: View {
         || loginViewModel.email == String()
         ? true
         : false
-    }
-    
-    func getDestination() -> AnyView {
-        if loginViewModel.checkEmail() {
-            return AnyView(InputPasswordView(loginViewModel: loginViewModel))
-        } else {
-            return AnyView(SignupPasswordView(loginViewModel: loginViewModel))
-        }
     }
 }
 

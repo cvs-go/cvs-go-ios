@@ -10,7 +10,6 @@ import SwiftUI
 struct SignupNicknameView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     @FocusState private var isFocused
-    @State var canMoveNextPage = false
     
     var body: some View {
         VStack {
@@ -36,18 +35,19 @@ struct SignupNicknameView: View {
 
             NavigationLink(
                 destination: SignupSelectTagView(loginViewModel: loginViewModel),
-                isActive: $canMoveNextPage) {
-                    Text("다음")
-                        .font(.pretendard(.bold, 18))
-                        .foregroundColor(.white)
-                        .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-                        .background(backgroundColor)
-                        .cornerRadius(isFocused ? 0 : 10)
-                        .disabled(isDisabled)
-                        .onTapGesture {
-                            canMoveNextPage = loginViewModel.checkNickname()
-                        }
-                }
+                isActive: $loginViewModel.checkNicknameValue
+            ) {
+                Text("다음")
+                    .font(.pretendard(.bold, 18))
+                    .foregroundColor(.white)
+                    .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                    .background(backgroundColor)
+                    .cornerRadius(isFocused ? 0 : 10)
+                    .disabled(isDisabled)
+                    .onTapGesture {
+                        loginViewModel.checkNickname()
+                    }
+            }
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {

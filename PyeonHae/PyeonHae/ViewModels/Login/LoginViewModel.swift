@@ -7,8 +7,11 @@
 
 import Foundation
 import Combine
+import Alamofire
 
 class LoginViewModel: ObservableObject {
+    private let apiManager = APIManager()
+    
     @Published var textFieldState: TextFieldState = .normal
     @Published var textFieldType: TextFieldType = .email
     @Published var email: String = String()
@@ -16,14 +19,32 @@ class LoginViewModel: ObservableObject {
     @Published var checkPassword: String = String()
     @Published var nickname: String = String()
     
+    // Tags
+    @Published var tags: [TagModel] = []
+    @Published var selectedTags: [TagModel] = []
+    
+    // Check Email
+    @Published var pushToLogin: Bool = false
+    @Published var pushToSignUp: Bool = false
+    
+    // Check Nickname
+    @Published var checkNicknameValue: Bool = false
+    
+    // Success SignUp
+    @Published var pushToSuccess: Bool = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
+        subscribeTextFields()
+    }
+    
+    private func subscribeTextFields() {
         $email
             .filter { _ in self.textFieldType == .email }
             .sink { text in
                 self.state(textFieldType: self.textFieldType)
-        }.store(in: &bag)
+            }.store(in: &bag)
         
         $password
             .sink { text in
@@ -32,7 +53,7 @@ class LoginViewModel: ObservableObject {
                 } else {
                     self.state(textFieldType: self.textFieldType)
                 }
-        }.store(in: &bag)
+            }.store(in: &bag)
         
         $checkPassword
             .filter { _ in self.textFieldType == .signupCheckPassword }
@@ -78,33 +99,88 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    // 존재하는 id인지 아닌지 판별하는 api
-    func checkEmail() -> Bool {
-        if email == "dghj6739@naver.com" {
-            return true
-        } else {
-            return false
-        }
+    // 이메일 중복 검사 api
+    func checkEmail() {
+        apiManager.request(for: LoginAPI.checkEmail(email: email))
+            .sink { (result: Result<CheckEmailModel, Error>) in
+                switch result {
+                case .success(let data):
+                    if data.data {
+                        self.pushToLogin = true
+                    } else {
+                        self.pushToSignUp = true
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
     
     // 닉네임 중복 검사 api
-    func checkNickname() -> Bool {
-        if nickname == "정건호" { // 중복된 닉네임이 있으면 false 던지고 텍스트필드 state 변경
-            self.textFieldState = .unavailableNickname
-            return false
-        } else { // 없으면 true 던지고 다음 페이지로
-            return true
-        }
+    func checkNickname() {
+        apiManager.request(for: LoginAPI.checkNickname(nickname: nickname))
+            .sink { (result: Result<CheckNicknameModel, Error>) in
+                switch result {
+                case .success(let data):
+                    if data.data {
+                        self.textFieldState = .unavailableNickname
+                        self.checkNicknameValue = false
+                    } else {
+                        self.checkNicknameValue = true
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
     
-    // 비밀번호 검사하는 api
-    func tryToLogin() -> Bool {
-        if password == "wnghkrjsgh12!" {
-            return true
-        } else {
-            self.textFieldState = .wrongPassword
-            return false
-        }
+    // 로그인 api
+    func tryToLogin() {
+        let parameters: [String : String] = [
+            "email" : email,
+            "password" : password
+        ]
+        apiManager.request(for: LoginAPI.login(parameters))
+            .sink { (result: Result<LoginModel, Error>) in
+                switch result {
+                case .success(let data):
+                    print(data)
+                case .failure:
+                    self.textFieldState = .wrongPassword
+                }
+            }.store(in: &bag)
+    }
+    
+    // 태그 api
+    func getTags() {
+        apiManager.request(for: LoginAPI.getTags)
+            .sink { (result: Result<TagsModel, Error>) in
+                switch result {
+                case .success(let data):
+                    self.tags = data.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 회원가입 api
+    func requestSignUp() {
+        let parameters: [String : Any] = [
+            "email" : email,
+            "password" : password,
+            "nickname" : nickname,
+            "tagIds" : selectedTags.map { $0.id }
+        ]
+        apiManager.request(for: LoginAPI.signUp(parameters))
+            .sink { (result: Result<SignUpModel, Error>) in
+                switch result {
+                case .success:
+                    self.pushToSuccess = true
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }
 
