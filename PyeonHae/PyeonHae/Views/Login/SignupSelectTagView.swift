@@ -33,31 +33,42 @@ struct SignupSelectTagView: View {
                     isSelected: loginViewModel.selectedTags.contains { $0 == tag }
                 )
                 .onTapGesture {
-                    if loginViewModel.selectedTags.contains(tag) {
-                        loginViewModel.selectedTags.removeAll(where: { $0 == tag })
-                    } else {
-                        // 같은 그룹의 태그가 선택되어 있으면 선택 해제
-                        if loginViewModel.selectedTags.map({ $0.group }).contains(tag.group) {
-                            loginViewModel.selectedTags.removeAll(where: { $0.group == tag.group })
-                        }
-                        if loginViewModel.selectedTags.count < 3 {
-                            loginViewModel.selectedTags.append(tag)
-                        }
-                    }
+                    handleTagSelection(tag)
                 }
             }
             Spacer()
-            Text("확인")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.white)
-                .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
-                .background(Color.red100)
-                .cornerRadius(10)
-                .onTapGesture {
-                    loginViewModel.requestSignUp()
+            NavigationLink(
+                destination: SignUpSuccessView(loginViewModel: loginViewModel).navigationBarHidden(true),
+                isActive: $loginViewModel.pushToSuccess) {
+                    Text("확인")
+                        .font(.pretendard(.bold, 18))
+                        .foregroundColor(.white)
+                        .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
+                        .background(Color.red100)
+                        .cornerRadius(10)
+                        .onTapGesture {
+                            loginViewModel.requestSignUp()
+                        }
                 }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 20)
+        .onAppear {
+            loginViewModel.getTags()
+        }
+    }
+    
+    private func handleTagSelection(_ tag: TagModel) {
+        if loginViewModel.selectedTags.contains(tag) {
+            loginViewModel.selectedTags.removeAll(where: { $0 == tag })
+        } else {
+            // 같은 그룹의 태그가 선택되어 있으면 선택 해제
+            if loginViewModel.selectedTags.map({ $0.group }).contains(tag.group) {
+                loginViewModel.selectedTags.removeAll(where: { $0.group == tag.group })
+            }
+            if loginViewModel.selectedTags.count < 3 {
+                loginViewModel.selectedTags.append(tag)
+            }
+        }
     }
 }

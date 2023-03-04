@@ -12,7 +12,8 @@ enum LoginAPI: API {
     case checkEmail(email: String)
     case checkNickname(nickname: String)
     case getTags
-    case signUp([String : Any]?)
+    case signUp([String : Any])
+    case login([String : String])
 }
 
 extension LoginAPI {
@@ -27,6 +28,8 @@ extension LoginAPI {
             return .get
         case .signUp:
             return .post
+        case .login:
+            return .post
         }
     }
     
@@ -40,6 +43,8 @@ extension LoginAPI {
             return "/tags"
         case .signUp:
             return "/users"
+        case .login:
+            return "/auth/login"
         }
     }
     
@@ -52,6 +57,8 @@ extension LoginAPI {
         case .getTags:
             return nil
         case .signUp(let parameters):
+            return parameters
+        case .login(let parameters):
             return parameters
         }
     }
@@ -66,10 +73,14 @@ extension LoginAPI {
             return JSONEncoding.default
         case .signUp:
             return JSONEncoding.default
+        case .login:
+            return JSONEncoding.default
         }
     }
     
     var fullURL: URL {
-        return URL(string: baseURL + path)!
+        var urlComponents = URLComponents(string: baseURL)!
+        urlComponents.path += path
+        return urlComponents.url!
     }
 }

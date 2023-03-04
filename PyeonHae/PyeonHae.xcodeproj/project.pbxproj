@@ -22,6 +22,8 @@
 		54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */; };
 		54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB929584327009D5A09 /* ImageExtension.swift */; };
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
+		5418328729B21E29002DA931 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418328629B21E29002DA931 /* LoginModel.swift */; };
+		5418328A29B21FBB002DA931 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418328929B21FBB002DA931 /* SignUpSuccessView.swift */; };
 		542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542F03A52997893A00DBF9C8 /* TopTabBar.swift */; };
 		544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40A2998BE5200EA9223 /* FilterView.swift */; };
 		544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40C2998D67E00EA9223 /* SelectableButton.swift */; };
@@ -32,10 +34,10 @@
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */; };
 		54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1E929ACEA130058DB39 /* LoginAPI.swift */; };
-		54AFA1EC29ACEEE70058DB39 /* URLConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1EB29ACEEE70058DB39 /* URLConstants.swift */; };
 		54AFA1EE29ACF9840058DB39 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1ED29ACF9840058DB39 /* APIManager.swift */; };
 		54AFA1F129ACFFB50058DB39 /* TagsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1F029ACFFB50058DB39 /* TagsModel.swift */; };
 		54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 54B8F6A82997722D00E19FFF /* WrappingHStack */; };
+		54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C4A09A29B3310900A33862 /* EndPoint.swift */; };
 		54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */; };
 		54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */; };
 		54C71D4C29A9E8B400FAFDCD /* SearchProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */; };
@@ -98,6 +100,8 @@
 		54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithTitle.swift; sourceTree = "<group>"; };
 		54126CB929584327009D5A09 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		54126CC029585BD6009D5A09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		5418328629B21E29002DA931 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		5418328929B21FBB002DA931 /* SignUpSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpSuccessView.swift; sourceTree = "<group>"; };
 		542F03A52997893A00DBF9C8 /* TopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = PyeonHae/TopTabBar.swift; sourceTree = SOURCE_ROOT; };
 		544CE40A2998BE5200EA9223 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		544CE40C2998D67E00EA9223 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
@@ -108,9 +112,10 @@
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagView.swift; sourceTree = "<group>"; };
 		54AFA1E929ACEA130058DB39 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
-		54AFA1EB29ACEEE70058DB39 /* URLConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConstants.swift; sourceTree = "<group>"; };
 		54AFA1ED29ACF9840058DB39 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		54AFA1F029ACFFB50058DB39 /* TagsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsModel.swift; sourceTree = "<group>"; };
+		54C4A09A29B3310900A33862 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		54C4A09C29B3370400A33862 /* Security.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Security.xcconfig; sourceTree = "<group>"; };
 		54C50C6D296984A60092AF39 /* SignupCheckPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCheckPasswordView.swift; sourceTree = "<group>"; };
 		54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNicknameView.swift; sourceTree = "<group>"; };
 		54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductView.swift; sourceTree = "<group>"; };
@@ -174,6 +179,7 @@
 			children = (
 				54CC11E929571E54007DAD20 /* Assets.xcassets */,
 				5403AED02957251100FB7253 /* Fonts */,
+				54C4A09C29B3370400A33862 /* Security.xcconfig */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -246,6 +252,19 @@
 				54C50C6F2969D40D0092AF39 /* SignupNicknameView.swift */,
 				54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */,
 				54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */,
+				5418328929B21FBB002DA931 /* SignUpSuccessView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5418328829B21E2C002DA931 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				54AFA1F029ACFFB50058DB39 /* TagsModel.swift */,
+				54F6B33129AF991000914889 /* CheckEmailModel.swift */,
+				54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */,
+				54070B6029B0EF5E00D87F51 /* SignUpModel.swift */,
+				5418328629B21E29002DA931 /* LoginModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -277,10 +296,7 @@
 		54AFA1EF29ACFF990058DB39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				54AFA1F029ACFFB50058DB39 /* TagsModel.swift */,
-				54F6B33129AF991000914889 /* CheckEmailModel.swift */,
-				54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */,
-				54070B6029B0EF5E00D87F51 /* SignUpModel.swift */,
+				5418328829B21E2C002DA931 /* Login */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -291,6 +307,7 @@
 				54F6B32F29AF562C00914889 /* API.swift */,
 				54AFA1E929ACEA130058DB39 /* LoginAPI.swift */,
 				54AFA1ED29ACF9840058DB39 /* APIManager.swift */,
+				54C4A09A29B3310900A33862 /* EndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -343,7 +360,6 @@
 			children = (
 				54D0101A295F3E5800FACB90 /* Constants.swift */,
 				54D0101C295F3E9400FACB90 /* RegexConstants.swift */,
-				54AFA1EB29ACEEE70058DB39 /* URLConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -553,12 +569,13 @@
 				54C71D4C29A9E8B400FAFDCD /* SearchProductView.swift in Sources */,
 				5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */,
 				54F981AF297E635B00D7E450 /* PopularProducts.swift in Sources */,
+				5418328A29B21FBB002DA931 /* SignUpSuccessView.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
-				54AFA1EC29ACEEE70058DB39 /* URLConstants.swift in Sources */,
 				D506C05F29AF32AB00B9EA96 /* ItemDetailView.swift in Sources */,
 				D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
+				5418328729B21E29002DA931 /* LoginModel.swift in Sources */,
 				544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */,
 				54F981B1297E72E200D7E450 /* MainTabView.swift in Sources */,
 				54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */,
@@ -574,6 +591,7 @@
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
+				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
@@ -715,6 +733,7 @@
 		};
 		54CC11F129571E54007DAD20 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C4A09C29B3370400A33862 /* Security.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -748,6 +767,7 @@
 		};
 		54CC11F229571E54007DAD20 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54C4A09C29B3370400A33862 /* Security.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

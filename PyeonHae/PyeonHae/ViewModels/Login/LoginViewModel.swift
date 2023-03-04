@@ -30,14 +30,21 @@ class LoginViewModel: ObservableObject {
     // Check Nickname
     @Published var checkNicknameValue: Bool = false
     
+    // Success SignUp
+    @Published var pushToSuccess: Bool = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
+        subscribeTextFields()
+    }
+    
+    private func subscribeTextFields() {
         $email
             .filter { _ in self.textFieldType == .email }
             .sink { text in
                 self.state(textFieldType: self.textFieldType)
-        }.store(in: &bag)
+            }.store(in: &bag)
         
         $password
             .sink { text in
@@ -46,7 +53,7 @@ class LoginViewModel: ObservableObject {
                 } else {
                     self.state(textFieldType: self.textFieldType)
                 }
-        }.store(in: &bag)
+            }.store(in: &bag)
         
         $checkPassword
             .filter { _ in self.textFieldType == .signupCheckPassword }
@@ -59,8 +66,6 @@ class LoginViewModel: ObservableObject {
             .sink { text in
                 self.textFieldState = .normal
             }.store(in: &bag)
-        
-        getTags()
     }
     
     func state(textFieldType: TextFieldType) {
@@ -94,7 +99,7 @@ class LoginViewModel: ObservableObject {
         }
     }
     
-    // 존재하는 id인지 아닌지 판별하는 api
+    // 이메일 중복 검사 api
     func checkEmail() {
         apiManager.request(api: LoginAPI.checkEmail(email: email))
             .sink { (result: Result<CheckEmailModel, Error>) in
@@ -129,16 +134,24 @@ class LoginViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    // 비밀번호 검사하는 api
-    func tryToLogin() -> Bool {
-        if password == "wnghkrjsgh12!" {
-            return true
-        } else {
-            self.textFieldState = .wrongPassword
-            return false
-        }
+    // 로그인 api
+    func tryToLogin() {
+        let parameters: [String : String] = [
+            "email" : email,
+            "password" : password
+        ]
+        apiManager.request(api: LoginAPI.login(parameters))
+            .sink { (result: Result<LoginModel, Error>) in
+                switch result {
+                case .success(let data):
+                    print(data)
+                case .failure:
+                    self.textFieldState = .wrongPassword
+                }
+            }.store(in: &bag)
     }
     
+    // 태그 api
     func getTags() {
         apiManager.request(api: LoginAPI.getTags)
             .sink { (result: Result<TagsModel, Error>) in
@@ -151,8 +164,9 @@ class LoginViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
+    // 회원가입 api
     func requestSignUp() {
-        let parameters: [String: Any]? = [
+        let parameters: [String : Any] = [
             "email" : email,
             "password" : password,
             "nickname" : nickname,
@@ -161,8 +175,8 @@ class LoginViewModel: ObservableObject {
         apiManager.request(api: LoginAPI.signUp(parameters))
             .sink { (result: Result<SignUpModel, Error>) in
                 switch result {
-                case .success(let data):
-                    print("가입 축하!!!", data)
+                case .success:
+                    self.pushToSuccess = true
                 case .failure(let error):
                     print(error)
                 }

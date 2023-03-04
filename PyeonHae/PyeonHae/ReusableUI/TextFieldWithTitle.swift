@@ -97,9 +97,11 @@ struct TextFieldWithTitle: View {
             .background(Color.grayscale10)
             .cornerRadius(10)
             
-            Text(state.rawValue)
-                .font(.pretendard(.regular, 14))
-                .foregroundColor(textFieldGuideColor())
+            if state != .normal {
+                Text(state.rawValue)
+                    .font(.pretendard(.regular, 14))
+                    .foregroundColor(textFieldGuideColor())
+            }
         }
     }
     
