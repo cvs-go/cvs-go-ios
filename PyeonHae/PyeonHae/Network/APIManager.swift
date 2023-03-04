@@ -18,8 +18,6 @@ class APIManager {
             configuration: configuration,
             delegate: SessionDelegate()
         )
-        session.sessionConfiguration.timeoutIntervalForRequest = 15
-        
         return session
     }()
     
@@ -34,7 +32,7 @@ class APIManager {
             )
     }
     
-    func request<T>(api: API) -> AnyPublisher<Result<T, Error>, Never> where T: Codable {
+    func request<T: Codable>(for api: API) -> AnyPublisher<Result<T, Error>, Never> where T: Codable {
         return makeRequest(api)
             .validate()
             .publishData()

@@ -20,15 +20,9 @@ extension LoginAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .checkEmail:
+        case .checkEmail, .checkNickname, .getTags:
             return .get
-        case .checkNickname:
-            return .get
-        case .getTags:
-            return .get
-        case .signUp:
-            return .post
-        case .login:
+        case .signUp, .login:
             return .post
         }
     }
@@ -50,11 +44,7 @@ extension LoginAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case .checkEmail:
-            return nil
-        case .checkNickname:
-            return nil
-        case .getTags:
+        case .checkEmail, .checkNickname, .getTags:
             return nil
         case .signUp(let parameters):
             return parameters
@@ -65,15 +55,7 @@ extension LoginAPI {
     
     var encoding: ParameterEncoding {
         switch self {
-        case .checkEmail:
-            return JSONEncoding.default
-        case .checkNickname:
-            return JSONEncoding.default
-        case .getTags:
-            return JSONEncoding.default
-        case .signUp:
-            return JSONEncoding.default
-        case .login:
+        default:
             return JSONEncoding.default
         }
     }
