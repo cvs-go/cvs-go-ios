@@ -28,8 +28,17 @@ struct SignUpSuccessView: View {
                 .background(Color.red100)
                 .cornerRadius(10)
                 .onTapGesture {
-                    loginViewModel.tryToLogin()
+                    loginViewModel.tryToLogin {
+                        switchRootViewToMain()
+                    }
                 }
         }
+    }
+    
+    private func switchRootViewToMain() {
+        let hostingController = UIHostingController(rootView: MainTabView())
+        let option = UIWindow.TransitionOptions(direction: .toRight, style: .easeInOut)
+        option.duration = 0.25
+        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
 }

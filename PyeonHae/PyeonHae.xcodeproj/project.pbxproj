@@ -50,6 +50,7 @@
 		54D0101B295F3E5800FACB90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101A295F3E5800FACB90 /* Constants.swift */; };
 		54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101C295F3E9400FACB90 /* RegexConstants.swift */; };
 		54D0101F295F412600FACB90 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101E295F412600FACB90 /* StringExtension.swift */; };
+		54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 54E58D6729B620E900958789 /* UIWindowTransitions */; };
 		54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3C3E7298C025200C10FF5 /* ReviewHome.swift */; };
 		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
 		54F6B33029AF562C00914889 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B32F29AF562C00914889 /* API.swift */; };
@@ -168,6 +169,7 @@
 			files = (
 				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 				54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */,
+				54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +484,7 @@
 			packageProductDependencies = (
 				54B8F6A82997722D00E19FFF /* WrappingHStack */,
 				54C71D5229AB8EC200FAFDCD /* Alamofire */,
+				54E58D6729B620E900958789 /* UIWindowTransitions */,
 			);
 			productName = PyeonHae;
 			productReference = 54CC11E229571E52007DAD20 /* PyeonHae.app */;
@@ -514,6 +517,7 @@
 			packageReferences = (
 				54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				54C71D5129AB8EC200FAFDCD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */,
 			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
 			projectDirPath = "";
@@ -839,6 +843,14 @@
 				kind = branch;
 			};
 		};
+		54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/UIWindowTransitions";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -851,6 +863,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54C71D5129AB8EC200FAFDCD /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		54E58D6729B620E900958789 /* UIWindowTransitions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */;
+			productName = UIWindowTransitions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

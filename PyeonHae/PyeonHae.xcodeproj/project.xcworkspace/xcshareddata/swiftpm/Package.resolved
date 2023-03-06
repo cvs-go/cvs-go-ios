@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "uiwindowtransitions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/malcommac/UIWindowTransitions",
+      "state" : {
+        "revision" : "9fae35fc44e2742cb12f640afbad6111355bda85",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "wrappinghstack",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dkk/WrappingHStack.git",

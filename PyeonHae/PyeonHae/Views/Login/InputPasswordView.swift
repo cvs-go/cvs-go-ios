@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIWindowTransitions
 
 struct InputPasswordView: View {
     @ObservedObject var loginViewModel: LoginViewModel
@@ -45,7 +46,9 @@ struct InputPasswordView: View {
                 .cornerRadius(isFocused ? 0 : 10)
                 .disabled(isDisabled)
                 .onTapGesture {
-                    loginViewModel.tryToLogin()
+                    loginViewModel.tryToLogin {
+                        switchRootViewToMain()
+                    }
                 }
             Spacer().frame(height: isFocused ? 0 : 52)
         }
@@ -68,5 +71,12 @@ struct InputPasswordView: View {
         return loginViewModel.password.isValidPassword()
         ? false
         : true
+    }
+    
+    private func switchRootViewToMain() {
+        let hostingController = UIHostingController(rootView: MainTabView())
+        let option = UIWindow.TransitionOptions(direction: .toRight, style: .easeInOut)
+        option.duration = 0.25
+        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
 }

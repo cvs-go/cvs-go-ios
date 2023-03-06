@@ -135,7 +135,7 @@ class LoginViewModel: ObservableObject {
     }
     
     // 로그인 api
-    func tryToLogin() {
+    func tryToLogin(completion: @escaping () -> Void) {
         let parameters: [String : String] = [
             "email" : email,
             "password" : password
@@ -145,6 +145,7 @@ class LoginViewModel: ObservableObject {
                 switch result {
                 case .success(let data):
                     print(data)
+                    completion()
                 case .failure:
                     self.textFieldState = .wrongPassword
                 }
