@@ -53,6 +53,7 @@ struct DetailItemView: View {
                 }
         }
     }
+    
     var DetailItemViewTopBar: some View {
         HStack(spacing: 0) {
             Spacer().frame(width: 14)
@@ -68,15 +69,6 @@ struct DetailItemView: View {
         .frame(height: 44)
     }
 }
-
-struct ScrollViewOffsetPreferenceKey: PreferenceKey {
-    static var defaultValue: CGFloat = 0
-    
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
-
 
 struct DetailItemView_Previews: PreviewProvider {
     static var previews: some View {
