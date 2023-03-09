@@ -20,14 +20,8 @@ struct DetailItemView: View {
                         .background(
                             GeometryReader { geometry -> Color in
                                 let maxY = geometry.frame(in: .global).midY
-                                if maxY <= 0 && !isReviewButtonVisible {
-                                    DispatchQueue.main.async {
-                                        isReviewButtonVisible = true
-                                    }
-                                } else if maxY > 0 && isReviewButtonVisible {
-                                    DispatchQueue.main.async {
-                                        isReviewButtonVisible = false
-                                    }
+                              DispatchQueue.main.async {
+                                    isReviewButtonVisible = maxY <= 0
                                 }
                                 return Color.clear
                             }
