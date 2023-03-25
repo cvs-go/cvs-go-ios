@@ -83,6 +83,12 @@ struct LoginView: View {
                     EmptyView()
                 }
             }
+            .background(
+                Image(name: .backgroundImage)
+                    .resizable()
+                    .scaledToFill()
+                    .edgesIgnoringSafeArea(.all)
+            )
             .onAppear {
                 self.loginViewModel.textFieldType = .email
                 self.loginViewModel.textFieldState = .normal

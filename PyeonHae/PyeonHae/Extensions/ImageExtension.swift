@@ -52,6 +52,7 @@ extension Image {
         case heartMarkFill = "heartMarkFill"
         case arrowLeft = "arrowLeft"
         case pyeonHaeImage = "pyeonHaeImage"
+        case backgroundImage = "backgroundImage"
     }
     
     init(name imageName: ImageName) {
