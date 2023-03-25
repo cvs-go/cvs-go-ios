@@ -144,7 +144,7 @@ class LoginViewModel: ObservableObject {
             .sink { (result: Result<LoginModel, Error>) in
                 switch result {
                 case .success(let data):
-                    print(data)
+                    self.saveToken(data: data.data)
                     completion()
                 case .failure:
                     self.textFieldState = .wrongPassword
@@ -182,6 +182,12 @@ class LoginViewModel: ObservableObject {
                     print(error)
                 }
             }.store(in: &bag)
+    }
+    
+    private func saveToken(data: LoginDataModel) {
+        UserShared.isLoggedIn = true
+        UserShared.accessToken = data.accessToken
+        UserShared.refreshToken = data.refreshToken
     }
 }
 
