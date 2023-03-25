@@ -24,18 +24,19 @@ struct SplashView: View {
         }
     }
     
-    private func switchRootViewToMain() {
-        let hostingController = UIHostingController(rootView: MainTabView())
+    private func switchRootView<Content: View>(to rootView: Content) {
+        let hostingController = UIHostingController(rootView: rootView)
         let option = UIWindow.TransitionOptions(direction: .fade, style: .easeInOut)
         option.duration = 0.25
         UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
-    
+
+    private func switchRootViewToMain() {
+        switchRootView(to: MainTabView())
+    }
+
     private func switchRootViewToLogin() {
-        let hostingController = UIHostingController(rootView: LoginView())
-        let option = UIWindow.TransitionOptions(direction: .fade, style: .easeInOut)
-        option.duration = 0.25
-        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
+        switchRootView(to: LoginView())
     }
 }
 
