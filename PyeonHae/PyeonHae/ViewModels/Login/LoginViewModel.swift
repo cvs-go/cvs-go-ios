@@ -140,7 +140,7 @@ class LoginViewModel: ObservableObject {
             "email" : email,
             "password" : password
         ]
-        apiManager.request(for: LoginAPI.login(parameters))
+        apiManager.request(for: AuthAPI.login(parameters))
             .sink { (result: Result<LoginModel, Error>) in
                 switch result {
                 case .success(let data):

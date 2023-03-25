@@ -13,7 +13,6 @@ enum LoginAPI: API {
     case checkNickname(nickname: String)
     case getTags
     case signUp([String : Any])
-    case login([String : String])
 }
 
 extension LoginAPI {
@@ -22,7 +21,7 @@ extension LoginAPI {
         switch self {
         case .checkEmail, .checkNickname, .getTags:
             return .get
-        case .signUp, .login:
+        case .signUp:
             return .post
         }
     }
@@ -37,8 +36,6 @@ extension LoginAPI {
             return "/tags"
         case .signUp:
             return "/users"
-        case .login:
-            return "/auth/login"
         }
     }
     
@@ -47,8 +44,6 @@ extension LoginAPI {
         case .checkEmail, .checkNickname, .getTags:
             return nil
         case .signUp(let parameters):
-            return parameters
-        case .login(let parameters):
             return parameters
         }
     }
