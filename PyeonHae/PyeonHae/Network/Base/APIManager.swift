@@ -16,7 +16,8 @@ class APIManager {
         configuration.timeoutIntervalForRequest = 15
         let session = Alamofire.Session(
             configuration: configuration,
-            delegate: SessionDelegate()
+            delegate: SessionDelegate(),
+            interceptor: Interceptor()
         )
         return session
     }()

@@ -28,54 +28,54 @@ class Interceptor: RequestInterceptor {
         completion(.success(urlRequest))
     }
     
-
-func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-    guard let response = request.task?.response as? HTTPURLResponse
-          response.statusCode == 401
-          request.retryCount < maxRetryCount
-    else {
-        completion(.doNotRetryWithError(error))
-        return
-    }
-
-    refreshToken { success in
-        if success {
-            completion(.retry)
-        } else {
+    
+    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        guard let response = request.task?.response as? HTTPURLResponse,
+              response.statusCode == 401,
+              request.retryCount < maxRetryCount
+        else {
             completion(.doNotRetryWithError(error))
+            return
         }
-    }
-}
-
-func refreshToken(completion: @escaping (Bool) -> Void) {
-    let refreshTokenAPI = AuthAPI.tokens
-    let request = Alamofire.request(
-        refreshTokenAPI.fullURL,
-        method: refreshTokenAPI.method,
-        parameters: refreshTokenAPI.parameters,
-        encoding: refreshTokenAPI.encoding
-    )
-
-    request.responseJSON { response in
-        switch response.result {
-        case .success(let data):
-            guard let json = data as? [String: Any],
-                  let newAccessToken = json["access_token"] as? String,
-                  let newRefreshToken = json["refresh_token"] as? String
-            else {
-                completion(false)
-                return
+        
+        refreshToken { success in
+            if success {
+                completion(.retry)
+            } else {
+                completion(.doNotRetryWithError(error))
             }
-
-            UserShared.accessToken = newAccessToken
-            UserShared.refreshToken = newRefreshToken
-            completion(true)
-
-        case .failure:
-            completion(false)
         }
     }
-}
+    
+    func refreshToken(completion: @escaping (Bool) -> Void) {
+        let refreshTokenAPI = AuthAPI.tokens
+        let request = AF.request(
+            refreshTokenAPI.fullURL,
+            method: refreshTokenAPI.method,
+            parameters: refreshTokenAPI.parameters,
+            encoding: refreshTokenAPI.encoding
+        )
+        
+        request.responseJSON { response in
+            switch response.result {
+            case .success(let data):
+                guard let json = data as? [String: Any],
+                      let newAccessToken = json["access_token"] as? String,
+                      let newRefreshToken = json["refresh_token"] as? String
+                else {
+                    completion(false)
+                    return
+                }
+                
+                UserShared.accessToken = newAccessToken
+                UserShared.refreshToken = newRefreshToken
+                completion(true)
+                
+            case .failure:
+                completion(false)
+            }
+        }
+    }
 }
 
 
