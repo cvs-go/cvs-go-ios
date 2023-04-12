@@ -29,6 +29,8 @@
 		543CEABC29CF142B00CDB0C8 /* UserShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEABB29CF142B00CDB0C8 /* UserShared.swift */; };
 		543CEABE29CF1B1000CDB0C8 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */; };
 		543CEAC129CF1DAB00CDB0C8 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEAC029CF1DAB00CDB0C8 /* Interceptor.swift */; };
+		543CEAC329CF2A5900CDB0C8 /* ProductsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEAC229CF2A5900CDB0C8 /* ProductsAPI.swift */; };
+		543CEAC529CF4AB700CDB0C8 /* FiltersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */; };
 		544CE40B2998BE5200EA9223 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40A2998BE5200EA9223 /* FilterView.swift */; };
 		544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40C2998D67E00EA9223 /* SelectableButton.swift */; };
 		544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */; };
@@ -112,6 +114,8 @@
 		543CEABB29CF142B00CDB0C8 /* UserShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShared.swift; sourceTree = "<group>"; };
 		543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		543CEAC029CF1DAB00CDB0C8 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		543CEAC229CF2A5900CDB0C8 /* ProductsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsAPI.swift; sourceTree = "<group>"; };
+		543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersModel.swift; sourceTree = "<group>"; };
 		544CE40A2998BE5200EA9223 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		544CE40C2998D67E00EA9223 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUserInfo.swift; sourceTree = "<group>"; };
@@ -277,6 +281,7 @@
 				54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */,
 				54070B6029B0EF5E00D87F51 /* SignUpModel.swift */,
 				5418328629B21E29002DA931 /* LoginModel.swift */,
+				543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 				543CEABF29CF1B7F00CDB0C8 /* Base */,
 				54AFA1E929ACEA130058DB39 /* LoginAPI.swift */,
 				543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */,
+				543CEAC229CF2A5900CDB0C8 /* ProductsAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
 				54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */,
 				54F80D1D2985275F00102772 /* ViewExtension.swift in Sources */,
+				543CEAC329CF2A5900CDB0C8 /* ProductsAPI.swift in Sources */,
 				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
 				542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */,
 				54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */,
@@ -629,6 +636,7 @@
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
+				543CEAC529CF4AB700CDB0C8 /* FiltersModel.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
