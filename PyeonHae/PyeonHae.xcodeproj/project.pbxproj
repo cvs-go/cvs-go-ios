@@ -38,6 +38,7 @@
 		5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77729A0D2E20063C450 /* ArrayExtension.swift */; };
 		5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77929A0DF830063C450 /* ToastMessage.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
+		5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */; };
 		54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */; };
 		54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1E929ACEA130058DB39 /* LoginAPI.swift */; };
 		54AFA1EE29ACF9840058DB39 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1ED29ACF9840058DB39 /* APIManager.swift */; };
@@ -123,6 +124,7 @@
 		5462B77729A0D2E20063C450 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5462B77929A0DF830063C450 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagView.swift; sourceTree = "<group>"; };
 		54AFA1E929ACEA130058DB39 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		54AFA1ED29ACF9840058DB39 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -281,7 +283,6 @@
 				54F6B33329AF9FA500914889 /* CheckNicknameModel.swift */,
 				54070B6029B0EF5E00D87F51 /* SignUpModel.swift */,
 				5418328629B21E29002DA931 /* LoginModel.swift */,
-				543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -316,6 +317,7 @@
 		547BE29529631F310069828A /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5485EB7529EC0CB000FDB56B /* Search */,
 				547BE29829631F4F0069828A /* Login */,
 			);
 			path = ViewModels;
@@ -329,9 +331,18 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		5485EB7529EC0CB000FDB56B /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		54AFA1EF29ACFF990058DB39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				54CF51B229EEDA2400FC492F /* Search */,
 				5418328829B21E2C002DA931 /* Login */,
 			);
 			path = Model;
@@ -389,6 +400,14 @@
 				54CC11EC29571E54007DAD20 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		54CF51B229EEDA2400FC492F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		54D01019295F3E2600FACB90 /* Constants */ = {
@@ -602,6 +621,7 @@
 				543CEAC129CF1DAB00CDB0C8 /* Interceptor.swift in Sources */,
 				D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */,
 				54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */,
+				5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */,
 				D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */,
 				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
 				543CEABC29CF142B00CDB0C8 /* UserShared.swift in Sources */,

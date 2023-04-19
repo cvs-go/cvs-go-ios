@@ -9,12 +9,12 @@ import SwiftUI
 import WrappingHStack
 
 struct FilterView: View {
-    let filterDatas: [FilterData]
+    let filterDatas: FiltersDataModel
     @Binding private var showFilter: Bool
     @Binding private var selectedElements: [String]
     
     init(
-        filterDatas: [FilterData],
+        filterDatas: FiltersDataModel,
         showFilter: Binding<Bool>,
         selectedElements: Binding<[String]>
     ) {
@@ -66,36 +66,70 @@ struct FilterView: View {
     }
     
     private func filterElements() -> some View {
-        VStack(spacing: 0) {
-            ForEach(Array(filterDatas.enumerated()), id: \.element) { index, data in
-                VStack(alignment: .leading) {
-                    Text(data.category)
-                        .font(.pretendard(.bold, 12))
-                        .foregroundColor(.grayscale85)
-                    WrappingHStack(data.elements, id: \.self, lineSpacing: 6) { element in
-                        SelectableButton(
-                            text: element,
-                            isSelected: selectedElements.contains(element)
-                        )
-                        .onTapGesture {
-                            if selectedElements.contains(element) {
-                                selectedElements.removeAll(where: { $0 == element })
-                            } else {
-                                selectedElements.append(element)
-                            }
+        VStack {
+            VStack(alignment: .leading) {
+                Text("편의점")
+                    .font(.pretendard(.bold, 12))
+                    .foregroundColor(.grayscale85)
+                WrappingHStack(filterDatas.convenienceStores, id: \.self, lineSpacing: 6) { element in
+                    SelectableButton(
+                        text: element.name,
+                        isSelected: selectedElements.contains(element.name)
+                    )
+                    .onTapGesture {
+                        if selectedElements.contains(element.name) {
+                            selectedElements.removeAll(where: { $0 == element.name })
+                        } else {
+                            selectedElements.append(element.name)
                         }
                     }
                 }
-                .padding(
-                    EdgeInsets(
-                        top: index == 0 ? 16 : 20,
-                        leading: 20,
-                        bottom: index == filterDatas.count - 1 ? 16 : 0,
-                        trailing: 20
-                    )
-                )
             }
-            .frame(width: UIWindow().screen.bounds.width, alignment: .leading)
+            .padding(.top, 16)
+            .padding(.horizontal, 20)
+            
+            VStack(alignment: .leading) {
+                Text("제품")
+                    .font(.pretendard(.bold, 12))
+                    .foregroundColor(.grayscale85)
+                WrappingHStack(filterDatas.categories, id: \.self, lineSpacing: 6) { element in
+                    SelectableButton(
+                        text: element.name,
+                        isSelected: selectedElements.contains(element.name)
+                    )
+                    .onTapGesture {
+                        if selectedElements.contains(element.name) {
+                            selectedElements.removeAll(where: { $0 == element.name })
+                        } else {
+                            selectedElements.append(element.name)
+                        }
+                    }
+                }
+            }
+            .padding(.top, 20)
+            .padding(.horizontal, 20)
+            
+            VStack(alignment: .leading) {
+                Text("이벤트")
+                    .font(.pretendard(.bold, 12))
+                    .foregroundColor(.grayscale85)
+                WrappingHStack(filterDatas.eventTypes, id: \.self, lineSpacing: 6) { element in
+                    SelectableButton(
+                        text: element.name,
+                        isSelected: selectedElements.contains(element.name)
+                    )
+                    .onTapGesture {
+                        if selectedElements.contains(element.name) {
+                            selectedElements.removeAll(where: { $0 == element.name })
+                        } else {
+                            selectedElements.append(element.name)
+                        }
+                    }
+                }
+            }
+            .padding(.top, 20)
+            .padding(.horizontal, 20)
+            
         }
     }
 }

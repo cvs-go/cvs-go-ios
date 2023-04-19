@@ -37,7 +37,6 @@ class LoginViewModel: ObservableObject {
     
     init() {
         subscribeTextFields()
-        requestFilterDatas()
     }
     
     private func subscribeTextFields() {
@@ -183,20 +182,6 @@ class LoginViewModel: ObservableObject {
                     print(error)
                 }
             }.store(in: &bag)
-    }
-    
-    func requestFilterDatas() {
-        apiManager.request(for: ProductsAPI.filter)
-            .sink { (result: Result<FiltersModel, Error>) in
-                switch result {
-                case .success(let data):
-                    // TODO: 해당 데이터는 내부 DB에 저장해서 쓸 예정
-                    print(data)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            .store(in: &bag)
     }
     
     private func saveToken(data: LoginDataModel) {
