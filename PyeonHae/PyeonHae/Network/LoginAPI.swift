@@ -31,7 +31,7 @@ extension LoginAPI {
         case .checkEmail(let email):
             return "/users/emails/\(email)/exists"
         case .checkNickname(let nickname):
-            return "/users/nicknames/\(nickname)/exists".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            return "/users/nicknames/\(nickname)/exists"
         case .getTags:
             return "/tags"
         case .signUp:
