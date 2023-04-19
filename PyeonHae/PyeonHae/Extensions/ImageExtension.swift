@@ -53,6 +53,15 @@ extension Image {
         case arrowLeft = "arrowLeft"
         case pyeonHaeImage = "pyeonHaeImage"
         case backgroundImage = "backgroundImage"
+        
+        case foodImage = "foodImage"
+        case instantFoodImage = "instantFoodImage"
+        case snackImage = "snackImage"
+        case icecreamImage = "icecreamImage"
+        case freshFoodImage = "freshFoodImage"
+        case dairyProductImage = "dairyProductImage"
+        case beverageImage = "beverageImage"
+        case etcImage = "etcImage"
     }
     
     init(name imageName: ImageName) {

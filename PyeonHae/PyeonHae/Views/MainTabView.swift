@@ -31,7 +31,7 @@ struct MainTabView: View {
         case .review:
             ReviewHome()
         case .search:
-            SearchResultView()
+            SearchHomeView()
         case .myPage:
             Text("내정보")
         }
