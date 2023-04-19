@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchResultView: View {
+    @ObservedObject var searchViewModel = SearchViewModel()
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var showWriteView = false
@@ -22,7 +23,7 @@ struct SearchResultView: View {
     var body: some View {
         VStack {
             FilterView(
-                filterDatas: filterDatas,
+                filterDatas: searchViewModel.filtersData!,
                 showFilter: $showFilter,
                 selectedElements: $selectedElements
             )
@@ -53,6 +54,9 @@ struct SearchResultView: View {
                 }
             }
         }
+        .onAppear {
+            print(self.searchViewModel.filtersData)
+        }
     }
     
     @ViewBuilder
@@ -61,7 +65,7 @@ struct SearchResultView: View {
             VStack(spacing: 0) {
                 Spacer().frame(height: 10)
                 FilterView(
-                    filterDatas: filterDatas,
+                    filterDatas: searchViewModel.filtersData!,
                     showFilter: $showFilter,
                     selectedElements: $selectedElements
                 )

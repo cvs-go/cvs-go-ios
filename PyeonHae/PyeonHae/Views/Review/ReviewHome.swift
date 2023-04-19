@@ -61,11 +61,13 @@ struct ReviewHome: View {
         ScrollView {
             VStack(spacing: 0) {
                 Spacer().frame(height: 10)
-                FilterView(
-                    filterDatas: filterDatas,
-                    showFilter: $showFilter,
-                    selectedElements: $selectedElements
-                )
+                
+                // TODO: 리뷰 필터 뷰 수정하기
+//                FilterView(
+//                    filterDatas: filterDatas,
+//                    showFilter: $showFilter,
+//                    selectedElements: $selectedElements
+//                )
                 HStack {
                     Spacer().frame(width: 20)
                     Text("새로운 리뷰 14개")
