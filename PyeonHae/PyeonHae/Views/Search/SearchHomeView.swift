@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SearchHomeView: View {
-    @State var text = String()
+    @State private var text = String()
     private let imageSize = (UIWindow().screen.bounds.width - 55) / 4
+    
     var body: some View {
         VStack {
-            SearchBar(text: $text)
+            SearchBar(text: $text, searchBarType: .uneditable)
             Spacer().frame(height: 20)
             ProductCategories
             Spacer()
         }
     }
-    
    
     var ProductCategories: some View {
         VStack {
