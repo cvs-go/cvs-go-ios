@@ -17,6 +17,7 @@ class SearchViewModel: ObservableObject {
     
     init() {
         requestFilterDatas()
+        searchProducts()
     }
     
     func requestFilterDatas() {
@@ -30,5 +31,25 @@ class SearchViewModel: ObservableObject {
                 }
             }
             .store(in: &bag)
+    }
+    
+    func searchProducts() {
+        let parameters: [String : Any] = [
+            "convenienceStoreIds" : [1],
+            "categoryIds" : [1],
+            "eventTypes" : ["BOGO"],
+            "lowestPrice" : 0,
+            "highestPrice" : 1000
+        ]
+        
+        apiManager.request(for: ProductsAPI.search(parameters))
+            .sink { (result: Result<ProductModel, Error>) in
+                switch result {
+                case .success(let products):
+                    print(products)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }
