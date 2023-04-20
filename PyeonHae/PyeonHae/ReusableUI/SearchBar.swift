@@ -12,14 +12,24 @@ struct SearchBar: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @Binding var text: String
+    @Binding var showResultView: Bool
     let searchBarType: searchBarType
     @FocusState private var isFocused
-    @State private var startSearch = false
+    
+    init(
+        text: Binding<String>,
+        showResultView: Binding<Bool> = .constant(false),
+        searchBarType: searchBarType
+    ) {
+        self._text = text
+        self._showResultView = showResultView
+        self.searchBarType = searchBarType
+    }
     
     var body: some View {
         VStack(spacing: 9) {
             HStack(spacing: 0) {
-                if searchBarType == .editable {
+                if searchBarType != .home {
                     Image(name: .arrowLeft)
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -27,37 +37,44 @@ struct SearchBar: View {
                             self.presentationMode.wrappedValue.dismiss()
                         }
                 }
-                TextField(
-                    String(),
-                    text: $text,
-                    prompt: Text("찾고싶은 상품을 입력하세요.")
-                        .font(.pretendard(.regular, 14))
-                        .foregroundColor(.grayscale50)
-                )
+                ZStack(alignment: .leading) {
+                    if text.isEmpty {
+                        Text("찾고싶은 상품을 입력하세요.")
+                            .font(.pretendard(.regular, 14))
+                            .foregroundColor(.grayscale50)
+                    }
+                    TextField(
+                        String(),
+                        text: $text,
+                        onCommit: {
+                            showResultView = true
+                        }
+                    )
+                }
                 .focused($isFocused)
                 Image(name: .searchIcon)
                     .resizable()
                     .frame(width: 24, height: 24)
                     .padding(.vertical, 2)
+                    .onTapGesture {
+                        if searchBarType == .start {
+                            showResultView = true
+                        }
+                    }
             }
             .padding(EdgeInsets(
                 top: 8,
-                leading: searchBarType == .editable ? 14 : 20,
+                leading: searchBarType != .home ? 14 : 20,
                 bottom: 0,
                 trailing: 18)
             )
         }
         .onAppear {
-            if searchBarType == .uneditable {
+            if searchBarType == .home {
                 self.isFocused = false
                 self.text = String()
-            } else {
+            } else if searchBarType == .start {
                 self.isFocused = true
-            }
-        }
-        .onTapGesture {
-            if searchBarType == .uneditable {
-                startSearch = true
             }
         }
         .overlay(
@@ -67,18 +84,12 @@ struct SearchBar: View {
                 .offset(y: 8)
             , alignment: .bottom
         )
-        
-        NavigationLink(
-            destination: SearchStartView(text: $text).navigationBarHidden(true),
-            isActive: $startSearch)
-        {
-            EmptyView()
-        }
         .padding(.bottom, 8)
     }
 }
 
 enum searchBarType {
-    case editable
-    case uneditable
+    case home
+    case start
+    case result
 }

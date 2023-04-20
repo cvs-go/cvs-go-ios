@@ -10,16 +10,25 @@ import SwiftUI
 struct SearchHomeView: View {
     @State private var text = String()
     private let imageSize = (UIWindow().screen.bounds.width - 55) / 4
+    @State private var startSearch = false
     
     var body: some View {
         VStack {
-            SearchBar(text: $text, searchBarType: .uneditable)
+            SearchBar(text: $text, searchBarType: .home)
+                .onTapGesture {
+                    startSearch = true
+                }
             Spacer().frame(height: 20)
             ProductCategories
             Spacer()
+            NavigationLink(
+                destination: SearchStartView(text: $text).navigationBarHidden(true),
+                isActive: $startSearch)
+            {
+                EmptyView()
+            }
         }
     }
-    
    
     var ProductCategories: some View {
         VStack {

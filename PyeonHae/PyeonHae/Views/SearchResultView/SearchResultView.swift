@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SearchResultView: View {
-    @ObservedObject var searchViewModel = SearchViewModel()
+    @ObservedObject var searchViewModel: SearchViewModel
+    @Binding var text: String
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var showWriteView = false
@@ -22,6 +23,7 @@ struct SearchResultView: View {
     ]
     var body: some View {
         VStack {
+            SearchBar(text: $text, searchBarType: .result)
             FilterView(
                 filterDatas: searchViewModel.filtersData!,
                 showFilter: $showFilter,
@@ -98,11 +100,5 @@ struct SearchResultView: View {
                     .padding(.bottom, 16)
             }
         }
-    }
-}
-
-struct SearchResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultView()
     }
 }
