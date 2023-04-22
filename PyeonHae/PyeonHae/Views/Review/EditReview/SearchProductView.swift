@@ -19,7 +19,7 @@ struct SearchProductView: View {
             ScrollView {
                 VStack {
                     ForEach(0..<10) { _ in
-                        SearchResultItemView()
+//                        SearchResultItemView()
                     }
                     .padding(.vertical, 10)
                 }

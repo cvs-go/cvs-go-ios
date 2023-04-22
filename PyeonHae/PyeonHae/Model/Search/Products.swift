@@ -14,9 +14,10 @@ struct ProductModel: Codable {
 
 struct Products: Codable {
     let content: [Product]
+    let totalElements: Int
 }
 
-struct Product: Codable {
+struct Product: Codable, Hashable {
     let productId: Int
     let productName: String
     let productPrice: Int
@@ -30,7 +31,7 @@ struct Product: Codable {
     let convenienceStoreEvents: [ConvenienceStoreEvents]
 }
 
-struct ConvenienceStoreEvents: Codable {
+struct ConvenienceStoreEvents: Codable, Hashable {
     let name: String
     let eventType: String?
     let discountAmount: Int?

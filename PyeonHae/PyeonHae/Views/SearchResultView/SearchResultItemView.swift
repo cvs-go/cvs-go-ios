@@ -6,28 +6,39 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct SearchResultItemView: View {
     @State var isBookMark: Bool = false
     @State var isHeartMark: Bool = false
+    let product: Product
     
     var body: some View {
         VStack {
             HStack {
                 ZStack {
-                    Image(name: .sampleImage)
-                        .resizable()
-                        .frame(width: 120, height: 120)
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.grayscale30, lineWidth: 1)
+                    if let url = product.productImageUrl, let imageUrl = URL(string: url) {
+                        KFImage(imageUrl)
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.grayscale30, lineWidth: 1)
+                            )
+                            .frame(width: 120, height: 120)
+                    } else {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.grayscale30, lineWidth: 1)
+                            .frame(width: 120, height: 120)
+                    }
                 }
                 .frame(width: 120, height: 120)
                 VStack(alignment: .leading, spacing: 0) {
-                    Text("롯데푸드")
+                    Text(product.manufacturerName)
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale70)
                     HStack {
-                        Text("월드콘")
+                        Text(product.productName)
                             .font(.pretendard(.semiBold, 16))
                             .foregroundColor(.grayscale100)
                         Spacer()
@@ -43,19 +54,19 @@ struct SearchResultItemView: View {
                         }
                     }
                     .padding(.bottom, 2)
-                    Text("2,500원")
+                    Text("\(product.productPrice)원")
                         .font(.pretendard(.medium, 16))
                         .foregroundColor(.grayscale85)
                         .padding(.bottom, 8)
                     HStack {
                         Image(name: .redStar)
-                        Text("4.5")
+                        Text(product.reviewRating)
                             .font(.pretendard(.semiBold, 14))
                             .foregroundColor(.grayscale100)
                         Text("|")
                             .font(.pretendard(.semiBold, 14))
                             .foregroundColor(.grayscale30)
-                        Text("5,000개의 리뷰")
+                        Text("\(product.reviewCount)개의 리뷰")
                             .font(.pretendard(.regular, 14))
                             .foregroundColor(.grayscale30)
                     }
@@ -72,11 +83,5 @@ struct SearchResultItemView: View {
             }
         }
         .padding(.horizontal,20)
-    }
-}
-
-struct SearchResultItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultItemView()
     }
 }

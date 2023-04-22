@@ -13,16 +13,19 @@ struct SearchBar: View {
     
     @Binding var text: String
     @Binding var showResultView: Bool
+    @Binding var searchAgain: Bool
     let searchBarType: searchBarType
     @FocusState private var isFocused
     
     init(
         text: Binding<String>,
         showResultView: Binding<Bool> = .constant(false),
+        searchAgain: Binding<Bool> = .constant(false),
         searchBarType: searchBarType
     ) {
         self._text = text
         self._showResultView = showResultView
+        self._searchAgain = searchAgain
         self.searchBarType = searchBarType
     }
     
@@ -47,7 +50,11 @@ struct SearchBar: View {
                         String(),
                         text: $text,
                         onCommit: {
-                            showResultView = true
+                            if searchBarType == .start {
+                                showResultView = true
+                            } else if searchBarType == .result {
+                                searchAgain.toggle()
+                            }
                         }
                     )
                 }
@@ -59,6 +66,8 @@ struct SearchBar: View {
                     .onTapGesture {
                         if searchBarType == .start {
                             showResultView = true
+                        } else if searchBarType == .result {
+                            searchAgain.toggle()
                         }
                     }
             }

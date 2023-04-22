@@ -22,6 +22,7 @@
 		54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */; };
 		54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB929584327009D5A09 /* ImageExtension.swift */; };
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
+		54159D2229F154C30085CF08 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 54159D2129F154C30085CF08 /* Kingfisher */; };
 		5418328729B21E29002DA931 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418328629B21E29002DA931 /* LoginModel.swift */; };
 		5418328A29B21FBB002DA931 /* SignUpSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418328929B21FBB002DA931 /* SignUpSuccessView.swift */; };
 		5420D1BA29F02AB200A78000 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5420D1B929F02AB200A78000 /* SearchBar.swift */; };
@@ -189,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54159D2229F154C30085CF08 /* Kingfisher in Frameworks */,
 				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 				54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */,
 				54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */,
@@ -558,6 +560,7 @@
 				54B8F6A82997722D00E19FFF /* WrappingHStack */,
 				54C71D5229AB8EC200FAFDCD /* Alamofire */,
 				54E58D6729B620E900958789 /* UIWindowTransitions */,
+				54159D2129F154C30085CF08 /* Kingfisher */,
 			);
 			productName = PyeonHae;
 			productReference = 54CC11E229571E52007DAD20 /* PyeonHae.app */;
@@ -591,6 +594,7 @@
 				54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				54C71D5129AB8EC200FAFDCD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */,
+				54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
 			projectDirPath = "";
@@ -911,6 +915,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dkk/WrappingHStack.git";
@@ -938,6 +950,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		54159D2129F154C30085CF08 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		54B8F6A82997722D00E19FFF /* WrappingHStack */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */;
