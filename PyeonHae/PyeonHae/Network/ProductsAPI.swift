@@ -10,13 +10,14 @@ import Alamofire
 
 enum ProductsAPI: API {
     case filter
+    case search([String : Any])
 }
 
 extension ProductsAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .filter:
+        case .filter, .search:
             return .get
         }
     }
@@ -25,6 +26,8 @@ extension ProductsAPI {
         switch self {
         case .filter:
             return "/products/filter"
+        case .search:
+            return "/products"
         }
     }
     
@@ -32,11 +35,15 @@ extension ProductsAPI {
         switch self {
         case .filter:
             return nil
+        case .search(let parameters):
+            return parameters
         }
     }
     
     var encoding: ParameterEncoding {
         switch self {
+        case .search:
+            return URLEncoding.default
         default:
             return JSONEncoding.default
         }

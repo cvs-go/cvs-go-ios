@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct SearchResultView: View {
-    @ObservedObject var searchViewModel = SearchViewModel()
+    @ObservedObject var searchViewModel: SearchViewModel
+    @Binding var text: String
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var showWriteView = false
+    @State private var searchAgain = false
     
-    // 임시 데이터
-    let filterDatas: [FilterData] = [
-        FilterData(category: "편의점", elements: ["CU", "GS25", "7일레븐", "Emart24", "미니스톱"]),
-        FilterData(category: "제품", elements: ["간편식사", "즉석요리", "과자&빵", "아이스크림", "신선식품", "유제품", "음료", "기타"]),
-        FilterData(category: "유저", elements: ["맵부심", "맵찔이", "초코러버", "비건", "다이어터", "대식가", "소식가", "기타"]),
-        FilterData(category: "이벤트", elements: ["1+1", "2+1", "3+1", "증정"]),
-    ]
     var body: some View {
         VStack {
+            SearchBar(
+                text: $text,
+                searchAgain: $searchAgain,
+                searchBarType: .result
+            )
             FilterView(
                 filterDatas: searchViewModel.filtersData!,
                 showFilter: $showFilter,
@@ -29,7 +29,7 @@ struct SearchResultView: View {
             )
             HStack {
                 Spacer().frame(width: 20)
-                Text("'아이스크림' 검색 결과 14개")
+                Text("'\(searchViewModel.keyword)' 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
                     .font(.pretendard(.regular, 12))
                     .foregroundColor(.grayscale85)
                 Spacer()
@@ -46,16 +46,22 @@ struct SearchResultView: View {
             }
             .padding(.bottom, 10)
             ScrollView {
-                ForEach(0..<10) { _ in
+                ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
                     VStack {
-                        SearchResultItemView()
+                        SearchResultItemView(product: product)
                     }
                     .padding(.vertical, 10)
                 }
             }
         }
         .onAppear {
-            print(self.searchViewModel.filtersData)
+            UIScrollView.appearance().keyboardDismissMode = .onDrag
+            searchViewModel.keyword = text
+            searchViewModel.searchProducts()
+        }
+        .onChange(of: searchAgain) { _ in
+            searchViewModel.keyword = text
+            searchViewModel.searchProducts()
         }
     }
     
@@ -98,11 +104,5 @@ struct SearchResultView: View {
                     .padding(.bottom, 16)
             }
         }
-    }
-}
-
-struct SearchResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultView()
     }
 }

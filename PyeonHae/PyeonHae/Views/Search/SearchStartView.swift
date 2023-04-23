@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct SearchStartView: View {
+    @ObservedObject var searchViewModel = SearchViewModel()
+    
     @Binding var text: String
+    @State private var showResultView = false
     
     var body: some View {
         VStack {
-            SearchBar(text: $text, searchBarType: .editable)
+            SearchBar(
+                text: $text,
+                showResultView: $showResultView,
+                searchBarType: .start
+            )
             Spacer().frame(height: 14)
             
             Group {
@@ -51,6 +58,16 @@ struct SearchStartView: View {
                 Spacer()
             }
             .padding(.horizontal, 20) // 임시 코드
+            
+            NavigationLink(
+                destination: SearchResultView(
+                    searchViewModel: searchViewModel,
+                    text: $text
+                ).navigationBarHidden(true),
+                isActive: $showResultView
+            ) {
+                EmptyView()
+            }
         }
     }
 }
