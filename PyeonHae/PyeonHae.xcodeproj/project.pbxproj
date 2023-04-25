@@ -92,6 +92,8 @@
 		D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25429A4D0480018E8FB /* SearchResultItemView.swift */; };
 		D57E78A729F531A500F35DFC /* Security.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D57E78A629F531A500F35DFC /* Security.xcconfig */; };
 		D57E78AA29F539C500F35DFC /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78A929F539C500F35DFC /* MyInfo.swift */; };
+		D57E78AC29F6B91700F35DFC /* MyInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */; };
+		D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */; };
 		D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCAE29938B8C00F25941 /* UserPageView.swift */; };
 		D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB02993966A00F25941 /* UserInfoView.swift */; };
 		D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */; };
@@ -182,6 +184,8 @@
 		D560E25429A4D0480018E8FB /* SearchResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemView.swift; sourceTree = "<group>"; };
 		D57E78A629F531A500F35DFC /* Security.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Security.xcconfig; sourceTree = "<group>"; };
 		D57E78A929F539C500F35DFC /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
+		D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditView.swift; sourceTree = "<group>"; };
+		D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditImagePicker.swift; sourceTree = "<group>"; };
 		D5D1BCAE29938B8C00F25941 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		D5D1BCB02993966A00F25941 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewsView.swift; sourceTree = "<group>"; };
@@ -538,6 +542,8 @@
 			isa = PBXGroup;
 			children = (
 				D57E78A929F539C500F35DFC /* MyInfo.swift */,
+				D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */,
+				D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -645,6 +651,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54F80D202985478A00102772 /* HomeView.swift in Sources */,
+				D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */,
 				668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */,
 				D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */,
 				545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */,
@@ -670,6 +677,7 @@
 				543CEABE29CF1B1000CDB0C8 /* AuthAPI.swift in Sources */,
 				5418328A29B21FBB002DA931 /* SignUpSuccessView.swift in Sources */,
 				54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */,
+				D57E78AC29F6B91700F35DFC /* MyInfoEditView.swift in Sources */,
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
 				543CEAB829CEF70C00CDB0C8 /* SplashView.swift in Sources */,
 				D506C05F29AF32AB00B9EA96 /* ItemDetailView.swift in Sources */,
