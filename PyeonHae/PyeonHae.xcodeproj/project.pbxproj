@@ -63,6 +63,11 @@
 		54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101C295F3E9400FACB90 /* RegexConstants.swift */; };
 		54D0101F295F412600FACB90 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101E295F412600FACB90 /* StringExtension.swift */; };
 		54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 54E58D6729B620E900958789 /* UIWindowTransitions */; };
+		54F0C23129F9684900CBF83C /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23029F9684900CBF83C /* ProductDetail.swift */; };
+		54F0C23529F9782D00CBF83C /* ProductLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23429F9782D00CBF83C /* ProductLikeModel.swift */; };
+		54F0C23729F9783900CBF83C /* ProductUnLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23629F9783900CBF83C /* ProductUnLikeModel.swift */; };
+		54F0C23929F9785000CBF83C /* ProductBookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */; };
+		54F0C23B29F9785800CBF83C /* ProductUnBookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */; };
 		54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3C3E7298C025200C10FF5 /* ReviewHome.swift */; };
 		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
 		54F6B33029AF562C00914889 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B32F29AF562C00914889 /* API.swift */; };
@@ -152,6 +157,11 @@
 		54D0101A295F3E5800FACB90 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		54D0101C295F3E9400FACB90 /* RegexConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexConstants.swift; sourceTree = "<group>"; };
 		54D0101E295F412600FACB90 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		54F0C23029F9684900CBF83C /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
+		54F0C23429F9782D00CBF83C /* ProductLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLikeModel.swift; sourceTree = "<group>"; };
+		54F0C23629F9783900CBF83C /* ProductUnLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUnLikeModel.swift; sourceTree = "<group>"; };
+		54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkModel.swift; sourceTree = "<group>"; };
+		54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUnBookmarkModel.swift; sourceTree = "<group>"; };
 		54F3C3E7298C025200C10FF5 /* ReviewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHome.swift; sourceTree = "<group>"; };
 		54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyView.swift; sourceTree = "<group>"; };
 		54F6B32F29AF562C00914889 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -428,6 +438,11 @@
 			children = (
 				543CEAC429CF4AB700CDB0C8 /* FiltersModel.swift */,
 				543DCA8629F03564000CDAF0 /* Products.swift */,
+				54F0C23029F9684900CBF83C /* ProductDetail.swift */,
+				54F0C23429F9782D00CBF83C /* ProductLikeModel.swift */,
+				54F0C23629F9783900CBF83C /* ProductUnLikeModel.swift */,
+				54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */,
+				54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -641,6 +656,7 @@
 				54D0101D295F3E9400FACB90 /* RegexConstants.swift in Sources */,
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
+				54F0C23529F9782D00CBF83C /* ProductLikeModel.swift in Sources */,
 				54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */,
 				543CEAC129CF1DAB00CDB0C8 /* Interceptor.swift in Sources */,
 				D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */,
@@ -659,6 +675,8 @@
 				54C50C702969D40D0092AF39 /* SignupNicknameView.swift in Sources */,
 				543CEAB829CEF70C00CDB0C8 /* SplashView.swift in Sources */,
 				D506C05F29AF32AB00B9EA96 /* ItemDetailView.swift in Sources */,
+				54F0C23B29F9785800CBF83C /* ProductUnBookmarkModel.swift in Sources */,
+				54F0C23929F9785000CBF83C /* ProductBookmarkModel.swift in Sources */,
 				D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */,
 				54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */,
 				5418328729B21E29002DA931 /* LoginModel.swift in Sources */,
@@ -682,12 +700,14 @@
 				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
 				543CEAC529CF4AB700CDB0C8 /* FiltersModel.swift in Sources */,
+				54F0C23729F9783900CBF83C /* ProductUnLikeModel.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
 				5420D1C029F02AEF00A78000 /* SearchHomeView.swift in Sources */,
 				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
+				54F0C23129F9684900CBF83C /* ProductDetail.swift in Sources */,
 				D506C05D29AF24D100B9EA96 /* DetailItemView.swift in Sources */,
 				D5D1BCB529939AA800F25941 /* ReviewView.swift in Sources */,
 				54F981A5297BF45800D7E450 /* MainBanner.swift in Sources */,
