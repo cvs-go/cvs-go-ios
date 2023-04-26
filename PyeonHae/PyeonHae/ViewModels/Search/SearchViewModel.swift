@@ -11,8 +11,10 @@ import Combine
 class SearchViewModel: ObservableObject {
     private let apiManager = APIManager()
     
+    // api 통신으로 받아온 데이터
     @Published var filtersData: FiltersDataModel?
     @Published var searchResults: ProductModel?
+    @Published var productDetail: ProductDetail?
 
     // 검색 api parameters
     @Published var keyword: String = String()
@@ -22,12 +24,16 @@ class SearchViewModel: ObservableObject {
     @Published var lowestPrice: Int = 0
     @Published var highestPrice: Int = 0
     
+    // detail 화면으로 이동
+    @Published var showProductDetail = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
         requestFilterDatas()
     }
     
+    // 상품 필터 조회
     func requestFilterDatas() {
         apiManager.request(for: ProductsAPI.filter)
             .sink { (result: Result<FiltersModel, Error>) in
@@ -41,6 +47,7 @@ class SearchViewModel: ObservableObject {
             .store(in: &bag)
     }
     
+    // 상품 목록 조회
     func searchProducts() {
         let parameters: [String : Any] = [
             "keyword": keyword,
@@ -55,6 +62,72 @@ class SearchViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.searchResults = result
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 상세 조회
+    func requestProductDetail(productID: Int, completion: @escaping () -> Void) {
+        apiManager.request(for: ProductsAPI.product(id: productID))
+            .sink { (result: Result<ProductDetail, Error>) in
+                switch result {
+                case .success(let result):
+                    self.productDetail = result
+                    self.showProductDetail = true
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 좋아요 생성
+    func requestProductLike(productID: Int) {
+        apiManager.request(for: ProductsAPI.like(id: productID))
+            .sink { (result: Result<ProductLikeModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 좋아요 삭제
+    func requestProductUnLike(productID: Int) {
+        apiManager.request(for: ProductsAPI.unlike(id: productID))
+            .sink { (result: Result<ProductUnLikeModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 북마크 생성
+    func requestProductBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.product(id: productID))
+            .sink { (result: Result<ProductBookmarkModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 북마크 삭제
+    func requestProductUnBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.product(id: productID))
+            .sink { (result: Result<ProductUnBookmarkModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
                 case .failure(let error):
                     print(error)
                 }

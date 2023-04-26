@@ -12,6 +12,7 @@ struct SearchResultItemView: View {
     @State var isBookMark: Bool = false
     @State var isHeartMark: Bool = false
     let product: Product
+    @Binding var selectedProductID: Int
     
     var body: some View {
         VStack {
@@ -83,5 +84,8 @@ struct SearchResultItemView: View {
             }
         }
         .padding(.horizontal,20)
+        .onTapGesture {
+            selectedProductID = product.productId
+        }
     }
 }

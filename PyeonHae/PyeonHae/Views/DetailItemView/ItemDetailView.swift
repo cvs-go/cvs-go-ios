@@ -6,29 +6,39 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ItemDetailView: View {
+    let productDetail: ProductInfo?
     @State var isBookMark: Bool = false
     @State var isHeartMark: Bool = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.grayscale20, lineWidth: 1)
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(.grayscale10)
-                Image(name: .sampleImage)
-                    .resizable()
-                    .frame(width: 200, height: 200)
+            HStack(alignment: .center) {
+                Spacer()
+                if let url = productDetail?.productImageUrl, let imageUrl = URL(string: url) {
+                    KFImage(imageUrl)
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.black.opacity(0.05), lineWidth: 1)
+                                .frame(width: UIWindow().screen.bounds.width - 40, height: 200)
+                        )
+                } else {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.grayscale10, lineWidth: 1)
+                        .frame(width: UIWindow().screen.bounds.width - 40, height: 200)
+                }
+                Spacer()
             }
-            .frame(height: 200)
-            Text("롯데푸드")
+            Text(productDetail?.manufacturerName ?? String())
                 .font(.pretendard(.regular, 12))
                 .foregroundColor(.grayscale70)
                 .padding(.top, 12)
             HStack {
-                Text("백두마운틴바")
+                Text(productDetail?.productName ?? String())
                     .font(.pretendard(.semiBold, 18))
                     .foregroundColor(.grayscale100)
                 Spacer()
@@ -46,7 +56,7 @@ struct ItemDetailView: View {
                 }
                 .frame(width: 18, height: 18)
             }
-            Text("1,000원")
+            Text("\(productDetail?.productPrice ?? 0)원")
                 .font(.pretendard(.medium, 18))
                 .foregroundColor(.grayscale85)
             HStack(spacing: 4) {
@@ -86,11 +96,5 @@ struct ItemDetailView: View {
         }
         .padding(.top, 21)
         .padding(.horizontal, 20)
-    }
-}
-
-struct ItemDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ItemDetailView()
     }
 }
