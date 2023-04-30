@@ -23,7 +23,7 @@ struct ProductInfo: Codable {
     let convenienceStoreEvents: [ConvenienceStoreEvent]
 }
 
-struct ConvenienceStoreEvent: Codable {
+struct ConvenienceStoreEvent: Codable, Hashable {
     let name: String
     let eventType: String?
     let discountAmount: Int?

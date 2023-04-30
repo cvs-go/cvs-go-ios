@@ -73,11 +73,15 @@ struct SearchResultItemView: View {
                     }
                     .padding(.bottom, 8)
                     HStack(spacing: 4) {
-                        Image(name: .logoCU)
-                        Image(name: .logoGS)
-                        Image(name: .logoMini)
-                        Image(name: .logoEmart)
-                        Image(name: .logoSeven)
+                        if let event = product.convenienceStoreEvents {
+                            ForEach(event, id: \.self) { event in
+                                if let type = event.eventType {
+                                    Image("\(event.name)_\(type)")
+                                } else {
+                                    Image(event.name)
+                                }
+                            }
+                        }
                     }
                 }
                 .padding(.leading, 15)

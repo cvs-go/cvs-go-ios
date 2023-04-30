@@ -60,11 +60,15 @@ struct ItemDetailView: View {
                 .font(.pretendard(.medium, 18))
                 .foregroundColor(.grayscale85)
             HStack(spacing: 4) {
-                Image(name: .logoCU)
-                Image(name: .logoGS)
-                Image(name: .logoMini)
-                Image(name: .logoEmart)
-                Image(name: .logoSeven)
+                if let event = productDetail?.convenienceStoreEvents {
+                    ForEach(event, id: \.self) { event in
+                        if let type = event.eventType {
+                            Image("\(event.name)_\(type)")
+                        } else {
+                            Image(event.name)
+                        }
+                    }
+                }
             }
             .padding(.top, 16)
             HStack {
