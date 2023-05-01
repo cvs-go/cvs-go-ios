@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DetailItemView: View {
-    
+    @ObservedObject var searchViewModel: SearchViewModel
     @State private var isReviewButtonVisible = false
     
     var body: some View {
@@ -16,7 +16,7 @@ struct DetailItemView: View {
             VStack(alignment: .leading) {
                 DetailItemViewTopBar
                 ScrollView {
-                    ItemDetailView()
+                    ItemDetailView(productDetail: searchViewModel.productDetail?.data)
                         .background(
                             GeometryReader { geometry -> Color in
                                 let maxY = geometry.frame(in: .global).midY
@@ -58,9 +58,12 @@ struct DetailItemView: View {
         HStack(spacing: 0) {
             Spacer().frame(width: 14)
             Image(name: .arrowLeft)
+                .onTapGesture {
+                    searchViewModel.showProductDetail = false
+                }
             Spacer().frame(width: 18)
             if isReviewButtonVisible {
-                Text("백두마운틴바")
+                Text(searchViewModel.productDetail?.data.productName ?? String())
                     .font(.pretendard(.bold, 18))
                     .foregroundColor(.black)
             }
@@ -69,10 +72,3 @@ struct DetailItemView: View {
         .frame(height: 44)
     }
 }
-
-struct DetailItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailItemView()
-    }
-}
-

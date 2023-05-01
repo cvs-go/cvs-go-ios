@@ -11,14 +11,23 @@ import Alamofire
 enum ProductsAPI: API {
     case filter
     case search([String : Any])
+    case product(id: Int)
+    case like(id: Int)
+    case unlike(id: Int)
+    case bookmark(id: Int)
+    case unbookmark(id: Int)
 }
 
 extension ProductsAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .filter, .search:
+        case .filter, .search, .product:
             return .get
+        case .like, .bookmark:
+            return .post
+        case .unlike, .unbookmark:
+            return .delete
         }
     }
     
@@ -28,15 +37,21 @@ extension ProductsAPI {
             return "/products/filter"
         case .search:
             return "/products"
+        case .product(let id):
+            return "/products/\(id)"
+        case .like(let id), .unlike(let id):
+            return "/products/\(id)/likes"
+        case .bookmark(let id), .unbookmark(let id):
+            return "/products/\(id)/bookmarks"
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .filter:
-            return nil
         case .search(let parameters):
             return parameters
+        default:
+            return nil
         }
     }
     
