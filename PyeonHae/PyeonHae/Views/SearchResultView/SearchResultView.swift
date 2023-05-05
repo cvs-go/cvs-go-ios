@@ -23,11 +23,13 @@ struct SearchResultView: View {
                 searchAgain: $searchAgain,
                 searchBarType: .result
             )
-            FilterView(
-                filterDatas: searchViewModel.filtersData!,
-                showFilter: $showFilter,
-                selectedElements: $selectedElements
-            )
+            if let filtersData = searchViewModel.filtersData {
+                FilterView(
+                    filterDatas: filtersData,
+                    showFilter: $showFilter,
+                    selectedElements: $selectedElements
+                )
+            }
             HStack {
                 Spacer().frame(width: 20)
                 Text("'\(searchViewModel.keyword)' 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
