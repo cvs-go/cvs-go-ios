@@ -11,7 +11,7 @@ import SwiftUI
 struct PyeonHaeApp: App {
     var body: some Scene {
         WindowGroup {
-            PriceScrollButton()
+            SplashView()
         }
     }
 }

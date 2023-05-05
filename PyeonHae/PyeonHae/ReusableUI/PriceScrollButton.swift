@@ -10,20 +10,34 @@ import SwiftUI
 struct PriceScrollButton: View {
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
-    @State private var minPriceDragOffset: CGSize = .zero
-    @State private var maxPriceDragOffset: CGSize = .zero
+    @State private var priceTemp: CGFloat = 0
+    @State private var lastEditPrice: CGFloat = 0
     
     let trackWidth: CGFloat = 335
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("가격")
-                .font(.pretendard(.bold, 12))
-                .foregroundColor(Color.grayscale85)
+            HStack {
+                Text("가격")
+                    .font(.pretendard(.bold, 12))
+                    .foregroundColor(Color.grayscale85)
+                Spacer()
+                if (minPrice == 0 && maxPrice == 1) {
+                    Text("전체")
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(Color.grayscale70)
+                        .padding(.trailing, 20)
+                } else {
+                    Text("\(Int(minPrice * 15000))원~\(Int(maxPrice * 15000))원")
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(Color.grayscale70)
+                        .padding(.trailing, 20)
+                }
+            }
             ZStack {
                 HStack(spacing: 0) {
                     Rectangle()
-                        .foregroundColor(Color.grayscale100)
+                        .foregroundColor(Color.grayscale30)
                         .frame(width: trackWidth * minPrice, height: 8)
                     Rectangle()
                         .foregroundColor(Color.grayscale100)
@@ -36,36 +50,34 @@ struct PriceScrollButton: View {
                     Image(name: .PriceScrollButton)
                         .resizable()
                         .frame(width: 32, height: 32)
-                        .offset(x: minPriceDragOffset.width)
+                        .padding(.leading, trackWidth * minPrice)
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    let newMinPrice = max(0, minPrice + value.translation.width / trackWidth)
-                                    if newMinPrice < maxPrice {
-                                        minPrice = newMinPrice
-                                        minPriceDragOffset.width = value.translation.width
+                                    if priceTemp == 0 {
+                                        lastEditPrice = minPrice
                                     }
+                                    let addMinPrice = max(0, max(0, (minPrice * trackWidth + value.translation.width) / trackWidth) - priceTemp)
+                                    if addMinPrice < maxPrice {
+                                        minPrice = addMinPrice
+                                    }
+                                    priceTemp = minPrice - lastEditPrice
                                 }
-                                .onEnded { _ in
-                                    minPriceDragOffset = .zero
+                                .onEnded { value in
+                                    priceTemp = 0
                                 }
                         )
-                    Spacer().frame(width: trackWidth * (maxPrice - minPrice) - 32)
+                    Spacer().frame(width: max(trackWidth * (maxPrice - minPrice) - 32, 0))
                     Image(name: .PriceScrollButton)
                         .resizable()
                         .frame(width: 32, height: 32)
-                        .offset(x: maxPriceDragOffset.width)
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    let newMaxPrice = min(1, maxPrice + value.translation.width / trackWidth)
+                                    let newMaxPrice = min(1, (maxPrice * trackWidth + value.translation.width) / trackWidth)
                                     if newMaxPrice > minPrice {
                                         maxPrice = newMaxPrice
-                                        maxPriceDragOffset.width = value.translation.width
                                     }
-                                }
-                                .onEnded { _ in
-                                    maxPriceDragOffset = .zero
                                 }
                         )
                     Spacer()
