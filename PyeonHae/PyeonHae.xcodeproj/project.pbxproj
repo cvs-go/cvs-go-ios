@@ -99,6 +99,7 @@
 		D57E78AA29F539C500F35DFC /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78A929F539C500F35DFC /* MyInfo.swift */; };
 		D57E78AC29F6B91700F35DFC /* MyInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */; };
 		D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */; };
+		D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */; };
 		D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCAE29938B8C00F25941 /* UserPageView.swift */; };
 		D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB02993966A00F25941 /* UserInfoView.swift */; };
 		D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */; };
@@ -196,6 +197,7 @@
 		D57E78A929F539C500F35DFC /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
 		D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditView.swift; sourceTree = "<group>"; };
 		D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditImagePicker.swift; sourceTree = "<group>"; };
+		D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceScrollButton.swift; sourceTree = "<group>"; };
 		D5D1BCAE29938B8C00F25941 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		D5D1BCB02993966A00F25941 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewsView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */,
 				D506C06029AF3A1900B9EA96 /* ReviewTextCell.swift */,
 				5420D1B929F02AB200A78000 /* SearchBar.swift */,
+				D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -718,6 +721,7 @@
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				543DCA8729F03564000CDAF0 /* Products.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
+				D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
@@ -873,7 +877,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
@@ -906,7 +910,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 842FZARC28;
+				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;

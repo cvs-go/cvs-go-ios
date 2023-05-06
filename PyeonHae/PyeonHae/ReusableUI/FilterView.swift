@@ -130,6 +130,8 @@ struct FilterView: View {
             .padding(.top, 20)
             .padding(.horizontal, 20)
             
+            PriceScrollButton()
+                .padding(.horizontal, 20)
         }
     }
 }

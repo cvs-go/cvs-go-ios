@@ -56,6 +56,7 @@ extension Image {
         case defalutUserImage = "defalutUserImage"
         case setting = "setting"
         case editPen = "editPen"
+        case PriceScrollButton = "PriceScrollButton"
         
         case foodImage = "foodImage"
         case instantFoodImage = "instantFoodImage"
