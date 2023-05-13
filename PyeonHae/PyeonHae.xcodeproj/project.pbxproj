@@ -871,13 +871,14 @@
 		};
 		54CC11F129571E54007DAD20 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D57E78A629F531A500F35DFC /* Security.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 842FZARC28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
@@ -904,13 +905,14 @@
 		};
 		54CC11F229571E54007DAD20 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D57E78A629F531A500F35DFC /* Security.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PyeonHae/Preview Content\"";
-				DEVELOPMENT_TEAM = 5N5TS7Y4MA;
+				DEVELOPMENT_TEAM = 842FZARC28;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PyeonHae/Info.plist;
