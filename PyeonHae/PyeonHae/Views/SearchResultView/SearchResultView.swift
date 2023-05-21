@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EasySkeleton
 
 struct SearchResultView: View {
     @ObservedObject var searchViewModel: SearchViewModel
@@ -49,11 +50,24 @@ struct SearchResultView: View {
             }
             .padding(.bottom, 10)
             ScrollView {
-                ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
-                    VStack {
-                        SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                if searchViewModel.isLoading {
+                    ForEach(0...5, id: \.self) { _ in
+                        SearchResultItemSkeletonView(isLoading: $searchViewModel.isLoading)
+                            .padding(.vertical, 10)
                     }
-                    .padding(.vertical, 10)
+                    .setSkeleton(
+                        $searchViewModel.isLoading,
+                        animationType: .solid(.grayscale25),
+                        animation: Animation.easeIn(duration: 2),
+                        transition: AnyTransition.opacity
+                    )
+                } else {
+                    ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                        VStack {
+                            SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                        }
+                        .padding(.vertical, 10)
+                    }
                 }
             }
             NavigationLink(destination: DetailItemView(searchViewModel: searchViewModel).navigationBarHidden(true), isActive: $searchViewModel.showProductDetail) {
@@ -65,17 +79,24 @@ struct SearchResultView: View {
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
             selectedProductID = -1
+            searchViewModel.isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                searchViewModel.isLoading = false
+            }
         }
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
+            searchViewModel.isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                searchViewModel.isLoading = false
+            }
         }
         .onChange(of: selectedProductID) { id in
             if selectedProductID != -1 {
                 searchViewModel.requestProductDetail(productID: id) {
                     searchViewModel.showProductDetail = true
                 }
-                searchViewModel.requestProductLike(productID: id)
             }
         }
     }

@@ -27,6 +27,8 @@ class SearchViewModel: ObservableObject {
     // detail 화면으로 이동
     @Published var showProductDetail = false
     
+    @Published var isLoading = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
