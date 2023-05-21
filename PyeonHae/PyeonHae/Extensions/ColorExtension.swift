@@ -29,6 +29,7 @@ extension Color {
     
     static let grayscale10 = Color(hex: "F7F9FA")
     static let grayscale20 = Color(hex: "F3F6F8")
+    static let grayscale25 = Color(hex: "E2E7EA")
     static let grayscale30 = Color(hex: "CAD2D8")
     static let grayscale50 = Color(hex: "939CA3")
     static let grayscale70 = Color(hex: "747E84")
