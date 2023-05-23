@@ -45,6 +45,8 @@
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */; };
 		5493BE252A0F876B00CC127B /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */; };
+		54AA0E052A19F1070031190D /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 54AA0E042A19F1070031190D /* SwiftyGif */; };
+		54AA0E072A19F3260031190D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AA0E062A19F3260031190D /* LoadingView.swift */; };
 		54ABE02E297408DC00312B9D /* SignupSelectTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */; };
 		54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1E929ACEA130058DB39 /* LoginAPI.swift */; };
 		54AFA1EE29ACF9840058DB39 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AFA1ED29ACF9840058DB39 /* APIManager.swift */; };
@@ -57,6 +59,7 @@
 		54C71D4E29AB559E00FAFDCD /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */; };
 		54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */; };
 		54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 54C71D5229AB8EC200FAFDCD /* Alamofire */; };
+		54C9586E2A1CFC3500087679 /* LoadingGIF.gif in Resources */ = {isa = PBXBuildFile; fileRef = 54C9586D2A1CFC3500087679 /* LoadingGIF.gif */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
 		54CC11ED29571E54007DAD20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11EC29571E54007DAD20 /* Preview Assets.xcassets */; };
@@ -148,6 +151,7 @@
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
+		54AA0E062A19F3260031190D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		54ABE02D297408DC00312B9D /* SignupSelectTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupSelectTagView.swift; sourceTree = "<group>"; };
 		54AFA1E929ACEA130058DB39 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		54AFA1ED29ACF9840058DB39 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 		54C71D4B29A9E8B400FAFDCD /* SearchProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProductView.swift; sourceTree = "<group>"; };
 		54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		54C9586D2A1CFC3500087679 /* LoadingGIF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LoadingGIF.gif; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E929571E54007DAD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -219,6 +224,7 @@
 				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 				54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */,
 				54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */,
+				54AA0E052A19F1070031190D /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +234,7 @@
 		5403AEBB295723E800FB7253 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54AA0E082A19F4C30031190D /* GIF */,
 				54CC11E929571E54007DAD20 /* Assets.xcassets */,
 				D57E78A629F531A500F35DFC /* Security.xcconfig */,
 				5403AED02957251100FB7253 /* Fonts */,
@@ -280,6 +287,7 @@
 				D506C06029AF3A1900B9EA96 /* ReviewTextCell.swift */,
 				5420D1B929F02AB200A78000 /* SearchBar.swift */,
 				D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */,
+				54AA0E062A19F3260031190D /* LoadingView.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -387,6 +395,14 @@
 				5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		54AA0E082A19F4C30031190D /* GIF */ = {
+			isa = PBXGroup;
+			children = (
+				54C9586D2A1CFC3500087679 /* LoadingGIF.gif */,
+			);
+			path = GIF;
 			sourceTree = "<group>";
 		};
 		54AFA1EF29ACFF990058DB39 /* Model */ = {
@@ -614,6 +630,7 @@
 				54E58D6729B620E900958789 /* UIWindowTransitions */,
 				54159D2129F154C30085CF08 /* Kingfisher */,
 				54F618572A1A0C1A00A14868 /* EasySkeleton */,
+				54AA0E042A19F1070031190D /* SwiftyGif */,
 			);
 			productName = PyeonHae;
 			productReference = 54CC11E229571E52007DAD20 /* PyeonHae.app */;
@@ -649,6 +666,7 @@
 				54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */,
 				54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				54F618562A1A0C1A00A14868 /* XCRemoteSwiftPackageReference "EasySkeleton" */,
+				54AA0E032A19F1070031190D /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
 			projectDirPath = "";
@@ -665,6 +683,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54CC11ED29571E54007DAD20 /* Preview Assets.xcassets in Resources */,
+				54C9586E2A1CFC3500087679 /* LoadingGIF.gif in Resources */,
 				5403AEDC2957252B00FB7253 /* Pretendard-Thin.ttf in Resources */,
 				5403AEDD2957252B00FB7253 /* Pretendard-Regular.ttf in Resources */,
 				5403AEDA2957252B00FB7253 /* Pretendard-Bold.ttf in Resources */,
@@ -752,6 +771,7 @@
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
 				5420D1C029F02AEF00A78000 /* SearchHomeView.swift in Sources */,
+				54AA0E072A19F3260031190D /* LoadingView.swift in Sources */,
 				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
 				54F0C23129F9684900CBF83C /* ProductDetail.swift in Sources */,
 				D506C05D29AF24D100B9EA96 /* DetailItemView.swift in Sources */,
@@ -989,6 +1009,14 @@
 				kind = branch;
 			};
 		};
+		54AA0E032A19F1070031190D /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		54B8F6A72997722D00E19FFF /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dkk/WrappingHStack.git";
@@ -1028,6 +1056,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		54AA0E042A19F1070031190D /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54AA0E032A19F1070031190D /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
 		};
 		54B8F6A82997722D00E19FFF /* WrappingHStack */ = {
 			isa = XCSwiftPackageProductDependency;
