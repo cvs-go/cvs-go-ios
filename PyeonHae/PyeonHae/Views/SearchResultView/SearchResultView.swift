@@ -62,8 +62,6 @@ struct SearchResultView: View {
         }
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
-            searchViewModel.keyword = text
-            searchViewModel.searchProducts()
             selectedProductID = -1
         }
         .onChange(of: searchAgain) { _ in
@@ -75,7 +73,6 @@ struct SearchResultView: View {
                 searchViewModel.requestProductDetail(productID: id) {
                     searchViewModel.showProductDetail = true
                 }
-                searchViewModel.requestProductLike(productID: id)
             }
         }
     }

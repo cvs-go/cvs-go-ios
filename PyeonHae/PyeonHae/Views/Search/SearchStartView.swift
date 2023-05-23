@@ -58,6 +58,10 @@ struct SearchStartView: View {
                 Spacer()
             }
             .padding(.horizontal, 20) // 임시 코드
+            .onChange(of: showResultView) { _ in
+                searchViewModel.keyword = text
+                searchViewModel.searchProducts()
+            }
             
             NavigationLink(
                 destination: SearchResultView(

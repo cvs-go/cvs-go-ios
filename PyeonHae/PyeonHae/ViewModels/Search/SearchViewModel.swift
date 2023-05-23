@@ -83,7 +83,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 좋아요 생성
-    func requestProductLike(productID: Int) {
+    private func requestProductLike(productID: Int) {
         apiManager.request(for: ProductsAPI.like(id: productID))
             .sink { (result: Result<ProductLikeModel, Error>) in
                 switch result {
@@ -96,7 +96,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 좋아요 삭제
-    func requestProductUnLike(productID: Int) {
+    private func requestProductUnLike(productID: Int) {
         apiManager.request(for: ProductsAPI.unlike(id: productID))
             .sink { (result: Result<ProductUnLikeModel, Error>) in
                 switch result {
@@ -109,7 +109,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 북마크 생성
-    func requestProductBookmark(productID: Int) {
+    private func requestProductBookmark(productID: Int) {
         apiManager.request(for: ProductsAPI.product(id: productID))
             .sink { (result: Result<ProductBookmarkModel, Error>) in
                 switch result {
@@ -122,7 +122,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 북마크 삭제
-    func requestProductUnBookmark(productID: Int) {
+    private func requestProductUnBookmark(productID: Int) {
         apiManager.request(for: ProductsAPI.product(id: productID))
             .sink { (result: Result<ProductUnBookmarkModel, Error>) in
                 switch result {
@@ -132,5 +132,21 @@ class SearchViewModel: ObservableObject {
                     print(error)
                 }
             }.store(in: &bag)
+    }
+    
+    func productLike(productID: Int, _ isLike: Bool) {
+        if isLike {
+            requestProductLike(productID: productID)
+        } else {
+            requestProductUnLike(productID: productID)
+        }
+    }
+    
+    func productBookmark(productID: Int, _ isBookmark: Bool) {
+        if isBookmark {
+            requestProductBookmark(productID: productID)
+        } else {
+            requestProductUnBookmark(productID: productID)
+        }
     }
 }
