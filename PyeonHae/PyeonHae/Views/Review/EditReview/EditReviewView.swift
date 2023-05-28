@@ -15,6 +15,7 @@ struct EditReviewView: View {
     @StateObject private var keyboardResponder = KeyboardResponder()
     @StateObject var imageSelection = ImageSelection()
     @Binding var showWriteView: Bool
+    @State var rating: Int = 0
     @State private var showToast = false
     @State private var showImagePicker = false
     @State private var showSearchProductView = false
@@ -26,6 +27,7 @@ struct EditReviewView: View {
                 VStack(spacing: 0) {
                     reviewTopBar
                     SelectProductView(showSearchProductView: $showSearchProductView)
+                    reviewStarButton(rating: self.$rating)
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
