@@ -73,8 +73,6 @@
 		54F0C23929F9785000CBF83C /* ProductBookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */; };
 		54F0C23B29F9785800CBF83C /* ProductUnBookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */; };
 		54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F3C3E7298C025200C10FF5 /* ReviewHome.swift */; };
-		54F618582A1A0C1A00A14868 /* EasySkeleton in Frameworks */ = {isa = PBXBuildFile; productRef = 54F618572A1A0C1A00A14868 /* EasySkeleton */; };
-		54F6185B2A1A1E2700A14868 /* SearchResultItemSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6185A2A1A1E2700A14868 /* SearchResultItemSkeletonView.swift */; };
 		54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */; };
 		54F6B33029AF562C00914889 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B32F29AF562C00914889 /* API.swift */; };
 		54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F6B33129AF991000914889 /* CheckEmailModel.swift */; };
@@ -177,7 +175,6 @@
 		54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductBookmarkModel.swift; sourceTree = "<group>"; };
 		54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUnBookmarkModel.swift; sourceTree = "<group>"; };
 		54F3C3E7298C025200C10FF5 /* ReviewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewHome.swift; sourceTree = "<group>"; };
-		54F6185A2A1A1E2700A14868 /* SearchResultItemSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemSkeletonView.swift; sourceTree = "<group>"; };
 		54F6457D296C563B00F423B1 /* TermsAndPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndPolicyView.swift; sourceTree = "<group>"; };
 		54F6B32F29AF562C00914889 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		54F6B33129AF991000914889 /* CheckEmailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckEmailModel.swift; sourceTree = "<group>"; };
@@ -221,7 +218,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54F618582A1A0C1A00A14868 /* EasySkeleton in Frameworks */,
 				54159D2229F154C30085CF08 /* Kingfisher in Frameworks */,
 				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 				54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */,
@@ -297,7 +293,6 @@
 		54126CBC29585BA3009D5A09 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				54F618592A1A1DF800A14868 /* SkeletonViews */,
 				5420D1BB29F02AC600A78000 /* Search */,
 				543CEAB629CEF6E800CDB0C8 /* Splash */,
 				D506C05B29AF24B600B9EA96 /* DetailItemView */,
@@ -504,14 +499,6 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
-		54F618592A1A1DF800A14868 /* SkeletonViews */ = {
-			isa = PBXGroup;
-			children = (
-				54F6185A2A1A1E2700A14868 /* SearchResultItemSkeletonView.swift */,
-			);
-			path = SkeletonViews;
-			sourceTree = "<group>";
-		};
 		54F80D1E2985478000102772 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,7 +619,6 @@
 				54C71D5229AB8EC200FAFDCD /* Alamofire */,
 				54E58D6729B620E900958789 /* UIWindowTransitions */,
 				54159D2129F154C30085CF08 /* Kingfisher */,
-				54F618572A1A0C1A00A14868 /* EasySkeleton */,
 				54AA0E042A19F1070031190D /* SwiftyGif */,
 			);
 			productName = PyeonHae;
@@ -668,7 +654,6 @@
 				54C71D5129AB8EC200FAFDCD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */,
 				54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				54F618562A1A0C1A00A14868 /* XCRemoteSwiftPackageReference "EasySkeleton" */,
 				54AA0E032A19F1070031190D /* XCRemoteSwiftPackageReference "SwiftyGif" */,
 			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
@@ -709,7 +694,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				54F80D202985478A00102772 /* HomeView.swift in Sources */,
-				54F6185B2A1A1E2700A14868 /* SearchResultItemSkeletonView.swift in Sources */,
 				D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */,
 				668CC38829659B9200416C2F /* SignupPasswordView.swift in Sources */,
 				D5409FE32994FA650034B250 /* EditReviewView.swift in Sources */,
@@ -1045,14 +1029,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		54F618562A1A0C1A00A14868 /* XCRemoteSwiftPackageReference "EasySkeleton" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SpectralDragon/EasySkeleton?ref=iosexample.com";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1080,11 +1056,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */;
 			productName = UIWindowTransitions;
-		};
-		54F618572A1A0C1A00A14868 /* EasySkeleton */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 54F618562A1A0C1A00A14868 /* XCRemoteSwiftPackageReference "EasySkeleton" */;
-			productName = EasySkeleton;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
