@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import EasySkeleton
 
 struct SearchResultView: View {
     @ObservedObject var searchViewModel: SearchViewModel
@@ -49,24 +48,21 @@ struct SearchResultView: View {
                 Spacer().frame(width: 20)
             }
             .padding(.bottom, 10)
-            ScrollView {
-                if searchViewModel.isLoading {
-                    ForEach(0...5, id: \.self) { _ in
-                        SearchResultItemSkeletonView(isLoading: $searchViewModel.isLoading)
-                            .padding(.vertical, 10)
-                    }
-                    .setSkeleton(
-                        $searchViewModel.isLoading,
-                        animationType: .solid(.grayscale25),
-                        animation: Animation.easeIn(duration: 2),
-                        transition: AnyTransition.opacity
-                    )
-                } else {
-                    ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+            GeometryReader { geometry in
+                ScrollView {
+                    if searchViewModel.isLoading {
                         VStack {
-                            SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                            LoadingView()
                         }
-                        .padding(.vertical, 10)
+                        .frame(width: geometry.size.width)
+                        .frame(minHeight: geometry.size.height)
+                    } else {
+                        ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                            VStack {
+                                SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                            }
+                            .padding(.vertical, 10)
+                        }
                     }
                 }
             }
@@ -78,17 +74,11 @@ struct SearchResultView: View {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
             selectedProductID = -1
             searchViewModel.isLoading = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                searchViewModel.isLoading = false
-            }
         }
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
             searchViewModel.isLoading = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                searchViewModel.isLoading = false
-            }
         }
         .onChange(of: selectedProductID) { id in
             if selectedProductID != -1 {
