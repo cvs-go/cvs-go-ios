@@ -36,12 +36,13 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 필터 조회
-    func requestFilterDatas() {
+    private func requestFilterDatas() {
         apiManager.request(for: ProductsAPI.filter)
             .sink { (result: Result<FiltersModel, Error>) in
                 switch result {
                 case .success(let data):
                     self.filtersData = data.data
+                    self.highestPrice = data.data.highestPrice
                 case .failure(let error):
                     print(error)
                 }
@@ -52,11 +53,12 @@ class SearchViewModel: ObservableObject {
     // 상품 목록 조회
     func searchProducts() {
         let parameters: [String : Any] = [
-            "keyword": keyword,
-            "convenienceStoreIds": convenienceStoreIds,
-            "categoryIds": categoryIds,
-            "eventTypes": eventTypes,
-            "lowestPrice": lowestPrice
+            "convenienceStoreIds": convenienceStoreIds.toParameter(),
+            "categoryIds": categoryIds.toParameter(),
+            "eventTypes": eventTypes.toParameter(),
+            "lowestPrice": lowestPrice,
+            "highestPrice": highestPrice,
+            "keyword": keyword
         ]
         
         apiManager.request(for: ProductsAPI.search(parameters))

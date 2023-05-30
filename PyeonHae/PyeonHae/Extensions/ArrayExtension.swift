@@ -11,4 +11,8 @@ extension Array {
     subscript (safe index: Int) -> Element? {
         return indices ~= index ? self[index] : nil
     }
+    
+    func toParameter() -> String {
+        return self.map { String(describing: $0) }.joined(separator: ",")
+    }
 }

@@ -21,7 +21,7 @@ struct SelectableButton: View {
     
     var body: some View {
         Text(text)
-            .font(.pretendard(isSelected ? .semiBold : .regular, 14))
+            .font(.pretendard(.regular, 14))
             .foregroundColor(isSelected ? Color.red100 : Color.grayscale100)
             .padding(EdgeInsets(top: 7.5, leading: 10, bottom: 7.5, trailing: 10))
             .cornerRadius(100)
