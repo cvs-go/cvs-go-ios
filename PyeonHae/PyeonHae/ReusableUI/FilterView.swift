@@ -10,17 +10,27 @@ import WrappingHStack
 
 struct FilterView: View {
     let filterDatas: FiltersDataModel
+    @State private var selectedElements: [String] = []
     @Binding private var showFilter: Bool
-    @Binding private var selectedElements: [String]
+    @Binding private var convenienceStoreIds: [Int]
+    @Binding private var categoryIds: [Int]
+    @Binding private var eventTypes: [String]
+    @Binding private var filterClicked: Bool
     
     init(
         filterDatas: FiltersDataModel,
         showFilter: Binding<Bool>,
-        selectedElements: Binding<[String]>
+        convenienceStoreIds: Binding<[Int]>,
+        categoryIds: Binding<[Int]>,
+        eventTypes: Binding<[String]>,
+        filterClicked: Binding<Bool>
     ) {
         self.filterDatas = filterDatas
         self._showFilter = showFilter
-        self._selectedElements = selectedElements
+        self._convenienceStoreIds = convenienceStoreIds
+        self._categoryIds = categoryIds
+        self._eventTypes = eventTypes
+        self._filterClicked = filterClicked
     }
     
     var body: some View {
@@ -79,9 +89,12 @@ struct FilterView: View {
                     .onTapGesture {
                         if selectedElements.contains(element.name) {
                             selectedElements.removeAll(where: { $0 == element.name })
+                            convenienceStoreIds.removeAll(where: { $0 == element.id })
                         } else {
                             selectedElements.append(element.name)
+                            convenienceStoreIds.append(element.id)
                         }
+                        filterClicked.toggle()
                     }
                 }
             }
@@ -100,9 +113,12 @@ struct FilterView: View {
                     .onTapGesture {
                         if selectedElements.contains(element.name) {
                             selectedElements.removeAll(where: { $0 == element.name })
+                            categoryIds.removeAll(where: { $0 == element.id })
                         } else {
                             selectedElements.append(element.name)
+                            categoryIds.append(element.id)
                         }
+                        filterClicked.toggle()
                     }
                 }
             }
@@ -121,9 +137,12 @@ struct FilterView: View {
                     .onTapGesture {
                         if selectedElements.contains(element.name) {
                             selectedElements.removeAll(where: { $0 == element.name })
+                            eventTypes.removeAll(where: { $0 == element.value })
                         } else {
                             selectedElements.append(element.name)
+                            eventTypes.append(element.value)
                         }
+                        filterClicked.toggle()
                     }
                 }
             }

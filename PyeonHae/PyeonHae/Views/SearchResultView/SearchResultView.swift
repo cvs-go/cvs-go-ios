@@ -15,6 +15,7 @@ struct SearchResultView: View {
     @State private var showWriteView = false
     @State private var searchAgain = false
     @State private var selectedProductID = -1
+    @State private var filterClicked = false
     
     var body: some View {
         VStack {
@@ -27,7 +28,10 @@ struct SearchResultView: View {
                 FilterView(
                     filterDatas: filtersData,
                     showFilter: $showFilter,
-                    selectedElements: $selectedElements
+                    convenienceStoreIds: $searchViewModel.convenienceStoreIds,
+                    categoryIds: $searchViewModel.categoryIds,
+                    eventTypes: $searchViewModel.eventTypes,
+                    filterClicked: $filterClicked
                 )
             }
             HStack {
@@ -73,10 +77,13 @@ struct SearchResultView: View {
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
             selectedProductID = -1
-            searchViewModel.isLoading = true
         }
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
+            searchViewModel.searchProducts()
+            searchViewModel.isLoading = true
+        }
+        .onChange(of: filterClicked) { _ in
             searchViewModel.searchProducts()
             searchViewModel.isLoading = true
         }
