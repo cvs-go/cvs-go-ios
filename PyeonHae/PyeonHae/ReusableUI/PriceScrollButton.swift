@@ -56,17 +56,18 @@ struct PriceScrollButton: View {
                             .padding(.leading, trackWidth * minPrice)
                             .gesture(
                                 DragGesture()
+                                //이동한 값을 통해 제스처가 종료된 이후에 값 변경을 할 시 화면이 변경되지 않고, 제스처 중에 그대로 값 변경을 하게 될 경우 에러가 발생하여 최초값으로 부터 이동한 정도를 계속 계산하는 로직입니다.
                                     .onChanged { value in
                                         if priceTemp == 0 {
-                                            lastEditPrice = minPrice
+                                            lastEditPrice = minPrice //최초값 저장
                                         }
-                                        let addMinPrice = max(0, (minPrice * trackWidth + value.translation.width) / trackWidth - priceTemp)
-                                        if addMinPrice < maxPrice - (64 / trackWidth) {
+                                        let addMinPrice = max(0, (minPrice * trackWidth + value.translation.width) / trackWidth - priceTemp) // 이번에 들어온 제스처로 부터 직전보다 이동한 거리 계산
+                                        if addMinPrice < maxPrice - (64 / trackWidth) { //최댓값보다 더 많이 이동하지 않았는지 확인
                                             minPrice = addMinPrice
                                         } else {
                                             minPrice = maxPrice - (64 / trackWidth)
                                         }
-                                        priceTemp = minPrice - lastEditPrice
+                                        priceTemp = minPrice - lastEditPrice //지금까지 이동한 거리 저장
                                     }
                                     .onEnded { value in
                                         priceTemp = 0
