@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SearchResultView: View {
     @ObservedObject var searchViewModel: SearchViewModel
@@ -18,6 +19,8 @@ struct SearchResultView: View {
     @State private var filterClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
+    
+    @State private var priceChangeDebounceTimer: AnyCancellable?
     
     var body: some View {
         VStack {
@@ -100,13 +103,27 @@ struct SearchResultView: View {
         }
         .onChange(of: minPrice) { minPrice in
             searchViewModel.lowestPrice = Int(minPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
-            searchViewModel.searchProducts()
-            searchViewModel.isLoading = true
+            priceChangeDebounceTimer?.cancel()
+            priceChangeDebounceTimer = Future { promise in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    promise(.success(()))
+                }
+            }.sink { _ in
+                searchViewModel.searchProducts()
+                searchViewModel.isLoading = true
+            }
         }
         .onChange(of: maxPrice) { maxPrice in
             searchViewModel.highestPrice = Int(maxPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
-            searchViewModel.searchProducts()
-            searchViewModel.isLoading = true
+            priceChangeDebounceTimer?.cancel()
+            priceChangeDebounceTimer = Future { promise in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    promise(.success(()))
+                }
+            }.sink { _ in
+                searchViewModel.searchProducts()
+                searchViewModel.isLoading = true
+            }
         }
     }
 }
