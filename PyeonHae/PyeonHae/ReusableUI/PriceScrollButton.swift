@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct PriceScrollButton: View {
-    @State private var minPrice: CGFloat = 0
-    @State private var maxPrice: CGFloat = 1
+    
+    @Binding var minPrice: CGFloat
+    @Binding var maxPrice: CGFloat
     @State private var priceTemp: CGFloat = 0
     @State private var lastEditPrice: CGFloat = 0
+    let highestPrice: Int
     
     let trackWidth: CGFloat = 335
     
@@ -29,7 +31,7 @@ struct PriceScrollButton: View {
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     } else {
-                        Text("\(Int(minPrice * 15000))원~\(Int(maxPrice * 15000))원")
+                        Text("\(Int(minPrice * CGFloat(highestPrice)))원~\(Int(maxPrice * CGFloat(highestPrice)))원")
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     }
@@ -93,11 +95,11 @@ struct PriceScrollButton: View {
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
-                    Text("5천")
+                    Text("\(Int(highestPrice * 1/3) / 100 * 100)원")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
-                    Text("1만")
+                    Text("\(Int(highestPrice * 2/3) / 100 * 100)원")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
@@ -110,8 +112,3 @@ struct PriceScrollButton: View {
     }
 }
 
-struct PriceScrollButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PriceScrollButton()
-    }
-}

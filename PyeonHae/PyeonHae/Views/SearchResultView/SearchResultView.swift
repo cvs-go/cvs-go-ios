@@ -16,6 +16,8 @@ struct SearchResultView: View {
     @State private var searchAgain = false
     @State private var selectedProductID = -1
     @State private var filterClicked = false
+    @State private var minPrice: CGFloat = 0
+    @State private var maxPrice: CGFloat = 1
     
     var body: some View {
         VStack {
@@ -31,7 +33,9 @@ struct SearchResultView: View {
                     convenienceStoreIds: $searchViewModel.convenienceStoreIds,
                     categoryIds: $searchViewModel.categoryIds,
                     eventTypes: $searchViewModel.eventTypes,
-                    filterClicked: $filterClicked
+                    filterClicked: $filterClicked,
+                    minPrice: $minPrice,
+                    maxPrice: $maxPrice
                 )
             }
             HStack {
@@ -93,6 +97,16 @@ struct SearchResultView: View {
                     searchViewModel.showProductDetail = true
                 }
             }
+        }
+        .onChange(of: minPrice) { minPrice in
+            searchViewModel.lowestPrice = Int(minPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
+            searchViewModel.searchProducts()
+            searchViewModel.isLoading = true
+        }
+        .onChange(of: maxPrice) { maxPrice in
+            searchViewModel.highestPrice = Int(maxPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
+            searchViewModel.searchProducts()
+            searchViewModel.isLoading = true
         }
     }
 }
