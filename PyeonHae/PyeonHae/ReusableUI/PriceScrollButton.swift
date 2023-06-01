@@ -31,7 +31,7 @@ struct PriceScrollButton: View {
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     } else {
-                        Text("\(Int(minPrice * CGFloat(highestPrice)))원~\(Int(maxPrice * CGFloat(highestPrice)))원")
+                        Text("\(Int(minPrice * CGFloat(highestPrice)) / 100 * 100)원~\(Int(maxPrice * CGFloat(highestPrice)) / 100 * 100)원")
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     }
