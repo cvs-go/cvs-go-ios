@@ -12,6 +12,7 @@ struct ReviewHome: View {
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var showWriteView = false
+    @State var selectedSortOptionIndex = 0
     
     // 임시 데이터
     let filterDatas: [FilterData] = [
@@ -74,15 +75,7 @@ struct ReviewHome: View {
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale85)
                     Spacer()
-                    HStack(spacing: 6) {
-                        Text("최신순")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                        Image(name: .invertedTriangle)
-                    }
-                    .frame(width: 64.5, height: 26)
-                    .background(Color.grayscale10)
-                    .cornerRadius(10)
+                    SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
                     Spacer().frame(width: 20)
                 }
                 .frame(height: 40)
