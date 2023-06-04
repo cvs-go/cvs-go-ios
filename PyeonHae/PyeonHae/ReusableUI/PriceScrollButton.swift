@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct PriceScrollButton: View {
-    @State private var minPrice: CGFloat = 0
-    @State private var maxPrice: CGFloat = 1
+    
+    @Binding var minPrice: CGFloat
+    @Binding var maxPrice: CGFloat
     @State private var priceTemp: CGFloat = 0
     @State private var lastEditPrice: CGFloat = 0
+    let highestPrice: Int
     
     let trackWidth: CGFloat = 335
     
@@ -29,7 +31,7 @@ struct PriceScrollButton: View {
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     } else {
-                        Text("\(Int(minPrice * 15000))원~\(Int(maxPrice * 15000))원")
+                        Text("\(Int(minPrice * CGFloat(highestPrice)) / 100 * 100)원~\(Int(maxPrice * CGFloat(highestPrice)) / 100 * 100)원")
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(Color.grayscale70)
                     }
@@ -54,17 +56,18 @@ struct PriceScrollButton: View {
                             .padding(.leading, trackWidth * minPrice)
                             .gesture(
                                 DragGesture()
+                                //이동한 값을 통해 제스처가 종료된 이후에 값 변경을 할 시 화면이 변경되지 않고, 제스처 중에 그대로 값 변경을 하게 될 경우 에러가 발생하여 최초값으로 부터 이동한 정도를 계속 계산하는 로직입니다.
                                     .onChanged { value in
                                         if priceTemp == 0 {
-                                            lastEditPrice = minPrice
+                                            lastEditPrice = minPrice //최초값 저장
                                         }
-                                        let addMinPrice = max(0, (minPrice * trackWidth + value.translation.width) / trackWidth - priceTemp)
-                                        if addMinPrice < maxPrice - (64 / trackWidth) {
+                                        let addMinPrice = max(0, (minPrice * trackWidth + value.translation.width) / trackWidth - priceTemp) // 이번에 들어온 제스처로 부터 직전보다 이동한 거리 계산
+                                        if addMinPrice < maxPrice - (64 / trackWidth) { //최댓값보다 더 많이 이동하지 않았는지 확인
                                             minPrice = addMinPrice
                                         } else {
                                             minPrice = maxPrice - (64 / trackWidth)
                                         }
-                                        priceTemp = minPrice - lastEditPrice
+                                        priceTemp = minPrice - lastEditPrice //지금까지 이동한 거리 저장
                                     }
                                     .onEnded { value in
                                         priceTemp = 0
@@ -93,11 +96,11 @@ struct PriceScrollButton: View {
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
-                    Text("5천")
+                    Text("\(Int(highestPrice * 1/3) / 100 * 100)원")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
-                    Text("1만")
+                    Text("\(Int(highestPrice * 2/3) / 100 * 100)원")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(Color.grayscale70)
                     Spacer()
@@ -110,8 +113,3 @@ struct PriceScrollButton: View {
     }
 }
 
-struct PriceScrollButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PriceScrollButton()
-    }
-}

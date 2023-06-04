@@ -16,6 +16,8 @@ struct FilterView: View {
     @Binding private var categoryIds: [Int]
     @Binding private var eventTypes: [String]
     @Binding private var filterClicked: Bool
+    @Binding private var minPrice: CGFloat
+    @Binding private var maxPrice: CGFloat
     
     init(
         filterDatas: FiltersDataModel,
@@ -23,7 +25,9 @@ struct FilterView: View {
         convenienceStoreIds: Binding<[Int]>,
         categoryIds: Binding<[Int]>,
         eventTypes: Binding<[String]>,
-        filterClicked: Binding<Bool>
+        filterClicked: Binding<Bool>,
+        minPrice: Binding<CGFloat>,
+        maxPrice: Binding<CGFloat>
     ) {
         self.filterDatas = filterDatas
         self._showFilter = showFilter
@@ -31,6 +35,8 @@ struct FilterView: View {
         self._categoryIds = categoryIds
         self._eventTypes = eventTypes
         self._filterClicked = filterClicked
+        self._minPrice = minPrice
+        self._maxPrice = maxPrice
     }
     
     var body: some View {
@@ -149,7 +155,7 @@ struct FilterView: View {
             .padding(.top, 20)
             .padding(.horizontal, 20)
             
-            PriceScrollButton()
+            PriceScrollButton(minPrice: $minPrice, maxPrice: $maxPrice, highestPrice: filterDatas.highestPrice)
                 .frame(height: 82)
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
