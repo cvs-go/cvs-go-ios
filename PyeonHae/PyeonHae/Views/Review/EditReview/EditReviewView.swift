@@ -12,13 +12,19 @@ class ImageSelection: ObservableObject {
 }
 
 struct EditReviewView: View {
+    private let reviewViewModel = ReviewViewModel()
+    
     @StateObject private var keyboardResponder = KeyboardResponder()
     @StateObject var imageSelection = ImageSelection()
     @Binding var showWriteView: Bool
+    
+    @State private var content = String()
     @State var rating: Int = 0
+    
     @State private var showToast = false
     @State private var showImagePicker = false
     @State private var showSearchProductView = false
+    @State private var selectedProduct: Product? = nil
     
     var body: some View {
         GeometryReader { geo in
@@ -26,12 +32,15 @@ struct EditReviewView: View {
                 Color.white
                 VStack(spacing: 0) {
                     reviewTopBar
-                    SelectProductView(showSearchProductView: $showSearchProductView)
+                    SelectProductView(
+                        showSearchProductView: $showSearchProductView,
+                        selectedProduct: $selectedProduct
+                    )
                     reviewStarButton(rating: self.$rating)
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
-                    EditLetterView()
+                    EditLetterView(content: $content)
                     if(keyboardResponder.currentHeight == 0) {
                         ReviewPhotoView(imageSelection: imageSelection, showToast: $showToast)
                     }
@@ -71,7 +80,10 @@ struct EditReviewView: View {
         }
         .blur(radius: showSearchProductView ? 2 : 0)
         .bottomSheet(isPresented: $showSearchProductView) {
-            SearchProductView(showSearchProductView: $showSearchProductView)
+            SearchProductView(
+                showSearchProductView: $showSearchProductView,
+                selectedProduct: $selectedProduct
+            )
         }
     }
     
@@ -89,7 +101,24 @@ struct EditReviewView: View {
             Spacer()
             Text("완료")
                 .font(.pretendard(.bold, 16))
-                .foregroundColor(.grayscale50)
+                .foregroundColor(
+                    content.isEmpty || selectedProduct == nil
+                    ? .grayscale50
+                    : .red100
+                )
+                .onTapGesture {
+                    if let product = selectedProduct, !content.isEmpty {
+                        let parameters: [String : Any] = [
+                            "content": content,
+                            "rating": String(rating + 1)
+                        ]
+                        
+                        reviewViewModel.writeReview(
+                            productID: product.productId,
+                            parameters: parameters
+                        )
+                    }
+                }
             Spacer().frame(width: 20)
         }
         .frame(height: 44)

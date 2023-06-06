@@ -22,7 +22,6 @@ class APIManager {
         return session
     }()
     
-    
     public func makeRequest(_ api: API) -> DataRequest {
         return self.session
             .request(

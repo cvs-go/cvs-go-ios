@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct SearchProductView: View {
-    @Binding var showSearchProductView: Bool
+    @ObservedObject var searchViewModel = SearchViewModel()
+    
     @State private var searchText = String()
+    @Binding var showSearchProductView: Bool
+    @Binding var selectedProduct: Product?
+    
     var body: some View {
         VStack {
             topBar
@@ -18,11 +22,22 @@ struct SearchProductView: View {
                 .padding(.horizontal, 20)
             ScrollView {
                 VStack {
-                    ForEach(0..<10) { _ in
-//                        SearchResultItemView()
+                    ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                        VStack {
+                            SearchResultItemView(
+                                product: product,
+                                selectedProduct: $selectedProduct
+                            )
+                        }
+                        .padding(.vertical, 10)
                     }
-                    .padding(.vertical, 10)
                 }
+            }
+        }
+        .onChange(of: selectedProduct) { product in
+            if let product = product {
+                selectedProduct = product
+                showSearchProductView = false
             }
         }
     }
@@ -66,6 +81,10 @@ struct SearchProductView: View {
                 .foregroundColor(.grayscale85)
                 .padding(.vertical, 10)
                 .padding(.trailing, 20)
+                .onTapGesture {
+                    searchViewModel.keyword = searchText
+                    searchViewModel.searchProducts()
+                }
         }
     }
 }
