@@ -28,7 +28,8 @@ class APIManager {
                 api.fullURL,
                 method: api.method,
                 parameters: api.parameters,
-                encoding: api.encoding
+                encoding: api.encoding,
+                headers: api.headers
             )
     }
     

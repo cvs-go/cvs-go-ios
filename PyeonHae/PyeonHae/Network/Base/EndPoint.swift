@@ -10,6 +10,7 @@ import Alamofire
 
 protocol EndPoint {
     var baseURL: String { get }
+    var headers: HTTPHeaders { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: [String : Any]? { get }
