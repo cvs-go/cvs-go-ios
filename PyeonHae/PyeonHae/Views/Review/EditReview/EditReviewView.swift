@@ -78,6 +78,10 @@ struct EditReviewView: View {
                 message: "사진은 최대 3장까지 추가할 수 있습니다.",
                 isShowing: $showToast
             )
+            .showAlert(
+                message: reviewViewModel.errorMessage,
+                showAlert: $reviewViewModel.showAlertMessage
+            )
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(images: $imageSelection.images)

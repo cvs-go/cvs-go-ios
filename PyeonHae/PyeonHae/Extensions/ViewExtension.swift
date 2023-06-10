@@ -27,6 +27,20 @@ extension View {
         )
     }
     
+    func showAlert(
+        title: String = String(),
+        message: String,
+        showAlert: Binding<Bool>
+    ) -> some View {
+        self.alert(isPresented: showAlert) {
+            Alert(
+                title: Text(title),
+                message: Text(message),
+                dismissButton: .default(Text("확인"))
+            )
+        }
+    }
+    
     func bottomSheet<Content: View>(
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content) -> some View {

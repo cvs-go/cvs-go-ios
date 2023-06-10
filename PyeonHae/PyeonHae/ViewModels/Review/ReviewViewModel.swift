@@ -13,8 +13,23 @@ class ReviewViewModel: ObservableObject {
     
     @Published var showWriteView = false
     @Published var showToastMessage = false
+    @Published var showAlertMessage = false
+    @Published var errorMessage = String()
     
     var bag = Set<AnyCancellable>()
+    
+    init() {
+        subscribeErrorMessage()
+    }
+    
+    private func subscribeErrorMessage() {
+        apiManager.errorMessageSubject
+            .receive(on: DispatchQueue.main)
+            .sink { errorMessage in
+                self.errorMessage = errorMessage
+            }
+            .store(in: &bag)
+    }
     
     func writeReview(productID: Int, parameters: [String : Any]) {
         apiManager.request(for: ReviewAPI.writeReview(
@@ -26,8 +41,8 @@ class ReviewViewModel: ObservableObject {
             case .success:
                 self.showWriteView = false
                 self.showToastMessage = true
-            case .failure(let error):
-                print(error)
+            case .failure:
+                self.showAlertMessage = true
             }
         }
         .store(in: &bag)
