@@ -21,12 +21,6 @@ extension ReviewAPI {
         }
     }
     
-    var headers: HTTPHeaders {
-        var headers = HTTPHeaders()
-        headers.add(HTTPHeader.contentType("application/x-www-form-urlencoded"))
-        return headers
-    }
-    
     var path: String {
         switch self {
         case .writeReview(let id, _):
@@ -44,7 +38,7 @@ extension ReviewAPI {
     var encoding: ParameterEncoding {
         switch self {
         default:
-            return URLEncoding.httpBody
+            return JSONEncoding.default
         }
     }
     

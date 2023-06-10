@@ -110,7 +110,7 @@ struct EditReviewView: View {
                     if let product = selectedProduct, !content.isEmpty {
                         let parameters: [String : Any] = [
                             "content": content,
-                            "rating": String(rating + 1)
+                            "rating": rating + 1
                         ]
                         
                         reviewViewModel.writeReview(
