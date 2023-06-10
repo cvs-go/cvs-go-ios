@@ -16,7 +16,8 @@ extension View {
     
     func toast(message: String,
                isShowing: Binding<Bool>,
-               config: ToastMessage.Config) -> some View {
+               config: ToastMessage.Config = .init()
+    ) -> some View {
         self.modifier(
             ToastMessage(
                 message: message,

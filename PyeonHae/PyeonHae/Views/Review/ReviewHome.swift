@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ReviewHome: View {
+    @ObservedObject var reviewViewModel = ReviewViewModel()
+    
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
-    @State private var showWriteView = false
     
     // 임시 데이터
     let filterDatas: [FilterData] = [
@@ -32,9 +33,13 @@ struct ReviewHome: View {
                 ]
             )
         }
-        .fullScreenCover(isPresented: $showWriteView) {
-            EditReviewView(showWriteView: $showWriteView)
+        .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
+            EditReviewView(reviewViewModel: reviewViewModel)
         }
+        .toast(
+            message: "리뷰 작성에 성공했습니다!",
+            isShowing: $reviewViewModel.showToastMessage
+        )
     }
     
     @ViewBuilder
@@ -48,7 +53,7 @@ struct ReviewHome: View {
                 Spacer()
                 Image(name: .addSquare)
                     .onTapGesture {
-                        showWriteView = true
+                        reviewViewModel.showWriteView = true
                     }
                 Spacer().frame(width: 18)
             }

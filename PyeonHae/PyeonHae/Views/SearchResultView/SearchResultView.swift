@@ -13,7 +13,6 @@ struct SearchResultView: View {
     @Binding var text: String
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
-    @State private var showWriteView = false
     @State private var searchAgain = false
     @State private var selectedProduct: Product? = nil
     @State private var filterClicked = false

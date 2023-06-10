@@ -12,14 +12,13 @@ class ImageSelection: ObservableObject {
 }
 
 struct EditReviewView: View {
-    private let reviewViewModel = ReviewViewModel()
+    @ObservedObject var reviewViewModel: ReviewViewModel
     
     @StateObject private var keyboardResponder = KeyboardResponder()
     @StateObject var imageSelection = ImageSelection()
-    @Binding var showWriteView: Bool
     
     @State private var content = String()
-    @State var rating: Int = 0
+    @State var rating: Int = 2
     
     @State private var showToast = false
     @State private var showImagePicker = false
@@ -36,7 +35,9 @@ struct EditReviewView: View {
                         showSearchProductView: $showSearchProductView,
                         selectedProduct: $selectedProduct
                     )
-                    reviewStarButton(rating: self.$rating)
+                    if selectedProduct != nil {
+                        reviewStarButton(rating: self.$rating)
+                    }
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
@@ -73,7 +74,10 @@ struct EditReviewView: View {
                     }
                 }
             }
-            .toast(message: "사진은 최대 3장까지 추가할 수 있습니다.", isShowing: $showToast, config: .init())
+            .toast(
+                message: "사진은 최대 3장까지 추가할 수 있습니다.",
+                isShowing: $showToast
+            )
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(images: $imageSelection.images)
@@ -92,7 +96,7 @@ struct EditReviewView: View {
             Spacer().frame(width: 14)
             Image(name: .close)
                 .onTapGesture {
-                    showWriteView = false
+                    reviewViewModel.showWriteView = false
                 }
             Spacer().frame(width: 9)
             Text("리뷰 작성")

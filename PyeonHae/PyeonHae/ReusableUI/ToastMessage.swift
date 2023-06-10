@@ -64,7 +64,8 @@ struct ToastMessage: ViewModifier {
              backgroundColor: Color = .black.opacity(0.6),
              duration: TimeInterval = ToastMessage.short,
              transition: AnyTransition = .opacity,
-             animation: Animation = .linear(duration: 0.3)) {
+             animation: Animation = .linear(duration: 0.3)
+        ) {
             self.textColor = textColor
             self.font = font
             self.backgroundColor = backgroundColor

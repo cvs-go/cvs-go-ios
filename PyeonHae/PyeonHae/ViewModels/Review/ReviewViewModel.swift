@@ -11,6 +11,9 @@ import Combine
 class ReviewViewModel: ObservableObject {
     private let apiManager = APIManager()
     
+    @Published var showWriteView = false
+    @Published var showToastMessage = false
+    
     var bag = Set<AnyCancellable>()
     
     func writeReview(productID: Int, parameters: [String : Any]) {
@@ -20,8 +23,9 @@ class ReviewViewModel: ObservableObject {
         ))
         .sink { (result: Result<EmptyResponse, Error>) in
             switch result {
-            case .success(let data):
-                print(data)
+            case .success:
+                self.showWriteView = false
+                self.showToastMessage = true
             case .failure(let error):
                 print(error)
             }
