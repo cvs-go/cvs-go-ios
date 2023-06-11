@@ -121,10 +121,7 @@ struct EditReviewView: View {
                             "rating": rating + 1
                         ]
                         
-                        reviewViewModel.writeReview(
-                            productID: product.productId,
-                            parameters: parameters
-                        )
+                        reviewViewModel.writeReview(productID: product.productId, parameters: parameters, images: imageSelection.images)
                     }
                 }
             Spacer().frame(width: 20)

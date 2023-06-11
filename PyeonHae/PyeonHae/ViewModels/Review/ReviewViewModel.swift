@@ -7,6 +7,12 @@
 
 import Foundation
 import Combine
+import UIKit
+
+struct ImageResponse: Codable {
+    let timestamp: String
+    let data: [String]
+}
 
 class ReviewViewModel: ObservableObject {
     private let apiManager = APIManager()
@@ -31,20 +37,34 @@ class ReviewViewModel: ObservableObject {
             .store(in: &bag)
     }
     
-    func writeReview(productID: Int, parameters: [String : Any]) {
-        apiManager.request(for: ReviewAPI.writeReview(
-            id: productID,
-            parameters: parameters
-        ))
-        .sink { (result: Result<EmptyResponse, Error>) in
-            switch result {
-            case .success:
-                self.showWriteView = false
-                self.showToastMessage = true
-            case .failure:
-                self.showAlertMessage = true
-            }
+    func writeReview(productID: Int, parameters: [String : Any], images: [UIImage]) {
+            let api = ImageAPI(images: images, folder: "review")
+
+            apiManager.request(for: api)
+                .sink { (result: Result<ImageResponse, Error>) in
+                    switch result {
+                    case .success(let response):
+                        var updatedParameters = parameters
+                        updatedParameters["images"] = response.data
+
+                        self.apiManager.request(for: ReviewAPI.writeReview(
+                            id: productID,
+                            parameters: updatedParameters
+                        ))
+                        .sink { (result: Result<EmptyResponse, Error>) in
+                            switch result {
+                            case .success:
+                                self.showWriteView = false
+                                self.showToastMessage = true
+                            case .failure:
+                                self.showAlertMessage = true
+                            }
+                        }
+                        .store(in: &self.bag)
+                    case .failure:
+                        self.showAlertMessage = true
+                    }
+                }
+                .store(in: &bag)
         }
-        .store(in: &bag)
-    }
 }
