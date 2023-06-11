@@ -121,7 +121,11 @@ struct EditReviewView: View {
                             "rating": rating + 1
                         ]
                         
-                        reviewViewModel.writeReview(productID: product.productId, parameters: parameters, images: imageSelection.images)
+                        if imageSelection.images.isEmpty {
+                            reviewViewModel.writeReview(productID: product.productId, parameters: parameters)
+                        } else {
+                            reviewViewModel.writePhotoReview(productID: product.productId, parameters: parameters, images: imageSelection.images)
+                        }
                     }
                 }
             Spacer().frame(width: 20)
