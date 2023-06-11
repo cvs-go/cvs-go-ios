@@ -13,9 +13,8 @@ struct SearchResultView: View {
     @Binding var text: String
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
-    @State private var showWriteView = false
     @State private var searchAgain = false
-    @State private var selectedProductID = -1
+    @State private var selectedProduct: Product? = nil
     @State private var filterClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
@@ -44,7 +43,10 @@ struct SearchResultView: View {
                             } else {
                                 ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
                                     VStack {
-                                        SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                                        SearchResultItemView(
+                                            product: product,
+                                            selectedProduct: $selectedProduct
+                                        )
                                     }
                                     .padding(.vertical, 10)
                                 }
@@ -85,7 +87,7 @@ struct SearchResultView: View {
         }
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
-            selectedProductID = -1
+            selectedProduct = nil
         }
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
@@ -96,9 +98,9 @@ struct SearchResultView: View {
             searchViewModel.searchProducts()
             searchViewModel.isLoading = true
         }
-        .onChange(of: selectedProductID) { id in
-            if selectedProductID != -1 {
-                searchViewModel.requestProductDetail(productID: id) {
+        .onChange(of: selectedProduct) { product in	
+            if let product = product {
+                searchViewModel.requestProductDetail(productID: product.productId) {
                     searchViewModel.showProductDetail = true
                 }
             }

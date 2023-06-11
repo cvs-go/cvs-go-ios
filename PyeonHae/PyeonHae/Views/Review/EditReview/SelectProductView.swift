@@ -6,29 +6,68 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct SelectProductView: View {
     @State var isSelectProduct: Bool = false
     @Binding var showSearchProductView: Bool
+    @Binding var selectedProduct: Product?
+    
     var body: some View {
         VStack {
             Button(action: {
                 showSearchProductView.toggle()
             }) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(style: StrokeStyle(lineWidth: 1, dash: [3]))
-                        .foregroundColor(Color.grayscale30)
-                    HStack {
-                        Image(name: .plusButton)
-                        Text("리뷰를 남길 제품을 선택해주세요.")
-                            .font(.pretendard(.regular, 14))
-                            .foregroundColor(.grayscale70)
+                if let selectedProduct = selectedProduct {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.grayscale30.opacity(0.5), lineWidth: 1)
+                        HStack {
+                            Spacer().frame(width: 6)
+                            if let url = selectedProduct.productImageUrl, let imageUrl = URL(string: url) {
+                                KFImage(imageUrl)
+                                    .resizable()
+                                    .frame(width: 52, height: 52)
+                                    .background(Color.grayscale10)
+                            }
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(selectedProduct.manufacturerName)
+                                    .font(.pretendard(.regular, 12))
+                                    .foregroundColor(.grayscale50)
+                                    .frame(height: 20)
+                                Text(selectedProduct.productName)
+                                    .lineLimit(1)
+                                    .font(.pretendard(.semiBold, 14))
+                                    .foregroundColor(.grayscale85)
+                                    .frame(height: 20)
+                            }
+                            Spacer()
+                            Image(name: .close)
+                                .onTapGesture {
+                                    self.selectedProduct = nil
+                                }
+                            Spacer().frame(width: 16)
+                        }
                     }
+                    .background(Color.grayscale10)
+                    .padding(.horizontal, 12)
+                    .frame(height: 64)
+                } else {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(style: StrokeStyle(lineWidth: 1, dash: [3]))
+                            .foregroundColor(Color.grayscale30)
+                        HStack {
+                            Image(name: .plusButton)
+                            Text("리뷰를 남길 제품을 선택해주세요.")
+                                .font(.pretendard(.regular, 14))
+                                .foregroundColor(.grayscale70)
+                        }
+                    }
+                    .background(Color.grayscale10)
+                    .padding(.horizontal, 12)
+                    .frame(height: 64)
                 }
-                .background(Color.grayscale10)
-                .padding(.horizontal, 12)
-                .frame(height: 64)
             }
         }
         .padding(.all, 16)

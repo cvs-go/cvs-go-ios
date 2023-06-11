@@ -6,5 +6,15 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol API: EndPoint {}
+
+extension API {
+    // Default Content-Type: application/json
+    var headers: HTTPHeaders {
+        var headers = HTTPHeaders()
+        headers.add(HTTPHeader.contentType("application/json"))
+        return headers
+    }
+}

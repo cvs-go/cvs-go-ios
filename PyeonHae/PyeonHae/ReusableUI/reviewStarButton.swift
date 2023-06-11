@@ -47,7 +47,7 @@ struct reviewStarButton: View {
                 }
             }
         }
-        .padding()
+        .padding(.bottom, 18)
     }
     
     var ratingText: String {

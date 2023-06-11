@@ -16,7 +16,8 @@ extension View {
     
     func toast(message: String,
                isShowing: Binding<Bool>,
-               config: ToastMessage.Config) -> some View {
+               config: ToastMessage.Config = .init()
+    ) -> some View {
         self.modifier(
             ToastMessage(
                 message: message,
@@ -24,6 +25,20 @@ extension View {
                 config: config
             )
         )
+    }
+    
+    func showAlert(
+        title: String = String(),
+        message: String,
+        showAlert: Binding<Bool>
+    ) -> some View {
+        self.alert(isPresented: showAlert) {
+            Alert(
+                title: Text(title),
+                message: Text(message),
+                dismissButton: .default(Text("확인"))
+            )
+        }
     }
     
     func bottomSheet<Content: View>(

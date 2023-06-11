@@ -10,6 +10,7 @@ import Alamofire
 import Combine
 
 class APIManager {
+    var errorMessageSubject = PassthroughSubject<String, Never>()
     
     private var session: Session = {
         let configuration = URLSessionConfiguration.default
@@ -22,14 +23,14 @@ class APIManager {
         return session
     }()
     
-    
     public func makeRequest(_ api: API) -> DataRequest {
         return self.session
             .request(
                 api.fullURL,
                 method: api.method,
                 parameters: api.parameters,
-                encoding: api.encoding
+                encoding: api.encoding,
+                headers: api.headers
             )
     }
     
@@ -47,6 +48,10 @@ class APIManager {
                         return .failure(error)
                     }
                 case .failure(let error):
+                    if let data = apiResult.data,
+                       let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                        self.errorMessageSubject.send(errorResponse.message)
+                    }
                     return .failure(error)
                 }
             }

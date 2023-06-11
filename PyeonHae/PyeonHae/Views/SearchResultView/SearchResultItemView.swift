@@ -12,7 +12,7 @@ struct SearchResultItemView: View {
     @State var isBookMark: Bool = false
     @State var isHeartMark: Bool = false
     let product: Product
-    @Binding var selectedProductID: Int
+    @Binding var selectedProduct: Product?
     
     var body: some View {
         VStack {
@@ -73,13 +73,11 @@ struct SearchResultItemView: View {
                     }
                     .padding(.bottom, 8)
                     HStack(spacing: 4) {
-                        if let event = product.convenienceStoreEvents {
-                            ForEach(event, id: \.self) { event in
-                                if let type = event.eventType {
-                                    Image("\(event.name)_\(type)")
-                                } else {
-                                    Image(event.name)
-                                }
+                        ForEach(product.convenienceStoreEvents, id: \.self) { event in
+                            if let type = event.eventType {
+                                Image("\(event.name)_\(type)")
+                            } else {
+                                Image(event.name)
                             }
                         }
                     }
@@ -89,7 +87,7 @@ struct SearchResultItemView: View {
         }
         .padding(.horizontal,20)
         .onTapGesture {
-            selectedProductID = product.productId
+            selectedProduct = product
         }
     }
 }

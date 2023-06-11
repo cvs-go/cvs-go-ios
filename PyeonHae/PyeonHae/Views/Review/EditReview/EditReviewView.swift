@@ -12,13 +12,18 @@ class ImageSelection: ObservableObject {
 }
 
 struct EditReviewView: View {
+    @ObservedObject var reviewViewModel: ReviewViewModel
+    
     @StateObject private var keyboardResponder = KeyboardResponder()
     @StateObject var imageSelection = ImageSelection()
-    @Binding var showWriteView: Bool
-    @State var rating: Int = 0
+    
+    @State private var content = String()
+    @State var rating: Int = 2
+    
     @State private var showToast = false
     @State private var showImagePicker = false
     @State private var showSearchProductView = false
+    @State private var selectedProduct: Product? = nil
     
     var body: some View {
         GeometryReader { geo in
@@ -26,12 +31,17 @@ struct EditReviewView: View {
                 Color.white
                 VStack(spacing: 0) {
                     reviewTopBar
-                    SelectProductView(showSearchProductView: $showSearchProductView)
-                    reviewStarButton(rating: self.$rating)
+                    SelectProductView(
+                        showSearchProductView: $showSearchProductView,
+                        selectedProduct: $selectedProduct
+                    )
+                    if selectedProduct != nil {
+                        reviewStarButton(rating: self.$rating)
+                    }
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
-                    EditLetterView()
+                    EditLetterView(content: $content)
                     if(keyboardResponder.currentHeight == 0) {
                         ReviewPhotoView(imageSelection: imageSelection, showToast: $showToast)
                     }
@@ -64,14 +74,24 @@ struct EditReviewView: View {
                     }
                 }
             }
-            .toast(message: "사진은 최대 3장까지 추가할 수 있습니다.", isShowing: $showToast, config: .init())
+            .toast(
+                message: "사진은 최대 3장까지 추가할 수 있습니다.",
+                isShowing: $showToast
+            )
+            .showAlert(
+                message: reviewViewModel.errorMessage,
+                showAlert: $reviewViewModel.showAlertMessage
+            )
         }
         .sheet(isPresented: $showImagePicker) {
             ImagePicker(images: $imageSelection.images)
         }
         .blur(radius: showSearchProductView ? 2 : 0)
         .bottomSheet(isPresented: $showSearchProductView) {
-            SearchProductView(showSearchProductView: $showSearchProductView)
+            SearchProductView(
+                showSearchProductView: $showSearchProductView,
+                selectedProduct: $selectedProduct
+            )
         }
     }
     
@@ -80,7 +100,7 @@ struct EditReviewView: View {
             Spacer().frame(width: 14)
             Image(name: .close)
                 .onTapGesture {
-                    showWriteView = false
+                    reviewViewModel.showWriteView = false
                 }
             Spacer().frame(width: 9)
             Text("리뷰 작성")
@@ -89,7 +109,24 @@ struct EditReviewView: View {
             Spacer()
             Text("완료")
                 .font(.pretendard(.bold, 16))
-                .foregroundColor(.grayscale50)
+                .foregroundColor(
+                    content.isEmpty || selectedProduct == nil
+                    ? .grayscale50
+                    : .red100
+                )
+                .onTapGesture {
+                    if let product = selectedProduct, !content.isEmpty {
+                        let parameters: [String : Any] = [
+                            "content": content,
+                            "rating": rating + 1
+                        ]
+                        
+                        reviewViewModel.writeReview(
+                            productID: product.productId,
+                            parameters: parameters
+                        )
+                    }
+                }
             Spacer().frame(width: 20)
         }
         .frame(height: 44)
