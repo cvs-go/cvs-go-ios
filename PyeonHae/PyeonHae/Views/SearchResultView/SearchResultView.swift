@@ -19,62 +19,64 @@ struct SearchResultView: View {
     @State private var filterClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
+    @State var selectedSortOptionIndex = 0
     
     @State private var priceChangeDebounceTimer: AnyCancellable?
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             SearchBar(
                 text: $text,
                 searchAgain: $searchAgain,
                 searchBarType: .result
             )
-            if let filtersData = searchViewModel.filtersData {
-                FilterView(
-                    filterDatas: filtersData,
-                    showFilter: $showFilter,
-                    convenienceStoreIds: $searchViewModel.convenienceStoreIds,
-                    categoryIds: $searchViewModel.categoryIds,
-                    eventTypes: $searchViewModel.eventTypes,
-                    filterClicked: $filterClicked,
-                    minPrice: $minPrice,
-                    maxPrice: $maxPrice
-                )
-            }
-            HStack {
-                Spacer().frame(width: 20)
-                Text("'\(searchViewModel.keyword)' 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
-                    .font(.pretendard(.regular, 12))
-                    .foregroundColor(.grayscale85)
-                Spacer()
-                HStack(spacing: 6) {
-                    Text("최신순")
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale85)
-                    Image(name: .invertedTriangle)
-                }
-                .frame(width: 64.5, height: 26)
-                .background(Color.grayscale10)
-                .cornerRadius(10)
-                Spacer().frame(width: 20)
-            }
-            .padding(.bottom, 10)
-            GeometryReader { geometry in
-                ScrollView {
-                    if searchViewModel.isLoading {
-                        VStack {
-                            LoadingView()
-                        }
-                        .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
-                    } else {
-                        ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
-                            VStack {
-                                SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+            ZStack {
+                VStack {
+                    Spacer().frame(height: showFilter ? 473 : 83)
+                    GeometryReader { geometry in
+                        ScrollView {
+                            if searchViewModel.isLoading {
+                                VStack {
+                                    LoadingView()
+                                }
+                                .frame(width: geometry.size.width)
+                                .frame(minHeight: geometry.size.height)
+                            } else {
+                                ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                                    VStack {
+                                        SearchResultItemView(product: product, selectedProductID: $selectedProductID)
+                                    }
+                                    .padding(.vertical, 10)
+                                }
                             }
-                            .padding(.vertical, 10)
                         }
                     }
+                }
+                VStack(spacing: 0) {
+                    if let filtersData = searchViewModel.filtersData {
+                        FilterView(
+                            filterDatas: filtersData,
+                            showFilter: $showFilter,
+                            convenienceStoreIds: $searchViewModel.convenienceStoreIds,
+                            categoryIds: $searchViewModel.categoryIds,
+                            eventTypes: $searchViewModel.eventTypes,
+                            filterClicked: $filterClicked,
+                            minPrice: $minPrice,
+                            maxPrice: $maxPrice
+                        )
+                    }
+                    HStack(alignment: .top) {
+                        Spacer().frame(width: 20)
+                        Text("'\(searchViewModel.keyword)' 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
+                            .font(.pretendard(.regular, 12))
+                            .foregroundColor(.grayscale85)
+                            .padding(.top, 12)
+                        Spacer()
+                        SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
+                            .padding(.top, 7)
+                        Spacer().frame(width: 20)
+                    }
+                    Spacer()
                 }
             }
             NavigationLink(destination: DetailItemView(searchViewModel: searchViewModel).navigationBarHidden(true), isActive: $searchViewModel.showProductDetail) {
