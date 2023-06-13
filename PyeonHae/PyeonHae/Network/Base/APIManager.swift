@@ -57,4 +57,25 @@ class APIManager {
             }
             .eraseToAnyPublisher()
     }
+    
+    func upload<T: Codable>(api: ImageAPI) -> AnyPublisher<Result<T, Error>, Never> {
+        return Future { promise in
+            self.session.upload(multipartFormData: api.multipartFormData, to: api.fullURL, method: api.method, headers: api.headers)
+                .validate()
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let value):
+                        promise(.success(.success(value)))
+                    case .failure(let error):
+                        if let data = response.data,
+                           let errorResponse = try? JSONDecoder().decode(ErrorResponse.self, from: data) {
+                            self.errorMessageSubject.send(errorResponse.message)
+                        }
+                        promise(.success(.failure(error)))
+                    }
+                }
+        }
+        .eraseToAnyPublisher()
+    }
+
 }

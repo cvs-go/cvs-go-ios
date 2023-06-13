@@ -105,6 +105,7 @@
 		D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */; };
 		D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25229A4CCA40018E8FB /* SearchResultView.swift */; };
 		D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25429A4D0480018E8FB /* SearchResultItemView.swift */; };
+		D56B26B72A35A9F000237983 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B26B62A35A9F000237983 /* ImageAPI.swift */; };
 		D57E78A729F531A500F35DFC /* Security.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D57E78A629F531A500F35DFC /* Security.xcconfig */; };
 		D57E78AA29F539C500F35DFC /* MyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78A929F539C500F35DFC /* MyInfo.swift */; };
 		D57E78AC29F6B91700F35DFC /* MyInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */; };
@@ -213,6 +214,7 @@
 		D5409FE829950B1B0034B250 /* ReviewPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewPhotoView.swift; sourceTree = "<group>"; };
 		D560E25229A4CCA40018E8FB /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = "<group>"; };
 		D560E25429A4D0480018E8FB /* SearchResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultItemView.swift; sourceTree = "<group>"; };
+		D56B26B62A35A9F000237983 /* ImageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAPI.swift; sourceTree = "<group>"; };
 		D57E78A629F531A500F35DFC /* Security.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Security.xcconfig; sourceTree = "<group>"; };
 		D57E78A929F539C500F35DFC /* MyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfo.swift; sourceTree = "<group>"; };
 		D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditView.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */,
 				543CEAC229CF2A5900CDB0C8 /* ProductsAPI.swift */,
 				549CBA842A2F1C980074AFA5 /* ReviewAPI.swift */,
+				D56B26B62A35A9F000237983 /* ImageAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -765,6 +768,7 @@
 				54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */,
 				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
 				54AFA1EA29ACEA130058DB39 /* LoginAPI.swift in Sources */,
+				D56B26B72A35A9F000237983 /* ImageAPI.swift in Sources */,
 				54F80D1D2985275F00102772 /* ViewExtension.swift in Sources */,
 				543CEAC329CF2A5900CDB0C8 /* ProductsAPI.swift in Sources */,
 				54C50C6E296984A60092AF39 /* SignupCheckPasswordView.swift in Sources */,
