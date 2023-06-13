@@ -137,7 +137,6 @@ class ReviewViewModel: ObservableObject {
 //                var updatedParameters = parameters
 //                updatedParameters["images"] = imageResponse.data
 //
-//                // Then proceed to make the writeReview request with updatedParameters...
 //            } catch {
 //                print("Error decoding response: \(error)")
 //                self.showAlertMessage = true
