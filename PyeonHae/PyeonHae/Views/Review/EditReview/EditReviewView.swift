@@ -25,6 +25,8 @@ struct EditReviewView: View {
     @State private var showSearchProductView = false
     @State private var selectedProduct: Product? = nil
     
+    @FocusState private var contentIsFocused: Bool
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -42,6 +44,7 @@ struct EditReviewView: View {
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
                     EditLetterView(content: $content)
+                        .focused($contentIsFocused)
                     if(keyboardResponder.currentHeight == 0) {
                         ReviewPhotoView(imageSelection: imageSelection, showToast: $showToast)
                     }
@@ -72,6 +75,10 @@ struct EditReviewView: View {
                             .background(Color.grayscale20)
                         }
                     }
+                }
+                
+                if reviewViewModel.isLoading {
+                    LoadingView()
                 }
             }
             .toast(
@@ -115,6 +122,8 @@ struct EditReviewView: View {
                     : .red100
                 )
                 .onTapGesture {
+                    self.contentIsFocused = false
+                    self.reviewViewModel.isLoading = true
                     if let product = selectedProduct, !content.isEmpty {
                         let parameters: [String : Any] = [
                             "content": content,
@@ -122,9 +131,16 @@ struct EditReviewView: View {
                         ]
                         
                         if imageSelection.images.isEmpty {
-                            reviewViewModel.writeReview(productID: product.productId, parameters: parameters)
+                            reviewViewModel.writeReview(
+                                productID: product.productId,
+                                parameters: parameters
+                            )
                         } else {
-                            reviewViewModel.writePhotoReview(productID: product.productId, parameters: parameters, images: imageSelection.images)
+                            reviewViewModel.writePhotoReview(
+                                productID: product.productId,
+                                parameters: parameters,
+                                images: imageSelection.images
+                            )
                         }
                     }
                 }

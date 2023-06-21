@@ -9,16 +9,21 @@ import Foundation
 import Alamofire
 import UIKit
 
+enum FolderType: String {
+    case review = "review"
+    case profile = "profile"
+}
+
 struct ImageAPI: API {
     let images: [UIImage]
-    let folder: String
+    let folder: FolderType
     
     var method: HTTPMethod {
         return .post
     }
     
     var path: String {
-        return "/images/\(folder)"
+        return "/images/\(folder.rawValue)"
     }
     
     var parameters: [String: Any]? {
