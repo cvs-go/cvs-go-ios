@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct DetailItemReviewsView: View {
+    let reviewDatas: ReviewDatas?
+    
     var body: some View {
         VStack {
             HStack {
-                Text("리뷰 145개")
+                Text("리뷰 \(String(reviewDatas?.totalElements ?? 0))개")
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
                 Spacer()
@@ -37,24 +39,50 @@ struct DetailItemReviewsView: View {
                 .cornerRadius(10)
             }
             .padding(.horizontal, 20)
-            ForEach(0..<10) { _ in
-                VStack {
-//                    ReviewUserInfo(reviewType: .normal)
-//                    ReviewTextCell()
-                }
-                .padding(.horizontal, 20)
-                Color.grayscale30.opacity(0.5).frame(height: 1)
-                    .padding(.bottom, 16)
-            }
-//            .padding(.top, 10)
             
+            if let reviewDatas = reviewDatas,
+               let content = reviewDatas.content {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(content, id: \.self) { review in
+                        Group {
+                            ReviewUserInfo(
+                                reviewType: .normal,
+                                profileUrl: review.reviewerProfileImageUrl,
+                                nickname: review.reviewerNickname,
+                                tags: review.reviewerTags
+                            )
+                            .padding(.bottom, 10)
+                            HStack(spacing: 0) {
+                                Spacer().frame(width: 12)
+                                ReviewContents(
+                                    rating: review.reviewRating,
+                                    imageUrls: review.reviewImages,
+                                    content: review.reviewContent,
+                                    likeCount: review.reviewLikeCount
+                                )
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        Color.grayscale30.opacity(0.5).frame(height: 1)
+                            .padding(.vertical, 16)
+                    }
+                }
+            }
+            
+//            ForEach(0..<10) { _ in
+//                VStack {
+//                    ReviewUserInfo(
+//                        reviewType: .normal,
+//                        profileUrl: reviewDatas.p
+//                    )
+//
+//                }
+//                .padding(.horizontal, 20)
+//                Color.grayscale30.opacity(0.5).frame(height: 1)
+//                    .padding(.bottom, 16)
+//            }
         }
         
-    }
-}
-
-struct DetailItemReviewsView_Previews: PreviewProvider {
-    static var previews: some View {
-        DetailItemReviewsView()
     }
 }

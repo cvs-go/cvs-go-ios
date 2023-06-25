@@ -29,13 +29,13 @@ struct DetailItemView: View {
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)
-                    DetailItemReviewsView()
+                    DetailItemReviewsView(reviewDatas: searchViewModel.reviewDatas)
                     Rectangle()
                         .frame(height: 30)
                         .foregroundColor(Color.white)
                 }
             }
-                VStack{
+                VStack {
                     Spacer()
                     Button(action: {
                     
@@ -49,6 +49,7 @@ struct DetailItemView: View {
                         }
                         .frame(height: 50)
                         .padding(.horizontal, 20)
+                        .background(Color.white)
                     }
                 }
         }

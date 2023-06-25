@@ -100,9 +100,8 @@ struct SearchResultView: View {
         }
         .onChange(of: selectedProduct) { product in	
             if let product = product {
-                searchViewModel.requestProductDetail(productID: product.productId) {
-                    searchViewModel.showProductDetail = true
-                }
+                searchViewModel.requestProductDetail(productID: product.productId)
+                searchViewModel.requestReview(productID: product.productId)
             }
         }
         .onChange(of: minPrice) { minPrice in

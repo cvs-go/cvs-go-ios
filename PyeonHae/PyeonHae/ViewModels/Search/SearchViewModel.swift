@@ -15,6 +15,7 @@ class SearchViewModel: ObservableObject {
     @Published var filtersData: FiltersDataModel?
     @Published var searchResults: ProductModel?
     @Published var productDetail: ProductDetail?
+    @Published var reviewDatas: ReviewDatas?
 
     // 검색 api parameters
     @Published var keyword: String = String()
@@ -74,7 +75,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 상세 조회
-    func requestProductDetail(productID: Int, completion: @escaping () -> Void) {
+    func requestProductDetail(productID: Int) {
         apiManager.request(for: ProductsAPI.product(id: productID))
             .sink { (result: Result<ProductDetail, Error>) in
                 switch result {
@@ -153,5 +154,21 @@ class SearchViewModel: ObservableObject {
         } else {
             requestProductUnBookmark(productID: productID)
         }
+    }
+    
+    func requestReview(productID: Int) {
+        let parameters: [String : Any] = [
+            :
+        ]
+        
+        apiManager.request(for: ReviewAPI.productReview(id: productID, parameters: parameters))
+            .sink { (result: Result<ProductReviewsModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.reviewDatas = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }
