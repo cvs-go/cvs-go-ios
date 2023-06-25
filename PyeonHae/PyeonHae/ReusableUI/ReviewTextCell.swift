@@ -6,27 +6,41 @@
 //
 
 import SwiftUI
+import Kingfisher
 
-struct ReviewTextCell: View {
+struct ReviewContents: View {
+    let rating: Int
+    let imageUrls: [String]?
+    let content: String
+    let likeCount: Int
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("타이틀 제목이 들어갑니다.")
-                .lineLimit(1)
-                .font(.pretendard(.semiBold, 16))
-                .foregroundColor(.grayscale100)
             HStack(spacing: 0) {
-                ForEach(0..<5) { cell in
-                    Image(name: .yellowStar)
+                ForEach(0..<5) { index in
+                    Image(name: rating >= index ? .yellowStar : .emptyStar)
                 }
             }
-            Text("후기 본문이 들어갑니다. 미리보기에서는 두줄이 들어가야할 것 같네요. 내용이 넘어간다면 이렇게 됩니다.후기 본문이 들어갑니다. 미리보기에서는 두줄이 들어가야할 것 같네요. 내용이 넘어간다면 이렇게 됩니다")
+            if let imageUrls = imageUrls {
+                HStack(spacing: 6) {
+                    ForEach(imageUrls, id: \.self) { imageUrl in
+                        if let url = URL(string: imageUrl) {
+                            KFImage(url)
+                                .resizable()
+                                .frame(width: 120, height: 120)
+                                .cornerRadius(10)
+                        }
+                    }
+                }
+            }
+            Text(content)
                 .lineLimit(2)
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)
                 .padding(.vertical, 3)
             HStack(spacing: 2) {
                 Image(name: .like)
-                Text("14245")
+                Text(String(likeCount))
                     .font(.pretendard(.semiBold, 12))
                     .foregroundColor(.grayscale85)
             }
@@ -36,11 +50,5 @@ struct ReviewTextCell: View {
                     .stroke(Color.grayscale30)
             )
         }
-    }
-}
-
-struct ReviewTextCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewTextCell()
     }
 }

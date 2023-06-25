@@ -6,25 +6,33 @@
 //
 
 import SwiftUI
+import Kingfisher
 
-struct ReviewCell: View {
+struct ReviewProduct: View {
+    let imageUrl: String?
+    let manufacturer: String
+    let name: String
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            ReviewTextCell()
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 10)
                 HStack {
                     Spacer().frame(width: 6)
-                    Image(name: .sampleImage)
-                        .resizable()
-                        .frame(width: 52, height: 52)
+                    if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
+                        KFImage(url)
+                            .resizable()
+                            .frame(width: 52, height: 52)
+                    }
+                    
                     VStack(alignment: .leading) {
-                        Text("코카콜라")
+                        Text(manufacturer)
                             .font(.pretendard(.regular, 14))
                             .foregroundColor(.grayscale70)
-                        Text("상품이름 한줄에서 끝내자")
+                        Text(name)
                             .font(.pretendard(.semiBold, 14))
                             .foregroundColor(.grayscale85)
+                            .lineLimit(1)
                     }
                     Spacer()
                     Image(name: .bookMark)
@@ -34,14 +42,6 @@ struct ReviewCell: View {
             .frame(height: 64)
             .foregroundColor(.white)
         }
-        .padding(.horizontal, 12)
-        .padding(.top, 10)
         .foregroundColor(Color.grayscale10)
-    }
-}
-
-struct ReviewCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewCell()
     }
 }

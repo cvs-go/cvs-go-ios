@@ -76,7 +76,7 @@ struct ReviewHome: View {
 //                )
                 HStack {
                     Spacer().frame(width: 20)
-                    Text("새로운 리뷰 14개")
+                    Text("새로운 리뷰 \(reviewViewModel.latestReviewCount)개")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale85)
                     Spacer()
@@ -85,10 +85,28 @@ struct ReviewHome: View {
                 }
                 .frame(height: 40)
             }
-            ForEach(0..<10) { _ in
-                VStack {
-                    ReviewUserInfo(reviewType: .normal)
-                    ReviewCell()
+            ForEach(reviewViewModel.reviewList, id: \.self) { review in
+                VStack(alignment: .leading, spacing: 10) {
+                    ReviewUserInfo(
+                        reviewType: .normal,
+                        profileUrl: review.reviewerProfileImageUrl,
+                        nickname: review.reviewerNickname,
+                        tags: review.reviewerTags
+                    )
+                    HStack(spacing: 0) {
+                        Spacer().frame(width: 12)
+                        ReviewContents(
+                            rating: review.reviewRating,
+                            imageUrls: review.reviewImageUrls,
+                            content: review.reviewContent,
+                            likeCount: review.reviewLikeCount
+                        )
+                    }
+                    ReviewProduct(
+                        imageUrl: review.productImageUrl,
+                        manufacturer: review.productManufacturer,
+                        name: review.productName
+                    )
                 }
                 .padding(.horizontal, 19)
                 Color.grayscale30.opacity(0.5).frame(height: 1)

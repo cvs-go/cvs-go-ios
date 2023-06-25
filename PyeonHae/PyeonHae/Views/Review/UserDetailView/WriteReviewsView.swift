@@ -25,8 +25,8 @@ struct WriteReviewsView: View {
             }
             VStack {
                 ForEach(0..<10){ cell in
-                    ReviewCell()
-                        .padding(.bottom, 16)
+//                    ReviewCell()
+//                        .padding(.bottom, 16)
                 }
             }
         }

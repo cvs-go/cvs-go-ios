@@ -10,8 +10,8 @@ import SwiftUI
 struct ReviewView: View {
     var body: some View {
         VStack(alignment: .leading) {
-            ReviewUserInfo(reviewType: .popular)
-            ReviewCell()
+//            ReviewUserInfo(reviewType: .popular)
+//            ReviewCell()
         }
         .frame(width: 300)
     }

@@ -94,7 +94,7 @@ struct MyInfoView: View {
                 .padding(.horizontal,20)
                 ForEach(0..<10) { _ in
                     VStack {
-                        ReviewCell()
+//                        ReviewCell()
                     }
                     Color.grayscale30.opacity(0.5).frame(height: 1)
                         .padding(.bottom, 16)

@@ -39,8 +39,8 @@ struct DetailItemReviewsView: View {
             .padding(.horizontal, 20)
             ForEach(0..<10) { _ in
                 VStack {
-                    ReviewUserInfo(reviewType: .normal)
-                    ReviewTextCell()
+//                    ReviewUserInfo(reviewType: .normal)
+//                    ReviewTextCell()
                 }
                 .padding(.horizontal, 20)
                 Color.grayscale30.opacity(0.5).frame(height: 1)

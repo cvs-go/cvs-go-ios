@@ -6,23 +6,35 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ReviewUserInfo: View {
     let reviewType: ReviewType
+    let profileUrl: String?
+    let nickname: String
+    let tags: [String]
     
     var body: some View {
         HStack(alignment: .center) {
             // 사용자 프로필 이미지
-            Circle()
-                .fill(Color.grayscale30)
-                .frame(width: 36, height: 36)
+            if let profileUrl = profileUrl, let url = URL(string: profileUrl) {
+                KFImage(url)
+                    .resizable()
+                    .frame(width: 36, height: 36)
+                    .cornerRadius(100)
+            } else {
+                Image(name: .defalutUserImage)
+                    .resizable()    
+                    .frame(width: 36, height: 36)
+                    .cornerRadius(100)
+            }
             VStack(alignment: .leading) {
-                Text("작성자 닉네임")
+                Text(nickname)
                     .font(.pretendard(.semiBold, 14))
                     .foregroundColor(.grayscale100)
                 HStack {
-                    ForEach(0..<3){ cell in
-                        Text("#매른이")
+                    ForEach(tags, id: \.self){ tag in
+                        Text("#\(tag)")
                             .font(.pretendard(.medium, 12))
                             .foregroundColor(.iris100)
                     }
@@ -44,12 +56,6 @@ struct ReviewUserInfo: View {
         .padding(.leading, 12)
         .background(Color.grayscale10)
         .cornerRadius(10)
-    }
-}
-
-struct ReviewUserInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviewUserInfo(reviewType: .normal)
     }
 }
 
