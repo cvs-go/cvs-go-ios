@@ -99,7 +99,14 @@ struct ReviewHome: View {
                             rating: review.reviewRating,
                             imageUrls: review.reviewImageUrls,
                             content: review.reviewContent,
-                            likeCount: review.reviewLikeCount
+                            isReviewLiked: review.isReviewLiked,
+                            likeCount: review.reviewLikeCount,
+                            likeAction: {
+                                reviewViewModel.requestLikeReview(id: review.reviewId)
+                            },
+                            unlikeAction: {
+                                reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                            }
                         )
                     }
                     ReviewProduct(

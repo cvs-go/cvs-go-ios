@@ -17,9 +17,9 @@ struct DetailItemReviewsView: View {
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
                 Spacer()
-                    Image(name: .redStar)
-                        .resizable()
-                        .frame(width: 16, height: 16)
+                Image(name: .redStar)
+                    .resizable()
+                    .frame(width: 16, height: 16)
                 Text("4.5")
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
@@ -58,7 +58,14 @@ struct DetailItemReviewsView: View {
                                     rating: review.reviewRating,
                                     imageUrls: review.reviewImages,
                                     content: review.reviewContent,
-                                    likeCount: review.reviewLikeCount
+                                    isReviewLiked: review.isReviewLiked,
+                                    likeCount: review.reviewLikeCount,
+                                    likeAction: {
+                                        // TODO
+                                    },
+                                    unlikeAction: {
+                                        // TODO
+                                    }
                                 )
                             }
                         }
@@ -69,20 +76,6 @@ struct DetailItemReviewsView: View {
                     }
                 }
             }
-            
-//            ForEach(0..<10) { _ in
-//                VStack {
-//                    ReviewUserInfo(
-//                        reviewType: .normal,
-//                        profileUrl: reviewDatas.p
-//                    )
-//
-//                }
-//                .padding(.horizontal, 20)
-//                Color.grayscale30.opacity(0.5).frame(height: 1)
-//                    .padding(.bottom, 16)
-//            }
         }
-        
     }
 }

@@ -12,7 +12,34 @@ struct ReviewContents: View {
     let rating: Int
     let imageUrls: [String]?
     let content: String
+    let isReviewLiked: Bool
     let likeCount: Int
+    let likeAction: () -> Void
+    let unlikeAction: () -> Void
+    
+    @State private var isReviewLikedValue: Bool
+    @State private var likeCountValue: Int
+    
+    init(
+        rating: Int,
+        imageUrls: [String]?,
+        content: String,
+        isReviewLiked: Bool,
+        likeCount: Int,
+        likeAction: @escaping () -> Void,
+        unlikeAction: @escaping () -> Void
+    ) {
+        self.rating = rating
+        self.imageUrls = imageUrls
+        self.content = content
+        self.isReviewLiked = isReviewLiked
+        self.likeCount = likeCount
+        self.likeAction = likeAction
+        self.unlikeAction = unlikeAction
+        
+        _isReviewLikedValue = State(initialValue: isReviewLiked)
+        _likeCountValue = State(initialValue: likeCount)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -39,10 +66,20 @@ struct ReviewContents: View {
                 .foregroundColor(.grayscale85)
                 .padding(.vertical, 3)
             HStack(spacing: 2) {
-                Image(name: .like)
-                Text(String(likeCount))
+                Image(name: isReviewLikedValue ? .fillLike : .like)
+                Text(String(likeCountValue))
                     .font(.pretendard(.semiBold, 12))
                     .foregroundColor(.grayscale85)
+            }
+            .onTapGesture {
+                isReviewLikedValue.toggle()
+                if isReviewLikedValue {
+                    likeAction()
+                    likeCountValue += 1
+                } else {
+                    unlikeAction()
+                    likeCountValue -= 1
+                }
             }
             .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
             .overlay(

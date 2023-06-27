@@ -106,4 +106,30 @@ class ReviewViewModel: ObservableObject {
         }
         .store(in: &bag)
     }
+    
+    func requestLikeReview(id: Int) {
+        apiManager.request(for: ReviewAPI.like(id: id))
+        .sink { (result: Result<EmptyResponse, Error>) in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        .store(in: &bag)
+    }
+    
+    func requestUnlikeReview(id: Int) {
+        apiManager.request(for: ReviewAPI.unlike(id: id))
+        .sink { (result: Result<EmptyResponse, Error>) in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        .store(in: &bag)
+    }
 }
