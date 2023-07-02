@@ -52,6 +52,7 @@ class ReviewViewModel: ObservableObject {
             case .success:
                 self.showWriteView = false
                 self.showToastMessage = true
+                self.requestReviewList()
             case .failure:
                 self.showAlertMessage = true
             }
@@ -69,7 +70,7 @@ class ReviewViewModel: ObservableObject {
                 switch response {
                 case .success(let success):
                     var updatedParameters = parameters
-                    updatedParameters["images"] = success.data
+                    updatedParameters["imageUrls"] = success.data
                     
                     let writeReviewAPI = ReviewAPI.writeReview(id: productID, parameters: updatedParameters)
                     return self.apiManager.request(for: writeReviewAPI)
@@ -82,6 +83,7 @@ class ReviewViewModel: ObservableObject {
                 case .success:
                     self.showWriteView = false
                     self.showToastMessage = true
+                    self.requestReviewList()
                 case .failure:
                     self.showAlertMessage = true
                 }
@@ -92,7 +94,7 @@ class ReviewViewModel: ObservableObject {
     
     func requestReviewList() {
         apiManager.request(for: ReviewAPI.reviewList(
-            parameters: ["sortBy" : "LIKE"]
+            parameters: ["sortBy" : "LATEST"]
         ))
         .sink { (result: Result<ReviewListModel, Error>) in
             switch result {
