@@ -44,18 +44,22 @@ struct ReviewContents: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 0) {
+                Spacer().frame(width: 24)
                 ForEach(0..<5) { index in
                     Image(name: rating >= index ? .yellowStar : .emptyStar)
                 }
             }
             if let imageUrls = imageUrls {
-                HStack(spacing: 6) {
-                    ForEach(imageUrls, id: \.self) { imageUrl in
-                        if let url = URL(string: imageUrl) {
-                            KFImage(url)
-                                .resizable()
-                                .frame(width: 120, height: 120)
-                                .cornerRadius(10)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        Spacer().frame(width: 24)
+                        ForEach(imageUrls, id: \.self) { imageUrl in
+                            if let url = URL(string: imageUrl) {
+                                KFImage(url)
+                                    .resizable()
+                                    .frame(width: 120, height: 120)
+                                    .cornerRadius(10)
+                            }
                         }
                     }
                 }
@@ -65,27 +69,31 @@ struct ReviewContents: View {
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)
                 .padding(.vertical, 3)
-            HStack(spacing: 2) {
-                Image(name: isReviewLikedValue ? .fillLike : .like)
-                Text(String(likeCountValue))
-                    .font(.pretendard(.semiBold, 12))
-                    .foregroundColor(.grayscale85)
-            }
-            .onTapGesture {
-                isReviewLikedValue.toggle()
-                if isReviewLikedValue {
-                    likeAction()
-                    likeCountValue += 1
-                } else {
-                    unlikeAction()
-                    likeCountValue -= 1
+                .padding(.horizontal, 24)
+            HStack {
+                Spacer().frame(width: 24)
+                HStack(spacing: 2) {
+                    Image(name: isReviewLikedValue ? .fillLike : .like)
+                    Text(String(likeCountValue))
+                        .font(.pretendard(.semiBold, 12))
+                        .foregroundColor(.grayscale85)
                 }
+                .onTapGesture {
+                    isReviewLikedValue.toggle()
+                    if isReviewLikedValue {
+                        likeAction()
+                        likeCountValue += 1
+                    } else {
+                        unlikeAction()
+                        likeCountValue -= 1
+                    }
+                }
+                .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.grayscale30)
+                )
             }
-            .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.grayscale30)
-            )
         }
     }
 }

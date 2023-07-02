@@ -18,7 +18,7 @@ struct ReviewProduct: View {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 10)
                 HStack {
-                    Spacer().frame(width: 6)
+                    Spacer().frame(width: 24)
                     if let imageUrl = imageUrl, let url = URL(string: imageUrl) {
                         KFImage(url)
                             .resizable()
@@ -36,7 +36,7 @@ struct ReviewProduct: View {
                     }
                     Spacer()
                     Image(name: .bookMark)
-                    Spacer().frame(width: 13)
+                    Spacer().frame(width: 24)
                 }
             }
             .frame(height: 64)

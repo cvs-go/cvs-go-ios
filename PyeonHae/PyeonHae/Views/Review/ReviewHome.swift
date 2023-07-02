@@ -94,7 +94,6 @@ struct ReviewHome: View {
                         tags: review.reviewerTags
                     )
                     HStack(spacing: 0) {
-                        Spacer().frame(width: 12)
                         ReviewContents(
                             rating: review.reviewRating,
                             imageUrls: review.reviewImageUrls,
@@ -115,7 +114,6 @@ struct ReviewHome: View {
                         name: review.productName
                     )
                 }
-                .padding(.horizontal, 19)
                 Color.grayscale30.opacity(0.5).frame(height: 1)
                     .padding(.bottom, 16)
             }

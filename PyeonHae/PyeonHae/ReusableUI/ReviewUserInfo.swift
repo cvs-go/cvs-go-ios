@@ -16,6 +16,7 @@ struct ReviewUserInfo: View {
     
     var body: some View {
         HStack(alignment: .center) {
+            Spacer().frame(width: 12)
             // 사용자 프로필 이미지
             if let profileUrl = profileUrl, let url = URL(string: profileUrl) {
                 KFImage(url)
@@ -53,9 +54,9 @@ struct ReviewUserInfo: View {
         }
         .frame(height: 55)
         .foregroundColor(Color.grayscale10)
-        .padding(.leading, 12)
         .background(Color.grayscale10)
         .cornerRadius(10)
+        .padding(.horizontal, 19)
     }
 }
 
