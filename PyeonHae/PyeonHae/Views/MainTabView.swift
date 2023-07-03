@@ -33,7 +33,7 @@ struct MainTabView: View {
         case .search:
             SearchHomeView()
         case .myPage:
-            Text("내정보")
+            UserPageView()
         }
     }
 }
