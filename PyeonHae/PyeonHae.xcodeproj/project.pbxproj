@@ -114,6 +114,8 @@
 		D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */; };
 		D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */; };
 		D57E79502A1A25D800F35DFC /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E794F2A1A25D800F35DFC /* KeyboardResponder.swift */; };
+		D57E78B22A16519F00F35DFC /* UserSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78B12A16519F00F35DFC /* UserSettingView.swift */; };
+		D57E78B42A1655C700F35DFC /* CustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78B32A1655C700F35DFC /* CustomToggle.swift */; };
 		D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCAE29938B8C00F25941 /* UserPageView.swift */; };
 		D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB02993966A00F25941 /* UserInfoView.swift */; };
 		D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */; };
@@ -225,6 +227,8 @@
 		D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoEditImagePicker.swift; sourceTree = "<group>"; };
 		D57E78AF29FFE19900F35DFC /* PriceScrollButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceScrollButton.swift; sourceTree = "<group>"; };
 		D57E794F2A1A25D800F35DFC /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		D57E78B12A16519F00F35DFC /* UserSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingView.swift; sourceTree = "<group>"; };
+		D57E78B32A1655C700F35DFC /* CustomToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomToggle.swift; sourceTree = "<group>"; };
 		D5D1BCAE29938B8C00F25941 /* UserPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageView.swift; sourceTree = "<group>"; };
 		D5D1BCB02993966A00F25941 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		D5D1BCB22993982E00F25941 /* WriteReviewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewsView.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				54AA0E062A19F3260031190D /* LoadingView.swift */,
 				D53658BE2A236A3400B484F9 /* reviewStarButton.swift */,
 				D53658CC2A2C7A5C00B484F9 /* SortSelectView.swift */,
+				D57E78B32A1655C700F35DFC /* CustomToggle.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -627,6 +632,7 @@
 				D57E78A929F539C500F35DFC /* MyInfo.swift */,
 				D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */,
 				D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */,
+				D57E78B12A16519F00F35DFC /* UserSettingView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -802,6 +808,7 @@
 				549CBA882A2F20820074AFA5 /* EmptyResponse.swift in Sources */,
 				543CEAC529CF4AB700CDB0C8 /* FiltersModel.swift in Sources */,
 				54F0C23729F9783900CBF83C /* ProductUnLikeModel.swift in Sources */,
+				D57E78B42A1655C700F35DFC /* CustomToggle.swift in Sources */,
 				54F981AB297BF4D700D7E450 /* ReviewCell.swift in Sources */,
 				D509BE92298259CF00C4492C /* PopularReview.swift in Sources */,
 				5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */,
@@ -825,6 +832,7 @@
 				5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */,
 				54D0101F295F412600FACB90 /* StringExtension.swift in Sources */,
 				54070B6129B0EF5E00D87F51 /* SignUpModel.swift in Sources */,
+				D57E78B22A16519F00F35DFC /* UserSettingView.swift in Sources */,
 				5420D1BD29F02AD000A78000 /* SearchStartView.swift in Sources */,
 				54422CF22A3489D8007120FC /* ErrorResponse.swift in Sources */,
 				54D0101B295F3E5800FACB90 /* Constants.swift in Sources */,
