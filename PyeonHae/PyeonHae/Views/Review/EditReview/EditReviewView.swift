@@ -27,6 +27,8 @@ struct EditReviewView: View {
     
     @FocusState private var contentIsFocused: Bool
     
+    let fixedProduct: Product?
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -99,6 +101,11 @@ struct EditReviewView: View {
                 showSearchProductView: $showSearchProductView,
                 selectedProduct: $selectedProduct
             )
+        }
+        .onAppear {
+            if let fixedProduct = fixedProduct {
+                self.selectedProduct = fixedProduct
+            }
         }
     }
     

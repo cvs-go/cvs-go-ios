@@ -35,7 +35,10 @@ struct ReviewHome: View {
             )
         }
         .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
-            EditReviewView(reviewViewModel: reviewViewModel)
+            EditReviewView(
+                reviewViewModel: reviewViewModel,
+                fixedProduct: nil
+            )
         }
         .toast(
             message: "리뷰 작성에 성공했습니다!",

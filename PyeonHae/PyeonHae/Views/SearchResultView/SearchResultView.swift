@@ -81,7 +81,10 @@ struct SearchResultView: View {
                     Spacer()
                 }
             }
-            NavigationLink(destination: DetailItemView(searchViewModel: searchViewModel).navigationBarHidden(true), isActive: $searchViewModel.showProductDetail) {
+            NavigationLink(destination: DetailItemView(
+                searchViewModel: searchViewModel,
+                selectedProduct: selectedProduct
+            ).navigationBarHidden(true), isActive: $searchViewModel.showProductDetail) {
                 EmptyView()
             }
         }

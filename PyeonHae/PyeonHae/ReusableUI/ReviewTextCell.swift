@@ -20,6 +20,9 @@ struct ReviewContents: View {
     @State private var isReviewLikedValue: Bool
     @State private var likeCountValue: Int
     
+    @State private var showImageDetail = false
+    @State private var detailImageUrl = String()
+    
     init(
         rating: Int,
         imageUrls: [String]?,
@@ -59,6 +62,10 @@ struct ReviewContents: View {
                                     .resizable()
                                     .frame(width: 120, height: 120)
                                     .cornerRadius(10)
+                                    .onTapGesture {
+                                        self.detailImageUrl = imageUrl
+                                        self.showImageDetail = true
+                                    }
                             }
                         }
                     }
@@ -94,6 +101,14 @@ struct ReviewContents: View {
                         .stroke(Color.grayscale30)
                 )
             }
+        }
+        .fullScreenCover(isPresented: $showImageDetail) {
+            ImageDetailView(
+                imageUrl: self.$detailImageUrl,
+                dismissAction: {
+                    self.showImageDetail = false
+                }
+            )
         }
     }
 }

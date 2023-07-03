@@ -67,7 +67,7 @@ extension Image {
         case dairyProductImage = "dairyProductImage"
         case beverageImage = "beverageImage"
         case etcImage = "etcImage"
-        
+        case emptyReviewImage = "emptyReviewImage"
     }
     
     init(name imageName: ImageName) {
