@@ -52,11 +52,17 @@ struct SearchResultView: View {
                                 }
                             }
                         }
+                        .simultaneousGesture(DragGesture().onChanged { _ in
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                self.showFilter = false
+                            }
+                        })
                     }
                 }
                 VStack(spacing: 0) {
-                    if let filtersData = searchViewModel.filtersData {
-                        FilterView(
+                    Spacer().frame(height: 10)
+                    if let filtersData = UserShared.filterData {
+                        SearchFilterView(
                             filterDatas: filtersData,
                             showFilter: $showFilter,
                             convenienceStoreIds: $searchViewModel.convenienceStoreIds,
@@ -108,7 +114,7 @@ struct SearchResultView: View {
             }
         }
         .onChange(of: minPrice) { minPrice in
-            searchViewModel.lowestPrice = Int(minPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
+            searchViewModel.lowestPrice = Int(minPrice * CGFloat(UserShared.filterData?.highestPrice ?? 0))
             priceChangeDebounceTimer?.cancel()
             priceChangeDebounceTimer = Future { promise in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -120,7 +126,7 @@ struct SearchResultView: View {
             }
         }
         .onChange(of: maxPrice) { maxPrice in
-            searchViewModel.highestPrice = Int(maxPrice * CGFloat(searchViewModel.filtersData?.highestPrice ?? 15000))
+            searchViewModel.highestPrice = Int(maxPrice * CGFloat(UserShared.filterData?.highestPrice ?? 0))
             priceChangeDebounceTimer?.cancel()
             priceChangeDebounceTimer = Future { promise in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

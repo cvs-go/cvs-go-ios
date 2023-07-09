@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SplashView: View {
+    @ObservedObject var splashViewModel = SplashViewModel()
+    
     var body: some View {
         ZStack(alignment: .center) {
             Image(name: .backgroundImage)

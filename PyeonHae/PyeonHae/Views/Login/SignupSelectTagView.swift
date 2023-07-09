@@ -53,9 +53,6 @@ struct SignupSelectTagView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 20)
-        .onAppear {
-            loginViewModel.getTags()
-        }
     }
     
     private func handleTagSelection(_ tag: TagModel) {

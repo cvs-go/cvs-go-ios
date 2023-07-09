@@ -152,19 +152,6 @@ class LoginViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    // 태그 api
-    func getTags() {
-        apiManager.request(for: LoginAPI.getTags)
-            .sink { (result: Result<TagsModel, Error>) in
-                switch result {
-                case .success(let data):
-                    self.tags = data.data
-                case .failure(let error):
-                    print(error)
-                }
-            }.store(in: &bag)
-    }
-    
     // 회원가입 api
     func requestSignUp() {
         let parameters: [String : Any] = [

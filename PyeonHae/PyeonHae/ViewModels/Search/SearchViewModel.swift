@@ -12,7 +12,6 @@ class SearchViewModel: ObservableObject {
     private let apiManager = APIManager()
     
     // api 통신으로 받아온 데이터
-    @Published var filtersData: FiltersDataModel?
     @Published var searchResults: ProductModel?
     @Published var productDetail: ProductDetail?
     @Published var reviewDatas: ReviewDatas?
@@ -23,7 +22,7 @@ class SearchViewModel: ObservableObject {
     @Published var categoryIds: [Int] = []
     @Published var eventTypes: [String] = []
     @Published var lowestPrice: Int = 0
-    @Published var highestPrice: Int = 0
+    @Published var highestPrice: Int = UserShared.filterData?.highestPrice ?? 0
     
     // detail 화면으로 이동
     @Published var showProductDetail = false
@@ -31,25 +30,6 @@ class SearchViewModel: ObservableObject {
     @Published var isLoading = false
     
     var bag = Set<AnyCancellable>()
-    
-    init() {
-        requestFilterDatas()
-    }
-    
-    // 상품 필터 조회
-    private func requestFilterDatas() {
-        apiManager.request(for: ProductsAPI.filter)
-            .sink { (result: Result<FiltersModel, Error>) in
-                switch result {
-                case .success(let data):
-                    self.filtersData = data.data
-                    self.highestPrice = data.data.highestPrice
-                case .failure(let error):
-                    print(error)
-                }
-            }
-            .store(in: &bag)
-    }
     
     // 상품 목록 조회
     func searchProducts() {
