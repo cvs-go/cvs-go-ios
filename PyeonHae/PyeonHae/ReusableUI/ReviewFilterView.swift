@@ -1,42 +1,35 @@
 //
-//  FilterView.swift
+//  ReviewFilterView.swift
 //  PyeonHae
 //
-//  Created by 정건호 on 2023/02/12.
+//  Created by 정건호 on 2023/07/08.
 //
 
 import SwiftUI
 import WrappingHStack
 
-struct FilterView: View {
-    let filterDatas: FiltersDataModel
+struct ReviewFilterView: View {
     @State private var selectedElements: [String] = []
     @Binding private var showFilter: Bool
-    @Binding private var convenienceStoreIds: [Int]
-    @Binding private var categoryIds: [Int]
-    @Binding private var eventTypes: [String]
     @Binding private var filterClicked: Bool
-    @Binding private var minPrice: CGFloat
-    @Binding private var maxPrice: CGFloat
+    @Binding private var categoryIds: [Int]
+    @Binding private var tagIds: [Int]
+    @Binding private var ratings: [String]
+    
+    private let reviewRating = ["전체", "4.0", "3.0", "2.0", "1.0",]
     
     init(
-        filterDatas: FiltersDataModel,
         showFilter: Binding<Bool>,
-        convenienceStoreIds: Binding<[Int]>,
-        categoryIds: Binding<[Int]>,
-        eventTypes: Binding<[String]>,
         filterClicked: Binding<Bool>,
-        minPrice: Binding<CGFloat>,
-        maxPrice: Binding<CGFloat>
+        categoryIds: Binding<[Int]>,
+        tagIds: Binding<[Int]>,
+        ratings: Binding<[String]>
     ) {
-        self.filterDatas = filterDatas
         self._showFilter = showFilter
-        self._convenienceStoreIds = convenienceStoreIds
-        self._categoryIds = categoryIds
-        self._eventTypes = eventTypes
         self._filterClicked = filterClicked
-        self._minPrice = minPrice
-        self._maxPrice = maxPrice
+        self._categoryIds = categoryIds
+        self._tagIds = tagIds
+        self._ratings = ratings
     }
     
     var body: some View {
@@ -84,34 +77,10 @@ struct FilterView: View {
     private func filterElements() -> some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("편의점")
-                    .font(.pretendard(.bold, 12))
-                    .foregroundColor(.grayscale85)
-                WrappingHStack(filterDatas.convenienceStores, id: \.self, lineSpacing: 6) { element in
-                    SelectableButton(
-                        text: element.name,
-                        isSelected: selectedElements.contains(element.name)
-                    )
-                    .onTapGesture {
-                        if selectedElements.contains(element.name) {
-                            selectedElements.removeAll(where: { $0 == element.name })
-                            convenienceStoreIds.removeAll(where: { $0 == element.id })
-                        } else {
-                            selectedElements.append(element.name)
-                            convenienceStoreIds.append(element.id)
-                        }
-                        filterClicked.toggle()
-                    }
-                }
-            }
-            .padding(.top, 16)
-            .padding(.horizontal, 20)
-            
-            VStack(alignment: .leading) {
                 Text("제품")
                     .font(.pretendard(.bold, 12))
                     .foregroundColor(.grayscale85)
-                WrappingHStack(filterDatas.categories, id: \.self, lineSpacing: 6) { element in
+                WrappingHStack(UserShared.filterData?.categories ?? [], id: \.self, lineSpacing: 6) { element in
                     SelectableButton(
                         text: element.name,
                         isSelected: selectedElements.contains(element.name)
@@ -128,14 +97,14 @@ struct FilterView: View {
                     }
                 }
             }
-            .padding(.top, 20)
+            .padding(.top, 16)
             .padding(.horizontal, 20)
             
             VStack(alignment: .leading) {
-                Text("이벤트")
+                Text("유저")
                     .font(.pretendard(.bold, 12))
                     .foregroundColor(.grayscale85)
-                WrappingHStack(filterDatas.eventTypes, id: \.self, lineSpacing: 6) { element in
+                WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { element in
                     SelectableButton(
                         text: element.name,
                         isSelected: selectedElements.contains(element.name)
@@ -143,10 +112,10 @@ struct FilterView: View {
                     .onTapGesture {
                         if selectedElements.contains(element.name) {
                             selectedElements.removeAll(where: { $0 == element.name })
-                            eventTypes.removeAll(where: { $0 == element.value })
+                            tagIds.removeAll(where: { $0 == element.id })
                         } else {
                             selectedElements.append(element.name)
-                            eventTypes.append(element.value)
+                            tagIds.append(element.id)
                         }
                         filterClicked.toggle()
                     }
@@ -155,21 +124,53 @@ struct FilterView: View {
             .padding(.top, 20)
             .padding(.horizontal, 20)
             
-            PriceScrollButton(minPrice: $minPrice, maxPrice: $maxPrice, highestPrice: filterDatas.highestPrice)
-                .frame(height: 82)
-                .padding(.horizontal, 20)
-                .padding(.top, 20)
+            VStack(alignment: .leading) {
+                Text("평점")
+                    .font(.pretendard(.bold, 12))
+                    .foregroundColor(.grayscale85)
+                WrappingHStack(ReviewRating.allCases, id: \.self, lineSpacing: 6) { element in
+                    SelectableButton(
+                        text: element.rawValue,
+                        isSelected: selectedElements.contains(element.rawValue),
+                        image: .star
+                    )
+                    .onTapGesture {
+                        if selectedElements.contains(element.rawValue) {
+                            selectedElements.removeAll(where: { $0 == element.rawValue })
+                            ratings.removeAll(where: { $0 == element.value() })
+                        } else {
+                            selectedElements.append(element.rawValue)
+                            ratings.append(element.value())
+                        }
+                        filterClicked.toggle()
+                    }
+                }
+            }
+            .padding(.vertical, 20)
+            .padding(.horizontal, 20)
         }
     }
 }
 
-struct FilterData: Hashable {
-    let category: String
-    let elements: [String]
+enum ReviewRating: String, CaseIterable {
+    case five = "전체"
+    case four = "4.0"
+    case three = "3.0"
+    case two = "2.0"
+    case one = "1.0"
     
-    init(category: String, elements: [String]) {
-        self.category = category
-        self.elements = elements
+    func value() -> String {
+        switch self {
+        case .five:
+            return "5"
+        case .four:
+            return "4"
+        case .three:
+            return "3"
+        case .two:
+            return "2"
+        case .one:
+            return "1"
+        }
     }
 }
-

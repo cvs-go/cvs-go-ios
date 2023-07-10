@@ -13,15 +13,8 @@ struct ReviewHome: View {
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
+    @State private var filterClicked = false
     @State var selectedSortOptionIndex = 0
-    
-    // 임시 데이터
-    let filterDatas: [FilterData] = [
-        FilterData(category: "편의점", elements: ["CU", "GS25", "7일레븐", "Emart24", "미니스톱"]),
-        FilterData(category: "제품", elements: ["간편식사", "즉석요리", "과자&빵", "아이스크림", "신선식품", "유제품", "음료", "기타"]),
-        FilterData(category: "유저", elements: ["맵부심", "맵찔이", "초코러버", "비건", "다이어터", "대식가", "소식가", "기타"]),
-        FilterData(category: "이벤트", elements: ["1+1", "2+1", "3+1", "증정"]),
-    ]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -44,6 +37,10 @@ struct ReviewHome: View {
             message: "리뷰 작성에 성공했습니다!",
             isShowing: $reviewViewModel.showToastMessage
         )
+        .onAppear {
+            reviewViewModel.isLoading = true
+            reviewViewModel.requestReviewList()
+        }
     }
     
     @ViewBuilder
@@ -67,58 +64,92 @@ struct ReviewHome: View {
     
     @ViewBuilder
     private func allReviewTab() -> some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                Spacer().frame(height: 10)
-                
-                // TODO: 리뷰 필터 뷰 수정하기
-//                FilterView(
-//                    filterDatas: filterDatas,
-//                    showFilter: $showFilter,
-//                    selectedElements: $selectedElements
-//                )
-                HStack {
-                    Spacer().frame(width: 20)
-                    Text("새로운 리뷰 \(reviewViewModel.latestReviewCount)개")
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale85)
-                    Spacer()
-                    SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
-                    Spacer().frame(width: 20)
-                }
-                .frame(height: 40)
+        VStack(spacing: 0) {
+            Spacer().frame(height: 10)
+            ReviewFilterView(
+                showFilter: $showFilter,
+                filterClicked: $filterClicked,
+                categoryIds: $reviewViewModel.categoryIds,
+                tagIds: $reviewViewModel.tagIds,
+                ratings: $reviewViewModel.ratings
+            )
+            HStack {
+                Spacer().frame(width: 20)
+                Text("새로운 리뷰 \(reviewViewModel.latestReviewCount)개")
+                    .font(.pretendard(.regular, 12))
+                    .foregroundColor(.grayscale85)
+                Spacer()
+                SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
+                Spacer().frame(width: 20)
             }
-            ForEach(reviewViewModel.reviewList, id: \.self) { review in
-                VStack(alignment: .leading, spacing: 10) {
-                    ReviewUserInfo(
-                        reviewType: .normal,
-                        profileUrl: review.reviewerProfileImageUrl,
-                        nickname: review.reviewerNickname,
-                        tags: review.reviewerTags
-                    )
-                    HStack(spacing: 0) {
-                        ReviewContents(
-                            rating: review.reviewRating,
-                            imageUrls: review.reviewImageUrls,
-                            content: review.reviewContent,
-                            isReviewLiked: review.isReviewLiked,
-                            likeCount: review.reviewLikeCount,
-                            likeAction: {
-                                reviewViewModel.requestLikeReview(id: review.reviewId)
-                            },
-                            unlikeAction: {
-                                reviewViewModel.requestUnlikeReview(id: review.reviewId)
+            .frame(height: 40)
+        }
+        GeometryReader { geometry in
+            ScrollView {
+                if reviewViewModel.isLoading {
+                    LoadingView()
+                        .frame(width: geometry.size.width)
+                        .frame(minHeight: geometry.size.height)
+                } else {
+                    if reviewViewModel.reviewList.isEmpty {
+                        VStack {
+                            Spacer().frame(height: 53)
+                            Image(name: .emptyReviewImage)
+                            Spacer().frame(height: 12)
+                            Text("앗! 등록된 리뷰가 없어요")
+                                .font(.pretendard(.semiBold, 16))
+                                .foregroundColor(.grayscale85)
+                            Spacer().frame(height: 53)
+                        }
+                        .frame(width: geometry.size.width)
+                        .frame(minHeight: geometry.size.height)
+                    } else {
+                        ForEach(reviewViewModel.reviewList, id: \.self) { review in
+                            VStack(alignment: .leading, spacing: 10) {
+                                ReviewUserInfo(
+                                    reviewType: .normal,
+                                    profileUrl: review.reviewerProfileImageUrl,
+                                    nickname: review.reviewerNickname,
+                                    tags: review.reviewerTags
+                                )
+                                HStack(spacing: 0) {
+                                    ReviewContents(
+                                        rating: review.reviewRating,
+                                        imageUrls: review.reviewImageUrls,
+                                        content: review.reviewContent,
+                                        isReviewLiked: review.isReviewLiked,
+                                        likeCount: review.reviewLikeCount,
+                                        likeAction: {
+                                            reviewViewModel.requestLikeReview(id: review.reviewId)
+                                        },
+                                        unlikeAction: {
+                                            reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                        }
+                                    )
+                                }
+                                ReviewProduct(
+                                    imageUrl: review.productImageUrl,
+                                    manufacturer: review.productManufacturer,
+                                    name: review.productName
+                                )
                             }
-                        )
+                            Color.grayscale30.opacity(0.5).frame(height: 1)
+                                .padding(.bottom, 16)
+                        }
                     }
-                    ReviewProduct(
-                        imageUrl: review.productImageUrl,
-                        manufacturer: review.productManufacturer,
-                        name: review.productName
-                    )
                 }
-                Color.grayscale30.opacity(0.5).frame(height: 1)
-                    .padding(.bottom, 16)
+            }
+            .simultaneousGesture(DragGesture().onChanged { _ in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self.showFilter = false
+                }
+            })
+            .refreshable {
+                reviewViewModel.requestReviewList()
+            }
+            .onChange(of: filterClicked) { _ in
+                reviewViewModel.isLoading = true
+                reviewViewModel.requestReviewList()
             }
         }
     }

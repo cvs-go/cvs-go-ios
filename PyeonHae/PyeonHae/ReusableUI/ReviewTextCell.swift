@@ -48,7 +48,7 @@ struct ReviewContents: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 0) {
                 Spacer().frame(width: 24)
-                ForEach(0..<5) { index in
+                ForEach(1..<6) { index in
                     Image(name: rating >= index ? .yellowStar : .emptyStar)
                 }
             }

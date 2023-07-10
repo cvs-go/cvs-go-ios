@@ -26,11 +26,14 @@ class ReviewViewModel: ObservableObject {
     @Published var latestReviewCount: Int = 0
     @Published var reviewList: [ReviewDataModel] = []
     
+    @Published var categoryIds: [Int] = []
+    @Published var tagIds: [Int] = []
+    @Published var ratings: [String] = []
+    
     var bag = Set<AnyCancellable>()
     
     init() {
         subscribeErrorMessage()
-        requestReviewList()
     }
     
     private func subscribeErrorMessage() {
@@ -93,9 +96,14 @@ class ReviewViewModel: ObservableObject {
     }
     
     func requestReviewList() {
-        apiManager.request(for: ReviewAPI.reviewList(
-            parameters: ["sortBy" : "LATEST"]
-        ))
+        let parameters: [String : Any] = [
+            "sortBy": "LATEST",
+            "categoryIds": categoryIds.toParameter(),
+            "tagIds": tagIds.toParameter(),
+            "ratings": ratings.toParameter()
+        ]
+        
+        apiManager.request(for: ReviewAPI.reviewList(parameters: parameters))
         .sink { (result: Result<ReviewListModel, Error>) in
             switch result {
             case .success(let result):

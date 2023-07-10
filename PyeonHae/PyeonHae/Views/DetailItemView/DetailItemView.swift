@@ -115,11 +115,18 @@ struct DetailItemView: View {
             
             if let reviewDatas = searchViewModel.reviewDatas,
                let content = reviewDatas.content {
-                
                 if reviewDatas.totalElements == 0 {
                     VStack {
                         Spacer().frame(height: 53)
                         Image(name: .emptyReviewImage)
+                        Spacer().frame(height: 12)
+                        Text("앗! 등록된 리뷰가 없어요")
+                            .font(.pretendard(.semiBold, 16))
+                            .foregroundColor(.grayscale85)
+                        Spacer().frame(height: 2)
+                        Text("첫 번째로 리뷰를 등록해보세요.")
+                            .font(.pretendard(.light, 14))
+                            .foregroundColor(.grayscale70)
                         Spacer().frame(height: 53)
                     }
                 } else {
