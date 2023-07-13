@@ -19,7 +19,24 @@ struct DetailItemView: View {
             VStack(alignment: .leading) {
                 DetailItemViewTopBar
                 ScrollView {
-                    ItemDetailView(productDetail: searchViewModel.productDetail?.data)
+                    if let product = searchViewModel.productDetail {
+                        ItemDetailView(
+                            productDetail: product.data,
+                            isHeartMark: product.data.isLiked,
+                            isBookMark: product.data.isBookmarked,
+                            likeAction: {
+                                searchViewModel.requestProductLike(productID: product.data.productId)
+                            },
+                            unlikeAction: {
+                                searchViewModel.requestProductUnLike(productID: product.data.productId)
+                            },
+                            bookmarkAction: {
+                                searchViewModel.requestProductBookmark(productID: product.data.productId)
+                            },
+                            unBookmarkAction: {
+                                searchViewModel.requestProductUnBookmark(productID: product.data.productId)
+                            }
+                        )
                         .background(
                             GeometryReader { geometry -> Color in
                                 let maxY = geometry.frame(in: .global).midY
@@ -29,6 +46,7 @@ struct DetailItemView: View {
                                 return Color.clear
                             }
                         )
+                    }
                     Rectangle()
                         .frame(height: 14)
                         .foregroundColor(Color.grayscale10)

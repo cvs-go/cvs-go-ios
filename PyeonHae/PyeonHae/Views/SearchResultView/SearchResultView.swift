@@ -44,8 +44,27 @@ struct SearchResultView: View {
                                 ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
                                     VStack {
                                         SearchResultItemView(
+                                            selectedProduct: $selectedProduct,
+                                            isHeartMark: product.isLiked,
+                                            isBookMark: product.isBookmarked,
                                             product: product,
-                                            selectedProduct: $selectedProduct
+                                            productViewType: .search,
+                                            likeAction: {
+                                                searchViewModel.requestProductLike(productID: product.productId)
+                                                selectedProduct?.isLiked = true
+                                            },
+                                            unlikeAction: {
+                                                searchViewModel.requestProductUnLike(productID: product.productId)
+                                                selectedProduct?.isLiked = false
+                                            },
+                                            bookmarkAction: {
+                                                searchViewModel.requestProductBookmark(productID: product.productId)
+                                                selectedProduct?.isBookmarked = true
+                                            },
+                                            unBookmarkAction: {
+                                                searchViewModel.requestProductUnBookmark(productID: product.productId)
+                                                selectedProduct?.isBookmarked = true
+                                            }
                                         )
                                     }
                                     .padding(.vertical, 10)
