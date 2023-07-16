@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "roundedClose.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

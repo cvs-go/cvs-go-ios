@@ -100,5 +100,18 @@ struct ItemDetailView: View {
         }
         .padding(.top, 21)
         .padding(.horizontal, 20)
+        .onAppear {
+            // 최근 찾은 상품 저장
+            if let productId = productDetail?.productId,
+               let productImageurl = productDetail?.productImageUrl {
+                if !UserShared.searchedProducts.map({ $0.productId }).contains(productId) {
+                    UserShared.searchedProducts.append(.init(
+                        timestamp: Date().currentTime(),
+                        productId: productId,
+                        productImageUrl: productImageurl
+                    ))
+                }
+            }
+        }
     }
 }

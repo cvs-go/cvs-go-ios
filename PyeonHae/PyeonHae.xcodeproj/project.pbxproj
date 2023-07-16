@@ -49,6 +49,9 @@
 		5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482CA872A4335560080C7E3 /* ReviewListModel.swift */; };
 		5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */; };
 		548FF9022A59680E00C5875F /* ReviewFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548FF9012A59680E00C5875F /* ReviewFilterView.swift */; };
+		54915CCA2A63DEEB0076E442 /* SearchedProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54915CC92A63DEEB0076E442 /* SearchedProduct.swift */; };
+		54915CCC2A63ECDB0076E442 /* SearchedKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54915CCB2A63ECDB0076E442 /* SearchedKeyword.swift */; };
+		54915CCE2A63F3510076E442 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54915CCD2A63F3510076E442 /* DateExtension.swift */; };
 		5493BE252A0F876B00CC127B /* UINavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */; };
 		5496CBF92A530A2A003DF7E3 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5496CBF82A530A2A003DF7E3 /* ImageDetailView.swift */; };
 		549CBA832A2F1BF20074AFA5 /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549CBA822A2F1BF20074AFA5 /* ReviewViewModel.swift */; };
@@ -167,6 +170,9 @@
 		5482CA872A4335560080C7E3 /* ReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListModel.swift; sourceTree = "<group>"; };
 		5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		548FF9012A59680E00C5875F /* ReviewFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFilterView.swift; sourceTree = "<group>"; };
+		54915CC92A63DEEB0076E442 /* SearchedProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedProduct.swift; sourceTree = "<group>"; };
+		54915CCB2A63ECDB0076E442 /* SearchedKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedKeyword.swift; sourceTree = "<group>"; };
+		54915CCD2A63F3510076E442 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtension.swift; sourceTree = "<group>"; };
 		5496CBF82A530A2A003DF7E3 /* ImageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
 		549CBA822A2F1BF20074AFA5 /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 				54F80D1C2985275F00102772 /* ViewExtension.swift */,
 				5462B77729A0D2E20063C450 /* ArrayExtension.swift */,
 				5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */,
+				54915CCD2A63F3510076E442 /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -539,6 +546,8 @@
 				54F0C23629F9783900CBF83C /* ProductUnLikeModel.swift */,
 				54F0C23829F9785000CBF83C /* ProductBookmarkModel.swift */,
 				54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */,
+				54915CC92A63DEEB0076E442 /* SearchedProduct.swift */,
+				54915CCB2A63ECDB0076E442 /* SearchedKeyword.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -773,6 +782,7 @@
 				543CEAC129CF1DAB00CDB0C8 /* Interceptor.swift in Sources */,
 				D5409FE929950B1B0034B250 /* ReviewPhotoView.swift in Sources */,
 				54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */,
+				54915CCA2A63DEEB0076E442 /* SearchedProduct.swift in Sources */,
 				5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */,
 				D5409FE7299502AC0034B250 /* EditLetterView.swift in Sources */,
 				54F981AD297E4E3500D7E450 /* EventProducts.swift in Sources */,
@@ -816,6 +826,7 @@
 				543DCA8729F03564000CDAF0 /* Products.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
 				D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */,
+				54915CCE2A63F3510076E442 /* DateExtension.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
 				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */,
@@ -843,6 +854,7 @@
 				54AFA1EE29ACF9840058DB39 /* APIManager.swift in Sources */,
 				549CBA832A2F1BF20074AFA5 /* ReviewViewModel.swift in Sources */,
 				D53658BF2A236A3400B484F9 /* reviewStarButton.swift in Sources */,
+				54915CCC2A63ECDB0076E442 /* SearchedKeyword.swift in Sources */,
 				5420D1BA29F02AB200A78000 /* SearchBar.swift in Sources */,
 				D5409FE52994FA9A0034B250 /* SelectProductView.swift in Sources */,
 				5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */,

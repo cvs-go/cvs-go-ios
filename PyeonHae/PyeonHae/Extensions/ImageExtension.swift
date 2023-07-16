@@ -68,6 +68,7 @@ extension Image {
         case beverageImage = "beverageImage"
         case etcImage = "etcImage"
         case emptyReviewImage = "emptyReviewImage"
+        case roundedClose = "roundedClose"
     }
     
     init(name imageName: ImageName) {

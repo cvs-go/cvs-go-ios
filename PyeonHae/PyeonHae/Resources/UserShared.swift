@@ -54,6 +54,14 @@ enum UserShared {
     @UserDefault(key: "refreshToken", defaultValue: String())
     static var refreshToken: String
     
+    // 이전 검색어
+    @StructUserDefault(key: "searchedKeyword", defaultValue: [])
+    static var searchedKeyword: [SearchedKeyword]
+    
+    // 최근 찾은 상품
+    @StructUserDefault(key: "searchedProducts", defaultValue: [])
+    static var searchedProducts: [SearchedProduct]
+    
     @StructUserDefault(key: "tags", defaultValue: [])
     static var tags: [TagModel]
     
