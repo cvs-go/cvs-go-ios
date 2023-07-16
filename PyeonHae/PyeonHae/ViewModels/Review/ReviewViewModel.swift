@@ -142,4 +142,30 @@ class ReviewViewModel: ObservableObject {
         }
         .store(in: &bag)
     }
+    
+    // 상품 북마크 생성
+    func requestProductBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.bookmark(id: productID))
+            .sink { (result: Result<ProductBookmarkModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 북마크 삭제
+    func requestProductUnBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.unbookmark(id: productID))
+            .sink { (result: Result<ProductUnBookmarkModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
 }

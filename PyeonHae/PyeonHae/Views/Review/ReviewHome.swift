@@ -130,7 +130,14 @@ struct ReviewHome: View {
                                 ReviewProduct(
                                     imageUrl: review.productImageUrl,
                                     manufacturer: review.productManufacturer,
-                                    name: review.productName
+                                    name: review.productName,
+                                    isBookmarked: review.isProductBookmarked,
+                                    bookmarkAction: {
+                                        reviewViewModel.requestProductBookmark(productID: review.productId)
+                                    },
+                                    unBookmarkAction:  {
+                                        reviewViewModel.requestProductUnBookmark(productID: review.productId)
+                                    }
                                 )
                             }
                             Color.grayscale30.opacity(0.5).frame(height: 1)
