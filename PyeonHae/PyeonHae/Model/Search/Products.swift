@@ -29,14 +29,6 @@ struct Product: Codable, Hashable {
     let reviewCount: Int
     let reviewRating: String
     let convenienceStoreEvents: [ConvenienceStoreEvents]
-    
-    mutating func updateIsLikedValue(_ isLiked: Bool) {
-        self.isLiked = isLiked
-    }
-    
-    mutating func updateIsBookmarkedValue(_ isBookmarked: Bool) {
-        self.isBookmarked = isBookmarked
-    }
 }
 
 struct ConvenienceStoreEvents: Codable, Hashable {
