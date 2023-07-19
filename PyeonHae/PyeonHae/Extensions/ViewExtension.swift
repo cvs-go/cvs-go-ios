@@ -41,6 +41,22 @@ extension View {
         }
     }
     
+    func showDeleteAlert(
+        title: String = String(),
+        message: String,
+        showAlert: Binding<Bool>,
+        deleteAction: @escaping () -> Void
+    ) -> some View {
+        self.alert(isPresented: showAlert) {
+            Alert(
+                title: Text(title),
+                message: Text(message),
+                primaryButton: .default(Text("취소")),
+                secondaryButton: .destructive(Text("삭제"), action: deleteAction)
+            )
+        }
+    }
+    
     func bottomSheet<Content: View>(
         isPresented: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content) -> some View {

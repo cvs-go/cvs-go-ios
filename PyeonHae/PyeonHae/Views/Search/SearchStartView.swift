@@ -15,6 +15,8 @@ struct SearchStartView: View {
     @State private var showResultView = false
     @State private var searchedProducts: [SearchedProduct] = []
     @State private var searchedKeywords: [SearchedKeyword] = []
+    @State private var showAlert = false
+    @State var deleteAction: (() -> Void)? = nil
     
     var body: some View {
         VStack {
@@ -37,6 +39,13 @@ struct SearchStartView: View {
                                 .font(.pretendard(.regular, 12))
                                 .foregroundColor(.grayscale70)
                                 .underline(true, color: .grayscale70)
+                                .onTapGesture {
+                                    self.showAlert = true
+                                    self.deleteAction = {
+                                        self.searchedProducts.removeAll()
+                                        UserShared.searchedProducts.removeAll()
+                                    }
+                                }
                         }
                         .padding(.horizontal, 20)
                         Spacer().frame(height: 10)
@@ -62,6 +71,13 @@ struct SearchStartView: View {
                                 .font(.pretendard(.regular, 12))
                                 .foregroundColor(.grayscale70)
                                 .underline(true, color: .grayscale70)
+                                .onTapGesture {
+                                    self.showAlert = true
+                                    self.deleteAction = {
+                                        self.searchedKeywords.removeAll()
+                                        UserShared.searchedKeywords.removeAll()
+                                    }
+                                }
                         }
                         .padding(.horizontal, 20)
                         Spacer().frame(height: 10)
@@ -92,8 +108,8 @@ struct SearchStartView: View {
                 searchViewModel.keyword = text
                 searchViewModel.searchProducts()
                 // 이전 검색어 저장
-                if !UserShared.searchedKeyword.map({ $0.keyword }).contains(text) {
-                    UserShared.searchedKeyword.append(.init(
+                if !UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
+                    UserShared.searchedKeywords.append(.init(
                         timestamp: Date().currentTime(),
                         keyword: text
                     ))
@@ -112,8 +128,15 @@ struct SearchStartView: View {
         }
         .onAppear {
             self.searchedProducts = UserShared.searchedProducts.sorted(by: { $0.timestamp > $1.timestamp })
-            self.searchedKeywords = UserShared.searchedKeyword.sorted(by: { $0.timestamp > $1.timestamp })
+            self.searchedKeywords = UserShared.searchedKeywords.sorted(by: { $0.timestamp > $1.timestamp })
         }
+        .showDeleteAlert(
+            message: "삭제하시겠습니까?",
+            showAlert: $showAlert,
+            deleteAction: {
+                deleteAction?()
+            }
+        )
     }
     
     private func deleteSearchedProduct(_ productId: Int) {
@@ -122,7 +145,7 @@ struct SearchStartView: View {
     }
     
     private func deleteSearchedKeyword(_ keyword: String) {
-        UserShared.searchedKeyword.removeAll(where: { $0.keyword == keyword })
+        UserShared.searchedKeywords.removeAll(where: { $0.keyword == keyword })
         searchedKeywords.removeAll(where: { $0.keyword == keyword })
     }
     
