@@ -24,8 +24,8 @@ struct Product: Codable, Hashable {
     let productImageUrl: String?
     let categoryId: Int
     let manufacturerName: String
-    let isLiked: Bool
-    let isBookmarked: Bool
+    var isLiked: Bool
+    var isBookmarked: Bool
     let reviewCount: Int
     let reviewRating: String
     let convenienceStoreEvents: [ConvenienceStoreEvents]
