@@ -69,7 +69,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 좋아요 생성
-    private func requestProductLike(productID: Int) {
+    func requestProductLike(productID: Int) {
         apiManager.request(for: ProductsAPI.like(id: productID))
             .sink { (result: Result<ProductLikeModel, Error>) in
                 switch result {
@@ -82,7 +82,7 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 좋아요 삭제
-    private func requestProductUnLike(productID: Int) {
+    func requestProductUnLike(productID: Int) {
         apiManager.request(for: ProductsAPI.unlike(id: productID))
             .sink { (result: Result<ProductUnLikeModel, Error>) in
                 switch result {
@@ -95,8 +95,8 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 북마크 생성
-    private func requestProductBookmark(productID: Int) {
-        apiManager.request(for: ProductsAPI.product(id: productID))
+    func requestProductBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.bookmark(id: productID))
             .sink { (result: Result<ProductBookmarkModel, Error>) in
                 switch result {
                 case .success(let result):
@@ -108,8 +108,8 @@ class SearchViewModel: ObservableObject {
     }
     
     // 상품 북마크 삭제
-    private func requestProductUnBookmark(productID: Int) {
-        apiManager.request(for: ProductsAPI.product(id: productID))
+    func requestProductUnBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.unbookmark(id: productID))
             .sink { (result: Result<ProductUnBookmarkModel, Error>) in
                 switch result {
                 case .success(let result):

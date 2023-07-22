@@ -9,9 +9,14 @@ import SwiftUI
 import Kingfisher
 
 struct ReviewProduct: View {
+    @State private var isBookmarkedValue = false
+    
     let imageUrl: String?
     let manufacturer: String
     let name: String
+    let isBookmarked: Bool
+    let bookmarkAction: () -> Void
+    let unBookmarkAction: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -35,7 +40,11 @@ struct ReviewProduct: View {
                             .lineLimit(1)
                     }
                     Spacer()
-                    Image(name: .bookMark)
+                    Image(name: isBookmarkedValue ? .bookMarkFill : .bookMark)
+                        .onTapGesture {
+                            isBookmarkedValue.toggle()
+                            isBookmarkedValue ? bookmarkAction() : unBookmarkAction()
+                        }
                     Spacer().frame(width: 24)
                 }
             }
@@ -43,5 +52,8 @@ struct ReviewProduct: View {
             .foregroundColor(.white)
         }
         .foregroundColor(Color.grayscale10)
+        .onAppear {
+            self.isBookmarkedValue = isBookmarked
+        }
     }
 }

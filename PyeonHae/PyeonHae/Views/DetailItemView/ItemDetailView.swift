@@ -10,8 +10,36 @@ import Kingfisher
 
 struct ItemDetailView: View {
     let productDetail: ProductInfo?
-    @State var isBookMark: Bool = false
-    @State var isHeartMark: Bool = false
+    var isHeartMark: Bool
+    var isBookMark: Bool
+    let likeAction: () -> Void
+    let unlikeAction: () -> Void
+    let bookmarkAction: () -> Void
+    let unBookmarkAction: () -> Void
+    
+    @State private var isLikedValue: Bool
+    @State private var isBookMarkedValue: Bool
+    
+    init(
+        productDetail: ProductInfo?,
+        isHeartMark: Bool,
+        isBookMark: Bool,
+        likeAction: @escaping () -> Void,
+        unlikeAction: @escaping () -> Void,
+        bookmarkAction: @escaping () -> Void,
+        unBookmarkAction: @escaping () -> Void
+    ) {
+        self.productDetail = productDetail
+        self.isHeartMark = isHeartMark
+        self.isBookMark = isBookMark
+        self.likeAction = likeAction
+        self.unlikeAction = unlikeAction
+        self.bookmarkAction = bookmarkAction
+        self.unBookmarkAction = unBookmarkAction
+        
+        _isLikedValue = State(initialValue: isHeartMark)
+        _isBookMarkedValue = State(initialValue: isBookMark)
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -43,16 +71,17 @@ struct ItemDetailView: View {
                     .foregroundColor(.grayscale100)
                 Spacer()
                 Button(action: {
-                    isHeartMark.toggle()
+                    isLikedValue.toggle()
+                    isLikedValue ? likeAction() : unlikeAction()
                 }){
-                    isHeartMark ? Image(name: .heartMarkFill) :
-                    Image(name: .heartMark)
+                    isLikedValue ? Image(name: .heartMarkFill) : Image(name: .heartMark)
                 }
                 .frame(width: 18, height: 18)
                 Button(action: {
-                    isBookMark.toggle()
+                    isBookMarkedValue.toggle()
+                    isBookMarkedValue ? bookmarkAction() : unBookmarkAction()
                 }){
-                    isBookMark ? Image(name: .bookMarkFill) : Image(name: .bookMark)
+                    isBookMarkedValue ? Image(name: .bookMarkFill) : Image(name: .bookMark)
                 }
                 .frame(width: 18, height: 18)
             }

@@ -9,10 +9,43 @@ import SwiftUI
 import Kingfisher
 
 struct SearchResultItemView: View {
-    @State var isBookMark: Bool = false
-    @State var isHeartMark: Bool = false
-    let product: Product
     @Binding var selectedProduct: Product?
+    var isHeartMark: Bool
+    var isBookMark: Bool
+    let product: Product
+    let productViewType: ProductViewType
+    let likeAction: () -> Void
+    let unlikeAction: () -> Void
+    let bookmarkAction: () -> Void
+    let unBookmarkAction: () -> Void
+    
+    @State private var isLikedValue: Bool
+    @State private var isBookMarkedValue: Bool
+    
+    init(
+        selectedProduct: Binding<Product?>,
+        isHeartMark: Bool,
+        isBookMark: Bool,
+        product: Product,
+        productViewType: ProductViewType,
+        likeAction: @escaping () -> Void,
+        unlikeAction: @escaping () -> Void,
+        bookmarkAction: @escaping () -> Void,
+        unBookmarkAction: @escaping () -> Void
+    ) {
+        self._selectedProduct = selectedProduct
+        self.isHeartMark = isHeartMark
+        self.isBookMark = isBookMark
+        self.product = product
+        self.productViewType = productViewType
+        self.likeAction = likeAction
+        self.unlikeAction = unlikeAction
+        self.bookmarkAction = bookmarkAction
+        self.unBookmarkAction = unBookmarkAction
+        
+        _isLikedValue = State(initialValue: isHeartMark)
+        _isBookMarkedValue = State(initialValue: isBookMark)
+    }
     
     var body: some View {
         VStack {
@@ -43,16 +76,21 @@ struct SearchResultItemView: View {
                             .font(.pretendard(.semiBold, 16))
                             .foregroundColor(.grayscale100)
                         Spacer()
-                        Button(action: {
-                            isHeartMark.toggle()
-                        }){
-                            isHeartMark ? Image(name: .heartMarkFill) : Image(name: .heartMark)
+                        Group {
+                            Button(action: {
+                                isLikedValue.toggle()
+                                isLikedValue ? likeAction() : unlikeAction()
+                            }){
+                                isLikedValue ? Image(name: .heartMarkFill) : Image(name: .heartMark)
+                            }
+                            Button(action: {
+                                isBookMarkedValue.toggle()
+                                isBookMarkedValue ? bookmarkAction() : unBookmarkAction()
+                            }){
+                                isBookMarkedValue ? Image(name: .bookMarkFill) : Image(name: .bookMark)
+                            }
                         }
-                        Button(action: {
-                            isBookMark.toggle()
-                        }){
-                            isBookMark ? Image(name: .bookMarkFill) : Image(name: .bookMark)
-                        }
+                        .hidden(productViewType == .review ? true : false)
                     }
                     .padding(.bottom, 2)
                     Text("\(product.productPrice)원")
@@ -69,7 +107,7 @@ struct SearchResultItemView: View {
                             .foregroundColor(.grayscale30)
                         Text("\(product.reviewCount)개의 리뷰")
                             .font(.pretendard(.regular, 14))
-                            .foregroundColor(.grayscale30)
+                            .foregroundColor(.grayscale70)
                     }
                     .padding(.bottom, 8)
                     HStack(spacing: 4) {
@@ -90,4 +128,9 @@ struct SearchResultItemView: View {
             selectedProduct = product
         }
     }
+}
+
+enum ProductViewType {
+    case review
+    case search
 }
