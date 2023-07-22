@@ -56,7 +56,7 @@ struct SearchBar: View {
                                 searchAgain.toggle()
                             }
                         }
-                    )
+                    ).disabled(searchBarType == .home)
                 }
                 .focused($isFocused)
                 Image(name: .searchIcon)

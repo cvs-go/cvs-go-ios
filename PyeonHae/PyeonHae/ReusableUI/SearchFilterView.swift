@@ -41,6 +41,14 @@ struct SearchFilterView: View {
     
     var body: some View {
         filterButton()
+            .onAppear {
+                if !categoryIds.isEmpty,
+                   let categoryName = filterDatas.categories
+                    .filter({ categoryIds.contains($0.id) })
+                    .map({ $0.name }).first {
+                    selectedElements.append(categoryName)
+                }
+            }
     }
     
     @ViewBuilder

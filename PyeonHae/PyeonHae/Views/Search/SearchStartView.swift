@@ -9,7 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct SearchStartView: View {
-    @ObservedObject var searchViewModel = SearchViewModel()
+    @ObservedObject var searchViewModel: SearchViewModel
     
     @Binding var text: String
     @State private var showResultView = false
@@ -105,7 +105,9 @@ struct SearchStartView: View {
                 Spacer()
             }
             .onChange(of: showResultView) { _ in
+                searchViewModel.initFilters()
                 searchViewModel.keyword = text
+                searchViewModel.isLoading = true
                 searchViewModel.searchProducts()
                 // 이전 검색어 저장
                 if !UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
@@ -177,6 +179,10 @@ struct SearchStartView: View {
             Text(keyword.keyword)
                 .font(.pretendard(.medium, 14))
                 .foregroundColor(.grayscale100)
+                .onTapGesture {
+                    text = keyword.keyword
+                    showResultView = true
+                }
             Image(name: .close)
                 .resizable()
                 .renderingMode(.template)

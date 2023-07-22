@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct SearchHomeView: View {
+    @ObservedObject var searchViewModel = SearchViewModel()
+    
     @State private var text = String()
     private let imageSize = (UIWindow().screen.bounds.width - 55) / 4
     @State private var startSearch = false
+    @State private var showSearchResult = false
     
     var body: some View {
         VStack {
@@ -22,9 +25,21 @@ struct SearchHomeView: View {
             ProductCategories
             Spacer()
             NavigationLink(
-                destination: SearchStartView(text: $text).navigationBarHidden(true),
+                destination: SearchStartView(
+                    searchViewModel: searchViewModel,
+                    text: $text
+                ).navigationBarHidden(true),
                 isActive: $startSearch)
             {
+                EmptyView()
+            }
+            NavigationLink(
+                destination: SearchResultView(
+                    searchViewModel: searchViewModel,
+                    text: $text
+                ).navigationBarHidden(true),
+                isActive: $showSearchResult
+            ) {
                 EmptyView()
             }
         }
@@ -43,15 +58,39 @@ struct SearchHomeView: View {
                 Image(name: .foodImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [1]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .instantFoodImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [2]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .snackImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [3]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .icecreamImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [4]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
             }
             
             Spacer().frame(height: 6)
@@ -60,15 +99,39 @@ struct SearchHomeView: View {
                 Image(name: .freshFoodImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [5]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .dairyProductImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [6]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .beverageImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [7]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
                 Image(name: .etcImage)
                     .resizable()
                     .frame(width: imageSize, height: imageSize)
+                    .onTapGesture {
+                        searchViewModel.categoryIds = [8]
+                        searchViewModel.searchProducts()
+                        searchViewModel.isLoading = true
+                        showSearchResult = true
+                    }
             }
         }
         .padding(.horizontal, 20)

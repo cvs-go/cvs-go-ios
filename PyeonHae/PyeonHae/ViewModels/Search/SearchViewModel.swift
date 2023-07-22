@@ -151,4 +151,12 @@ class SearchViewModel: ObservableObject {
                 }
             }.store(in: &bag)
     }
+    
+    func initFilters() {
+        convenienceStoreIds.removeAll()
+        categoryIds.removeAll()
+        eventTypes.removeAll()
+        lowestPrice = 0
+        highestPrice = UserShared.filterData?.highestPrice ?? 0
+    }
 }
