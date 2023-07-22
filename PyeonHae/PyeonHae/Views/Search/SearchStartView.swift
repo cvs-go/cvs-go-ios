@@ -13,6 +13,7 @@ struct SearchStartView: View {
     
     @Binding var text: String
     @State private var showResultView = false
+    @State private var selectedProduct: Product? = nil
     @State private var searchedProducts: [SearchedProduct] = []
     @State private var searchedKeywords: [SearchedKeyword] = []
     @State private var showAlert = false
@@ -127,6 +128,16 @@ struct SearchStartView: View {
             ) {
                 EmptyView()
             }
+            
+            NavigationLink(
+                destination: DetailItemView(
+                    searchViewModel: searchViewModel,
+                    selectedProduct: selectedProduct
+                ).navigationBarHidden(true),
+                isActive: $searchViewModel.showProductDetail
+            ) {
+                EmptyView()
+            }
         }
         .onAppear {
             self.searchedProducts = UserShared.searchedProducts.sorted(by: { $0.timestamp > $1.timestamp })
@@ -177,6 +188,11 @@ struct SearchStartView: View {
                         .stroke(Color.grayscale20, lineWidth: 1)
                     )
             }
+        }
+        .onTapGesture {
+            selectedProduct = product.product
+            searchViewModel.requestProductDetail(productID: product.product.productId)
+            searchViewModel.requestReview(productID: product.product.productId)
         }
     }
     
