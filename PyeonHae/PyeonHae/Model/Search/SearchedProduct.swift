@@ -8,7 +8,6 @@
 import Foundation
 
 struct SearchedProduct: Codable, Hashable {
+    let product: Product
     let timestamp: String
-    let productId: Int
-    let productImageUrl: String
 }

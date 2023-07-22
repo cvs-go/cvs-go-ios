@@ -142,8 +142,8 @@ struct SearchStartView: View {
     }
     
     private func deleteSearchedProduct(_ productId: Int) {
-        UserShared.searchedProducts.removeAll(where: { $0.productId == productId })
-        searchedProducts.removeAll(where: { $0.productId == productId })
+        UserShared.searchedProducts.removeAll(where: { $0.product.productId == productId })
+        searchedProducts.removeAll(where: { $0.product.productId == productId })
     }
     
     private func deleteSearchedKeyword(_ keyword: String) {
@@ -153,18 +153,25 @@ struct SearchStartView: View {
     
     @ViewBuilder
     private func searchedProductView(_ product: SearchedProduct) -> some View {
-        if let url = URL(string: product.productImageUrl) {
-            ZStack(alignment: .topTrailing) {
-                Image(name: .roundedClose)
-                    .padding(.top, 4)
-                    .padding(.trailing, 4)
-                    .zIndex(1)
-                    .onTapGesture {
-                        deleteSearchedProduct(product.productId)
-                    }
-                
+        ZStack(alignment: .topTrailing) {
+            Image(name: .roundedClose)
+                .padding(.top, 4)
+                .padding(.trailing, 4)
+                .zIndex(1)
+                .onTapGesture {
+                    deleteSearchedProduct(product.product.productId)
+                }
+            
+            if let imageUrl = product.product.productImageUrl,
+               let url = URL(string: imageUrl) {
                 KFImage(url)
                     .resizable()
+                    .frame(width: 72, height: 72)
+                    .overlay(RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.grayscale20, lineWidth: 1)
+                    )
+            } else {
+                Image(name: .emptyImage)
                     .frame(width: 72, height: 72)
                     .overlay(RoundedRectangle(cornerRadius: 10)
                         .stroke(Color.grayscale20, lineWidth: 1)

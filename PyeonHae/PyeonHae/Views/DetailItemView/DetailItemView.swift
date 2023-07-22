@@ -81,6 +81,17 @@ struct DetailItemView: View {
                 fixedProduct: selectedProduct
             )
         }
+        .onAppear {
+            // 최근 찾은 상품 저장
+            if let product = selectedProduct {
+                if !UserShared.searchedProducts.map({ $0.product }).contains(product) {
+                    UserShared.searchedProducts.append(.init(
+                        product: product,
+                        timestamp: Date().currentTime()
+                    ))
+                }
+            }
+        }
     }
     
     var DetailItemViewTopBar: some View {

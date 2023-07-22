@@ -12,7 +12,7 @@ struct ProductDetail: Codable {
     let data: ProductInfo
 }
 
-struct ProductInfo: Codable {
+struct ProductInfo: Codable, Hashable {
     let productId: Int
     let productName: String
     let productPrice: Int
