@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DetailItemView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var reviewViewModel = ReviewViewModel()
     @State private var isReviewButtonVisible = false
@@ -15,80 +17,84 @@ struct DetailItemView: View {
     let selectedProduct: Product?
     
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                DetailItemViewTopBar
-                ScrollView {
-                    if let product = searchViewModel.productDetail {
-                        ItemDetailView(
-                            productDetail: product.data,
-                            isHeartMark: product.data.isLiked,
-                            isBookMark: product.data.isBookmarked,
-                            likeAction: {
-                                searchViewModel.requestProductLike(productID: product.data.productId)
-                            },
-                            unlikeAction: {
-                                searchViewModel.requestProductUnLike(productID: product.data.productId)
-                            },
-                            bookmarkAction: {
-                                searchViewModel.requestProductBookmark(productID: product.data.productId)
-                            },
-                            unBookmarkAction: {
-                                searchViewModel.requestProductUnBookmark(productID: product.data.productId)
-                            }
-                        )
-                        .background(
-                            GeometryReader { geometry -> Color in
-                                let maxY = geometry.frame(in: .global).midY
-                                DispatchQueue.main.async {
-                                    isReviewButtonVisible = maxY <= 0
+        if searchViewModel.detailIsLoading {
+            LoadingView()
+        } else {
+            ZStack {
+                VStack(alignment: .leading) {
+                    DetailItemViewTopBar
+                    ScrollView {
+                        if let product = searchViewModel.productDetail {
+                            ItemDetailView(
+                                productDetail: product.data,
+                                isHeartMark: product.data.isLiked,
+                                isBookMark: product.data.isBookmarked,
+                                likeAction: {
+                                    searchViewModel.requestProductLike(productID: product.data.productId)
+                                },
+                                unlikeAction: {
+                                    searchViewModel.requestProductUnLike(productID: product.data.productId)
+                                },
+                                bookmarkAction: {
+                                    searchViewModel.requestProductBookmark(productID: product.data.productId)
+                                },
+                                unBookmarkAction: {
+                                    searchViewModel.requestProductUnBookmark(productID: product.data.productId)
                                 }
-                                return Color.clear
-                            }
-                        )
+                            )
+                            .background(
+                                GeometryReader { geometry -> Color in
+                                    let maxY = geometry.frame(in: .global).midY
+                                    DispatchQueue.main.async {
+                                        isReviewButtonVisible = maxY <= 0
+                                    }
+                                    return Color.clear
+                                }
+                            )
+                        }
+                        Rectangle()
+                            .frame(height: 14)
+                            .foregroundColor(Color.grayscale10)
+                        DetailItemReviewsView
+                        Rectangle()
+                            .frame(height: 30)
+                            .foregroundColor(Color.white)
                     }
-                    Rectangle()
-                        .frame(height: 14)
-                        .foregroundColor(Color.grayscale10)
-                    DetailItemReviewsView
-                    Rectangle()
-                        .frame(height: 30)
-                        .foregroundColor(Color.white)
+                }
+                VStack {
+                    Spacer()
+                    Button(action: {
+                        reviewViewModel.showWriteView = true
+                    }){
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(.red100)
+                            Text("리뷰 작성")
+                                .font(.pretendard(.bold, 18))
+                                .foregroundColor(.white)
+                        }
+                        .frame(height: 50)
+                        .padding(.horizontal, 20)
+                        .background(Color.white)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
-            VStack {
-                Spacer()
-                Button(action: {
-                    reviewViewModel.showWriteView = true
-                }){
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(.red100)
-                        Text("리뷰 작성")
-                            .font(.pretendard(.bold, 18))
-                            .foregroundColor(.white)
-                    }
-                    .frame(height: 50)
-                    .padding(.horizontal, 20)
-                    .background(Color.white)
-                }
-                .buttonStyle(.plain)
+            .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
+                EditReviewView(
+                    reviewViewModel: reviewViewModel,
+                    fixedProduct: selectedProduct
+                )
             }
-        }
-        .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
-            EditReviewView(
-                reviewViewModel: reviewViewModel,
-                fixedProduct: selectedProduct
-            )
-        }
-        .onAppear {
-            // 최근 찾은 상품 저장
-            if let product = selectedProduct {
-                if !UserShared.searchedProducts.map({ $0.product }).contains(product) {
-                    UserShared.searchedProducts.append(.init(
-                        product: product,
-                        timestamp: Date().currentTime()
-                    ))
+            .onAppear {
+                // 최근 찾은 상품 저장
+                if let product = selectedProduct {
+                    if !UserShared.searchedProducts.map({ $0.product }).contains(product) {
+                        UserShared.searchedProducts.append(.init(
+                            product: product,
+                            timestamp: Date().currentTime()
+                        ))
+                    }
                 }
             }
         }
@@ -99,7 +105,7 @@ struct DetailItemView: View {
             Spacer().frame(width: 14)
             Image(name: .arrowLeft)
                 .onTapGesture {
-                    searchViewModel.showProductDetail = false
+                    self.presentationMode.wrappedValue.dismiss()
                 }
             Spacer().frame(width: 18)
             if isReviewButtonVisible {

@@ -18,7 +18,9 @@ struct SearchResultView: View {
     @State private var filterClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
-    @State var selectedSortOptionIndex = 0
+    @State private var selectedSortOptionIndex = 0
+    
+    @State private var showDetailView = false
     
     @State private var priceChangeDebounceTimer: AnyCancellable?
     
@@ -34,7 +36,7 @@ struct SearchResultView: View {
                     Spacer().frame(height: showFilter ? 473 : 83)
                     GeometryReader { geometry in
                         ScrollView {
-                            if searchViewModel.isLoading {
+                            if searchViewModel.resultListIsLoading {
                                 VStack {
                                     LoadingView()
                                 }
@@ -109,7 +111,7 @@ struct SearchResultView: View {
             NavigationLink(destination: DetailItemView(
                 searchViewModel: searchViewModel,
                 selectedProduct: selectedProduct
-            ).navigationBarHidden(true), isActive: $searchViewModel.showProductDetail) {
+            ).navigationBarHidden(true), isActive: $showDetailView) {
                 EmptyView()
             }
         }
@@ -120,14 +122,13 @@ struct SearchResultView: View {
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
-            searchViewModel.isLoading = true
         }
         .onChange(of: filterClicked) { _ in
             searchViewModel.searchProducts()
-            searchViewModel.isLoading = true
         }
         .onChange(of: selectedProduct) { product in	
             if let product = product {
+                showDetailView = true
                 searchViewModel.requestProductDetail(productID: product.productId)
                 searchViewModel.requestReview(productID: product.productId)
             }
@@ -141,7 +142,6 @@ struct SearchResultView: View {
                 }
             }.sink { _ in
                 searchViewModel.searchProducts()
-                searchViewModel.isLoading = true
             }
         }
         .onChange(of: maxPrice) { maxPrice in
@@ -153,7 +153,6 @@ struct SearchResultView: View {
                 }
             }.sink { _ in
                 searchViewModel.searchProducts()
-                searchViewModel.isLoading = true
             }
         }
     }

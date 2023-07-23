@@ -13,6 +13,7 @@ struct SearchStartView: View {
     
     @Binding var text: String
     @State private var showResultView = false
+    @State private var showDetailView = false
     @State private var selectedProduct: Product? = nil
     @State private var searchedProducts: [SearchedProduct] = []
     @State private var searchedKeywords: [SearchedKeyword] = []
@@ -108,7 +109,6 @@ struct SearchStartView: View {
             .onChange(of: showResultView) { _ in
                 searchViewModel.initFilters()
                 searchViewModel.keyword = text
-                searchViewModel.isLoading = true
                 searchViewModel.searchProducts()
                 // 이전 검색어 저장
                 if !UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
@@ -134,7 +134,7 @@ struct SearchStartView: View {
                     searchViewModel: searchViewModel,
                     selectedProduct: selectedProduct
                 ).navigationBarHidden(true),
-                isActive: $searchViewModel.showProductDetail
+                isActive: $showDetailView
             ) {
                 EmptyView()
             }
@@ -190,6 +190,7 @@ struct SearchStartView: View {
             }
         }
         .onTapGesture {
+            showDetailView = true
             selectedProduct = product.product
             searchViewModel.requestProductDetail(productID: product.product.productId)
             searchViewModel.requestReview(productID: product.product.productId)

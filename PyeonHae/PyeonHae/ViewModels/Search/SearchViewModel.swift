@@ -24,15 +24,25 @@ class SearchViewModel: ObservableObject {
     @Published var lowestPrice: Int = 0
     @Published var highestPrice: Int = UserShared.filterData?.highestPrice ?? 0
     
-    // detail 화면으로 이동
-    @Published var showProductDetail = false
+    // 로딩뷰를 위한 변수
+    @Published var productDataLoaded = false
+    @Published var reviewDataLoaded = false
+    @Published var productListDataLoaded = false
     
-    @Published var isLoading = false
+    @Published var resultListIsLoading = false
+    @Published var detailIsLoading = false
     
     var bag = Set<AnyCancellable>()
     
+    init() {
+        subscribeDetailLoadState()
+        subscribeProductListLoadState()
+    }
+    
     // 상품 목록 조회
     func searchProducts() {
+        self.resultListIsLoading = true
+        
         let parameters: [String : Any] = [
             "convenienceStoreIds": convenienceStoreIds.toParameter(),
             "categoryIds": categoryIds.toParameter(),
@@ -47,21 +57,23 @@ class SearchViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.searchResults = result
+                    self.productListDataLoaded = true
                 case .failure(let error):
                     print(error)
                 }
-                self.isLoading = false
             }.store(in: &bag)
     }
     
     // 상품 상세 조회
     func requestProductDetail(productID: Int) {
+        detailIsLoading = true
+        
         apiManager.request(for: ProductsAPI.product(id: productID))
             .sink { (result: Result<ProductDetail, Error>) in
                 switch result {
                 case .success(let result):
                     self.productDetail = result
-                    self.showProductDetail = true
+                    self.productDataLoaded = true
                 case .failure(let error):
                     print(error)
                 }
@@ -146,6 +158,7 @@ class SearchViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.reviewDatas = result.data
+                    self.reviewDataLoaded = true
                 case .failure(let error):
                     print(error)
                 }
@@ -158,5 +171,25 @@ class SearchViewModel: ObservableObject {
         eventTypes.removeAll()
         lowestPrice = 0
         highestPrice = UserShared.filterData?.highestPrice ?? 0
+    }
+    
+    func subscribeDetailLoadState() {
+        Publishers.Zip($productDataLoaded, $reviewDataLoaded)
+            .filter { $0.0 && $0.1 }
+            .delay(for: .seconds(0.5), scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.detailIsLoading = false
+            }
+            .store(in: &bag)
+    }
+    
+    func subscribeProductListLoadState() {
+        $productListDataLoaded
+            .filter { $0 }
+            .delay(for: .seconds(0.3), scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.resultListIsLoading = false
+            }
+            .store(in: &bag)
     }
 }

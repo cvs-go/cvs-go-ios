@@ -61,7 +61,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [1]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .instantFoodImage)
@@ -70,7 +69,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [2]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .snackImage)
@@ -79,7 +77,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [3]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .icecreamImage)
@@ -88,7 +85,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [4]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
             }
@@ -102,7 +98,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [5]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .dairyProductImage)
@@ -111,7 +106,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [6]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .beverageImage)
@@ -120,7 +114,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [7]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
                 Image(name: .etcImage)
@@ -129,7 +122,6 @@ struct SearchHomeView: View {
                     .onTapGesture {
                         searchViewModel.categoryIds = [8]
                         searchViewModel.searchProducts()
-                        searchViewModel.isLoading = true
                         showSearchResult = true
                     }
             }
