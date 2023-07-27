@@ -33,7 +33,7 @@ struct MainTabView: View {
         case .search:
             SearchHomeView()
         case .myPage:
-            UserPageView()
+            MyInfoView()
         }
     }
 }

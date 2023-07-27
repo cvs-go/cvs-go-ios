@@ -12,7 +12,7 @@ struct UserPageView: View {
         GeometryReader { geo in
             VStack {
                 ScrollView {
-                    UserInfoView()
+                    UserInfoView(userInfoType: .other)
                     Spacer().frame(height: 20)
                     WriteReviewsView()
                 }

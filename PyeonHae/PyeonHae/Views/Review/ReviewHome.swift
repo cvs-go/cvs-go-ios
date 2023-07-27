@@ -24,7 +24,8 @@ struct ReviewHome: View {
                 contents: [
                     AnyView(allReviewTab()),
                     AnyView(followReviewTab())
-                ]
+                ],
+                type: .review
             )
         }
         .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
