@@ -21,7 +21,7 @@ class SplashViewModel: ObservableObject {
     
     // 태그 api
     func requestTags() {
-        apiManager.request(for: LoginAPI.getTags)
+        apiManager.request(for: UserAPI.getTags)
             .sink { (result: Result<TagsModel, Error>) in
                 switch result {
                 case .success(let data):

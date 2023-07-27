@@ -101,7 +101,7 @@ class LoginViewModel: ObservableObject {
     
     // 이메일 중복 검사 api
     func checkEmail() {
-        apiManager.request(for: LoginAPI.checkEmail(email: email))
+        apiManager.request(for: UserAPI.checkEmail(email: email))
             .sink { (result: Result<CheckEmailModel, Error>) in
                 switch result {
                 case .success(let data):
@@ -118,7 +118,7 @@ class LoginViewModel: ObservableObject {
     
     // 닉네임 중복 검사 api
     func checkNickname() {
-        apiManager.request(for: LoginAPI.checkNickname(nickname: nickname))
+        apiManager.request(for: UserAPI.checkNickname(nickname: nickname))
             .sink { (result: Result<CheckNicknameModel, Error>) in
                 switch result {
                 case .success(let data):
@@ -160,7 +160,7 @@ class LoginViewModel: ObservableObject {
             "nickname" : nickname,
             "tagIds" : selectedTags.map { $0.id }
         ]
-        apiManager.request(for: LoginAPI.signUp(parameters))
+        apiManager.request(for: UserAPI.signUp(parameters))
             .sink { (result: Result<SignUpModel, Error>) in
                 switch result {
                 case .success:

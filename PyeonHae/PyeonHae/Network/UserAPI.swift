@@ -1,5 +1,5 @@
 //
-//  LoginAPI.swift
+//  UserAPI.swift
 //  PyeonHae
 //
 //  Created by 정건호 on 2023/02/27.
@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 
-enum LoginAPI: API {
+enum UserAPI: API {
     case checkEmail(email: String)
     case checkNickname(nickname: String)
     case getTags
     case signUp([String : Any])
 }
 
-extension LoginAPI {
+extension UserAPI {
     
     var method: HTTPMethod {
         switch self {
