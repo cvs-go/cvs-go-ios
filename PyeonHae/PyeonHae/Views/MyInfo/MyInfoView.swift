@@ -11,6 +11,8 @@ struct MyInfoView: View {
     @State private var selectedTab: Int = 0
     @State private var tabItems = MyInfoTapType.allCases.map { $0.rawValue }
     
+    @State private var showSettingView = false
+    
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
@@ -29,6 +31,13 @@ struct MyInfoView: View {
                 type: .myInfo
             )
             Spacer()
+            
+            NavigationLink(
+                destination: UserSettingView().navigationBarHidden(true),
+                isActive: $showSettingView
+            ) {
+                EmptyView()
+            }
         }
     }
     
@@ -43,7 +52,7 @@ struct MyInfoView: View {
                 Spacer()
                 Image(name: .setting)
                     .onTapGesture {
-                        
+                        self.showSettingView = true
                     }
                 Spacer().frame(width: 18)
             }
