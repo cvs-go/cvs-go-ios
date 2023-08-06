@@ -28,8 +28,9 @@ struct UserSettingView: View {
             divider(height: 14)
             contentsView("로그아웃", color: .grayscale50, arrowHidden: true)
             contentsView("회원탈퇴", color: .grayscale50, arrowHidden: true)
-            Spacer()
+            divider(height: .infinity)
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
     
     var settingTopBar: some View {
@@ -80,7 +81,7 @@ struct UserSettingView: View {
     }
     
     func divider(height: CGFloat) -> some View {
-        Rectangle().foregroundColor(.grayscale20).frame(height: height)
+        Rectangle().foregroundColor(.grayscale20).frame(maxHeight: height)
     }
 }
 
