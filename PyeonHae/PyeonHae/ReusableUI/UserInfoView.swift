@@ -10,9 +10,14 @@ import SwiftUI
 struct UserInfoView: View {
     private let userInfoType: UserInfoType
     @State var followCheck: Bool = false
+    @Binding var showEditView: Bool
     
-    init(userInfoType: UserInfoType) {
+    init(
+        userInfoType: UserInfoType,
+        showEditView: Binding<Bool> = .constant(false)
+    ) {
         self.userInfoType = userInfoType
+        self._showEditView = showEditView
     }
     
     var body: some View {
@@ -26,6 +31,9 @@ struct UserInfoView: View {
                             .foregroundColor(.grayscale100)
                         Image(name: .editPen)
                             .hidden(userInfoType == .other)
+                            .onTapGesture {
+                                self.showEditView = true
+                            }
                     }
                     HStack {
                         ForEach(0..<3){ cell in

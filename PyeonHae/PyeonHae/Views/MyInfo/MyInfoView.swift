@@ -12,12 +12,13 @@ struct MyInfoView: View {
     @State private var tabItems = MyInfoTapType.allCases.map { $0.rawValue }
     
     @State private var showSettingView = false
+    @State private var showEditView = false
     
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
             Spacer().frame(height: 20)
-            UserInfoView(userInfoType: .me)
+            UserInfoView(userInfoType: .me, showEditView: $showEditView)
             Rectangle()
                 .frame(height: 14)
                 .foregroundColor(Color.grayscale10)
@@ -38,6 +39,9 @@ struct MyInfoView: View {
             ) {
                 EmptyView()
             }
+        }
+        .fullScreenCover(isPresented: $showEditView) {
+            MyInfoEditView()
         }
     }
     
