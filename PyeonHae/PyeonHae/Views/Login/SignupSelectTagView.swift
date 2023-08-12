@@ -27,7 +27,7 @@ struct SignupSelectTagView: View {
                 .font(.pretendard(.bold, 14))
                 .foregroundColor(.grayscale100)
             Spacer().frame(height: 13)
-            WrappingHStack(loginViewModel.tags, lineSpacing: 6) { tag in
+            WrappingHStack(UserShared.tags, lineSpacing: 6) { tag in
                 SelectableButton(
                     text: tag.name,
                     isSelected: loginViewModel.selectedTags.contains { $0 == tag }

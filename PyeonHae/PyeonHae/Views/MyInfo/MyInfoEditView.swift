@@ -62,7 +62,7 @@ struct MyInfoEditView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                WrappingHStack(UserShared.filterData?.categories ?? [], id: \.self, lineSpacing: 6) { element in
+                WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { element in
                     SelectableButton(
                         text: element.name,
                         isSelected: selectedElements.contains(element.name)
@@ -106,6 +106,20 @@ struct MyInfoEditView: View {
             MyInfoEditImagePicker(images: $imageSelect.images)
         }
     }
+    
+//    private func handleTagSelection(_ tag: TagModel) {
+//        if loginViewModel.selectedTags.contains(tag) {
+//            loginViewModel.selectedTags.removeAll(where: { $0 == tag })
+//        } else {
+//            // 같은 그룹의 태그가 선택되어 있으면 선택 해제
+//            if loginViewModel.selectedTags.map({ $0.group }).contains(tag.group) {
+//                loginViewModel.selectedTags.removeAll(where: { $0.group == tag.group })
+//            }
+//            if loginViewModel.selectedTags.count < 3 {
+//                loginViewModel.selectedTags.append(tag)
+//            }
+//        }
+//    }
 }
 
 struct MyInfoEditView_Previews: PreviewProvider {

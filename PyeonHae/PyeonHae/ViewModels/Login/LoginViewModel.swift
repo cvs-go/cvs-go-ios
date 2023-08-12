@@ -20,7 +20,6 @@ class LoginViewModel: ObservableObject {
     @Published var nickname: String = String()
     
     // Tags
-    @Published var tags: [TagModel] = []
     @Published var selectedTags: [TagModel] = []
     
     // Check Email
