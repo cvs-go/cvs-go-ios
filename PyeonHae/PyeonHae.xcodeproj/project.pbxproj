@@ -31,6 +31,8 @@
 		5427B7122A7290E300523048 /* MyReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B7112A7290E300523048 /* MyReviewView.swift */; };
 		5427B7142A7292A500523048 /* MyLikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B7132A7292A500523048 /* MyLikeView.swift */; };
 		5427B7162A7292B200523048 /* MyBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B7152A7292B200523048 /* MyBookmarkView.swift */; };
+		5427B7192A72978300523048 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B7182A72978300523048 /* MyInfoViewModel.swift */; };
+		5427B71C2A729B1B00523048 /* UserLikeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B71B2A729B1B00523048 /* UserLikeList.swift */; };
 		542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542F03A52997893A00DBF9C8 /* TopTabBar.swift */; };
 		543CEAB829CEF70C00CDB0C8 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEAB729CEF70C00CDB0C8 /* SplashView.swift */; };
 		543CEABC29CF142B00CDB0C8 /* UserShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEABB29CF142B00CDB0C8 /* UserShared.swift */; };
@@ -155,6 +157,8 @@
 		5427B7112A7290E300523048 /* MyReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewView.swift; sourceTree = "<group>"; };
 		5427B7132A7292A500523048 /* MyLikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLikeView.swift; sourceTree = "<group>"; };
 		5427B7152A7292B200523048 /* MyBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBookmarkView.swift; sourceTree = "<group>"; };
+		5427B7182A72978300523048 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		5427B71B2A729B1B00523048 /* UserLikeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikeList.swift; sourceTree = "<group>"; };
 		542F03A52997893A00DBF9C8 /* TopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = PyeonHae/TopTabBar.swift; sourceTree = SOURCE_ROOT; };
 		543CEAB729CEF70C00CDB0C8 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		543CEABB29CF142B00CDB0C8 /* UserShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShared.swift; sourceTree = "<group>"; };
@@ -396,6 +400,22 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		5427B7172A72977000523048 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5427B7182A72978300523048 /* MyInfoViewModel.swift */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		5427B71A2A729B0E00523048 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5427B71B2A729B1B00523048 /* UserLikeList.swift */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		543CEAB629CEF6E800CDB0C8 /* Splash */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +450,7 @@
 				549CBA802A2F1BD10074AFA5 /* Review */,
 				5485EB7529EC0CB000FDB56B /* Search */,
 				547BE29829631F4F0069828A /* Login */,
+				5427B7172A72977000523048 /* MyInfo */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -478,6 +499,7 @@
 		54AFA1EF29ACFF990058DB39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5427B71A2A729B0E00523048 /* UserInfo */,
 				549CBA872A2F20820074AFA5 /* EmptyResponse.swift */,
 				54422CF12A3489D8007120FC /* ErrorResponse.swift */,
 				54CF51B229EEDA2400FC492F /* Search */,
@@ -852,6 +874,7 @@
 				5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */,
 				547BE29729631F440069828A /* LoginViewModel.swift in Sources */,
 				54F6457E296C563B00F423B1 /* TermsAndPolicyView.swift in Sources */,
+				5427B7192A72978300523048 /* MyInfoViewModel.swift in Sources */,
 				5420D1C029F02AEF00A78000 /* SearchHomeView.swift in Sources */,
 				54AA0E072A19F3260031190D /* LoadingView.swift in Sources */,
 				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
@@ -877,6 +900,7 @@
 				54422CF22A3489D8007120FC /* ErrorResponse.swift in Sources */,
 				54D0101B295F3E5800FACB90 /* Constants.swift in Sources */,
 				54F6B33029AF562C00914889 /* API.swift in Sources */,
+				5427B71C2A729B1B00523048 /* UserLikeList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

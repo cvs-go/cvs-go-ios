@@ -13,12 +13,14 @@ class ImageSelect: ObservableObject {
 }
 
 struct MyInfoEditView: View {
+    @ObservedObject var myInfoViewModel: MyInfoViewModel
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var keyboardResponder = KeyboardResponder()
     @State var nickName: String = ""
     @State var nickNameFieldState: TextFieldState = .normal
     @State private var showImagePicker = false
-    @State private var selectedElements: [String] = []
+    @State private var selectedTags: [TagModel] = []
     @StateObject var imageSelect = ImageSelect()
     
     var body: some View {
@@ -62,17 +64,13 @@ struct MyInfoEditView: View {
                     Spacer()
                 }
                 .padding(.horizontal, 20)
-                WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { element in
+                WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { tag in
                     SelectableButton(
-                        text: element.name,
-                        isSelected: selectedElements.contains(element.name)
+                        text: tag.name,
+                        isSelected: selectedTags.contains { $0 == tag }
                     )
                     .onTapGesture {
-                        if selectedElements.contains(element.name) {
-                            selectedElements.removeAll(where: { $0 == element.name })
-                        } else {
-                            selectedElements.append(element.name)
-                        }
+                        handleTagSelection(tag)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -96,6 +94,26 @@ struct MyInfoEditView: View {
                                 .font(.pretendard(.bold, 18))
                                 .foregroundColor(.white)
                         }
+                        .onTapGesture {
+                            if imageSelect.images.isEmpty {
+                                myInfoViewModel.requestEditInfo(
+                                    nickname: nickName,
+                                    tagIds: selectedTags.map { $0.id },
+                                    completion: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                )
+                            } else {
+                                myInfoViewModel.requestEditInfoWithImage(
+                                    nickname: nickName,
+                                    tagIds: selectedTags.map { $0.id },
+                                    images: imageSelect.images,
+                                    completion: {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                )
+                            }
+                        }
                         .frame(height: 50)
                     }
                 }
@@ -107,24 +125,18 @@ struct MyInfoEditView: View {
         }
     }
     
-//    private func handleTagSelection(_ tag: TagModel) {
-//        if loginViewModel.selectedTags.contains(tag) {
-//            loginViewModel.selectedTags.removeAll(where: { $0 == tag })
-//        } else {
-//            // 같은 그룹의 태그가 선택되어 있으면 선택 해제
-//            if loginViewModel.selectedTags.map({ $0.group }).contains(tag.group) {
-//                loginViewModel.selectedTags.removeAll(where: { $0.group == tag.group })
-//            }
-//            if loginViewModel.selectedTags.count < 3 {
-//                loginViewModel.selectedTags.append(tag)
-//            }
-//        }
-//    }
-}
-
-struct MyInfoEditView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyInfoEditView()
+    private func handleTagSelection(_ tag: TagModel) {
+        if selectedTags.contains(tag) {
+            selectedTags.removeAll(where: { $0 == tag })
+        } else {
+            // 같은 그룹의 태그가 선택되어 있으면 선택 해제
+            if selectedTags.map({ $0.group }).contains(tag.group) {
+                selectedTags.removeAll(where: { $0.group == tag.group })
+            }
+            if selectedTags.count < 3 {
+                selectedTags.append(tag)
+            }
+        }
     }
 }
 

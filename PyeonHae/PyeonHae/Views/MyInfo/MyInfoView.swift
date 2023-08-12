@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MyInfoView: View {
+    @ObservedObject var myInfoViewModel = MyInfoViewModel()
+    
     @State private var selectedTab: Int = 0
     @State private var tabItems = MyInfoTapType.allCases.map { $0.rawValue }
     
@@ -41,7 +43,7 @@ struct MyInfoView: View {
             }
         }
         .fullScreenCover(isPresented: $showEditView) {
-            MyInfoEditView()
+            MyInfoEditView(myInfoViewModel: myInfoViewModel)
         }
     }
     
