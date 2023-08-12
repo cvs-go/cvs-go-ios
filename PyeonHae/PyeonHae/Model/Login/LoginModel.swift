@@ -13,6 +13,8 @@ struct LoginModel: Codable {
 }
 
 struct LoginDataModel: Codable {
+    let userId: Int
+    let userNickname: String
     let accessToken: String
     let refreshToken: String
     let tokenType: String

@@ -44,6 +44,13 @@ struct StructUserDefault<T: Codable> {
 }
 
 enum UserShared {
+    // 유저 정보
+    @UserDefault(key: "userId", defaultValue: -1)
+    static var userId: Int
+    
+    @UserDefault(key: "userNickname", defaultValue: String())
+    static var userNickname: String
+    
     // 로그인 되어있는 상태인지 아닌지 판별
     @UserDefault(key: "isLoggedIn", defaultValue: false)
     static var isLoggedIn: Bool

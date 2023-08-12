@@ -8,113 +8,80 @@
 import SwiftUI
 
 struct UserSettingView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @State private var isOn = false
     
     var body: some View {
         VStack {
-            VStack(alignment: .center, spacing: 13) {
-                Spacer()
-                Text("환경설정")
-                    .font(.pretendard(.medium, 12))
-                    .foregroundColor(.grayscale100)
-                HStack {
-                    Text("알림 켜기")
-                        .font(.pretendard(.medium, 16))
-                        .foregroundColor(.grayscale100)
-                    Spacer()
-                    Toggle("", isOn: $isOn)
-                                    .toggleStyle(CustomToggleStyle())
-                }
-                Spacer()
+            settingTopBar
+            VStack(alignment: .leading, spacing: 0) {
+                titleView("서비스")
+                contentsView("공지사항")
             }
-            .frame(height: 100)
-            Divider().frame(height: 1)
-            VStack(alignment: .leading, spacing: 13) {
-                Spacer()
-                Text("서비스")
-                    .font(.pretendard(.medium, 12))
-                    .foregroundColor(.grayscale100)
-                Button(action: {
-                    // add action
-                }) {
-                    HStack {
-                        Text("공지사항")
-                            .font(.pretendard(.medium, 16))
-                            .foregroundColor(.grayscale100)
-                        Spacer()
-                        Image(name: .arrowRight)
-                            .resizable()
-                            .frame(width: 4.5, height: 9)
-                    }
-                }
-                Button(action: {
-                    // add action
-                }) {
-                    HStack {
-                        Text("이벤트")
-                            .font(.pretendard(.medium, 16))
-                            .foregroundColor(.grayscale100)
-                        Spacer()
-                        Image(name: .arrowRight)
-                            .resizable()
-                            .frame(width: 4.5, height: 9)
-                    }
-                }
-                Spacer()
+            divider(height: 1)
+            VStack(alignment: .leading, spacing: 0) {
+                titleView("앱 정보")
+                contentsView("오픈 라이센스")
+                contentsView("현재 버전 0.00.1", arrowHidden: true)
             }
-            .frame(height: 140)
-            Divider().frame(height: 1)
-            VStack(alignment: .leading, spacing: 13) {
-                Spacer()
-                Text("앱 정보")
-                    .font(.pretendard(.medium, 12))
-                    .foregroundColor(.grayscale100)
-                Button(action: {
-                    // add action
-                }) {
-                    HStack {
-                        Text("이벤트")
-                            .font(.pretendard(.medium, 16))
-                            .foregroundColor(.grayscale100)
-                        Spacer()
-                        Image(name: .arrowRight)
-                            .resizable()
-                            .frame(width: 4.5, height: 9)
-                    }
+            divider(height: 14)
+            contentsView("로그아웃", color: .grayscale50, arrowHidden: true)
+            contentsView("회원탈퇴", color: .grayscale50, arrowHidden: true)
+            divider(height: .infinity)
+        }
+        .edgesIgnoringSafeArea(.bottom)
+    }
+    
+    var settingTopBar: some View {
+        HStack(spacing: 0) {
+            Spacer().frame(width: 14)
+            Image(name: .arrowLeft)
+                .onTapGesture {
+                    self.presentationMode.wrappedValue.dismiss()
                 }
-                Text("현재 버전 0.001")
+            Spacer().frame(width: 9)
+            Text("설정")
+                .font(.pretendard(.bold, 18))
+                .foregroundColor(.black)
+            Spacer()
+        }
+        .frame(height: 44)
+    }
+    
+    @ViewBuilder
+    func titleView(_ text: String) -> some View {
+        Text(text)
+            .font(.pretendard(.medium, 12))
+            .foregroundColor(.mineGray400)
+            .frame(height: 28)
+            .padding(.horizontal, 24)
+    }
+    
+    @ViewBuilder
+    func contentsView(
+        _ text: String,
+        color: Color = .mineGray900,
+        arrowHidden: Bool = false
+    ) -> some View {
+        Button(action: {
+            // add action
+        }) {
+            HStack {
+                Text(text)
                     .font(.pretendard(.medium, 16))
-                    .foregroundColor(.grayscale100)
+                    .foregroundColor(color)
                 Spacer()
+                Image(name: .arrowRight)
+                    .hidden(arrowHidden)
             }
-            .frame(height: 140)
-            Rectangle()
-                .frame(height: 14)
-                .foregroundColor(Color.grayscale10)
-            VStack(spacing: 16) {
-                Spacer()
-                Button(action: {
-                    // add action
-                }) {
-                    Text("앱 정보")
-                        .font(.pretendard(.medium, 16))
-                        .foregroundColor(.grayscale100)
-                }
-                Button(action: {
-                    // add action
-                }) {
-                    Text("앱 정보")
-                        .font(.pretendard(.medium, 16))
-                        .foregroundColor(.grayscale100)
-                }
-                Spacer()
-            }
-            .frame(height: 84)
-//            Rectangle()
-//                .frame(height: 300)
-//                .foregroundColor(Color.grayscale10)
         }
         .padding(.horizontal, 24)
+        .frame(height: 40)
+    }
+    
+    func divider(height: CGFloat) -> some View {
+        Rectangle().foregroundColor(.grayscale20).frame(maxHeight: height)
     }
 }
 

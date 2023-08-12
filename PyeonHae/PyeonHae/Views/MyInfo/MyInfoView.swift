@@ -11,11 +11,14 @@ struct MyInfoView: View {
     @State private var selectedTab: Int = 0
     @State private var tabItems = MyInfoTapType.allCases.map { $0.rawValue }
     
+    @State private var showSettingView = false
+    @State private var showEditView = false
+    
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
             Spacer().frame(height: 20)
-            UserInfoView(userInfoType: .me)
+            UserInfoView(userInfoType: .me, showEditView: $showEditView)
             Rectangle()
                 .frame(height: 14)
                 .foregroundColor(Color.grayscale10)
@@ -29,6 +32,16 @@ struct MyInfoView: View {
                 type: .myInfo
             )
             Spacer()
+            
+            NavigationLink(
+                destination: UserSettingView().navigationBarHidden(true),
+                isActive: $showSettingView
+            ) {
+                EmptyView()
+            }
+        }
+        .fullScreenCover(isPresented: $showEditView) {
+            MyInfoEditView()
         }
     }
     
@@ -43,7 +56,7 @@ struct MyInfoView: View {
                 Spacer()
                 Image(name: .setting)
                     .onTapGesture {
-                        
+                        self.showSettingView = true
                     }
                 Spacer().frame(width: 18)
             }
