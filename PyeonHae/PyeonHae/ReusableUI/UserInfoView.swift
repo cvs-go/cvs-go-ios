@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct UserInfoView: View {
     private let userInfoType: UserInfoType
@@ -23,10 +24,17 @@ struct UserInfoView: View {
     var body: some View {
         VStack {
             HStack(spacing: 16) {
-                Image(name: .emptyImage)
+                if let url = UserShared.userProfileImageUrl, let imageUrl = URL(string: url) {
+                    KFImage(imageUrl)
+                        .resizable()
+                        .frame(width: 72, height: 72)
+                        .cornerRadius(10)
+                } else {
+                    Image(name: .emptyImage)
+                }
                 VStack(alignment: .leading) {
                     HStack(spacing: 6) {
-                        Text("작성자 닉네임")
+                        Text(UserShared.userNickname)
                             .font(.pretendard(.semiBold, 16))
                             .foregroundColor(.grayscale100)
                         Image(name: .editPen)
@@ -36,8 +44,8 @@ struct UserInfoView: View {
                             }
                     }
                     HStack {
-                        ForEach(0..<3){ cell in
-                            Text("#매른이")
+                        ForEach(UserShared.userTags, id: \.self) { tag in
+                            Text("#\(tag.name)")
                                 .font(.pretendard(.medium, 14))
                                 .foregroundColor(.iris100)
                         }
@@ -46,7 +54,7 @@ struct UserInfoView: View {
                         Image(name: userInfoType == .me ? .fillLike : .statistics)
                             .renderingMode(.template)
                             .foregroundColor(.grayscale70)
-                        Text(userInfoType == .me ? "00,000에게 도움을 줬어요." : "나와 취향이 66% 비슷해요.")
+                        Text(userInfoType == .me ? "\(UserShared.userReviewLikeCount)명에게 도움을 줬어요." : "나와 취향이 66% 비슷해요.")
                             .font(.pretendard(.medium, 14))
                             .foregroundColor(.grayscale70)
                     }

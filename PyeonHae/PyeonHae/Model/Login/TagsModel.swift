@@ -11,7 +11,7 @@ struct TagsModel: Codable {
     let data: [TagModel]
 }
 
-struct TagModel: Codable, Equatable {
+struct TagModel: Codable, Equatable, Hashable {
     let id: Int
     let name: String
     let group: Int

@@ -17,6 +17,18 @@ class MyInfoViewModel: ObservableObject {
         requestUserLikeList(id: UserShared.userId)
     }
     
+    func requestUserInfo() {
+        apiManager.request(for: UserAPI.getUserInfo)
+            .sink { (result: Result<UserInfoModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.saveUserInfo(result.data)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
     func requestEditInfo(
         nickname: String,
         tagIds: [Int],
@@ -27,7 +39,7 @@ class MyInfoViewModel: ObservableObject {
             "tagIds": tagIds
         ]
         
-        apiManager.request(for: UserAPI.editInfo(parameters))
+        apiManager.request(for: UserAPI.editUserInfo(parameters))
             .sink { (result: Result<EmptyResponse, Error>) in
                 switch result {
                 case .success:
@@ -57,7 +69,7 @@ class MyInfoViewModel: ObservableObject {
                         "profileImageUrl": success.data.first ?? String()
                     ]
                     
-                    let editInfoAPI = UserAPI.editInfo(parameters)
+                    let editInfoAPI = UserAPI.editUserInfo(parameters)
                     return self.apiManager.request(for: editInfoAPI)
                 case .failure(let failure):
                     return Just.eraseToAnyPublisher(.init(.failure(failure)))()
@@ -91,5 +103,13 @@ class MyInfoViewModel: ObservableObject {
     
     func requestUserBookmarkList() {
         
+    }
+    
+    private func saveUserInfo(_ userInfo: UserInfoDataModel) {
+        UserShared.userId = userInfo.id ?? 0
+        UserShared.userNickname = userInfo.nickname
+        UserShared.userProfileImageUrl = userInfo.profileImageUrl ?? nil
+        UserShared.userTags = userInfo.tags
+        UserShared.userReviewLikeCount = userInfo.reviewLikeCount
     }
 }

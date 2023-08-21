@@ -13,7 +13,8 @@ enum UserAPI: API {
     case checkNickname(nickname: String)
     case getTags
     case signUp([String : Any])
-    case editInfo([String : Any])
+    case getUserInfo
+    case editUserInfo([String : Any])
     case userLikeList(id: Int, parameters: [String : Any])
     case userBookmarkList(id: Int, parameters: [String : Any])
 }
@@ -22,11 +23,11 @@ extension UserAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .checkEmail, .checkNickname, .getTags, .userLikeList, .userBookmarkList:
+        case .checkEmail, .checkNickname, .getTags, .getUserInfo, .userLikeList, .userBookmarkList:
             return .get
         case .signUp:
             return .post
-        case .editInfo:
+        case .editUserInfo:
             return .put
         }
     }
@@ -41,7 +42,7 @@ extension UserAPI {
             return "/tags"
         case .signUp:
             return "/users"
-        case .editInfo:
+        case .getUserInfo, .editUserInfo:
             return "/user"
         case .userLikeList(let id, _):
             return "/users/\(id)/liked-products"
@@ -52,10 +53,10 @@ extension UserAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case .checkEmail, .checkNickname, .getTags:
+        case .checkEmail, .checkNickname, .getTags, .getUserInfo:
             return nil
         case .signUp(let parameters), .userBookmarkList(_, let parameters),
-                .userLikeList(_ ,let parameters), .editInfo(let parameters):
+                .userLikeList(_ ,let parameters), .editUserInfo(let parameters):
             return parameters
         }
     }

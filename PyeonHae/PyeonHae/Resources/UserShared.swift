@@ -51,6 +51,15 @@ enum UserShared {
     @UserDefault(key: "userNickname", defaultValue: String())
     static var userNickname: String
     
+    @UserDefault(key: "userProfileImageUrl", defaultValue: nil)
+    static var userProfileImageUrl: String?
+    
+    @StructUserDefault(key: "userTags", defaultValue: [])
+    static var userTags: [TagModel]
+    
+    @UserDefault(key: "userReviewLikeCount", defaultValue: -1)
+    static var userReviewLikeCount: Int
+    
     // 로그인 되어있는 상태인지 아닌지 판별
     @UserDefault(key: "isLoggedIn", defaultValue: false)
     static var isLoggedIn: Bool
