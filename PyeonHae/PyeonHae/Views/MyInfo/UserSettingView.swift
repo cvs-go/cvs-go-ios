@@ -9,6 +9,7 @@ import SwiftUI
 
 struct UserSettingView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var myInfoViewModel: MyInfoViewModel
     
     @State private var isOn = false
     
@@ -17,12 +18,16 @@ struct UserSettingView: View {
             settingTopBar
             VStack(alignment: .leading, spacing: 0) {
                 titleView("서비스")
-                contentsView("공지사항")
+                contentsView("공지사항", completion: {
+                    myInfoViewModel.requestNoticeList()
+                })
             }
             divider(height: 1)
             VStack(alignment: .leading, spacing: 0) {
                 titleView("앱 정보")
-                contentsView("오픈 라이센스")
+                contentsView("오픈 라이센스", completion: {
+                    // Action
+                })
                 contentsView("현재 버전 0.00.1", arrowHidden: true)
             }
             divider(height: 14)
@@ -62,10 +67,11 @@ struct UserSettingView: View {
     func contentsView(
         _ text: String,
         color: Color = .mineGray900,
-        arrowHidden: Bool = false
+        arrowHidden: Bool = false,
+        completion: (() -> Void)? = nil
     ) -> some View {
         Button(action: {
-            // add action
+            completion?()
         }) {
             HStack {
                 Text(text)
@@ -82,11 +88,5 @@ struct UserSettingView: View {
     
     func divider(height: CGFloat) -> some View {
         Rectangle().foregroundColor(.grayscale20).frame(maxHeight: height)
-    }
-}
-
-struct UserSettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserSettingView()
     }
 }

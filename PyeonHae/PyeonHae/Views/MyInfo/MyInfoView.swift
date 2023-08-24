@@ -36,7 +36,7 @@ struct MyInfoView: View {
             Spacer()
             
             NavigationLink(
-                destination: UserSettingView().navigationBarHidden(true),
+                destination: UserSettingView(myInfoViewModel: myInfoViewModel).navigationBarHidden(true),
                 isActive: $showSettingView
             ) {
                 EmptyView()

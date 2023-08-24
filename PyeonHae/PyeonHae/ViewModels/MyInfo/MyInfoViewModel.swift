@@ -105,6 +105,18 @@ class MyInfoViewModel: ObservableObject {
         
     }
     
+    func requestNoticeList() {
+        apiManager.request(for: UserAPI.noticeList)
+            .sink { (result: Result<NoticeListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
     private func saveUserInfo(_ userInfo: UserInfoDataModel) {
         UserShared.userId = userInfo.id ?? 0
         UserShared.userNickname = userInfo.nickname
