@@ -45,9 +45,6 @@ struct MyInfoView: View {
         .fullScreenCover(isPresented: $showEditView) {
             MyInfoEditView(myInfoViewModel: myInfoViewModel)
         }
-        .onAppear {
-            myInfoViewModel.requestUserInfo()
-        }
     }
     
     @ViewBuilder

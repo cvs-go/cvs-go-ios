@@ -51,6 +51,8 @@ struct MyInfoEditView: View {
                             .frame(width: 120, height: 120)
                     }
                 }
+                .cornerRadius(10)
+                .buttonStyle(.plain)
                 Spacer().frame(height: 30)
                 HStack {
                     TextFieldWithTitle(text: $nickName, title: "닉네임", placeholder: "2자 이상 8자 이내의 닉네임을 입력해주세요.", isSecure: false, type: .nickname, state: $nickNameFieldState)
@@ -123,6 +125,9 @@ struct MyInfoEditView: View {
         .sheet(isPresented: $showImagePicker) {
             MyInfoEditImagePicker(images: $imageSelect.images)
         }
+        .onAppear {
+            initUserInfo()
+        }
     }
     
     private func handleTagSelection(_ tag: TagModel) {
@@ -136,6 +141,14 @@ struct MyInfoEditView: View {
             if selectedTags.count < 3 {
                 selectedTags.append(tag)
             }
+        }
+    }
+    
+    private func initUserInfo() {
+        self.nickName = UserShared.userNickname
+        self.selectedTags = UserShared.userTags
+        if let image = UserShared.userProfileImageUrl?.toImage() {
+            self.imageSelect.images = [image]
         }
     }
 }

@@ -15,6 +15,7 @@ class MyInfoViewModel: ObservableObject {
     
     init() {
         requestUserLikeList(id: UserShared.userId)
+        requestUserInfo()
     }
     
     func requestUserInfo() {
