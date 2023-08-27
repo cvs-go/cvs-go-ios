@@ -47,7 +47,7 @@ struct InputPasswordView: View {
                 .disabled(isDisabled)
                 .onTapGesture {
                     loginViewModel.tryToLogin {
-                        switchRootViewToMain()
+                        switchRootView(rootview: MainTabView())
                     }
                 }
             Spacer().frame(height: isFocused ? 0 : 52)
@@ -71,12 +71,5 @@ struct InputPasswordView: View {
         return loginViewModel.password.isValidPassword()
         ? false
         : true
-    }
-    
-    private func switchRootViewToMain() {
-        let hostingController = UIHostingController(rootView: MainTabView())
-        let option = UIWindow.TransitionOptions(direction: .toRight, style: .easeInOut)
-        option.duration = 0.25
-        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
 }

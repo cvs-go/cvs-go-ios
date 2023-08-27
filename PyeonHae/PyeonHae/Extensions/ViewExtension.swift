@@ -41,18 +41,19 @@ extension View {
         }
     }
     
-    func showDeleteAlert(
+    func showDestructiveAlert(
         title: String = String(),
-        message: String,
+        message: String = String(),
+        secondaryButtonText: String,
         showAlert: Binding<Bool>,
-        deleteAction: @escaping () -> Void
+        destructiveAction: @escaping () -> Void
     ) -> some View {
         self.alert(isPresented: showAlert) {
             Alert(
                 title: Text(title),
                 message: Text(message),
                 primaryButton: .default(Text("취소")),
-                secondaryButton: .destructive(Text("삭제"), action: deleteAction)
+                secondaryButton: .destructive(Text(secondaryButtonText), action: destructiveAction)
             )
         }
     }
@@ -78,5 +79,12 @@ extension View {
     
     func hidden(_ shouldHide: Bool) -> some View {
         opacity(shouldHide ? 0 : 1)
+    }
+    
+    func switchRootView(rootview: some View) {
+        let hostingController = UIHostingController(rootView: rootview)
+        let option = UIWindow.TransitionOptions(direction: .toRight, style: .easeInOut)
+        option.duration = 0.25
+        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
 }

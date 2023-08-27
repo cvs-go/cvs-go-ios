@@ -13,6 +13,9 @@ struct UserSettingView: View {
     
     @State private var isOn = false
     
+    // TODO: 얼럿 취소할 시에 MyInfoView로 pop 되는 버그 수정하기
+    @State private var showLogoutAlert = false
+    
     var body: some View {
         VStack {
             settingTopBar
@@ -31,10 +34,21 @@ struct UserSettingView: View {
                 contentsView("현재 버전 0.00.1", arrowHidden: true)
             }
             divider(height: 14)
-            contentsView("로그아웃", color: .grayscale50, arrowHidden: true)
+            contentsView("로그아웃", color: .grayscale50, arrowHidden: true, completion: {
+                showLogoutAlert = true
+            })
             contentsView("회원탈퇴", color: .grayscale50, arrowHidden: true)
             divider(height: .infinity)
         }
+        .showDestructiveAlert(
+            title: "로그아웃 하시겠습니까?",
+            secondaryButtonText: "로그아웃",
+            showAlert: $showLogoutAlert,
+            destructiveAction: {
+                myInfoViewModel.requestLogout()
+                switchRootView(rootview: LoginView())
+            }
+        )
         .edgesIgnoringSafeArea(.bottom)
     }
     

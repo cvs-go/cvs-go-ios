@@ -50,7 +50,6 @@
 		5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77729A0D2E20063C450 /* ArrayExtension.swift */; };
 		5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77929A0DF830063C450 /* ToastMessage.swift */; };
 		54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54632D252A5A6C2500F8B55B /* SplashViewModel.swift */; };
-		54744FE42A97840C00905CA8 /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54744FE32A97840C00905CA8 /* NoticeListView.swift */; };
 		54744FE62A97843F00905CA8 /* NoticeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54744FE52A97843F00905CA8 /* NoticeListModel.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482CA872A4335560080C7E3 /* ReviewListModel.swift */; };
@@ -179,7 +178,6 @@
 		5462B77729A0D2E20063C450 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5462B77929A0DF830063C450 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		54632D252A5A6C2500F8B55B /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
-		54744FE32A97840C00905CA8 /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
 		54744FE52A97843F00905CA8 /* NoticeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListModel.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5482CA872A4335560080C7E3 /* ReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListModel.swift; sourceTree = "<group>"; };
@@ -696,7 +694,6 @@
 				5427B7112A7290E300523048 /* MyReviewView.swift */,
 				5427B7132A7292A500523048 /* MyLikeView.swift */,
 				5427B7152A7292B200523048 /* MyBookmarkView.swift */,
-				54744FE32A97840C00905CA8 /* NoticeListView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -870,7 +867,6 @@
 				D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */,
 				54915CCE2A63F3510076E442 /* DateExtension.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,
-				54744FE42A97840C00905CA8 /* NoticeListView.swift in Sources */,
 				54C4A09B29B3310900A33862 /* EndPoint.swift in Sources */,
 				54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,

@@ -143,10 +143,11 @@ struct SearchStartView: View {
             self.searchedProducts = UserShared.searchedProducts.sorted(by: { $0.timestamp > $1.timestamp })
             self.searchedKeywords = UserShared.searchedKeywords.sorted(by: { $0.timestamp > $1.timestamp })
         }
-        .showDeleteAlert(
+        .showDestructiveAlert(
             message: "검색 기록을 모두 삭제하겠습니까?",
+            secondaryButtonText: "삭제",
             showAlert: $showAlert,
-            deleteAction: {
+            destructiveAction: {
                 deleteAction?()
             }
         )
