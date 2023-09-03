@@ -18,6 +18,7 @@ enum UserAPI: API {
     case userLikeList(id: Int, parameters: [String : Any])
     case userBookmarkList(id: Int, parameters: [String : Any])
     case noticeList
+    case noticeDetail(id: Int)
 }
 
 extension UserAPI {
@@ -25,7 +26,7 @@ extension UserAPI {
     var method: HTTPMethod {
         switch self {
         case .checkEmail, .checkNickname, .getTags, .getUserInfo,
-                .userLikeList, .userBookmarkList, .noticeList:
+                .userLikeList, .userBookmarkList, .noticeList, .noticeDetail:
             return .get
         case .signUp:
             return .post
@@ -52,12 +53,14 @@ extension UserAPI {
             return "/users/\(id)/bookmarked-products"
         case .noticeList:
             return "/notices"
+        case .noticeDetail(let id):
+            return "/notices/\(id)"
         }
     }
     
     var parameters: [String : Any]? {
         switch self {
-        case .checkEmail, .checkNickname, .getTags, .getUserInfo, .noticeList:
+        case .checkEmail, .checkNickname, .getTags, .getUserInfo, .noticeList, .noticeDetail:
             return nil
         case .signUp(let parameters), .userBookmarkList(_, let parameters),
                 .userLikeList(_ ,let parameters), .editUserInfo(let parameters):

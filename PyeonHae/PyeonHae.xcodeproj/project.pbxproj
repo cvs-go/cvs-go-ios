@@ -81,6 +81,7 @@
 		54C9586E2A1CFC3500087679 /* LoadingGIF.gif in Resources */ = {isa = PBXBuildFile; fileRef = 54C9586D2A1CFC3500087679 /* LoadingGIF.gif */; };
 		54C9DC032AA4BF08001AC84D /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DC022AA4BF08001AC84D /* NoticeListView.swift */; };
 		54C9DC052AA4C6B2001AC84D /* NoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DC042AA4C6B2001AC84D /* NoticeDetailView.swift */; };
+		54C9DC072AA4CF06001AC84D /* NoticeDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DC062AA4CF06001AC84D /* NoticeDetailModel.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
 		54CC11ED29571E54007DAD20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11EC29571E54007DAD20 /* Preview Assets.xcassets */; };
@@ -208,6 +209,7 @@
 		54C9586D2A1CFC3500087679 /* LoadingGIF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LoadingGIF.gif; sourceTree = "<group>"; };
 		54C9DC022AA4BF08001AC84D /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
 		54C9DC042AA4C6B2001AC84D /* NoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailView.swift; sourceTree = "<group>"; };
+		54C9DC062AA4CF06001AC84D /* NoticeDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailModel.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E929571E54007DAD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				5427B71B2A729B1B00523048 /* UserLikeList.swift */,
 				5490B4A32A93976800A49949 /* UserInfoModel.swift */,
 				54744FE52A97843F00905CA8 /* NoticeListModel.swift */,
+				54C9DC062AA4CF06001AC84D /* NoticeDetailModel.swift */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -820,6 +823,7 @@
 				54F981A9297BF4B600D7E450 /* PopularProductCell.swift in Sources */,
 				5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */,
 				5493BE252A0F876B00CC127B /* UINavigationControllerExtension.swift in Sources */,
+				54C9DC072AA4CF06001AC84D /* NoticeDetailModel.swift in Sources */,
 				54F0C23529F9782D00CBF83C /* ProductLikeModel.swift in Sources */,
 				54F3C3E8298C025200C10FF5 /* ReviewHome.swift in Sources */,
 				543CEAC129CF1DAB00CDB0C8 /* Interceptor.swift in Sources */,

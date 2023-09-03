@@ -10,6 +10,8 @@ import SwiftUI
 struct NoticeListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var myInfoViewModel: MyInfoViewModel
+    @State private var showNoticeDetail = false
+    @State private var noticeId = -1
     
     var body: some View {
         VStack(spacing: 16) {
@@ -21,6 +23,16 @@ struct NoticeListView: View {
         }
         .onAppear {
             self.myInfoViewModel.requestNoticeList()
+        }
+        
+        NavigationLink(
+            destination: NoticeDetailView(
+                myInfoViewModel: myInfoViewModel,
+                noticeId: noticeId
+            ).navigationBarHidden(true),
+            isActive: $showNoticeDetail
+        ) {
+            EmptyView()
         }
     }
     
@@ -56,6 +68,12 @@ struct NoticeListView: View {
                 .font(.pretendard(.medium, 12))
                 .foregroundColor(.mineGray400)
             Spacer().frame(width: 20)
+        }
+        .contentShape(Rectangle())
+        .frame(height: 40)
+        .onTapGesture {
+            self.noticeId = notice.id
+            self.showNoticeDetail = true
         }
     }
 }
