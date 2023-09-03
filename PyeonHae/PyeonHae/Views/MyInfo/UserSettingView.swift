@@ -15,6 +15,7 @@ struct UserSettingView: View {
     
     // TODO: 얼럿 취소할 시에 MyInfoView로 pop 되는 버그 수정하기
     @State private var showLogoutAlert = false
+    @State private var showNoticeList = false
     
     var body: some View {
         VStack {
@@ -22,7 +23,7 @@ struct UserSettingView: View {
             VStack(alignment: .leading, spacing: 0) {
                 titleView("서비스")
                 contentsView("공지사항", completion: {
-                    myInfoViewModel.requestNoticeList()
+                    self.showNoticeList = true
                 })
             }
             divider(height: 1)
@@ -50,6 +51,15 @@ struct UserSettingView: View {
             }
         )
         .edgesIgnoringSafeArea(.bottom)
+        
+        NavigationLink(
+            destination: NoticeListView(
+                myInfoViewModel: myInfoViewModel
+            ).navigationBarHidden(true),
+            isActive: $showNoticeList
+        ) {
+            EmptyView()
+        }
     }
     
     var settingTopBar: some View {

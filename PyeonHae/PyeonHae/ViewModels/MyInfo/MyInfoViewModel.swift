@@ -10,6 +10,7 @@ import Combine
 
 class MyInfoViewModel: ObservableObject {
     private let apiManager = APIManager()
+    @Published var noticeList: [NoticeContentModel] = []
     
     var bag = Set<AnyCancellable>()
     
@@ -111,7 +112,7 @@ class MyInfoViewModel: ObservableObject {
             .sink { (result: Result<NoticeListModel, Error>) in
                 switch result {
                 case .success(let result):
-                    print(result)
+                    self.noticeList = result.data.content
                 case .failure(let error):
                     print(error)
                 }

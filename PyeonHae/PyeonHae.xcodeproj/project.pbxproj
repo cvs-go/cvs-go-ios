@@ -79,6 +79,8 @@
 		54C71D5029AB55B900FAFDCD /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */; };
 		54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 54C71D5229AB8EC200FAFDCD /* Alamofire */; };
 		54C9586E2A1CFC3500087679 /* LoadingGIF.gif in Resources */ = {isa = PBXBuildFile; fileRef = 54C9586D2A1CFC3500087679 /* LoadingGIF.gif */; };
+		54C9DC032AA4BF08001AC84D /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DC022AA4BF08001AC84D /* NoticeListView.swift */; };
+		54C9DC052AA4C6B2001AC84D /* NoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9DC042AA4C6B2001AC84D /* NoticeDetailView.swift */; };
 		54CC11E629571E52007DAD20 /* PyeonHaeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */; };
 		54CC11EA29571E54007DAD20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11E929571E54007DAD20 /* Assets.xcassets */; };
 		54CC11ED29571E54007DAD20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54CC11EC29571E54007DAD20 /* Preview Assets.xcassets */; };
@@ -204,6 +206,8 @@
 		54C71D4D29AB559E00FAFDCD /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		54C71D4F29AB55B900FAFDCD /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		54C9586D2A1CFC3500087679 /* LoadingGIF.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LoadingGIF.gif; sourceTree = "<group>"; };
+		54C9DC022AA4BF08001AC84D /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
+		54C9DC042AA4C6B2001AC84D /* NoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailView.swift; sourceTree = "<group>"; };
 		54CC11E229571E52007DAD20 /* PyeonHae.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PyeonHae.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54CC11E529571E52007DAD20 /* PyeonHaeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PyeonHaeApp.swift; sourceTree = "<group>"; };
 		54CC11E929571E54007DAD20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -694,6 +698,8 @@
 				5427B7112A7290E300523048 /* MyReviewView.swift */,
 				5427B7132A7292A500523048 /* MyLikeView.swift */,
 				5427B7152A7292B200523048 /* MyBookmarkView.swift */,
+				54C9DC022AA4BF08001AC84D /* NoticeListView.swift */,
+				54C9DC042AA4C6B2001AC84D /* NoticeDetailView.swift */,
 			);
 			path = MyInfo;
 			sourceTree = "<group>";
@@ -850,6 +856,7 @@
 				54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */,
 				5496CBF92A530A2A003DF7E3 /* ImageDetailView.swift in Sources */,
 				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
+				54C9DC032AA4BF08001AC84D /* NoticeListView.swift in Sources */,
 				54AFA1EA29ACEA130058DB39 /* UserAPI.swift in Sources */,
 				D56B26B72A35A9F000237983 /* ImageAPI.swift in Sources */,
 				5427B7122A7290E300523048 /* MyReviewView.swift in Sources */,
@@ -861,6 +868,7 @@
 				D5D1BCAF29938B8C00F25941 /* UserPageView.swift in Sources */,
 				D506C06129AF3A1900B9EA96 /* ReviewTextCell.swift in Sources */,
 				54C71D4E29AB559E00FAFDCD /* RoundedCorner.swift in Sources */,
+				54C9DC052AA4C6B2001AC84D /* NoticeDetailView.swift in Sources */,
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				543DCA8729F03564000CDAF0 /* Products.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,

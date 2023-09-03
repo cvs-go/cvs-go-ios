@@ -9,7 +9,7 @@ import Foundation
 
 struct NoticeListModel: Codable {
     let timestamp: String
-    let data: [NoticeContentModel]
+    let data: NoticeContentsModel
 }
 
 struct NoticeContentsModel: Codable {
@@ -18,9 +18,9 @@ struct NoticeContentsModel: Codable {
     let totalPages: Int
 }
 
-struct NoticeContentModel: Codable {
+struct NoticeContentModel: Codable, Hashable {
     let id: Int
     let title: String
-    let createdAt: String?
-    let isNew: Bool
+    let createdAt: String
+    let new: Bool
 }
