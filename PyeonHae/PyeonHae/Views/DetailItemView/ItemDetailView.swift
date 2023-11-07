@@ -56,7 +56,7 @@ struct ItemDetailView: View {
                         )
                 } else {
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.grayscale10, lineWidth: 1)
+                        .stroke(Color.black.opacity(0.05), lineWidth: 1)
                         .frame(width: UIWindow().screen.bounds.width - 40, height: 200)
                 }
                 Spacer()

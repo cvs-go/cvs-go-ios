@@ -172,8 +172,8 @@ class LoginViewModel: ObservableObject {
     
     private func saveToken(data: LoginDataModel) {
         UserShared.isLoggedIn = true
-        UserShared.accessToken = data.accessToken
-        UserShared.refreshToken = data.refreshToken
+        UserShared.accessToken = data.token.accessToken
+        UserShared.refreshToken = data.token.refreshToken
     }
 }
 
