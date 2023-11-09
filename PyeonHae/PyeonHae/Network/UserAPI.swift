@@ -52,7 +52,7 @@ extension UserAPI {
         case .getUserInfo, .editUserInfo:
             return "/user"
         case .follow(let userId), .unfollow(let userId):
-            return "users/\(userId)/followers"
+            return "/users/\(userId)/followers"
         case .userLikeList(let id, _):
             return "/users/\(id)/liked-products"
         case .userBookmarkList(let id, _):
