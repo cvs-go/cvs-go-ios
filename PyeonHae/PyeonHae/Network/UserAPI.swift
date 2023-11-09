@@ -15,6 +15,8 @@ enum UserAPI: API {
     case signUp([String : Any])
     case getUserInfo
     case editUserInfo([String : Any])
+    case follow(userId: Int)
+    case unfollow(userId: Int)
     case userLikeList(id: Int, parameters: [String : Any])
     case userBookmarkList(id: Int, parameters: [String : Any])
     case noticeList
@@ -28,10 +30,12 @@ extension UserAPI {
         case .checkEmail, .checkNickname, .getTags, .getUserInfo,
                 .userLikeList, .userBookmarkList, .noticeList, .noticeDetail:
             return .get
-        case .signUp:
+        case .signUp, .follow:
             return .post
         case .editUserInfo:
             return .put
+        case .unfollow:
+            return .delete
         }
     }
     
@@ -47,6 +51,8 @@ extension UserAPI {
             return "/users"
         case .getUserInfo, .editUserInfo:
             return "/user"
+        case .follow(let userId), .unfollow(let userId):
+            return "users/\(userId)/followers"
         case .userLikeList(let id, _):
             return "/users/\(id)/liked-products"
         case .userBookmarkList(let id, _):
@@ -60,7 +66,8 @@ extension UserAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case .checkEmail, .checkNickname, .getTags, .getUserInfo, .noticeList, .noticeDetail:
+        case .checkEmail, .checkNickname, .getTags, .getUserInfo,
+                .noticeList, .noticeDetail, .follow, .unfollow:
             return nil
         case .signUp(let parameters), .userBookmarkList(_, let parameters),
                 .userLikeList(_ ,let parameters), .editUserInfo(let parameters):

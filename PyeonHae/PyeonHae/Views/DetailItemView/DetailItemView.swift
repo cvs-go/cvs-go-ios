@@ -172,7 +172,15 @@ struct DetailItemView: View {
                                     reviewType: .normal,
                                     profileUrl: review.reviewerProfileImageUrl,
                                     nickname: review.reviewerNickname,
-                                    tags: review.reviewerTags
+                                    tags: review.reviewerTags,
+                                    isMe: review.isMe,
+                                    isFollowing: review.isFollowingUser,
+                                    followAction: {
+                                        reviewViewModel.requestFollow(userId: review.reviewerId)
+                                    },
+                                    unfollowAction: {
+                                        reviewViewModel.requestUnfollow(userId: review.reviewerId)
+                                    }
                                 )
                                 .padding(.bottom, 10)
                                 HStack(spacing: 0) {

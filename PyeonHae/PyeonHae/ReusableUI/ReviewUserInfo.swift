@@ -13,6 +13,34 @@ struct ReviewUserInfo: View {
     let profileUrl: String?
     let nickname: String
     let tags: [String]
+    let isMe: Bool
+    let isFollowing: Bool
+    let followAction: () -> Void
+    let unfollowAction: () -> Void
+    
+    @State private var isFollowingValue: Bool
+    
+    init(
+        reviewType: ReviewType,
+        profileUrl: String?,
+        nickname: String,
+        tags: [String],
+        isMe: Bool,
+        isFollowing: Bool,
+        followAction: @escaping () -> Void,
+        unfollowAction: @escaping () -> Void
+    ) {
+        self.reviewType = reviewType
+        self.profileUrl = profileUrl
+        self.nickname = nickname
+        self.tags = tags
+        self.isMe = isMe
+        self.isFollowing = isFollowing
+        self.followAction = followAction
+        self.unfollowAction = unfollowAction
+        
+        _isFollowingValue = State(initialValue: isFollowing)
+    }
     
     var body: some View {
         HStack(alignment: .center) {
@@ -25,7 +53,7 @@ struct ReviewUserInfo: View {
                     .cornerRadius(100)
             } else {
                 Image(name: .defalutUserImage)
-                    .resizable()    
+                    .resizable()
                     .frame(width: 36, height: 36)
                     .cornerRadius(100)
             }
@@ -43,12 +71,16 @@ struct ReviewUserInfo: View {
             }
             Spacer()
             
-            if reviewType == .normal {
-                Text("팔로우")
+            if reviewType == .normal && !isMe {
+                Text(isFollowingValue ? "팔로잉" : "팔로우")
                     .font(.pretendard(.semiBold, 12))
                     .padding(EdgeInsets(top: 6, leading: 20, bottom: 6, trailing: 20))
-                    .background(Color.red100)
+                    .background(isFollowingValue ? Color.grayscale50 : Color.red100)
                     .cornerRadius(6)
+                    .onTapGesture {
+                        isFollowingValue ? unfollowAction() : followAction()
+                        isFollowingValue.toggle()
+                    }
                 Spacer().frame(width: 12)
             }
         }

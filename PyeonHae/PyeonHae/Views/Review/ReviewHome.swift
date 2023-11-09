@@ -111,7 +111,15 @@ struct ReviewHome: View {
                                     reviewType: .normal,
                                     profileUrl: review.reviewerProfileImageUrl,
                                     nickname: review.reviewerNickname,
-                                    tags: review.reviewerTags
+                                    tags: review.reviewerTags,
+                                    isMe: review.reviewerId == UserShared.userId,
+                                    isFollowing: review.isFollowing,
+                                    followAction: {
+                                        reviewViewModel.requestFollow(userId: review.reviewerId)
+                                    },
+                                    unfollowAction: {
+                                        reviewViewModel.requestUnfollow(userId: review.reviewerId)
+                                    }
                                 )
                                 HStack(spacing: 0) {
                                     ReviewContents(

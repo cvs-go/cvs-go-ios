@@ -168,4 +168,30 @@ class ReviewViewModel: ObservableObject {
                 }
             }.store(in: &bag)
     }
+    
+    // 회원 팔로우 생성
+    func requestFollow(userId: Int) {
+        apiManager.request(for: UserAPI.follow(userId: userId))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 회원 팔로우 삭제
+    func requestUnfollow(userId: Int) {
+        apiManager.request(for: UserAPI.unfollow(userId: userId))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
 }
