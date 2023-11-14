@@ -17,6 +17,7 @@ enum UserAPI: API {
     case editUserInfo([String : Any])
     case follow(userId: Int)
     case unfollow(userId: Int)
+    case tagMatch(userId: Int)
     case userLikeList(id: Int, parameters: [String : Any])
     case userBookmarkList(id: Int, parameters: [String : Any])
     case noticeList
@@ -27,8 +28,8 @@ extension UserAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .checkEmail, .checkNickname, .getTags, .getUserInfo,
-                .userLikeList, .userBookmarkList, .noticeList, .noticeDetail:
+        case .checkEmail, .checkNickname, .getTags, .getUserInfo, .userLikeList,
+                .userBookmarkList, .noticeList, .noticeDetail, .tagMatch:
             return .get
         case .signUp, .follow:
             return .post
@@ -53,6 +54,8 @@ extension UserAPI {
             return "/user"
         case .follow(let userId), .unfollow(let userId):
             return "/users/\(userId)/followers"
+        case .tagMatch(let userId):
+            return "/users/\(userId)/tag-match-percentage"
         case .userLikeList(let id, _):
             return "/users/\(id)/liked-products"
         case .userBookmarkList(let id, _):
@@ -67,7 +70,7 @@ extension UserAPI {
     var parameters: [String : Any]? {
         switch self {
         case .checkEmail, .checkNickname, .getTags, .getUserInfo,
-                .noticeList, .noticeDetail, .follow, .unfollow:
+                .noticeList, .noticeDetail, .follow, .unfollow, .tagMatch:
             return nil
         case .signUp(let parameters), .userBookmarkList(_, let parameters),
                 .userLikeList(_ ,let parameters), .editUserInfo(let parameters):
