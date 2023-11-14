@@ -13,7 +13,7 @@ enum UserAPI: API {
     case checkNickname(nickname: String)
     case getTags
     case signUp([String : Any])
-    case getUserInfo
+    case getUserInfo(userId: Int)
     case editUserInfo([String : Any])
     case follow(userId: Int)
     case unfollow(userId: Int)
@@ -50,8 +50,10 @@ extension UserAPI {
             return "/tags"
         case .signUp:
             return "/users"
-        case .getUserInfo, .editUserInfo:
+        case .editUserInfo:
             return "/user"
+        case .getUserInfo(let userId):
+            return "/users/\(userId)"
         case .follow(let userId), .unfollow(let userId):
             return "/users/\(userId)/followers"
         case .tagMatch(let userId):

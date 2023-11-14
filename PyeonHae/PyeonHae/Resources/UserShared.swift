@@ -51,7 +51,7 @@ enum UserShared {
     @UserDefault(key: "userNickname", defaultValue: String())
     static var userNickname: String
     
-    @UserDefault(key: "userProfileImageUrl", defaultValue: nil)
+    @StructUserDefault(key: "userProfileImageUrl", defaultValue: nil)
     static var userProfileImageUrl: String?
     
     @StructUserDefault(key: "userTags", defaultValue: [])

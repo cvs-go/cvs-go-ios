@@ -17,11 +17,11 @@ class MyInfoViewModel: ObservableObject {
     
     init() {
         requestUserLikeList(id: UserShared.userId)
-        requestUserInfo()
+        requestUserInfo(id: UserShared.userId)
     }
     
-    func requestUserInfo() {
-        apiManager.request(for: UserAPI.getUserInfo)
+    func requestUserInfo(id: Int) {
+        apiManager.request(for: UserAPI.getUserInfo(userId: id))
             .sink { (result: Result<UserInfoModel, Error>) in
                 switch result {
                 case .success(let result):
@@ -151,7 +151,7 @@ class MyInfoViewModel: ObservableObject {
     private func saveUserInfo(_ userInfo: UserInfoDataModel) {
         UserShared.userId = userInfo.id ?? 0
         UserShared.userNickname = userInfo.nickname
-        UserShared.userProfileImageUrl = userInfo.profileImageUrl ?? nil
+        UserShared.userProfileImageUrl = userInfo.profileImageUrl
         UserShared.userTags = userInfo.tags
         UserShared.userReviewLikeCount = userInfo.reviewLikeCount
     }

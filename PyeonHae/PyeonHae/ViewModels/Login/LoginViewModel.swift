@@ -143,6 +143,7 @@ class LoginViewModel: ObservableObject {
             .sink { (result: Result<LoginModel, Error>) in
                 switch result {
                 case .success(let data):
+                    UserShared.userId = data.data.userId
                     self.saveToken(data: data.data)
                     completion()
                 case .failure:
