@@ -26,6 +26,8 @@ extension Image {
         case sampleImage = "sampleImage"
         case logoOnePlusOne = "logoOnePlusOne"
         case logoTwoPlusOne = "logoTwoPlusOne"
+        case logoGift = "logoGift"
+        case logoDiscount = "logoDiscount"
         case infoCircle = "infoCircle"
         case redStar = "redStar"
         case yellowStar = "yellowStar"
