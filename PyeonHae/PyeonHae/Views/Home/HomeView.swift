@@ -25,7 +25,7 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     MainBanner(promotions: $homeViewModel.promotions)
-                    EventProducts()
+                    EventProducts(eventProducts: $homeViewModel.eventProducts)
                 }
                 Spacer().frame(height: 14)
                 PopularProducts()

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventProducts: View {
+    @Binding var eventProducts: [Product]
+    
     var body: some View {
         VStack {
             HStack {
@@ -22,19 +24,13 @@ struct EventProducts: View {
             Spacer().frame(height: 16)
             ScrollView(.horizontal) {
                 HStack {
-                    ForEach(0..<10){ cell in
-                        EventProductCell()
+                    ForEach($eventProducts, id: \.self) { eventProduct in
+                        EventProductCell(eventProduct: eventProduct)
                     }
                 }
                 .padding(.horizontal, 20)
             }
         }
         .background(Color.white)
-    }
-}
-
-struct EventProducts_Previews: PreviewProvider {
-    static var previews: some View {
-        EventProducts()
     }
 }

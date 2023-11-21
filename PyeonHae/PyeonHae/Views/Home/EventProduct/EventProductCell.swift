@@ -6,39 +6,46 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct EventProductCell: View {
+    @Binding var eventProduct: Product
+    
     var body: some View {
         VStack(alignment: .leading) {
-            ZStack {
-                Image(name: .logoCU)
-                    .zIndex(1)
-                    .offset(x: -37, y: -37)
-                Image(name: .sampleImage)
+            if let url = eventProduct.productImageUrl, let imageUrl = URL(string: url) {
+                KFImage(imageUrl)
                     .resizable()
+                    .frame(width: 106, height: 106)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.borderColor)
+                    )
             }
-            .frame(width: 106, height: 106)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.borderColor)
-                )
             Spacer().frame(height: 8)
-            Text("토레타P 900ml")
+            Text(eventProduct.productName)
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)
             Spacer().frame(height: 2)
-            Text("2,600원")
+            Text("\(eventProduct.productPrice)원")
                 .font(.pretendard(.semiBold, 18))
                 .foregroundColor(.grayscale100)
             Spacer().frame(height: 8)
-            Image(name: .logoOnePlusOne)
+            HStack(spacing: 2) {
+                if eventProduct.convenienceStoreEvents.contains(where: { $0.eventType == "BOGO" }) {
+                    Image(name: .logoOnePlusOne)
+                }
+                if eventProduct.convenienceStoreEvents.contains(where: { $0.eventType == "BTGO" }) {
+                    Image(name: .logoTwoPlusOne)
+                }
+                if eventProduct.convenienceStoreEvents.contains(where: { $0.eventType == "GIFT" }) {
+                    Image(name: .logoGift)
+                }
+                if eventProduct.convenienceStoreEvents.contains(where: { $0.eventType == "DISCOUNT" }) {
+                    Image(name: .logoDiscount)
+                }
+            }
             Spacer().frame(height: 24)
         }
-    }
-}
-
-struct EventProductCell_Previews: PreviewProvider {
-    static var previews: some View {
-        EventProductCell()
     }
 }
