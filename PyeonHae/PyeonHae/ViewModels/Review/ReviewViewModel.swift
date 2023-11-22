@@ -21,7 +21,9 @@ class ReviewViewModel: ObservableObject {
     @Published var showToastMessage = false
     @Published var showAlertMessage = false
     @Published var errorMessage = String()
+    
     @Published var isLoading = false
+    @Published var userInfoLoading = false
     
     @Published var latestReviewCount: Int = 0
     @Published var reviewList: [ReviewDataModel] = []
@@ -29,6 +31,9 @@ class ReviewViewModel: ObservableObject {
     @Published var categoryIds: [Int] = []
     @Published var tagIds: [Int] = []
     @Published var ratings: [String] = []
+    
+    @Published var userInfo: UserInfoDataModel? = nil
+    @Published var tagMatchPercentage = -1
     
     var bag = Set<AnyCancellable>()
     
@@ -193,5 +198,57 @@ class ReviewViewModel: ObservableObject {
                     print(error)
                 }
             }.store(in: &bag)
+    }
+    
+    // 회원 정보 조회
+    func requestUserInfo(id: Int) {
+        apiManager.request(for: UserAPI.getUserInfo(userId: id))
+            .sink { (result: Result<UserInfoModel, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    //　태그 매칭률 조회
+    func requestTagMatch(userId: Int) {
+        apiManager.request(for: UserAPI.tagMatch(userId: userId))
+            .sink { (result: Result<TagMatchModel, Error>) in
+                switch result {
+                case . success(let result):
+                    self.tagMatchPercentage = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    //　리뷰 홈에서 회원 정보 조회 때 사용
+    func requestSelectedUserInfo(userId: Int) {
+        apiManager.request(for: UserAPI.tagMatch(userId: userId))
+            .flatMap { (result: Result<TagMatchModel, Error>) ->
+                AnyPublisher<Result<UserInfoModel, Error>, Never> in
+                switch result {
+                case .success(let result):
+                    self.tagMatchPercentage = result.data
+                    return self.apiManager.request(for: UserAPI.getUserInfo(userId: userId))
+                case .failure(let error):
+                    return Just.eraseToAnyPublisher(.init(.failure(error)))()
+                }
+            }
+            .sink { result in
+                switch result {
+                case .success(let result):
+                    self.userInfo = result.data
+                    self.userInfoLoading = false
+                case .failure(let error):
+                    print(error)
+                    self.userInfoLoading = false
+                }
+            }
+            .store(in: &bag)
     }
 }

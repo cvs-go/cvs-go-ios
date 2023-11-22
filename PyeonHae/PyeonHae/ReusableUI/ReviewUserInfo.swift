@@ -17,8 +17,11 @@ struct ReviewUserInfo: View {
     let isFollowing: Bool
     let followAction: () -> Void
     let unfollowAction: () -> Void
+    let reviewerId: Int
     
     @State private var isFollowingValue: Bool
+    @Binding var showUserPage: Bool
+    @Binding var selectedReviewerId: Int
     
     init(
         reviewType: ReviewType,
@@ -28,7 +31,10 @@ struct ReviewUserInfo: View {
         isMe: Bool,
         isFollowing: Bool,
         followAction: @escaping () -> Void,
-        unfollowAction: @escaping () -> Void
+        unfollowAction: @escaping () -> Void,
+        reviewerId: Int,
+        showUserPage: Binding<Bool>,
+        selectedReviewerId: Binding<Int>
     ) {
         self.reviewType = reviewType
         self.profileUrl = profileUrl
@@ -38,6 +44,9 @@ struct ReviewUserInfo: View {
         self.isFollowing = isFollowing
         self.followAction = followAction
         self.unfollowAction = unfollowAction
+        self.reviewerId = reviewerId
+        self._showUserPage = showUserPage
+        self._selectedReviewerId = selectedReviewerId
         
         _isFollowingValue = State(initialValue: isFollowing)
     }
@@ -45,29 +54,35 @@ struct ReviewUserInfo: View {
     var body: some View {
         HStack(alignment: .center) {
             Spacer().frame(width: 12)
-            // 사용자 프로필 이미지
-            if let profileUrl = profileUrl, let url = URL(string: profileUrl) {
-                KFImage(url)
-                    .resizable()
-                    .frame(width: 36, height: 36)
-                    .cornerRadius(100)
-            } else {
-                Image(name: .defalutUserImage)
-                    .resizable()
-                    .frame(width: 36, height: 36)
-                    .cornerRadius(100)
-            }
-            VStack(alignment: .leading) {
-                Text(nickname)
-                    .font(.pretendard(.semiBold, 14))
-                    .foregroundColor(.grayscale100)
-                HStack {
-                    ForEach(tags, id: \.self){ tag in
-                        Text("#\(tag)")
-                            .font(.pretendard(.medium, 12))
-                            .foregroundColor(.iris100)
+            Group {
+                // 사용자 프로필 이미지
+                if let profileUrl = profileUrl, let url = URL(string: profileUrl) {
+                    KFImage(url)
+                        .resizable()
+                        .frame(width: 36, height: 36)
+                        .cornerRadius(100)
+                } else {
+                    Image(name: .defalutUserImage)
+                        .resizable()
+                        .frame(width: 36, height: 36)
+                        .cornerRadius(100)
+                }
+                VStack(alignment: .leading) {
+                    Text(nickname)
+                        .font(.pretendard(.semiBold, 14))
+                        .foregroundColor(.grayscale100)
+                    HStack {
+                        ForEach(tags, id: \.self){ tag in
+                            Text("#\(tag)")
+                                .font(.pretendard(.medium, 12))
+                                .foregroundColor(.iris100)
+                        }
                     }
                 }
+            }
+            .onTapGesture {
+                self.showUserPage = true
+                self.selectedReviewerId = reviewerId
             }
             Spacer()
             

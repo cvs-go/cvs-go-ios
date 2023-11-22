@@ -8,22 +8,52 @@
 import SwiftUI
 
 struct UserPageView: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @ObservedObject var reviewViewModel: ReviewViewModel
+    
+    @Binding var selectedReviewerId: Int
+    
     var body: some View {
         GeometryReader { geo in
-            VStack {
-                ScrollView {
-                    UserInfoView(userInfoType: .other)
-                    Spacer().frame(height: 20)
-                    WriteReviewsView()
+            if reviewViewModel.userInfoLoading {
+                LoadingView()
+                    .position(x: geo.size.width/2, y: geo.size.height/2)
+            } else {
+                VStack {
+                    userPageTopBar
+                    ScrollView {
+                        UserInfoView(
+                            userInfo: reviewViewModel.userInfo,
+                            userInfoType: selectedReviewerId == UserShared.userId ? .me : .other,
+                            tagMatchPercentage: reviewViewModel.tagMatchPercentage
+                        )
+                        Spacer().frame(height: 20)
+                        WriteReviewsView()
+                    }
+                    .background(Color.grayscale10)
                 }
-                .background(Color.grayscale10)
             }
         }
+        .onAppear {
+            reviewViewModel.userInfoLoading = true
+            reviewViewModel.requestSelectedUserInfo(userId: selectedReviewerId)
+            // TODO: 작성한 리뷰 
+        }
     }
-}
-
-struct UserPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        UserPageView()
+    
+    var userPageTopBar: some View {
+        HStack(spacing: 0) {
+            Spacer().frame(width: 14)
+            Image(name: .arrowLeft)
+                .onTapGesture {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+            Spacer().frame(width: 9)
+            Text("회원 정보")
+                .font(.pretendard(.bold, 20))
+                .foregroundColor(.grayscale100)
+            Spacer()
+        }
+        .frame(height: 44)
     }
 }

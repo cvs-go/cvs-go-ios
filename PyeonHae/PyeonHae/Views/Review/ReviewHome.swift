@@ -10,11 +10,16 @@ import SwiftUI
 struct ReviewHome: View {
     @ObservedObject var reviewViewModel = ReviewViewModel()
     
+    @State private var reviewLoaded = false
+    
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var filterClicked = false
     @State var selectedSortOptionIndex = 0
+    
+    @State private var showUserPage = false
+    @State private var selectedReviewerId = -1
     
     var body: some View {
         VStack(spacing: 0) {
@@ -27,6 +32,15 @@ struct ReviewHome: View {
                 ],
                 type: .review
             )
+            NavigationLink(
+                destination: UserPageView(
+                    reviewViewModel: reviewViewModel,
+                    selectedReviewerId: $selectedReviewerId
+                ).navigationBarHidden(true),
+                isActive: $showUserPage)
+            {
+                EmptyView()
+            }
         }
         .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
             EditReviewView(
@@ -38,9 +52,12 @@ struct ReviewHome: View {
             message: "리뷰 작성에 성공했습니다!",
             isShowing: $reviewViewModel.showToastMessage
         )
-        .onAppear {
-            reviewViewModel.isLoading = true
-            reviewViewModel.requestReviewList()
+        .task {
+            if !reviewLoaded {
+                reviewViewModel.isLoading = true
+                reviewViewModel.requestReviewList()
+                self.reviewLoaded = true
+            }
         }
     }
     
@@ -107,20 +124,25 @@ struct ReviewHome: View {
                     } else {
                         ForEach(reviewViewModel.reviewList, id: \.self) { review in
                             VStack(alignment: .leading, spacing: 10) {
-                                ReviewUserInfo(
-                                    reviewType: .normal,
-                                    profileUrl: review.reviewerProfileImageUrl,
-                                    nickname: review.reviewerNickname,
-                                    tags: review.reviewerTags,
-                                    isMe: review.reviewerId == UserShared.userId,
-                                    isFollowing: review.isFollowing,
-                                    followAction: {
-                                        reviewViewModel.requestFollow(userId: review.reviewerId)
-                                    },
-                                    unfollowAction: {
-                                        reviewViewModel.requestUnfollow(userId: review.reviewerId)
-                                    }
-                                )
+                                Group {
+                                    ReviewUserInfo(
+                                        reviewType: .normal,
+                                        profileUrl: review.reviewerProfileImageUrl,
+                                        nickname: review.reviewerNickname,
+                                        tags: review.reviewerTags,
+                                        isMe: review.reviewerId == UserShared.userId,
+                                        isFollowing: review.isFollowing,
+                                        followAction: {
+                                            reviewViewModel.requestFollow(userId: review.reviewerId)
+                                        },
+                                        unfollowAction: {
+                                            reviewViewModel.requestUnfollow(userId: review.reviewerId)
+                                        },
+                                        reviewerId: review.reviewerId,
+                                        showUserPage: $showUserPage,
+                                        selectedReviewerId: $selectedReviewerId
+                                    )
+                                }
                                 HStack(spacing: 0) {
                                     ReviewContents(
                                         rating: review.reviewRating,

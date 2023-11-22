@@ -14,6 +14,9 @@ struct DetailItemView: View {
     @ObservedObject var reviewViewModel = ReviewViewModel()
     @State private var isReviewButtonVisible = false
     
+    @State private var showUserPage = false
+    @State private var selectedReviewerId = -1
+    
     let selectedProduct: Product?
     
     var body: some View {
@@ -180,7 +183,10 @@ struct DetailItemView: View {
                                     },
                                     unfollowAction: {
                                         reviewViewModel.requestUnfollow(userId: review.reviewerId)
-                                    }
+                                    },
+                                    reviewerId: review.reviewerId,
+                                    showUserPage: $showUserPage,
+                                    selectedReviewerId: $selectedReviewerId
                                 )
                                 .padding(.bottom, 10)
                                 HStack(spacing: 0) {

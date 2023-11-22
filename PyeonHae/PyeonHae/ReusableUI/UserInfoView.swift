@@ -9,22 +9,31 @@ import SwiftUI
 import Kingfisher
 
 struct UserInfoView: View {
+    private let userInfo: UserInfoDataModel?
     private let userInfoType: UserInfoType
+    private let tagMatchPercentage: Int
     @State var followCheck: Bool = false
     @Binding var showEditView: Bool
     
     init(
+        userInfo: UserInfoDataModel? = nil,
         userInfoType: UserInfoType,
+        tagMatchPercentage: Int = -1,
         showEditView: Binding<Bool> = .constant(false)
     ) {
+        self.userInfo = userInfo
         self.userInfoType = userInfoType
+        self.tagMatchPercentage = tagMatchPercentage
         self._showEditView = showEditView
     }
     
     var body: some View {
         VStack {
             HStack(spacing: 16) {
-                if let url = UserShared.userProfileImageUrl, let imageUrl = URL(string: url) {
+                if let url = userInfoType == .me
+                    ? UserShared.userProfileImageUrl
+                    : userInfo?.profileImageUrl ?? nil
+                    , let imageUrl = URL(string: url) {
                     KFImage(imageUrl)
                         .resizable()
                         .frame(width: 72, height: 72)
@@ -34,7 +43,10 @@ struct UserInfoView: View {
                 }
                 VStack(alignment: .leading) {
                     HStack(spacing: 6) {
-                        Text(UserShared.userNickname)
+                        Text(userInfoType == .me 
+                             ? UserShared.userNickname
+                             : userInfo?.nickname ?? "-"
+                        )
                             .font(.pretendard(.semiBold, 16))
                             .foregroundColor(.grayscale100)
                         Image(name: .editPen)
@@ -44,7 +56,9 @@ struct UserInfoView: View {
                             }
                     }
                     HStack {
-                        ForEach(UserShared.userTags, id: \.self) { tag in
+                        ForEach(userInfoType == .me
+                                ? UserShared.userTags
+                                : userInfo?.tags ?? [], id: \.self) { tag in
                             Text("#\(tag.name)")
                                 .font(.pretendard(.medium, 14))
                                 .foregroundColor(.iris100)
@@ -54,7 +68,9 @@ struct UserInfoView: View {
                         Image(name: userInfoType == .me ? .fillLike : .statistics)
                             .renderingMode(.template)
                             .foregroundColor(.grayscale70)
-                        Text(userInfoType == .me ? "\(UserShared.userReviewLikeCount)명에게 도움을 줬어요." : "나와 취향이 66% 비슷해요.")
+                        Text(userInfoType == .me
+                             ? "\(UserShared.userReviewLikeCount)명에게 도움을 줬어요."
+                             : "나와 취향이 \(tagMatchPercentage)% 비슷해요.")
                             .font(.pretendard(.medium, 14))
                             .foregroundColor(.grayscale70)
                     }
