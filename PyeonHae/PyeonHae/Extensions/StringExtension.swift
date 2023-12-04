@@ -18,15 +18,18 @@ extension String {
         return password.evaluate(with: self)
     }
     
-    func toImage() -> UIImage? {
+    func toImage(completion: @escaping (UIImage?) -> Void) {
         if let url = URL(string: self) {
-            do {
-                let data = try Data(contentsOf: url)
-                return UIImage(data: data)
-            } catch(let error) {
-                print(error)
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    completion(nil)
+                    return
+                }
+                completion(UIImage(data: data))
             }
+            task.resume()
+        } else {
+            completion(nil)
         }
-        return nil
     }
 }

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject var homeViewModel = HomeViewModel()
+    
     var body: some View {
         VStack {
             HStack {
@@ -22,7 +24,7 @@ struct HomeView: View {
             .frame(height: 44)
             ScrollView {
                 VStack(spacing: 0) {
-                    MainBanner()
+                    MainBanner(promotions: $homeViewModel.promotions)
                     EventProducts()
                 }
                 Spacer().frame(height: 14)

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MainBanner: View {
-    let images = [Image(name: .banner1), Image(name: .banner1), Image(name: .banner1)]
+    @Binding var promotions: [PromotionContent]
+    @State private var images: [Image] = []
     
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var currentImage: Image?
@@ -16,7 +17,7 @@ struct MainBanner: View {
         didSet {
             scrollToCurrentPage()
             withAnimation(.easeInOut) {
-                currentImage = images[currentIndex]
+                currentImage = images[safe: currentIndex]
             }
         }
     }
@@ -32,7 +33,7 @@ struct MainBanner: View {
                         HStack(spacing: spacing) {
                             Group {
                                 ForEach(-1..<images.count + 1, id: \.self) { i in
-                                    images[i < 0 ? images.count - 1 : (i >= images.count ? 0 : i)]
+                                    images[safe: i < 0 ? images.count - 1 : (i >= images.count ? 0 : i)]?
                                         .resizable()
                                         .frame(width: titleViewWidth, height: 200)
                                         .cornerRadius(10)
@@ -67,12 +68,21 @@ struct MainBanner: View {
                     }
             )
             .onAppear {
-                currentImage = images[0]
+                currentImage = images[safe: 0]
                 titleViewWidth = geo.size.width - 70
                 contentOffsetX = -titleViewWidth + spacing
             }
             .onReceive(timer) { _ in
                 currentIndex += 1
+            }
+            .onChange(of: promotions) { _ in
+                promotions.forEach { promotion in
+                    promotion.imageUrl.toImage { image in
+                        if let image = image {
+                            images.append(Image(uiImage: image))
+                        }
+                    }
+                }
             }
         }
         .frame(height: 200)
@@ -92,11 +102,5 @@ struct MainBanner: View {
         withAnimation {
             contentOffsetX = -titleViewWidth * CGFloat(currentIndex + 1) - spacing * CGFloat(currentIndex - 1)
         }
-    }
-}
-
-struct MainBanner_Previews: PreviewProvider {
-    static var previews: some View {
-        MainBanner()
     }
 }

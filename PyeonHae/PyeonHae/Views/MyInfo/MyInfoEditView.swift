@@ -147,8 +147,10 @@ struct MyInfoEditView: View {
     private func initUserInfo() {
         self.nickName = UserShared.userNickname
         self.selectedTags = UserShared.userTags
-        if let image = UserShared.userProfileImageUrl?.toImage() {
-            self.imageSelect.images = [image]
+        UserShared.userProfileImageUrl?.toImage { image in
+            if let image = image {
+                self.imageSelect.images = [image]
+            }
         }
     }
 }
