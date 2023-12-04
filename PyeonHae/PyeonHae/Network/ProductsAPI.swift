@@ -16,13 +16,14 @@ enum ProductsAPI: API {
     case unlike(id: Int)
     case bookmark(id: Int)
     case unbookmark(id: Int)
+    case promotions
 }
 
 extension ProductsAPI {
     
     var method: HTTPMethod {
         switch self {
-        case .filter, .search, .product:
+        case .filter, .search, .product, .promotions:
             return .get
         case .like, .bookmark:
             return .post
@@ -43,6 +44,8 @@ extension ProductsAPI {
             return "/products/\(id)/likes"
         case .bookmark(let id), .unbookmark(let id):
             return "/products/\(id)/bookmarks"
+        case .promotions:
+            return "/promotions"
         }
     }
     
