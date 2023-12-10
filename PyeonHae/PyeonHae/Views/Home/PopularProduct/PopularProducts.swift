@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PopularProducts: View {
+//    @Binding var popularProducts: [Product]
+    @ObservedObject var homeViewModel: HomeViewModel
     @State private var showToolTip = false
     
     var body: some View {
@@ -34,8 +36,8 @@ struct PopularProducts: View {
                 Spacer().frame(width: 16)
             }
             Spacer().frame(height: 16)
-            ForEach(0..<3) { _ in
-                PopularProductCell()
+            ForEach($homeViewModel.popularProducts, id: \.self) { popularProduct in
+                PopularProductCell(popularProduct: popularProduct)
                     .padding(.bottom, 16)
             }
             Spacer().frame(height: 8)
@@ -50,11 +52,5 @@ struct PopularProducts: View {
             .padding(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
             .background(Color.grayscale85.opacity(0.8))
             .cornerRadius(10)
-    }
-}
-
-struct PopularProducts_Previews: PreviewProvider {
-    static var previews: some View {
-        PopularProducts()
     }
 }

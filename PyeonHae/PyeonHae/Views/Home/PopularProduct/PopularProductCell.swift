@@ -6,41 +6,47 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct PopularProductCell: View {
+    @Binding var popularProduct: Product
+    
     var body: some View {
         HStack(spacing: 15) {
             ZStack {
-                Image(name: .sampleImage)
-                    .resizable()
+                if let imageUrl = popularProduct.productImageUrl, let url = URL(string: imageUrl) {
+                    KFImage(url)
+                        .resizable()
+                }
             }
             .frame(width: 120, height: 120)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.borderColor)
-                )
+            )
             VStack(alignment: .leading) {
-                Text("해드림")
+                Text(popularProduct.manufacturerName)
                     .font(.pretendard(.regular, 12))
                     .foregroundColor(.grayscale70)
-                Text("매콤 투움바 퓨전 파스타")
+                Text(popularProduct.productName)
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
-                Text("9,900원")
+                Text("\(popularProduct.productPrice)원")
                     .font(.pretendard(.medium, 16))
                     .foregroundColor(.grayscale85)
                 HStack {
                     Image(name: .redStar)
-                    Text("4.5")
+                    Text(popularProduct.reviewRating)
                         .font(.pretendard(.semiBold, 14))
                         .foregroundColor(.grayscale100)
                     Image(name: .rectengle)
-                    Text("5,000개의 리뷰")
+                    Text("\(popularProduct.reviewCount)개의 리뷰")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale70)
                 }
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10)
+                    // TODO: 상품 태그 api 호출
                     Text("이 제품을 주로 찾는 맵찔이에요.")
                         .lineLimit(1)
                         .font(.pretendard(.regular, 12))
@@ -53,11 +59,5 @@ struct PopularProductCell: View {
             }
         }
         .padding(.horizontal, 20)
-    }
-}
-
-struct PopularProductCell_Previews: PreviewProvider {
-    static var previews: some View {
-        PopularProductCell()
     }
 }

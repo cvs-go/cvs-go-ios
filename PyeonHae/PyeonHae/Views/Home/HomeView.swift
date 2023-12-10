@@ -28,7 +28,8 @@ struct HomeView: View {
                     EventProducts(eventProducts: $homeViewModel.eventProducts)
                 }
                 Spacer().frame(height: 14)
-                PopularProducts()
+//                PopularProducts(popularProducts: $homeViewModel.popularProducts)
+                PopularProducts(homeViewModel: homeViewModel)
                 Spacer().frame(height: 14)
                 PopularReview()
             }

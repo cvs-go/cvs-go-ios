@@ -12,12 +12,14 @@ class HomeViewModel: ObservableObject {
     private let apiManager = APIManager()
     @Published var promotions: [PromotionContent] = []
     @Published var eventProducts: [Product] = []
+    @Published var popularProducts: [Product] = []
     
     var bag = Set<AnyCancellable>()
     
     init() {
         requestPromotions()
         requestEventProducts()
+        requestPopularProducts()
     }
     
     // 홈 화면 프로모션 요청
@@ -45,6 +47,24 @@ class HomeViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.eventProducts = result.data.content
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    //　인기 상품 조회
+    private func requestPopularProducts() {
+        let parameters: [String : Any] = [
+            "sortBy": "SCORE",
+            "size": "3"
+        ]
+        
+        apiManager.request(for: ProductsAPI.search(parameters))
+            .sink { (result: Result<ProductModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.popularProducts = result.data.content
                 case .failure(let error):
                     print(error)
                 }
