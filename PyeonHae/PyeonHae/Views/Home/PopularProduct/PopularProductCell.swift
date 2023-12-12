@@ -10,6 +10,7 @@ import Kingfisher
 
 struct PopularProductCell: View {
     @Binding var popularProduct: Product
+    @Binding var tag: [Int: String]
     
     var body: some View {
         HStack(spacing: 15) {
@@ -45,18 +46,20 @@ struct PopularProductCell: View {
                         .foregroundColor(.grayscale70)
                 }
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 10)
-                    // TODO: 상품 태그 api 호출
-                    Text("이 제품을 주로 찾는 맵찔이에요.")
-                        .lineLimit(1)
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale70)
-                        .zIndex(1)
-                        .padding(.horizontal, 12)
+                    if let tag = tag[popularProduct.productId], tag != String() {
+                        RoundedRectangle(cornerRadius: 10)
+                        Text("이 제품을 주로 찾는 \(tag)에요.")
+                            .lineLimit(1)
+                            .font(.pretendard(.regular, 12))
+                            .foregroundColor(.grayscale70)
+                            .zIndex(1)
+                            .padding(.horizontal, 12)
+                    }
                 }
                 .foregroundColor(.grayscale20)
                 .frame(height: 23)
             }
+            Spacer()
         }
         .padding(.horizontal, 20)
     }

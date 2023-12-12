@@ -18,7 +18,7 @@ struct Products: Codable {
 }
 
 struct Product: Codable, Hashable {
-    let productId: Int
+    var productId: Int
     let productName: String
     let productPrice: Int
     let productImageUrl: String?

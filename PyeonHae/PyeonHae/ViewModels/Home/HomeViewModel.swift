@@ -13,6 +13,7 @@ class HomeViewModel: ObservableObject {
     @Published var promotions: [PromotionContent] = []
     @Published var eventProducts: [Product] = []
     @Published var popularProducts: [Product] = []
+    @Published var productTags: [Int: String] = [:]
     
     var bag = Set<AnyCancellable>()
     
@@ -65,6 +66,18 @@ class HomeViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.popularProducts = result.data.content
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    func requestProductTag(productId: Int) {
+        apiManager.request(for: ProductsAPI.tags(id: productId))
+            .sink { (result: Result<ProductTags, Error>) in
+                switch result {
+                case .success(let result):
+                    self.productTags.updateValue(result.data.first?.name ?? String(), forKey: productId)
                 case .failure(let error):
                     print(error)
                 }

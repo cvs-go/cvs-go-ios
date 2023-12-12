@@ -19,6 +19,7 @@
 		5403AEE82957275C00FB7253 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5403AEE72957275B00FB7253 /* FontExtension.swift */; };
 		5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5403AEE9295729C500FB7253 /* ColorExtension.swift */; };
 		54070B6129B0EF5E00D87F51 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54070B6029B0EF5E00D87F51 /* SignUpModel.swift */; };
+		5408F3A52B280EF400EE78F5 /* ProductTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5408F3A42B280EF400EE78F5 /* ProductTags.swift */; };
 		54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */; };
 		54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB929584327009D5A09 /* ImageExtension.swift */; };
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
@@ -154,6 +155,7 @@
 		5403AEE72957275B00FB7253 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		5403AEE9295729C500FB7253 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		54070B6029B0EF5E00D87F51 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		5408F3A42B280EF400EE78F5 /* ProductTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTags.swift; sourceTree = "<group>"; };
 		54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithTitle.swift; sourceTree = "<group>"; };
 		54126CB929584327009D5A09 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		54126CC029585BD6009D5A09 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -599,6 +601,7 @@
 				54F0C23A29F9785800CBF83C /* ProductUnBookmarkModel.swift */,
 				54915CC92A63DEEB0076E442 /* SearchedProduct.swift */,
 				54915CCB2A63ECDB0076E442 /* SearchedKeyword.swift */,
+				5408F3A42B280EF400EE78F5 /* ProductTags.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -925,6 +928,7 @@
 				5420D1C029F02AEF00A78000 /* SearchHomeView.swift in Sources */,
 				54AA0E072A19F3260031190D /* LoadingView.swift in Sources */,
 				D5D1BCB12993966A00F25941 /* UserInfoView.swift in Sources */,
+				5408F3A52B280EF400EE78F5 /* ProductTags.swift in Sources */,
 				54F0C23129F9684900CBF83C /* ProductDetail.swift in Sources */,
 				D506C05D29AF24D100B9EA96 /* DetailItemView.swift in Sources */,
 				D5D1BCB529939AA800F25941 /* ReviewView.swift in Sources */,

@@ -37,8 +37,14 @@ struct PopularProducts: View {
             }
             Spacer().frame(height: 16)
             ForEach($homeViewModel.popularProducts, id: \.self) { popularProduct in
-                PopularProductCell(popularProduct: popularProduct)
-                    .padding(.bottom, 16)
+                PopularProductCell(
+                    popularProduct: popularProduct,
+                    tag: $homeViewModel.productTags
+                )
+                .padding(.bottom, 16)
+                .onAppear {
+                    homeViewModel.requestProductTag(productId: popularProduct.productId.wrappedValue)
+                }
             }
             Spacer().frame(height: 8)
         }
