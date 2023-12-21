@@ -72,6 +72,7 @@ struct ReviewContents: View {
                 }
             }
             Text(content)
+                .frame(width: UIWindow().screen.bounds.width - 93, alignment: .leading)
                 .lineLimit(2)
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)

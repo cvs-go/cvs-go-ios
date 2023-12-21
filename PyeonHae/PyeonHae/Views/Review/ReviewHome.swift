@@ -123,7 +123,7 @@ struct ReviewHome: View {
                         .frame(minHeight: geometry.size.height)
                     } else {
                         ForEach(reviewViewModel.reviewList, id: \.self) { review in
-                            VStack(alignment: .leading, spacing: 10) {
+                            VStack(alignment: .leading) {
                                 Group {
                                     ReviewUserInfo(
                                         reviewType: .normal,

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PopularReview: View {
+    @ObservedObject var homeViewModel: HomeViewModel
+    
     var body: some View {
         VStack {
             HStack {
@@ -20,10 +22,25 @@ struct PopularReview: View {
                 Spacer().frame(width: 16)
             }
             Spacer().frame(height: 16)
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(0..<10){ cell in
-                        ReviewView()
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach($homeViewModel.popularReviews, id: \.self) { review in
+                        ReviewView(
+                            review: review,
+                            likeAction: {
+                                homeViewModel.requestLikeReview(id: review.reviewId.wrappedValue)
+                            },
+                            unlikeAction: {
+                                homeViewModel.requestUnlikeReview(id: review.reviewId.wrappedValue)
+                            },
+                            bookmarkAction: {
+                                homeViewModel.requestProductBookmark(productID: review.productId.wrappedValue)
+                            },
+                            unBookmarkAction: {
+                                homeViewModel.requestProductUnBookmark(productID: review.productId.wrappedValue)
+                            }
+                        )
+                            .frame(width: UIWindow().screen.bounds.width - 75)
                     }
                 }
                 .padding(.horizontal, 20)
@@ -31,11 +48,5 @@ struct PopularReview: View {
         }
         .padding(.vertical, 16)
         .background(Color.white)
-    }
-}
-
-struct PopularReview_Previews: PreviewProvider {
-    static var previews: some View {
-        PopularReview()
     }
 }

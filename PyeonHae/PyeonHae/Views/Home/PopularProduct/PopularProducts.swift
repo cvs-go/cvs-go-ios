@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PopularProducts: View {
-//    @Binding var popularProducts: [Product]
     @ObservedObject var homeViewModel: HomeViewModel
     @State private var showToolTip = false
     

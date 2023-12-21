@@ -18,11 +18,11 @@ struct ReviewsModel: Codable {
 }
 
 struct ReviewDataModel: Codable, Hashable {
-    let productId: Int
+    var productId: Int
     let productName: String
     let productManufacturer: String
     let productImageUrl: String?
-    let reviewId: Int
+    var reviewId: Int
     let reviewerId: Int
     let reviewerNickname: String
     let reviewerProfileImageUrl: String?

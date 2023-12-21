@@ -30,11 +30,11 @@ struct ReviewUserInfo: View {
         tags: [String],
         isMe: Bool,
         isFollowing: Bool,
-        followAction: @escaping () -> Void,
-        unfollowAction: @escaping () -> Void,
+        followAction: @escaping () -> Void = {},
+        unfollowAction: @escaping () -> Void = {},
         reviewerId: Int,
-        showUserPage: Binding<Bool>,
-        selectedReviewerId: Binding<Int>
+        showUserPage: Binding<Bool> = .constant(false),
+        selectedReviewerId: Binding<Int> = .constant(-1)
     ) {
         self.reviewType = reviewType
         self.profileUrl = profileUrl
@@ -103,7 +103,7 @@ struct ReviewUserInfo: View {
         .foregroundColor(Color.grayscale10)
         .background(Color.grayscale10)
         .cornerRadius(10)
-        .padding(.horizontal, 19)
+        .padding(.init(top: 0, leading: 19, bottom: 0, trailing: reviewType == .normal ? 19 : 0))
     }
 }
 
