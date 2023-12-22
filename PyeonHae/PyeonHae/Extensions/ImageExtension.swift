@@ -72,6 +72,7 @@ extension Image {
         case emptyReviewImage = "emptyReviewImage"
         case roundedClose = "roundedClose"
         case newImage = "newImage"
+        case more = "more"
     }
     
     init(name imageName: ImageName) {

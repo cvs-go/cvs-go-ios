@@ -12,16 +12,18 @@ class MyInfoViewModel: ObservableObject {
     private let apiManager = APIManager()
     @Published var noticeList: [NoticeContentModel] = []
     @Published var noticeDetail: NoticeDetailContent? = nil
+    @Published var myReviewData: UserReviewsModel? = nil
     
     var bag = Set<AnyCancellable>()
     
     init() {
-        requestUserLikeList(id: UserShared.userId)
-        requestUserInfo(id: UserShared.userId)
+        requestMyReviewList()
+        requestMyLikeList()
+        requestUserInfo()
     }
     
-    func requestUserInfo(id: Int) {
-        apiManager.request(for: UserAPI.getUserInfo(userId: id))
+    func requestUserInfo() {
+        apiManager.request(for: UserAPI.getUserInfo(userId: UserShared.userId))
             .sink { (result: Result<UserInfoModel, Error>) in
                 switch result {
                 case .success(let result):
@@ -88,12 +90,26 @@ class MyInfoViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    func requestUserLikeList(id: Int) {
+    private func requestMyReviewList() {
+        let parameters: [String: Any] = [:]
+        
+        apiManager.request(for: ReviewAPI.userReviews(id: UserShared.userId, parameters: parameters))
+            .sink { (result: Result<UserReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.myReviewData = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    func requestMyLikeList() {
         let parameters: [String: Any] = [
             :
         ]
         
-        apiManager.request(for: UserAPI.userLikeList(id: id, parameters: parameters))
+        apiManager.request(for: UserAPI.userLikeList(id: UserShared.userId, parameters: parameters))
             .sink { (result: Result<UserLikeList, Error>) in
                 switch result {
                 case .success(let result):

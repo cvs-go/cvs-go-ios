@@ -51,6 +51,7 @@
 		5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77729A0D2E20063C450 /* ArrayExtension.swift */; };
 		5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77929A0DF830063C450 /* ToastMessage.swift */; };
 		54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54632D252A5A6C2500F8B55B /* SplashViewModel.swift */; };
+		54732F002B3426F800770FA1 /* UserReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54732EFF2B3426F800770FA1 /* UserReviewListModel.swift */; };
 		54744FE62A97843F00905CA8 /* NoticeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54744FE52A97843F00905CA8 /* NoticeListModel.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
 		5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482CA872A4335560080C7E3 /* ReviewListModel.swift */; };
@@ -186,6 +187,7 @@
 		5462B77729A0D2E20063C450 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5462B77929A0DF830063C450 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		54632D252A5A6C2500F8B55B /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		54732EFF2B3426F800770FA1 /* UserReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReviewListModel.swift; sourceTree = "<group>"; };
 		54744FE52A97843F00905CA8 /* NoticeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListModel.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5482CA872A4335560080C7E3 /* ReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListModel.swift; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 			children = (
 				5482CA872A4335560080C7E3 /* ReviewListModel.swift */,
 				544041912A4835B700FE2B61 /* ProductReviewsModel.swift */,
+				54732EFF2B3426F800770FA1 /* UserReviewListModel.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				54D8796C2B1D8F3A008A43E1 /* PromotionsModel.swift in Sources */,
 				54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */,
 				54126CC129585BD6009D5A09 /* LoginView.swift in Sources */,
+				54732F002B3426F800770FA1 /* UserReviewListModel.swift in Sources */,
 				549CBA882A2F20820074AFA5 /* EmptyResponse.swift in Sources */,
 				543CEAC529CF4AB700CDB0C8 /* FiltersModel.swift in Sources */,
 				54F0C23729F9783900CBF83C /* ProductUnLikeModel.swift in Sources */,

@@ -40,7 +40,7 @@ struct PopularReview: View {
                                 homeViewModel.requestProductUnBookmark(productID: review.productId.wrappedValue)
                             }
                         )
-                            .frame(width: UIWindow().screen.bounds.width - 75)
+                        .frame(width: UIWindow().screen.bounds.width - 75)
                     }
                 }
                 .padding(.horizontal, 20)

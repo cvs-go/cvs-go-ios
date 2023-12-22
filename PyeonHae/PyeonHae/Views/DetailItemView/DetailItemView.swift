@@ -192,6 +192,7 @@ struct DetailItemView: View {
                                 HStack(spacing: 0) {
                                     Spacer().frame(width: 12)
                                     ReviewContents(
+                                        reviewerId: review.reviewerId,
                                         rating: review.reviewRating,
                                         imageUrls: review.reviewImages,
                                         content: review.reviewContent,

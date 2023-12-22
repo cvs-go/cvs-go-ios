@@ -30,6 +30,8 @@ struct ReviewView: View {
             }
             HStack(spacing: 0) {
                 ReviewContents(
+                    reviewType: .popular,
+                    reviewerId: review.reviewerId,
                     rating: review.reviewRating,
                     imageUrls: review.reviewImageUrls,
                     content: review.reviewContent,

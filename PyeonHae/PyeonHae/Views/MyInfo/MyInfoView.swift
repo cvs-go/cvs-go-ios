@@ -27,7 +27,7 @@ struct MyInfoView: View {
             TopTabBar(
                 tabItems: tabItems,
                 contents: [
-                    AnyView(MyReviewView()),
+                    AnyView(MyReviewView(reviewContent: $myInfoViewModel.myReviewData)),
                     AnyView(MyLikeView()),
                     AnyView(MyBookmarkView()),
                 ],

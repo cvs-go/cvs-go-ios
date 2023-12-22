@@ -9,6 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct ReviewContents: View {
+    let reviewType: ReviewType
+    let reviewerId: Int
     let rating: Int
     let imageUrls: [String]?
     let content: String
@@ -24,6 +26,8 @@ struct ReviewContents: View {
     @State private var detailImageUrl = String()
     
     init(
+        reviewType: ReviewType = .normal,
+        reviewerId: Int,
         rating: Int,
         imageUrls: [String]?,
         content: String,
@@ -32,6 +36,8 @@ struct ReviewContents: View {
         likeAction: @escaping () -> Void,
         unlikeAction: @escaping () -> Void
     ) {
+        self.reviewType = reviewType
+        self.reviewerId = reviewerId
         self.rating = rating
         self.imageUrls = imageUrls
         self.content = content
@@ -47,11 +53,15 @@ struct ReviewContents: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 0) {
-                Spacer().frame(width: 24)
                 ForEach(1..<6) { index in
                     Image(name: rating >= index ? .yellowStar : .emptyStar)
                 }
+                if reviewerId == UserShared.userId, reviewType == .normal {
+                    Spacer()
+                    Image(name: .more)
+                }
             }
+            .padding(.horizontal, 24)
             if let imageUrls = imageUrls {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
@@ -72,7 +82,6 @@ struct ReviewContents: View {
                 }
             }
             Text(content)
-                .frame(width: UIWindow().screen.bounds.width - 93, alignment: .leading)
                 .lineLimit(2)
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)

@@ -12,6 +12,7 @@ enum ReviewAPI: API {
     case writeReview(id: Int, parameters: [String : Any])
     case reviewList(parameters: [String : Any])
     case productReview(id: Int, parameters: [String : Any])
+    case userReviews(id: Int, parameters: [String : Any])
     case like(id: Int)
     case unlike(id: Int)
 }
@@ -22,7 +23,7 @@ extension ReviewAPI {
         switch self {
         case .writeReview, .like:
             return .post
-        case .reviewList, .productReview:
+        case .reviewList, .productReview, .userReviews:
             return .get
         case .unlike:
             return .delete
@@ -37,6 +38,8 @@ extension ReviewAPI {
             return "/reviews"
         case .productReview(let id, _):
             return "/products/\(id)/reviews"
+        case .userReviews(let id, _):
+            return "/users/\(id)/reviews"
         case .like(let id), .unlike(let id):
             return "/reviews/\(id)/likes"
         }
@@ -44,7 +47,8 @@ extension ReviewAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case .writeReview(_, let parameters), .productReview(_, let parameters):
+        case .writeReview(_, let parameters), .productReview(_, let parameters),
+                .userReviews(_, let parameters):
             return parameters
         case .reviewList(let parameters):
             return parameters
@@ -55,7 +59,7 @@ extension ReviewAPI {
     
     var encoding: ParameterEncoding {
         switch self {
-        case .reviewList, .productReview:
+        case .reviewList, .productReview, .userReviews:
             return URLEncoding.default
         default:
             return JSONEncoding.default

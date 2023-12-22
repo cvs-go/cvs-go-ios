@@ -145,6 +145,7 @@ struct ReviewHome: View {
                                 }
                                 HStack(spacing: 0) {
                                     ReviewContents(
+                                        reviewerId: review.reviewerId,
                                         rating: review.reviewRating,
                                         imageUrls: review.reviewImageUrls,
                                         content: review.reviewContent,
