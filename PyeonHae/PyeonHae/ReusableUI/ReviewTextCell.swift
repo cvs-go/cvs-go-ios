@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import ExpandableText
 
 struct ReviewContents: View {
     let reviewType: ReviewType
@@ -81,12 +82,23 @@ struct ReviewContents: View {
                     }
                 }
             }
-            Text(content)
-                .lineLimit(2)
-                .font(.pretendard(.regular, 14))
-                .foregroundColor(.grayscale85)
-                .padding(.vertical, 3)
-                .padding(.horizontal, 24)
+            if reviewType == .popular {
+                Text(content)
+                    .lineLimit(2)
+                    .font(.pretendard(.regular, 14))
+                    .foregroundColor(.grayscale85)
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 24)
+            } else {
+                ExpandableText(text: content)
+                    .lineLimit(2)
+                    .font(.pretendard(.regular, 14))
+                    .foregroundColor(.grayscale85)
+                    .expandButton(TextSet(text: "더보기", font: .pretendard(.regular, 14), color: .grayscale50))
+                    .expandAnimation(.easeOut)
+                    .padding(.vertical, 3)
+                    .padding(.horizontal, 24)
+            }
             HStack {
                 Spacer().frame(width: 24)
                 HStack(spacing: 2) {

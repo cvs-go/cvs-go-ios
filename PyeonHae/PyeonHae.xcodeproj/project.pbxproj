@@ -20,6 +20,7 @@
 		5403AEEA295729C500FB7253 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5403AEE9295729C500FB7253 /* ColorExtension.swift */; };
 		54070B6129B0EF5E00D87F51 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54070B6029B0EF5E00D87F51 /* SignUpModel.swift */; };
 		5408F3A52B280EF400EE78F5 /* ProductTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5408F3A42B280EF400EE78F5 /* ProductTags.swift */; };
+		540CD3F52B380A0C0052DE00 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 540CD3F42B380A0C0052DE00 /* ExpandableText */; };
 		54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB329581F56009D5A09 /* TextFieldWithTitle.swift */; };
 		54126CBA29584327009D5A09 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CB929584327009D5A09 /* ImageExtension.swift */; };
 		54126CC129585BD6009D5A09 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54126CC029585BD6009D5A09 /* LoginView.swift */; };
@@ -128,7 +129,6 @@
 		D560E25329A4CCA40018E8FB /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25229A4CCA40018E8FB /* SearchResultView.swift */; };
 		D560E25529A4D0480018E8FB /* SearchResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D560E25429A4D0480018E8FB /* SearchResultItemView.swift */; };
 		D56B26B72A35A9F000237983 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B26B62A35A9F000237983 /* ImageAPI.swift */; };
-		D57E78A729F531A500F35DFC /* Security.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = D57E78A629F531A500F35DFC /* Security.xcconfig */; };
 		D57E78AA29F539C500F35DFC /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78A929F539C500F35DFC /* MyInfoView.swift */; };
 		D57E78AC29F6B91700F35DFC /* MyInfoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AB29F6B91700F35DFC /* MyInfoEditView.swift */; };
 		D57E78AE29F8092B00F35DFC /* MyInfoEditImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57E78AD29F8092B00F35DFC /* MyInfoEditImagePicker.swift */; };
@@ -283,6 +283,7 @@
 				54159D2229F154C30085CF08 /* Kingfisher in Frameworks */,
 				54B8F6A92997722D00E19FFF /* WrappingHStack in Frameworks */,
 				54C71D5329AB8EC200FAFDCD /* Alamofire in Frameworks */,
+				540CD3F52B380A0C0052DE00 /* ExpandableText in Frameworks */,
 				54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */,
 				54AA0E052A19F1070031190D /* SwiftyGif in Frameworks */,
 			);
@@ -770,6 +771,7 @@
 				54E58D6729B620E900958789 /* UIWindowTransitions */,
 				54159D2129F154C30085CF08 /* Kingfisher */,
 				54AA0E042A19F1070031190D /* SwiftyGif */,
+				540CD3F42B380A0C0052DE00 /* ExpandableText */,
 			);
 			productName = PyeonHae;
 			productReference = 54CC11E229571E52007DAD20 /* PyeonHae.app */;
@@ -783,7 +785,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					54CC11E129571E52007DAD20 = {
 						CreatedOnToolsVersion = 14.1;
@@ -805,6 +807,7 @@
 				54E58D6629B620E900958789 /* XCRemoteSwiftPackageReference "UIWindowTransitions" */,
 				54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				54AA0E032A19F1070031190D /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				540CD3F32B380A0C0052DE00 /* XCRemoteSwiftPackageReference "ExpandableText" */,
 			);
 			productRefGroup = 54CC11E329571E52007DAD20 /* Products */;
 			projectDirPath = "";
@@ -825,7 +828,6 @@
 				5403AEDC2957252B00FB7253 /* Pretendard-Thin.ttf in Resources */,
 				5403AEDD2957252B00FB7253 /* Pretendard-Regular.ttf in Resources */,
 				5403AEDA2957252B00FB7253 /* Pretendard-Bold.ttf in Resources */,
-				D57E78A729F531A500F35DFC /* Security.xcconfig in Resources */,
 				5403AEDB2957252B00FB7253 /* Pretendard-Light.ttf in Resources */,
 				5403AEE22957252B00FB7253 /* Pretendard-SemiBold.ttf in Resources */,
 				5403AEDE2957252B00FB7253 /* Pretendard-Medium.ttf in Resources */,
@@ -1000,6 +1002,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1060,6 +1063,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1170,6 +1174,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		540CD3F32B380A0C0052DE00 /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NuPlay/ExpandableText.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -1213,6 +1225,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		540CD3F42B380A0C0052DE00 /* ExpandableText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 540CD3F32B380A0C0052DE00 /* XCRemoteSwiftPackageReference "ExpandableText" */;
+			productName = ExpandableText;
+		};
 		54159D2129F154C30085CF08 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 54159D2029F154C30085CF08 /* XCRemoteSwiftPackageReference "Kingfisher" */;
