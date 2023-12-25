@@ -49,6 +49,7 @@
 		544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40C2998D67E00EA9223 /* SelectableButton.swift */; };
 		544CE40F2998F03400EA9223 /* ReviewUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */; };
 		545AC7D4295B3A23002D6853 /* InputPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AC7D3295B3A23002D6853 /* InputPasswordView.swift */; };
+		545C62A02B39603000E02B3A /* EventProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545C629F2B39603000E02B3A /* EventProductView.swift */; };
 		5462B77829A0D2E20063C450 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77729A0D2E20063C450 /* ArrayExtension.swift */; };
 		5462B77A29A0DF830063C450 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5462B77929A0DF830063C450 /* ToastMessage.swift */; };
 		54632D262A5A6C2500F8B55B /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54632D252A5A6C2500F8B55B /* SplashViewModel.swift */; };
@@ -184,6 +185,7 @@
 		544CE40C2998D67E00EA9223 /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		544CE40E2998F03400EA9223 /* ReviewUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewUserInfo.swift; sourceTree = "<group>"; };
 		545AC7D3295B3A23002D6853 /* InputPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputPasswordView.swift; sourceTree = "<group>"; };
+		545C629F2B39603000E02B3A /* EventProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProductView.swift; sourceTree = "<group>"; };
 		5462B77729A0D2E20063C450 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		5462B77929A0DF830063C450 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		54632D252A5A6C2500F8B55B /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
@@ -671,6 +673,7 @@
 			children = (
 				54F981A6297BF48400D7E450 /* EventProductCell.swift */,
 				54F981AC297E4E3500D7E450 /* EventProducts.swift */,
+				545C629F2B39603000E02B3A /* EventProductView.swift */,
 			);
 			path = EventProduct;
 			sourceTree = "<group>";
@@ -912,6 +915,7 @@
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				543DCA8729F03564000CDAF0 /* Products.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
+				545C62A02B39603000E02B3A /* EventProductView.swift in Sources */,
 				D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */,
 				54915CCE2A63F3510076E442 /* DateExtension.swift in Sources */,
 				54126CB429581F56009D5A09 /* TextFieldWithTitle.swift in Sources */,

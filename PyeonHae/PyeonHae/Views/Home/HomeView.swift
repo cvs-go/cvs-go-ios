@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
+    @ObservedObject var searchViewModel = SearchViewModel()
+    @State private var showEventProducts = false
     
     var body: some View {
         VStack {
@@ -25,15 +27,25 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     MainBanner(promotions: $homeViewModel.promotions)
-                    EventProducts(eventProducts: $homeViewModel.eventProducts)
+                    EventProducts(eventProducts: $homeViewModel.eventProducts, showEventProducts: $showEventProducts)
+                    Spacer().frame(height: 14)
+                    PopularProducts(homeViewModel: homeViewModel)
+                    Spacer().frame(height: 14)
+                    PopularReview(homeViewModel: homeViewModel)
+                    Spacer().frame(height: 22)
                 }
-                Spacer().frame(height: 14)
-                PopularProducts(homeViewModel: homeViewModel)
-                Spacer().frame(height: 14)
-                PopularReview(homeViewModel: homeViewModel)
-                Spacer().frame(height: 22)
             }
             .background(Color.grayscale20)
+            
+            NavigationLink(
+                destination: EventProductView(
+                    homeViewModel: homeViewModel,
+                    searchViewModel: searchViewModel
+                ),
+                isActive: $showEventProducts
+            ) {
+                EmptyView()
+            }
         }
     }
 }
