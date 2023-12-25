@@ -132,7 +132,7 @@ struct SearchStartView: View {
             NavigationLink(
                 destination: DetailItemView(
                     searchViewModel: searchViewModel,
-                    selectedProduct: selectedProduct
+                    selectedProduct: $selectedProduct
                 ).navigationBarHidden(true),
                 isActive: $showDetailView
             ) {

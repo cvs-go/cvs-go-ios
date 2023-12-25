@@ -67,7 +67,7 @@ struct EventProductView: View {
             NavigationLink(
                 destination: DetailItemView(
                     searchViewModel: searchViewModel,
-                    selectedProduct: selectedProduct
+                    selectedProduct: $selectedProduct
                 ).navigationBarBackButtonHidden(),
                 isActive: $showDetailView
             ) {
@@ -80,9 +80,6 @@ struct EventProductView: View {
                 self.searchViewModel.requestReview(productID: selectedProduct.productId)
                 self.showDetailView = true
             }
-        }
-        .onAppear {
-            self.selectedProduct = nil
         }
     }
         @ViewBuilder

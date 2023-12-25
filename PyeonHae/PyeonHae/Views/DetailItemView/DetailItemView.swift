@@ -17,7 +17,7 @@ struct DetailItemView: View {
     @State private var showUserPage = false
     @State private var selectedReviewerId = -1
     
-    let selectedProduct: Product?
+    @Binding var selectedProduct: Product?
     
     var body: some View {
         if searchViewModel.detailIsLoading {
@@ -99,6 +99,9 @@ struct DetailItemView: View {
                         ))
                     }
                 }
+            }
+            .onDisappear {
+                self.selectedProduct = nil
             }
         }
     }

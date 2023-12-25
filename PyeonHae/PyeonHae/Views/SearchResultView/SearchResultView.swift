@@ -110,14 +110,13 @@ struct SearchResultView: View {
             }
             NavigationLink(destination: DetailItemView(
                 searchViewModel: searchViewModel,
-                selectedProduct: selectedProduct
+                selectedProduct: $selectedProduct
             ).navigationBarHidden(true), isActive: $showDetailView) {
                 EmptyView()
             }
         }
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
-            selectedProduct = nil
         }
         .onChange(of: searchAgain) { _ in
             searchViewModel.keyword = text
