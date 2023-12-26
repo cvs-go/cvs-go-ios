@@ -68,7 +68,7 @@ struct EventProductView: View {
                 destination: DetailItemView(
                     searchViewModel: searchViewModel,
                     selectedProduct: $selectedProduct
-                ).navigationBarBackButtonHidden(),
+                ),
                 isActive: $showDetailView
             ) {
                 EmptyView()

@@ -21,7 +21,7 @@ struct LoadingView: View {
             Text("잠시만 기다려주세요")
                 .font(.pretendard(.regular, 14))
                 .foregroundColor(.grayscale85)
-        }
+        }.navigationBarBackButtonHidden()
     }
 }
 

@@ -11,6 +11,8 @@ struct HomeView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
     @ObservedObject var searchViewModel = SearchViewModel()
     @State private var showEventProducts = false
+    @State private var showEventDetail = false
+    @State private var selectedProduct: Product? = nil
     
     var body: some View {
         VStack {
@@ -27,7 +29,13 @@ struct HomeView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     MainBanner(promotions: $homeViewModel.promotions)
-                    EventProducts(eventProducts: $homeViewModel.eventProducts, showEventProducts: $showEventProducts)
+                    EventProducts(
+                        searchViewModel: searchViewModel,
+                        eventProducts: $homeViewModel.eventProducts,
+                        selectedProduct: $selectedProduct,
+                        showEventProducts: $showEventProducts,
+                        showEventDetail: $showEventDetail
+                    )
                     Spacer().frame(height: 14)
                     PopularProducts(homeViewModel: homeViewModel)
                     Spacer().frame(height: 14)
@@ -43,6 +51,16 @@ struct HomeView: View {
                     searchViewModel: searchViewModel
                 ),
                 isActive: $showEventProducts
+            ) {
+                EmptyView()
+            }
+            
+            NavigationLink(
+                destination: DetailItemView(
+                    searchViewModel: searchViewModel,
+                    selectedProduct: $selectedProduct
+                ),
+                isActive: $showEventDetail
             ) {
                 EmptyView()
             }

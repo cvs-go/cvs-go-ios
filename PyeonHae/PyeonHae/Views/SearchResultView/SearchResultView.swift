@@ -108,10 +108,13 @@ struct SearchResultView: View {
                     Spacer()
                 }
             }
-            NavigationLink(destination: DetailItemView(
-                searchViewModel: searchViewModel,
-                selectedProduct: $selectedProduct
-            ).navigationBarHidden(true), isActive: $showDetailView) {
+            NavigationLink(
+                destination: DetailItemView(
+                    searchViewModel: searchViewModel,
+                    selectedProduct: $selectedProduct
+                ),
+                isActive: $showDetailView
+            ) {
                 EmptyView()
             }
         }
@@ -125,7 +128,7 @@ struct SearchResultView: View {
         .onChange(of: filterClicked) { _ in
             searchViewModel.searchProducts()
         }
-        .onChange(of: selectedProduct) { product in	
+        .onChange(of: selectedProduct) { product in
             if let product = product {
                 showDetailView = true
                 searchViewModel.requestProductDetail(productID: product.productId)
