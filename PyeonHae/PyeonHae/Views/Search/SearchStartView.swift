@@ -133,7 +133,7 @@ struct SearchStartView: View {
                 destination: DetailItemView(
                     searchViewModel: searchViewModel,
                     selectedProduct: selectedProduct
-                ).navigationBarHidden(true),
+                ),
                 isActive: $showDetailView
             ) {
                 EmptyView()

@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct EventProducts: View {
+    @ObservedObject var searchViewModel: SearchViewModel
     @Binding var eventProducts: [Product]
+    @Binding var selectedProduct: Product?
     @Binding var showEventProducts: Bool
+    @Binding var showEventDetail: Bool
     
     var body: some View {
         VStack {
@@ -29,6 +32,12 @@ struct EventProducts: View {
                 HStack {
                     ForEach($eventProducts, id: \.self) { eventProduct in
                         EventProductCell(eventProduct: eventProduct)
+                            .onTapGesture {
+                                searchViewModel.requestReview(productID: eventProduct.productId.wrappedValue)
+                                searchViewModel.requestProductDetail(productID: eventProduct.productId.wrappedValue)
+                                self.selectedProduct = eventProduct.wrappedValue
+                                self.showEventDetail = true
+                            }
                     }
                 }
                 .padding(.horizontal, 20)

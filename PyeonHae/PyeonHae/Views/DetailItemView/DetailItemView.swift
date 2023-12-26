@@ -82,7 +82,7 @@ struct DetailItemView: View {
                     }
                     .buttonStyle(.plain)
                 }
-            }
+            }.navigationBarBackButtonHidden()
             .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
                 EditReviewView(
                     reviewViewModel: reviewViewModel,
