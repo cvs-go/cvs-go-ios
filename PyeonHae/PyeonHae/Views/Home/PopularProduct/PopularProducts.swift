@@ -10,32 +10,36 @@ import SwiftUI
 struct PopularProducts: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @State private var showToolTip = false
+    @Binding var showPopularProducts: Bool
+    @State private var popularProducts: [Product] = []
     
     var body: some View {
         VStack {
             Spacer().frame(height: 16)
-            HStack {
-                Spacer().frame(width: 20)
-                Text("인기 상품")
-                    .font(.pretendard(.bold, 18))
-                    .foregroundColor(.grayscale100)
-                ZStack(alignment: .leading) {
-                    toolTip
-                        .fixedSize(horizontal: false, vertical: true)
-                        .offset(y: -32)
-                        .opacity(showToolTip ? 1 : 0)
-                    Image(name: .infoCircle)
-                        .onTapGesture {
-                            showToolTip.toggle()
-                        }
+            Button(action: { showPopularProducts = true }) {
+                HStack {
+                    Spacer().frame(width: 20)
+                    Text("인기 상품")
+                        .font(.pretendard(.bold, 18))
+                        .foregroundColor(.grayscale100)
+                    ZStack(alignment: .leading) {
+                        toolTip
+                            .fixedSize(horizontal: false, vertical: true)
+                            .offset(y: -32)
+                            .opacity(showToolTip ? 1 : 0)
+                        Image(name: .infoCircle)
+                            .onTapGesture {
+                                showToolTip.toggle()
+                            }
+                    }
+                    .frame(height: 16)
+                    Spacer()
+                    Image(name: .arrowRight)
+                    Spacer().frame(width: 16)
                 }
-                .frame(height: 16)
-                Spacer()
-                Image(name: .arrowRight)
-                Spacer().frame(width: 16)
             }
             Spacer().frame(height: 16)
-            ForEach($homeViewModel.popularProducts, id: \.self) { popularProduct in
+            ForEach($popularProducts, id: \.self) { popularProduct in
                 PopularProductCell(
                     popularProduct: popularProduct,
                     tag: $homeViewModel.productTags
@@ -48,6 +52,12 @@ struct PopularProducts: View {
             Spacer().frame(height: 8)
         }
         .background(Color.white)
+        .task {
+            self.popularProducts = Array(homeViewModel.popularProducts.prefix(3))
+        }
+        .onDisappear {
+            self.showToolTip = false
+        }
     }
     
     var toolTip: some View {

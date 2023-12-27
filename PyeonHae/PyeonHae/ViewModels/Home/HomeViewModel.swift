@@ -62,8 +62,7 @@ class HomeViewModel: ObservableObject {
     //　인기 상품 조회
     private func requestPopularProducts() {
         let parameters: [String: Any] = [
-            "sortBy": "SCORE",
-            "size": "3"
+            "sortBy": "SCORE"
         ]
         
         apiManager.request(for: ProductsAPI.search(parameters))

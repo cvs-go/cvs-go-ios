@@ -12,6 +12,7 @@ struct HomeView: View {
     @ObservedObject var searchViewModel = SearchViewModel()
     @State private var showEventProducts = false
     @State private var showEventDetail = false
+    @State private var showPopularProducts = false
     @State private var selectedProduct: Product? = nil
     
     var body: some View {
@@ -37,7 +38,10 @@ struct HomeView: View {
                         showEventDetail: $showEventDetail
                     )
                     Spacer().frame(height: 14)
-                    PopularProducts(homeViewModel: homeViewModel)
+                    PopularProducts(
+                        homeViewModel: homeViewModel,
+                        showPopularProducts: $showPopularProducts
+                    )
                     Spacer().frame(height: 14)
                     PopularReview(homeViewModel: homeViewModel)
                     Spacer().frame(height: 22)
@@ -46,11 +50,23 @@ struct HomeView: View {
             .background(Color.grayscale20)
             
             NavigationLink(
-                destination: EventProductView(
+                destination: ProductListView(
+                    type: .event,
                     homeViewModel: homeViewModel,
                     searchViewModel: searchViewModel
                 ),
                 isActive: $showEventProducts
+            ) {
+                EmptyView()
+            }
+            
+            NavigationLink(
+                destination: ProductListView(
+                    type: .popular,
+                    homeViewModel: homeViewModel,
+                    searchViewModel: searchViewModel
+                ),
+                isActive: $showPopularProducts
             ) {
                 EmptyView()
             }
