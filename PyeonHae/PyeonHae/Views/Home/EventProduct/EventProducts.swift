@@ -12,7 +12,7 @@ struct EventProducts: View {
     @Binding var eventProducts: [Product]
     @Binding var selectedProduct: Product?
     @Binding var showEventProducts: Bool
-    @Binding var showEventDetail: Bool
+    @Binding var showProductDetail: Bool
     
     var body: some View {
         VStack {
@@ -36,7 +36,7 @@ struct EventProducts: View {
                                 searchViewModel.requestReview(productID: eventProduct.productId.wrappedValue)
                                 searchViewModel.requestProductDetail(productID: eventProduct.productId.wrappedValue)
                                 self.selectedProduct = eventProduct.wrappedValue
-                                self.showEventDetail = true
+                                self.showProductDetail = true
                             }
                     }
                 }

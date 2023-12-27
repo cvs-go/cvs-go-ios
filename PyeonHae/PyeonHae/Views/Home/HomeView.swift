@@ -11,8 +11,8 @@ struct HomeView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
     @ObservedObject var searchViewModel = SearchViewModel()
     @State private var showEventProducts = false
-    @State private var showEventDetail = false
     @State private var showPopularProducts = false
+    @State private var showProductDetail = false
     @State private var selectedProduct: Product? = nil
     
     var body: some View {
@@ -35,12 +35,15 @@ struct HomeView: View {
                         eventProducts: $homeViewModel.eventProducts,
                         selectedProduct: $selectedProduct,
                         showEventProducts: $showEventProducts,
-                        showEventDetail: $showEventDetail
+                        showProductDetail: $showProductDetail
                     )
                     Spacer().frame(height: 14)
                     PopularProducts(
                         homeViewModel: homeViewModel,
-                        showPopularProducts: $showPopularProducts
+                        searchViewModel: searchViewModel,
+                        showPopularProducts: $showPopularProducts,
+                        selectedProduct: $selectedProduct,
+                        showProductDetail: $showProductDetail
                     )
                     Spacer().frame(height: 14)
                     PopularReview(homeViewModel: homeViewModel)
@@ -76,7 +79,7 @@ struct HomeView: View {
                     searchViewModel: searchViewModel,
                     selectedProduct: $selectedProduct
                 ),
-                isActive: $showEventDetail
+                isActive: $showProductDetail
             ) {
                 EmptyView()
             }

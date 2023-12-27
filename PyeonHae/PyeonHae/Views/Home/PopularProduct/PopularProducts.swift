@@ -9,9 +9,12 @@ import SwiftUI
 
 struct PopularProducts: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
     @State private var showToolTip = false
     @Binding var showPopularProducts: Bool
     @State private var popularProducts: [Product] = []
+    @Binding var selectedProduct: Product?
+    @Binding var showProductDetail: Bool
     
     var body: some View {
         VStack {
@@ -47,6 +50,12 @@ struct PopularProducts: View {
                 .padding(.bottom, 16)
                 .onAppear {
                     homeViewModel.requestProductTag(productId: popularProduct.productId.wrappedValue)
+                }
+                .onTapGesture {
+                    searchViewModel.requestReview(productID: popularProduct.productId.wrappedValue)
+                    searchViewModel.requestProductDetail(productID: popularProduct.productId.wrappedValue)
+                    self.selectedProduct = popularProduct.wrappedValue
+                    self.showProductDetail = true
                 }
             }
             Spacer().frame(height: 8)
