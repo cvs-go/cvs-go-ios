@@ -82,6 +82,8 @@ extension UserAPI {
     
     var encoding: ParameterEncoding {
         switch self {
+        case .userLikeList(_, _):
+            return URLEncoding.default
         default:
             return JSONEncoding.default
         }

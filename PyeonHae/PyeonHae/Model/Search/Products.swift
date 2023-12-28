@@ -13,8 +13,8 @@ struct ProductModel: Codable {
 }
 
 struct Products: Codable {
-    let content: [Product]
-    let totalElements: Int
+    var content: [Product]
+    var totalElements: Int
 }
 
 struct Product: Codable, Hashable {

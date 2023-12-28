@@ -13,6 +13,7 @@ class MyInfoViewModel: ObservableObject {
     @Published var noticeList: [NoticeContentModel] = []
     @Published var noticeDetail: NoticeDetailContent? = nil
     @Published var myReviewData: UserReviewsModel? = nil
+    @Published var myLikeData: Products? = nil
     
     var bag = Set<AnyCancellable>()
     
@@ -106,14 +107,14 @@ class MyInfoViewModel: ObservableObject {
     
     func requestMyLikeList() {
         let parameters: [String: Any] = [
-            :
+            "sortBy": "SCORE"
         ]
         
         apiManager.request(for: UserAPI.userLikeList(id: UserShared.userId, parameters: parameters))
             .sink { (result: Result<UserLikeList, Error>) in
                 switch result {
                 case .success(let result):
-                    print(result)
+                    self.myLikeData = result.data
                 case .failure(let error):
                     print(error)
                 }
@@ -170,5 +171,57 @@ class MyInfoViewModel: ObservableObject {
         UserShared.userProfileImageUrl = userInfo.profileImageUrl
         UserShared.userTags = userInfo.tags
         UserShared.userReviewLikeCount = userInfo.reviewLikeCount
+    }
+    
+    // 상품 북마크 생성
+    func requestProductBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.bookmark(id: productID))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 북마크 삭제
+    func requestProductUnBookmark(productID: Int) {
+        apiManager.request(for: ProductsAPI.unbookmark(id: productID))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 좋아요
+    func requestProductLike(productID: Int) {
+        apiManager.request(for: ProductsAPI.like(id: productID))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 좋아요 취소
+    func requestProductUnlike(productID: Int) {
+        apiManager.request(for: ProductsAPI.unlike(id: productID))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }

@@ -16,6 +16,8 @@ struct MyInfoView: View {
     @State private var showSettingView = false
     @State private var showEditView = false
     
+    @State private var selectedProduct: Product? = nil
+    
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
@@ -27,8 +29,13 @@ struct MyInfoView: View {
             TopTabBar(
                 tabItems: tabItems,
                 contents: [
-                    AnyView(MyReviewView(reviewContent: $myInfoViewModel.myReviewData)),
-                    AnyView(MyLikeView()),
+                    AnyView(MyReviewView(
+                        reviewContent: $myInfoViewModel.myReviewData
+                    )),
+                    AnyView(MyLikeView(
+                        myInfoViewModel: myInfoViewModel,
+                        selectedProduct: $selectedProduct
+                    )),
                     AnyView(MyBookmarkView()),
                 ],
                 type: .myInfo
