@@ -18,6 +18,17 @@ struct DetailItemView: View {
     @State private var selectedReviewerId = -1
     
     @Binding var selectedProduct: Product?
+    @Binding var productList: Products?
+    
+    init(
+        searchViewModel: SearchViewModel,
+        selectedProduct: Binding<Product?>,
+        productList: Binding<Products?> = .constant(nil)
+    ) {
+        self.searchViewModel = searchViewModel
+        self._selectedProduct = selectedProduct
+        self._productList = productList
+    }
     
     var body: some View {
         if searchViewModel.detailIsLoading {
@@ -37,6 +48,11 @@ struct DetailItemView: View {
                                 },
                                 unlikeAction: {
                                     searchViewModel.requestProductUnLike(productID: product.data.productId)
+                                    // 내정보에서 좋아요 취소 시 리스트에서 제거
+                                    if let _ = productList {
+                                        productList?.content.removeAll(where: { $0.productId == product.data.productId })
+                                        productList?.totalElements -= 1
+                                    }
                                 },
                                 bookmarkAction: {
                                     searchViewModel.requestProductBookmark(productID: product.data.productId)

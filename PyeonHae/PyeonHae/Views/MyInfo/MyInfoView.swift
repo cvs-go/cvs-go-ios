@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyInfoView: View {
     @ObservedObject var myInfoViewModel = MyInfoViewModel()
+    @ObservedObject var searchViewModel = SearchViewModel()
     
     @State private var selectedTab: Int = 0
     @State private var tabItems = MyInfoTapType.allCases.map { $0.rawValue }
@@ -17,6 +18,7 @@ struct MyInfoView: View {
     @State private var showEditView = false
     
     @State private var selectedProduct: Product? = nil
+    @State private var showProductDetail = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -34,7 +36,8 @@ struct MyInfoView: View {
                     )),
                     AnyView(MyLikeView(
                         myInfoViewModel: myInfoViewModel,
-                        selectedProduct: $selectedProduct
+                        selectedProduct: $selectedProduct,
+                        showProductDetail: $showProductDetail
                     )),
                     AnyView(MyBookmarkView()),
                 ],
@@ -48,9 +51,28 @@ struct MyInfoView: View {
             ) {
                 EmptyView()
             }
+            
+            NavigationLink(
+                destination: DetailItemView(
+                    searchViewModel: searchViewModel,
+                    selectedProduct: $selectedProduct,
+                    productList: $myInfoViewModel.myLikeData
+                ),
+                isActive: $showProductDetail
+            ) {
+                EmptyView()
+            }
         }
         .fullScreenCover(isPresented: $showEditView) {
             MyInfoEditView(myInfoViewModel: myInfoViewModel)
+        }
+        .onChange(of: selectedProduct) { _ in
+            if let selectedProduct = selectedProduct {
+                searchViewModel.requestReview(productID: selectedProduct.productId)
+                searchViewModel.requestProductDetail(productID: selectedProduct.productId)
+                self.selectedProduct = selectedProduct
+                self.showProductDetail = true
+            }
         }
     }
     

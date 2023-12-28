@@ -10,6 +10,7 @@ import SwiftUI
 struct MyLikeView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
     @Binding var selectedProduct: Product?
+    @Binding var showProductDetail: Bool
     
     var body: some View {
         VStack(spacing: 0) {
