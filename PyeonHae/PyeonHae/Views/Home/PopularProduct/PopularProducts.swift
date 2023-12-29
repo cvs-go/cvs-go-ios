@@ -42,7 +42,7 @@ struct PopularProducts: View {
                 }
             }
             Spacer().frame(height: 16)
-            ForEach($popularProducts, id: \.self) { popularProduct in
+            ForEach($homeViewModel.popularProducts.prefix(3), id: \.id) { popularProduct in
                 PopularProductCell(
                     popularProduct: popularProduct,
                     tag: $homeViewModel.productTags
@@ -62,9 +62,6 @@ struct PopularProducts: View {
             Spacer().frame(height: 8)
         }
         .background(Color.white)
-        .task {
-            self.popularProducts = Array(homeViewModel.popularProducts.prefix(3))
-        }
         .onDisappear {
             self.showToolTip = false
         }

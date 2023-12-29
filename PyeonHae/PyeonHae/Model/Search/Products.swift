@@ -17,7 +17,8 @@ struct Products: Codable {
     var totalElements: Int
 }
 
-struct Product: Codable, Hashable {
+struct Product: Codable, Hashable, Identifiable {
+    let id = UUID()
     var productId: Int
     let productName: String
     let productPrice: Int
@@ -29,6 +30,20 @@ struct Product: Codable, Hashable {
     let reviewCount: Int
     let reviewRating: String
     let convenienceStoreEvents: [ConvenienceStoreEvents]
+    
+    private enum CodingKeys: CodingKey {
+        case productId
+        case productName
+        case productPrice
+        case productImageUrl
+        case categoryId
+        case manufacturerName
+        case isLiked
+        case isBookmarked
+        case reviewCount
+        case reviewRating
+        case convenienceStoreEvents
+    }
 }
 
 struct ConvenienceStoreEvents: Codable, Hashable {
