@@ -71,11 +71,6 @@ struct MainBanner: View {
                 currentImage = images[safe: 0]
                 titleViewWidth = geo.size.width - 70
                 contentOffsetX = -titleViewWidth + spacing
-            }
-            .onReceive(timer) { _ in
-                currentIndex += 1
-            }
-            .onChange(of: promotions) { _ in
                 promotions.forEach { promotion in
                     promotion.imageUrl.toImage { image in
                         if let image = image {
@@ -83,6 +78,9 @@ struct MainBanner: View {
                         }
                     }
                 }
+            }
+            .onReceive(timer) { _ in
+                currentIndex += 1
             }
         }
         .frame(height: 200)

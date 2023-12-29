@@ -15,65 +15,68 @@ class HomeViewModel: ObservableObject {
     @Published var popularProducts: [Product] = []
     @Published var productTags: [Int: String] = [:]
     @Published var popularReviews: [ReviewDataModel] = []
-    
+    @Published var isLoading: Bool = true
     var eventProductCount = 0
     
     var bag = Set<AnyCancellable>()
     
-    init() {
-        requestPromotions()
-        requestEventProducts()
-        requestPopularProducts()
-        requestPopularReviews()
-    }
+
+     init() {
+         requestHomeViewDatas()
+     }
     
-    // 홈 화면 프로모션 요청
-    private func requestPromotions() {
-        apiManager.request(for: ProductsAPI.promotions)
-            .sink { (result: Result<PromotionsModel, Error>) in
-                switch result {
-                case .success(let data):
-                    self.promotions = data.data.content
-                case .failure(let error):
-                    print(error)
-                }
+    private func requestHomeViewDatas() {
+        // 홈 화면 프로모션 요청
+        let promotionsPublisher: AnyPublisher<Result<PromotionsModel, Error>, Never>
+        = apiManager.request(for: ProductsAPI.promotions)
+        // 행사 상품 조회
+        let eventProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never>
+        = apiManager.request(for: ProductsAPI.search(["isEvent": true]))
+        //　인기 상품 조회
+        let popularProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never>
+        = apiManager.request(for: ProductsAPI.search(["sortBy": "SCORE"]))
+        // 인기 리뷰 조회
+        let popularReviewsPublisher: AnyPublisher<Result<ReviewListModel, Error>, Never>
+        = apiManager.request(for: ReviewAPI.reviewList(parameters: ["sortBy": "LIKE", "size": 10]))
+        
+        Publishers.Zip4(
+            promotionsPublisher,
+            eventProductsPublisher,
+            popularProductsPublisher,
+            popularReviewsPublisher
+        )
+        .sink { (promotionsResult, eventProductsResult, popularProductsResult, popularReviewsResult) in
+            self.isLoading = false
+            
+            switch promotionsResult {
+            case .success(let data):
+                self.promotions = data.data.content
+            case .failure(let error):
+                print(error)
             }
-            .store(in: &bag)
-    }
-    
-    // 행사 상품 조회
-    private func requestEventProducts() {
-        let parameters: [String : Any] = [
-            "isEvent": true
-        ]
-        
-        apiManager.request(for: ProductsAPI.search(parameters))
-            .sink { (result: Result<ProductModel, Error>) in
-                switch result {
-                case .success(let result):
-                    self.eventProducts = result.data.content
-                    self.eventProductCount = result.data.totalElements
-                case .failure(let error):
-                    print(error)
-                }
-            }.store(in: &bag)
-    }
-    
-    //　인기 상품 조회
-    private func requestPopularProducts() {
-        let parameters: [String: Any] = [
-            "sortBy": "SCORE"
-        ]
-        
-        apiManager.request(for: ProductsAPI.search(parameters))
-            .sink { (result: Result<ProductModel, Error>) in
-                switch result {
-                case .success(let result):
-                    self.popularProducts = result.data.content
-                case .failure(let error):
-                    print(error)
-                }
-            }.store(in: &bag)
+
+            switch eventProductsResult {
+            case .success(let result):
+                self.eventProducts = result.data.content
+                self.eventProductCount = result.data.totalElements
+            case .failure(let error):
+                print(error)
+            }
+
+            switch popularProductsResult {
+            case .success(let result):
+                self.popularProducts = result.data.content
+            case .failure(let error):
+                print(error)
+            }
+
+            switch popularReviewsResult {
+            case .success(let result):
+                self.popularReviews = result.data.reviews
+            case .failure(let error):
+                print(error)
+            }
+        }.store(in: &bag)
     }
     
     func requestProductTag(productId: Int) {
@@ -82,24 +85,6 @@ class HomeViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.productTags.updateValue(result.data.first?.name ?? String(), forKey: productId)
-                case .failure(let error):
-                    print(error)
-                }
-            }.store(in: &bag)
-    }
-    
-    // 인기 리뷰 조회
-    private func requestPopularReviews() {
-        let parameters: [String: Any] = [
-            "sortBy": "LIKE",
-            "size": 10
-        ]
-        
-        apiManager.request(for: ReviewAPI.reviewList(parameters: parameters))
-            .sink { (result: Result<ReviewListModel, Error>) in
-                switch result {
-                case .success(let result):
-                    self.popularReviews = result.data.reviews
                 case .failure(let error):
                     print(error)
                 }
