@@ -54,6 +54,7 @@ struct PopularProducts: View {
                 .onTapGesture {
                     searchViewModel.requestReview(productID: popularProduct.productId.wrappedValue)
                     searchViewModel.requestProductDetail(productID: popularProduct.productId.wrappedValue)
+                    searchViewModel.requestProductTag(productId: popularProduct.productId.wrappedValue)
                     self.selectedProduct = popularProduct.wrappedValue
                     self.showProductDetail = true
                 }

@@ -41,6 +41,7 @@ struct DetailItemView: View {
                         if let product = searchViewModel.productDetail {
                             ItemDetailView(
                                 productDetail: product.data,
+                                productTags: searchViewModel.productTags,
                                 isHeartMark: product.data.isLiked,
                                 isBookMark: product.data.isBookmarked,
                                 likeAction: {

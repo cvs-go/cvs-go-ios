@@ -133,6 +133,7 @@ struct SearchResultView: View {
                 showDetailView = true
                 searchViewModel.requestProductDetail(productID: product.productId)
                 searchViewModel.requestReview(productID: product.productId)
+                searchViewModel.requestProductTag(productId: product.productId)
             }
         }
         .onChange(of: minPrice) { minPrice in

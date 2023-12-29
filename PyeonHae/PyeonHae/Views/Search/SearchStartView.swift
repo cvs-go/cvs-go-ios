@@ -195,6 +195,7 @@ struct SearchStartView: View {
             selectedProduct = product.product
             searchViewModel.requestProductDetail(productID: product.product.productId)
             searchViewModel.requestReview(productID: product.product.productId)
+            searchViewModel.requestProductTag(productId: product.product.productId)
         }
     }
     

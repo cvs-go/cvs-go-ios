@@ -15,6 +15,7 @@ class SearchViewModel: ObservableObject {
     @Published var searchResults: ProductModel?
     @Published var productDetail: ProductDetail?
     @Published var reviewDatas: ReviewDatas?
+    @Published var productTags: [ProductTagsModel]?
 
     // 검색 api parameters
     @Published var keyword: String = String()
@@ -159,6 +160,18 @@ class SearchViewModel: ObservableObject {
                 case .success(let result):
                     self.reviewDatas = result.data
                     self.reviewDataLoaded = true
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    func requestProductTag(productId: Int) {
+        apiManager.request(for: ProductsAPI.tags(id: productId))
+            .sink { (result: Result<ProductTags, Error>) in
+                switch result {
+                case .success(let result):
+                    self.productTags = result.data
                 case .failure(let error):
                     print(error)
                 }

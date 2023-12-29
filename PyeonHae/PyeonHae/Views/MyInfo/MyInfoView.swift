@@ -70,6 +70,7 @@ struct MyInfoView: View {
             if let selectedProduct = selectedProduct {
                 searchViewModel.requestReview(productID: selectedProduct.productId)
                 searchViewModel.requestProductDetail(productID: selectedProduct.productId)
+                searchViewModel.requestProductTag(productId: selectedProduct.productId)
                 self.selectedProduct = selectedProduct
                 self.showProductDetail = true
             }

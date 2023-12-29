@@ -10,6 +10,7 @@ import Kingfisher
 
 struct ItemDetailView: View {
     let productDetail: ProductInfo?
+    let productTags: [ProductTagsModel]?
     var isHeartMark: Bool
     var isBookMark: Bool
     let likeAction: () -> Void
@@ -22,6 +23,7 @@ struct ItemDetailView: View {
     
     init(
         productDetail: ProductInfo?,
+        productTags: [ProductTagsModel]?,
         isHeartMark: Bool,
         isBookMark: Bool,
         likeAction: @escaping () -> Void,
@@ -30,6 +32,7 @@ struct ItemDetailView: View {
         unBookmarkAction: @escaping () -> Void
     ) {
         self.productDetail = productDetail
+        self.productTags = productTags
         self.isHeartMark = isHeartMark
         self.isBookMark = isBookMark
         self.likeAction = likeAction
@@ -100,32 +103,33 @@ struct ItemDetailView: View {
                 }
             }
             .padding(.top, 16)
-            HStack {
-                Text("이 제품을 주로 찾는 유저예요.")
-                    .font(.pretendard(.regular, 12))
-                    .foregroundColor(.grayscale70)
-                    .padding(.trailing, 15)
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                    HStack {
-                        Text("맵찔이 11")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                        Spacer()
-                        Text("초코킬러 9")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                        Spacer()
-                        Text("소식가 6")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                    }
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 8)
+            if let productTags = productTags, !productTags.isEmpty {
+                HStack(spacing: 0) {
+                    Text("이 제품을 주로 찾는 유저예요.")
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(.grayscale70)
+                    Spacer()
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(Color.grayscale20)
+                        .frame(height: 22)
+                        .overlay(
+                            HStack(spacing: 12) {
+                                ForEach(productTags, id: \.self) { tag in
+                                    HStack(spacing: 2) {
+                                        Text(tag.name)
+                                            .font(.pretendard(.regular, 12))
+                                            .foregroundColor(.grayscale85)
+                                        Text(" \(tag.tagCount)")
+                                            .font(.pretendard(.bold, 12))
+                                            .foregroundColor(.grayscale85)
+                                    }
+                                }
+                            }
+                        )
                 }
-                .foregroundColor(Color.grayscale20)
+                .padding(.top, 24)
+                .padding(.bottom, 16)
             }
-            .padding(.top, 26)
         }
         .padding(.top, 21)
         .padding(.horizontal, 20)

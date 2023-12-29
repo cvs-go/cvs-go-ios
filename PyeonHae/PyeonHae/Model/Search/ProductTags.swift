@@ -12,7 +12,7 @@ struct ProductTags: Codable {
     let data: [ProductTagsModel]
 }
 
-struct ProductTagsModel: Codable {
+struct ProductTagsModel: Codable, Hashable {
     let id: Int
     let name: String
     let tagCount: Int

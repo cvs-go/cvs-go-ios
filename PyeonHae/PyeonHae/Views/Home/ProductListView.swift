@@ -73,6 +73,7 @@ struct ProductListView: View {
             if let selectedProduct = selectedProduct {
                 self.searchViewModel.requestProductDetail(productID: selectedProduct.productId)
                 self.searchViewModel.requestReview(productID: selectedProduct.productId)
+                searchViewModel.requestProductTag(productId: selectedProduct.productId)
                 self.showDetailView = true
             }
         }
