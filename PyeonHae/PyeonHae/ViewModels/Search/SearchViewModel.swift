@@ -18,6 +18,7 @@ class SearchViewModel: ObservableObject {
     @Published var productTags: [ProductTagsModel]?
 
     // 검색 api parameters
+    @Published var sortBy: String = String()
     @Published var keyword: String = String()
     @Published var convenienceStoreIds: [Int] = []
     @Published var categoryIds: [Int] = []
@@ -45,6 +46,7 @@ class SearchViewModel: ObservableObject {
         self.resultListIsLoading = true
         
         let parameters: [String : Any] = [
+            "sortBy": sortBy,
             "convenienceStoreIds": convenienceStoreIds.toParameter(),
             "categoryIds": categoryIds.toParameter(),
             "eventTypes": eventTypes.toParameter(),

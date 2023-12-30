@@ -16,7 +16,7 @@ struct ReviewHome: View {
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
     @State private var filterClicked = false
-    @State var selectedSortOptionIndex = 0
+    @State private var searchAgain = false
     
     @State private var showUserPage = false
     @State private var selectedReviewerId = -1
@@ -97,7 +97,11 @@ struct ReviewHome: View {
                     .font(.pretendard(.regular, 12))
                     .foregroundColor(.grayscale85)
                 Spacer()
-                SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
+                SortSelectView(
+                    sortType: .review,
+                    sortBy: $reviewViewModel.sortBy,
+                    searchAgain: $searchAgain
+                )
                 Spacer().frame(width: 20)
             }
             .frame(height: 40)

@@ -18,7 +18,6 @@ struct SearchResultView: View {
     @State private var filterClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
-    @State private var selectedSortOptionIndex = 0
     
     @State private var showDetailView = false
     
@@ -101,7 +100,11 @@ struct SearchResultView: View {
                             .foregroundColor(.grayscale85)
                             .padding(.top, 12)
                         Spacer()
-                        SortSelectView(selectedOptionIndex: $selectedSortOptionIndex)
+                        SortSelectView(
+                            sortType: .product,
+                            sortBy: $searchViewModel.sortBy,
+                            searchAgain: $searchAgain
+                        )
                             .padding(.top, 7)
                         Spacer().frame(width: 20)
                     }

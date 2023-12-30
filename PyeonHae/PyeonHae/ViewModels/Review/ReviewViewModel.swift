@@ -28,6 +28,8 @@ class ReviewViewModel: ObservableObject {
     @Published var latestReviewCount: Int = 0
     @Published var reviewList: [ReviewDataModel] = []
     
+    // 리뷰 목록 파라미터
+    @Published var sortBy: String = String()
     @Published var categoryIds: [Int] = []
     @Published var tagIds: [Int] = []
     @Published var ratings: [String] = []
@@ -102,7 +104,7 @@ class ReviewViewModel: ObservableObject {
     
     func requestReviewList() {
         let parameters: [String : Any] = [
-            "sortBy": "LATEST",
+            "sortBy": sortBy,
             "categoryIds": categoryIds.toParameter(),
             "tagIds": tagIds.toParameter(),
             "ratings": ratings.toParameter()
