@@ -17,9 +17,10 @@ struct SortSelectView: View {
             if isDropdownOpen {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.grayscale20, lineWidth: 1)
+                    .background(Color.white)
                     .frame(width: 64.5, height: 73)
             }
-            VStack(spacing: 4) {
+            VStack(spacing: 0) {
                 Button(action: {
                     isDropdownOpen.toggle()
                 }) {
@@ -34,7 +35,7 @@ struct SortSelectView: View {
                     .cornerRadius(10)
                 }
                 if isDropdownOpen {
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 0) {
                         ForEach(options.indices, id: \.self) { index in
                             if index != selectedOptionIndex {
                                 Button(action: {
@@ -47,12 +48,11 @@ struct SortSelectView: View {
                                             .foregroundColor(.grayscale50)
                                         Spacer()
                                     }
-                                    .frame(width: 48.5)
+                                    .frame(width: 48.5, height: 23.5)
                                 }
                             }
                         }
                     }
-                    Spacer()
                 }
             }
             .frame(width: 64.5, height: isDropdownOpen ? 73 : 26)
