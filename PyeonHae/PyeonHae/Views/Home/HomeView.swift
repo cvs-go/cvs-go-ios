@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var showPopularProducts = false
     @State private var showProductDetail = false
     @State private var selectedProduct: Product? = nil
+    @State private var searchAgain = false
     
     var body: some View {
         if homeViewModel.isLoading {
@@ -59,7 +60,8 @@ struct HomeView: View {
                     destination: ProductListView(
                         type: .event,
                         homeViewModel: homeViewModel,
-                        searchViewModel: searchViewModel
+                        searchViewModel: searchViewModel,
+                        searchAgain: $searchAgain
                     ),
                     isActive: $showEventProducts
                 ) {

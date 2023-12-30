@@ -15,4 +15,12 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+    
+    func currentDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yy.MM.dd"
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        
+        return dateFormatter.string(from: self)
+    }
 }

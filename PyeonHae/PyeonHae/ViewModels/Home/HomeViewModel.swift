@@ -16,11 +16,18 @@ class HomeViewModel: ObservableObject {
     @Published var productTags: [Int: String] = [:]
     @Published var popularReviews: [ReviewDataModel] = []
     @Published var isLoading: Bool = true
+    @Published var searchAgain: Bool = false // 행사 상품 재검색
+    @Published var sortBy: String = String() // 상품 정렬
+    
     var eventProductCount = 0
+    
+    // 행사 상품 조회
+    private var eventProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never> {
+        return apiManager.request(for: ProductsAPI.search(["isEvent": true, "sortBy": sortBy]))
+    }
     
     var bag = Set<AnyCancellable>()
     
-
      init() {
          requestHomeViewDatas()
      }
@@ -29,9 +36,6 @@ class HomeViewModel: ObservableObject {
         // 홈 화면 프로모션 요청
         let promotionsPublisher: AnyPublisher<Result<PromotionsModel, Error>, Never>
         = apiManager.request(for: ProductsAPI.promotions)
-        // 행사 상품 조회
-        let eventProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never>
-        = apiManager.request(for: ProductsAPI.search(["isEvent": true]))
         //　인기 상품 조회
         let popularProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never>
         = apiManager.request(for: ProductsAPI.search(["sortBy": "SCORE"]))
@@ -79,6 +83,22 @@ class HomeViewModel: ObservableObject {
         }.store(in: &bag)
     }
     
+    // 정렬 값에 따른 행사 상품 재요청
+    func requestEventProducts() {
+        eventProductsPublisher
+            .sink { result in
+                self.searchAgain = false
+                switch result {
+                case .success(let result):
+                    self.eventProducts = result.data.content
+                    self.eventProductCount = result.data.totalElements
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 특정 상품 좋아요 태그 조회
     func requestProductTag(productId: Int) {
         apiManager.request(for: ProductsAPI.tags(id: productId))
             .sink { (result: Result<ProductTags, Error>) in

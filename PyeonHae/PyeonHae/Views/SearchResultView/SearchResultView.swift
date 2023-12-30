@@ -105,7 +105,7 @@ struct SearchResultView: View {
                             sortBy: $searchViewModel.sortBy,
                             searchAgain: $searchAgain
                         )
-                            .padding(.top, 7)
+                        .padding(.top, 7)
                         Spacer().frame(width: 20)
                     }
                     Spacer()
