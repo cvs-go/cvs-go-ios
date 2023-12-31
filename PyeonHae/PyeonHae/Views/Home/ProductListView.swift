@@ -22,7 +22,7 @@ struct ProductListView: View {
          searchViewModel: SearchViewModel,
          searchAgain: Binding<Bool> = .constant(false)
     ) {
-        self.type = type
+        self.type = type    
         self.homeViewModel = homeViewModel
         self.searchViewModel = searchViewModel
         self._searchAgain = searchAgain
@@ -121,7 +121,7 @@ struct ProductListView: View {
     @ViewBuilder
     private func topView(_ type: ProductListType) -> some View {
         if type == .event {
-            HStack(alignment: .top) {
+            HStack(alignment: .top) {   
                 Spacer().frame(width: 20)
                 Text("행사상품 총 \(homeViewModel.eventProductCount)개")
                     .font(.pretendard(.regular, 12))

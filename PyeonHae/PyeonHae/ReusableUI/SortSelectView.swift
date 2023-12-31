@@ -69,6 +69,7 @@ struct SortSelectView: View {
             }
             .frame(width: 64.5, height: isDropdownOpen ? 73 : 26)
         }
+        .cornerRadius(10)
         .onAppear {
             self.currentSort = sortType == .product ? "랭킹순" : "최신순"
         }

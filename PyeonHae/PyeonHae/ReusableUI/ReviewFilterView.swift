@@ -16,8 +16,6 @@ struct ReviewFilterView: View {
     @Binding private var tagIds: [Int]
     @Binding private var ratings: [String]
     
-    private let reviewRating = ["전체", "4.0", "3.0", "2.0", "1.0",]
-    
     init(
         showFilter: Binding<Bool>,
         filterClicked: Binding<Bool>,
@@ -153,7 +151,7 @@ struct ReviewFilterView: View {
 }
 
 enum ReviewRating: String, CaseIterable {
-    case five = "전체"
+    case five = "5.0"
     case four = "4.0"
     case three = "3.0"
     case two = "2.0"

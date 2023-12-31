@@ -59,6 +59,10 @@ struct ReviewHome: View {
                 self.reviewLoaded = true
             }
         }
+        .onChange(of: searchAgain) { _ in
+            self.reviewViewModel.isLoading = true
+            self.reviewViewModel.requestReviewList()
+        }
     }
     
     @ViewBuilder
@@ -82,119 +86,121 @@ struct ReviewHome: View {
     
     @ViewBuilder
     private func allReviewTab() -> some View {
-        VStack(spacing: 0) {
-            Spacer().frame(height: 10)
-            ReviewFilterView(
-                showFilter: $showFilter,
-                filterClicked: $filterClicked,
-                categoryIds: $reviewViewModel.categoryIds,
-                tagIds: $reviewViewModel.tagIds,
-                ratings: $reviewViewModel.ratings
-            )
-            HStack {
+        ReviewFilterView(
+            showFilter: $showFilter,
+            filterClicked: $filterClicked,
+            categoryIds: $reviewViewModel.categoryIds,
+            tagIds: $reviewViewModel.tagIds,
+            ratings: $reviewViewModel.ratings
+        )
+        .padding(.top, 10)
+        ZStack(alignment: .top) {
+            HStack(alignment: .top) {
                 Spacer().frame(width: 20)
                 Text("새로운 리뷰 \(reviewViewModel.latestReviewCount)개")
                     .font(.pretendard(.regular, 12))
                     .foregroundColor(.grayscale85)
+                    .padding(.top, 12)
                 Spacer()
                 SortSelectView(
                     sortType: .review,
                     sortBy: $reviewViewModel.sortBy,
                     searchAgain: $searchAgain
-                )
+                ).padding(.top, 7)
                 Spacer().frame(width: 20)
             }
-            .frame(height: 40)
-        }
-        GeometryReader { geometry in
-            ScrollView {
-                if reviewViewModel.isLoading {
-                    LoadingView()
-                        .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
-                } else {
-                    if reviewViewModel.reviewList.isEmpty {
-                        VStack {
-                            Spacer().frame(height: 53)
-                            Image(name: .emptyReviewImage)
-                            Spacer().frame(height: 12)
-                            Text("앗! 등록된 리뷰가 없어요")
-                                .font(.pretendard(.semiBold, 16))
-                                .foregroundColor(.grayscale85)
-                            Spacer().frame(height: 53)
-                        }
-                        .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
+            .zIndex(1)
+            .padding(.bottom, 10)
+            GeometryReader { geometry in
+                ScrollView {
+                    if reviewViewModel.isLoading {
+                        LoadingView()
+                            .frame(width: geometry.size.width)
+                            .frame(minHeight: geometry.size.height)
                     } else {
-                        ForEach(reviewViewModel.reviewList, id: \.self) { review in
-                            VStack(alignment: .leading) {
-                                Group {
-                                    ReviewUserInfo(
-                                        reviewType: .normal,
-                                        profileUrl: review.reviewerProfileImageUrl,
-                                        nickname: review.reviewerNickname,
-                                        tags: review.reviewerTags,
-                                        isMe: review.reviewerId == UserShared.userId,
-                                        isFollowing: review.isFollowing,
-                                        followAction: {
-                                            reviewViewModel.requestFollow(userId: review.reviewerId)
+                        if reviewViewModel.reviewList.isEmpty {
+                            VStack {
+                                Spacer().frame(height: 53)
+                                Image(name: .emptyReviewImage)
+                                Spacer().frame(height: 12)
+                                Text("앗! 등록된 리뷰가 없어요")
+                                    .font(.pretendard(.semiBold, 16))
+                                    .foregroundColor(.grayscale85)
+                                Spacer().frame(height: 53)
+                            }
+                            .frame(width: geometry.size.width)
+                            .frame(minHeight: geometry.size.height)
+                        } else {
+                            ForEach(reviewViewModel.reviewList, id: \.self) { review in
+                                VStack(alignment: .leading) {
+                                    Group {
+                                        ReviewUserInfo(
+                                            reviewType: .normal,
+                                            profileUrl: review.reviewerProfileImageUrl,
+                                            nickname: review.reviewerNickname,
+                                            tags: review.reviewerTags,
+                                            isMe: review.reviewerId == UserShared.userId,
+                                            isFollowing: review.isFollowing,
+                                            followAction: {
+                                                reviewViewModel.requestFollow(userId: review.reviewerId)
+                                            },
+                                            unfollowAction: {
+                                                reviewViewModel.requestUnfollow(userId: review.reviewerId)
+                                            },
+                                            reviewerId: review.reviewerId,
+                                            showUserPage: $showUserPage,
+                                            selectedReviewerId: $selectedReviewerId
+                                        )
+                                    }
+                                    HStack(spacing: 0) {
+                                        ReviewContents(
+                                            reviewerId: review.reviewerId,
+                                            rating: review.reviewRating,
+                                            imageUrls: review.reviewImageUrls,
+                                            content: review.reviewContent,
+                                            isReviewLiked: review.isReviewLiked,
+                                            likeCount: review.reviewLikeCount,
+                                            likeAction: {
+                                                reviewViewModel.requestLikeReview(id: review.reviewId)
+                                            },
+                                            unlikeAction: {
+                                                reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                            }
+                                        )
+                                    }
+                                    ReviewProduct(
+                                        imageUrl: review.productImageUrl,
+                                        manufacturer: review.productManufacturer,
+                                        name: review.productName,
+                                        isBookmarked: review.isProductBookmarked,
+                                        bookmarkAction: {
+                                            reviewViewModel.requestProductBookmark(productID: review.productId)
                                         },
-                                        unfollowAction: {
-                                            reviewViewModel.requestUnfollow(userId: review.reviewerId)
-                                        },
-                                        reviewerId: review.reviewerId,
-                                        showUserPage: $showUserPage,
-                                        selectedReviewerId: $selectedReviewerId
-                                    )
-                                }
-                                HStack(spacing: 0) {
-                                    ReviewContents(
-                                        reviewerId: review.reviewerId,
-                                        rating: review.reviewRating,
-                                        imageUrls: review.reviewImageUrls,
-                                        content: review.reviewContent,
-                                        isReviewLiked: review.isReviewLiked,
-                                        likeCount: review.reviewLikeCount,
-                                        likeAction: {
-                                            reviewViewModel.requestLikeReview(id: review.reviewId)
-                                        },
-                                        unlikeAction: {
-                                            reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                        unBookmarkAction:  {
+                                            reviewViewModel.requestProductUnBookmark(productID: review.productId)
                                         }
                                     )
                                 }
-                                ReviewProduct(
-                                    imageUrl: review.productImageUrl,
-                                    manufacturer: review.productManufacturer,
-                                    name: review.productName,
-                                    isBookmarked: review.isProductBookmarked,
-                                    bookmarkAction: {
-                                        reviewViewModel.requestProductBookmark(productID: review.productId)
-                                    },
-                                    unBookmarkAction:  {
-                                        reviewViewModel.requestProductUnBookmark(productID: review.productId)
-                                    }
-                                )
+                                Color.grayscale30.opacity(0.5).frame(height: 1)
+                                    .padding(.bottom, 16)
                             }
-                            Color.grayscale30.opacity(0.5).frame(height: 1)
-                                .padding(.bottom, 16)
                         }
                     }
                 }
-            }
-            .simultaneousGesture(DragGesture().onChanged { _ in
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    self.showFilter = false
+                .simultaneousGesture(DragGesture().onChanged { _ in
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        self.showFilter = false
+                    }
+                })
+                .refreshable {
+                    reviewViewModel.requestReviewList()
                 }
-            })
-            .refreshable {
-                reviewViewModel.requestReviewList()
-            }
-            .onChange(of: filterClicked) { _ in
-                reviewViewModel.isLoading = true
-                reviewViewModel.requestReviewList()
-            }
-        }
+                .onChange(of: filterClicked) { _ in
+                    reviewViewModel.isLoading = true
+                    reviewViewModel.requestReviewList()
+                }
+            }.offset(y: 50)
+        }.padding(.bottom, 50)
     }
     
     private func followReviewTab() -> some View {
