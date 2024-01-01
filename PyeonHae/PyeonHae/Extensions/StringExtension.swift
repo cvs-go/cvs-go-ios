@@ -25,7 +25,9 @@ extension String {
                     completion(nil)
                     return
                 }
-                completion(UIImage(data: data))
+                DispatchQueue.main.async {
+                    completion(UIImage(data: data))
+                }
             }
             task.resume()
         } else {
