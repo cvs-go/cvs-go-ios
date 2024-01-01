@@ -91,14 +91,14 @@ struct DetailItemView: View {
                         reviewViewModel.showWriteView = true
                     }){
                         ZStack {
-                            RoundedRectangle(cornerRadius: 10)
+                            RoundedRectangle(cornerRadius: UIDevice().hasNotch ? 10 : 0)
                                 .foregroundColor(.red100)
                             Text("리뷰 작성")
                                 .font(.pretendard(.bold, 18))
                                 .foregroundColor(.white)
                         }
                         .frame(height: 50)
-                        .padding(.horizontal, 20)
+                        .padding(.horizontal, UIDevice().hasNotch ? 20 : 0)
                         .background(Color.white)
                     }
                     .buttonStyle(.plain)

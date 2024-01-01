@@ -56,6 +56,7 @@
 		54732F002B3426F800770FA1 /* UserReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54732EFF2B3426F800770FA1 /* UserReviewListModel.swift */; };
 		54744FE62A97843F00905CA8 /* NoticeListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54744FE52A97843F00905CA8 /* NoticeListModel.swift */; };
 		547BE29729631F440069828A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547BE29629631F440069828A /* LoginViewModel.swift */; };
+		548018742B42CF14001A64BA /* UIDeviceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548018732B42CF14001A64BA /* UIDeviceExtension.swift */; };
 		5482CA882A4335560080C7E3 /* ReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5482CA872A4335560080C7E3 /* ReviewListModel.swift */; };
 		5485EB7729EC0F7200FDB56B /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */; };
 		548FF9022A59680E00C5875F /* ReviewFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548FF9012A59680E00C5875F /* ReviewFilterView.swift */; };
@@ -192,6 +193,7 @@
 		54732EFF2B3426F800770FA1 /* UserReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReviewListModel.swift; sourceTree = "<group>"; };
 		54744FE52A97843F00905CA8 /* NoticeListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListModel.swift; sourceTree = "<group>"; };
 		547BE29629631F440069828A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		548018732B42CF14001A64BA /* UIDeviceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDeviceExtension.swift; sourceTree = "<group>"; };
 		5482CA872A4335560080C7E3 /* ReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListModel.swift; sourceTree = "<group>"; };
 		5485EB7629EC0F7200FDB56B /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		548FF9012A59680E00C5875F /* ReviewFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFilterView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				5462B77729A0D2E20063C450 /* ArrayExtension.swift */,
 				5493BE242A0F876B00CC127B /* UINavigationControllerExtension.swift */,
 				54915CCD2A63F3510076E442 /* DateExtension.swift */,
+				548018732B42CF14001A64BA /* UIDeviceExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -914,6 +917,7 @@
 				54C9DC052AA4C6B2001AC84D /* NoticeDetailView.swift in Sources */,
 				D5291D42299E2F42001D3276 /* ImagePicker.swift in Sources */,
 				543DCA8729F03564000CDAF0 /* Products.swift in Sources */,
+				548018742B42CF14001A64BA /* UIDeviceExtension.swift in Sources */,
 				544CE40D2998D67E00EA9223 /* SelectableButton.swift in Sources */,
 				545C62A02B39603000E02B3A /* ProductListView.swift in Sources */,
 				D57E78B029FFE19900F35DFC /* PriceScrollButton.swift in Sources */,
