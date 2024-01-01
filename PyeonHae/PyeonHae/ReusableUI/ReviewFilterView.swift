@@ -9,6 +9,7 @@ import SwiftUI
 import WrappingHStack
 
 struct ReviewFilterView: View {
+    let reviewType: ReviewType
     @State private var selectedElements: [String] = []
     @Binding private var showFilter: Bool
     @Binding private var filterClicked: Bool
@@ -17,12 +18,14 @@ struct ReviewFilterView: View {
     @Binding private var ratings: [String]
     
     init(
+        reviewType: ReviewType = .normal,
         showFilter: Binding<Bool>,
         filterClicked: Binding<Bool>,
-        categoryIds: Binding<[Int]>,
+        categoryIds: Binding<[Int]> = .constant([]),
         tagIds: Binding<[Int]>,
         ratings: Binding<[String]>
     ) {
+        self.reviewType = reviewType
         self._showFilter = showFilter
         self._filterClicked = filterClicked
         self._categoryIds = categoryIds
@@ -43,24 +46,27 @@ struct ReviewFilterView: View {
                 .foregroundColor(.grayscale100)
             Image(name: showFilter ? .arrowUp : .arrowDown)
             Spacer()
-            ForEach(Array(selectedElements.enumerated()), id: \.element) { index, element in
-                if index < 3 {
-                    if index != 0 {
-                        Image(name: .grayCircle)
-                            .padding(.horizontal, 8)
+            HStack(spacing: 0) {
+                ForEach(Array(selectedElements.enumerated()), id: \.element) { index, element in
+                    if index < 3 {
+                        if index != 0 {
+                            Image(name: .grayCircle)
+                                .padding(.horizontal, 8)
+                        }
+                        Text(element)
+                            .font(.pretendard(.bold, 12))
+                            .foregroundColor(.grayscale85)
                     }
-                    Text(element)
-                        .font(.pretendard(.bold, 12))
-                        .foregroundColor(.grayscale85)
                 }
+                if selectedElements.count > 3 {
+                    Text("외\(selectedElements.count - 3)")
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(.grayscale85)
+                        .padding(.leading, 8)
+                }
+                Spacer().frame(width: 20)
             }
-            if selectedElements.count > 3 {
-                Text("외\(selectedElements.count - 3)")
-                    .font(.pretendard(.regular, 12))
-                    .foregroundColor(.grayscale85)
-                    .padding(.leading, 8)
-            }
-            Spacer().frame(width: 20)
+            .hidden(!showFilter && reviewType == .detail)
         }
         .frame(height: 32)
         .onTapGesture {
@@ -74,29 +80,31 @@ struct ReviewFilterView: View {
     
     private func filterElements() -> some View {
         VStack {
-            VStack(alignment: .leading) {
-                Text("제품")
-                    .font(.pretendard(.bold, 12))
-                    .foregroundColor(.grayscale85)
-                WrappingHStack(UserShared.filterData?.categories ?? [], id: \.self, lineSpacing: 6) { element in
-                    SelectableButton(
-                        text: element.name,
-                        isSelected: selectedElements.contains(element.name)
-                    )
-                    .onTapGesture {
-                        if selectedElements.contains(element.name) {
-                            selectedElements.removeAll(where: { $0 == element.name })
-                            categoryIds.removeAll(where: { $0 == element.id })
-                        } else {
-                            selectedElements.append(element.name)
-                            categoryIds.append(element.id)
+            if !(reviewType == .detail) {
+                VStack(alignment: .leading) {
+                    Text("제품")
+                        .font(.pretendard(.bold, 12))
+                        .foregroundColor(.grayscale85)
+                    WrappingHStack(UserShared.filterData?.categories ?? [], id: \.self, lineSpacing: 6) { element in
+                        SelectableButton(
+                            text: element.name,
+                            isSelected: selectedElements.contains(element.name)
+                        )
+                        .onTapGesture {
+                            if selectedElements.contains(element.name) {
+                                selectedElements.removeAll(where: { $0 == element.name })
+                                categoryIds.removeAll(where: { $0 == element.id })
+                            } else {
+                                selectedElements.append(element.name)
+                                categoryIds.append(element.id)
+                            }
+                            filterClicked.toggle()
                         }
-                        filterClicked.toggle()
                     }
                 }
+                .padding(.top, 16)
+                .padding(.horizontal, 20)
             }
-            .padding(.top, 16)
-            .padding(.horizontal, 20)
             
             VStack(alignment: .leading) {
                 Text("유저")

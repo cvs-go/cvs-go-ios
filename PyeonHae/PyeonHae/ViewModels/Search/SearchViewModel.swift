@@ -26,6 +26,11 @@ class SearchViewModel: ObservableObject {
     @Published var lowestPrice: Int = 0
     @Published var highestPrice: Int = UserShared.filterData?.highestPrice ?? 0
     
+    // 리뷰 목록 파라미터
+    @Published var reviewSortBy: String = String()
+    @Published var tagIds: [Int] = []
+    @Published var ratings: [String] = []
+    
     // 로딩뷰를 위한 변수
     @Published var productDataLoaded = false
     @Published var reviewDataLoaded = false
@@ -153,7 +158,9 @@ class SearchViewModel: ObservableObject {
     
     func requestReview(productID: Int) {
         let parameters: [String : Any] = [
-            :
+            "sortBy": reviewSortBy,
+            "tagIds": tagIds.toParameter(),
+            "ratings": ratings.toParameter()
         ]
         
         apiManager.request(for: ReviewAPI.productReview(id: productID, parameters: parameters))

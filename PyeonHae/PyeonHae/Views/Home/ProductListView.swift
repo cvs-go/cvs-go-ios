@@ -144,9 +144,6 @@ struct ProductListView: View {
                     .foregroundColor(.grayscale85)
                 Spacer()
             }
-            .onAppear {
-                print(Date().currentDate())
-            }
         }
     }
 }

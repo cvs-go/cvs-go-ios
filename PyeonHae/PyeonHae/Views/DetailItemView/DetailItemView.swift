@@ -17,6 +17,10 @@ struct DetailItemView: View {
     @State private var showUserPage = false
     @State private var selectedReviewerId = -1
     
+    @State private var showFilter = false
+    @State private var filterClicked = false // 필터 값 바꼈을 경우
+    @State private var searchAgain = false // 정렬 값 바꼈을 경우
+    
     @Binding var selectedProduct: Product?
     @Binding var productList: Products?
     
@@ -99,7 +103,8 @@ struct DetailItemView: View {
                     }
                     .buttonStyle(.plain)
                 }
-            }.navigationBarBackButtonHidden()
+            }
+            .navigationBarBackButtonHidden()
             .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
                 EditReviewView(
                     reviewViewModel: reviewViewModel,
@@ -119,6 +124,16 @@ struct DetailItemView: View {
             }
             .onDisappear {
                 self.selectedProduct = nil
+            }
+            .onChange(of: filterClicked) { _ in
+                if let selectedProduct = selectedProduct {
+                    self.searchViewModel.requestReview(productID: selectedProduct.productId)
+                }
+            }
+            .onChange(of: searchAgain) { _ in
+                if let selectedProduct = selectedProduct {
+                    self.searchViewModel.requestReview(productID: selectedProduct.productId)
+                }
             }
         }
     }
@@ -151,84 +166,91 @@ struct DetailItemView: View {
                 Image(name: .redStar)
                     .resizable()
                     .frame(width: 16, height: 16)
-                Text("4.5")
+                Text(selectedProduct?.reviewRating ?? String())
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
             }
             .padding(.top, 12)
             .padding(.horizontal, 20)
-            HStack {
-                Spacer()
-                HStack(spacing: 6) {
-                    Text("최신순")
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale85)
-                    Image(name: .invertedTriangle)
+            ReviewFilterView(
+                reviewType: .detail,
+                showFilter: $showFilter,
+                filterClicked: $filterClicked,
+                tagIds: $searchViewModel.tagIds,
+                ratings: $searchViewModel.ratings
+            )
+            ZStack(alignment: .top) {
+                HStack(alignment: .top) {
+                    Spacer()
+                    SortSelectView(
+                        sortType: .review,
+                        sortBy: $searchViewModel.reviewSortBy,
+                        searchAgain: $searchAgain
+                    )
+                    Spacer().frame(width: 20)
                 }
-                .frame(width: 64.5, height: 26)
-                .background(Color.grayscale10)
-                .cornerRadius(10)
-            }
-            .padding(.horizontal, 20)
-            
-            if let reviewDatas = searchViewModel.reviewDatas,
-               let content = reviewDatas.content {
-                if reviewDatas.totalElements == 0 {
-                    VStack {
-                        Spacer().frame(height: 53)
-                        Image(name: .emptyReviewImage)
-                        Spacer().frame(height: 12)
-                        Text("앗! 등록된 리뷰가 없어요")
-                            .font(.pretendard(.semiBold, 16))
-                            .foregroundColor(.grayscale85)
-                        Spacer().frame(height: 2)
-                        Text("첫 번째로 리뷰를 등록해보세요.")
-                            .font(.pretendard(.light, 14))
-                            .foregroundColor(.grayscale70)
-                        Spacer().frame(height: 53)
-                    }
-                } else {
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(content, id: \.self) { review in
-                            Group {
-                                ReviewUserInfo(
-                                    reviewType: .normal,
-                                    profileUrl: review.reviewerProfileImageUrl,
-                                    nickname: review.reviewerNickname,
-                                    tags: review.reviewerTags,
-                                    isMe: review.isMe,
-                                    isFollowing: review.isFollowingUser,
-                                    followAction: {
-                                        reviewViewModel.requestFollow(userId: review.reviewerId)
-                                    },
-                                    unfollowAction: {
-                                        reviewViewModel.requestUnfollow(userId: review.reviewerId)
-                                    },
-                                    reviewerId: review.reviewerId,
-                                    showUserPage: $showUserPage,
-                                    selectedReviewerId: $selectedReviewerId
-                                )
-                                .padding(.bottom, 10)
-                                HStack(spacing: 0) {
-                                    Spacer().frame(width: 12)
-                                    ReviewContents(
-                                        reviewerId: review.reviewerId,
-                                        rating: review.reviewRating,
-                                        imageUrls: review.reviewImages,
-                                        content: review.reviewContent,
-                                        isReviewLiked: review.isReviewLiked,
-                                        likeCount: review.reviewLikeCount,
-                                        likeAction: {
-                                            reviewViewModel.requestLikeReview(id: review.reviewId)
+                .offset(y: -40)
+                .zIndex(1)
+                .hidden(showFilter)
+                if let reviewDatas = searchViewModel.reviewDatas,
+                   let content = reviewDatas.content {
+                    if reviewDatas.totalElements == 0 {
+                        VStack {
+                            Spacer().frame(height: 53)
+                            Image(name: .emptyReviewImage)
+                            Spacer().frame(height: 12)
+                            Text("앗! 등록된 리뷰가 없어요")
+                                .font(.pretendard(.semiBold, 16))
+                                .foregroundColor(.grayscale85)
+                            Spacer().frame(height: 2)
+                            Text("첫 번째로 리뷰를 등록해보세요.")
+                                .font(.pretendard(.light, 14))
+                                .foregroundColor(.grayscale70)
+                            Spacer().frame(height: 53)
+                        }
+                    } else {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(content, id: \.self) { review in
+                                Group {
+                                    ReviewUserInfo(
+                                        reviewType: .normal,
+                                        profileUrl: review.reviewerProfileImageUrl,
+                                        nickname: review.reviewerNickname,
+                                        tags: review.reviewerTags,
+                                        isMe: review.isMe,
+                                        isFollowing: review.isFollowingUser,
+                                        followAction: {
+                                            reviewViewModel.requestFollow(userId: review.reviewerId)
                                         },
-                                        unlikeAction: {
-                                            reviewViewModel.requestUnlikeReview(id: review.reviewId)
-                                        }
+                                        unfollowAction: {
+                                            reviewViewModel.requestUnfollow(userId: review.reviewerId)
+                                        },
+                                        reviewerId: review.reviewerId,
+                                        showUserPage: $showUserPage,
+                                        selectedReviewerId: $selectedReviewerId
                                     )
+                                    .padding(.bottom, 10)
+                                    HStack(spacing: 0) {
+                                        Spacer().frame(width: 12)
+                                        ReviewContents(
+                                            reviewerId: review.reviewerId,
+                                            rating: review.reviewRating,
+                                            imageUrls: review.reviewImages,
+                                            content: review.reviewContent,
+                                            isReviewLiked: review.isReviewLiked,
+                                            likeCount: review.reviewLikeCount,
+                                            likeAction: {
+                                                reviewViewModel.requestLikeReview(id: review.reviewId)
+                                            },
+                                            unlikeAction: {
+                                                reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                            }
+                                        )
+                                    }
                                 }
+                                Color.grayscale30.opacity(0.5).frame(height: 1)
+                                    .padding(.vertical, 16)
                             }
-                            Color.grayscale30.opacity(0.5).frame(height: 1)
-                                .padding(.vertical, 16)
                         }
                     }
                 }
