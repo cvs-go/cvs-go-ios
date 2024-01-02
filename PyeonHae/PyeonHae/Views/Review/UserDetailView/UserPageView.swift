@@ -28,7 +28,10 @@ struct UserPageView: View {
                             tagMatchPercentage: reviewViewModel.tagMatchPercentage
                         )
                         Spacer().frame(height: 20)
-                        WriteReviewsView(userReviews: $reviewViewModel.userReviews)
+                        WriteReviewsView(
+                            reviewViewModel: reviewViewModel,
+                            selectedReviewerId: $selectedReviewerId
+                        )
                     }
                     .background(Color.grayscale10)
                 }

@@ -23,7 +23,6 @@ struct MyInfoView: View {
     var body: some View {
         VStack(spacing: 0) {
             navigationBar
-            Spacer().frame(height: 20)
             UserInfoView(userInfoType: .me, showEditView: $showEditView)
             Rectangle()
                 .frame(height: 14)

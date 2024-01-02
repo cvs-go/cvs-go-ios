@@ -256,7 +256,9 @@ class ReviewViewModel: ObservableObject {
     }
     
     func requestUserReviewList(userId: Int) {
-        let parameters: [String: Any] = [:]
+        let parameters: [String: Any] = [
+            "sortBy": sortBy
+        ]
         
         apiManager.request(for: ReviewAPI.userReviews(id: userId, parameters: parameters))
             .sink { (result: Result<UserReviewListModel, Error>) in

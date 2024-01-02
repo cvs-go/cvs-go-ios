@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct WriteReviewsView: View {
-    @Binding var userReviews: UserReviewsModel?
+    @ObservedObject var reviewViewModel: ReviewViewModel
+    @Binding var selectedReviewerId: Int
+    @State private var showFilter = false
+    @State private var filterClicked = false
+    @State private var searchAgain = false
     
     var body: some View {
-        if let userReviews = userReviews {
+        if let userReviews = reviewViewModel.userReviews {
             VStack {
                 HStack {
                     Text("작성한 리뷰")
@@ -27,7 +31,27 @@ struct WriteReviewsView: View {
                     //                        .foregroundColor(.grayscale50)
                 }
                 .padding(.horizontal, 20)
-                ScrollView {
+                // TODO: 기획 후 수정하기
+//                ReviewFilterView(
+//                    reviewType: .detail,
+//                    showFilter: $showFilter,
+//                    filterClicked: $filterClicked,
+//                    tagIds: $reviewViewModel.tagIds,
+//                    ratings: $reviewViewModel.ratings
+//                )
+                ZStack(alignment: .top) {
+                    HStack(alignment: .top) {
+                        Spacer()
+                        SortSelectView(
+                            sortType: .review,
+                            sortBy: $reviewViewModel.sortBy,
+                            searchAgain: $searchAgain
+                        )
+                        Spacer().frame(width: 20)
+                    }
+                    .offset(y: -40)
+                    .zIndex(1)
+                    .hidden(showFilter)
                     VStack {
                         ForEach(userReviews.content, id: \.self) { review in
                             ReviewCell(review)
@@ -39,6 +63,12 @@ struct WriteReviewsView: View {
             }
             .padding(.top, 14)
             .background(Color.white)
+            .onChange(of: filterClicked) { _ in
+                self.reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
+            }
+            .onChange(of: searchAgain) { _ in
+                self.reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
+            }
         } else {
             Text("데이터 로드 실패")
         }

@@ -29,6 +29,7 @@ struct UserInfoView: View {
     
     var body: some View {
         VStack {
+            Spacer().frame(height: 20)
             HStack(spacing: 16) {
                 if let url = userInfoType == .me
                     ? UserShared.userProfileImageUrl
