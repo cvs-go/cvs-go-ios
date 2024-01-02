@@ -28,7 +28,7 @@ struct UserPageView: View {
                             tagMatchPercentage: reviewViewModel.tagMatchPercentage
                         )
                         Spacer().frame(height: 20)
-                        WriteReviewsView()
+                        WriteReviewsView(userReviews: $reviewViewModel.userReviews)
                     }
                     .background(Color.grayscale10)
                 }
@@ -37,7 +37,7 @@ struct UserPageView: View {
         .onAppear {
             reviewViewModel.userInfoLoading = true
             reviewViewModel.requestSelectedUserInfo(userId: selectedReviewerId)
-            // TODO: 작성한 리뷰 
+            reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
         }
     }
     

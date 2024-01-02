@@ -27,6 +27,7 @@ class ReviewViewModel: ObservableObject {
     
     @Published var latestReviewCount: Int = 0
     @Published var reviewList: [ReviewDataModel] = []
+    @Published var userReviews: UserReviewsModel? = nil
     
     // 리뷰 목록 파라미터
     @Published var sortBy: String = String()
@@ -252,5 +253,19 @@ class ReviewViewModel: ObservableObject {
                 }
             }
             .store(in: &bag)
+    }
+    
+    func requestUserReviewList(userId: Int) {
+        let parameters: [String: Any] = [:]
+        
+        apiManager.request(for: ReviewAPI.userReviews(id: userId, parameters: parameters))
+            .sink { (result: Result<UserReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.userReviews = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
 }
