@@ -9,12 +9,13 @@ import Foundation
 
 struct ProductModel: Codable {
     let timestamp: String
-    let data: Products
+    var data: Products
 }
 
 struct Products: Codable {
     var content: [Product]
     var totalElements: Int
+    var last: Bool
 }
 
 struct Product: Codable, Hashable, Identifiable {

@@ -25,6 +25,7 @@ class SearchViewModel: ObservableObject {
     @Published var eventTypes: [String] = []
     @Published var lowestPrice: Int = 0
     @Published var highestPrice: Int = UserShared.filterData?.highestPrice ?? 0
+    @Published var page: Int = 0
     
     // 리뷰 목록 파라미터
     @Published var reviewSortBy: String = String()
@@ -48,6 +49,7 @@ class SearchViewModel: ObservableObject {
     
     // 상품 목록 조회
     func searchProducts() {
+        self.page = 0
         self.resultListIsLoading = true
         
         let parameters: [String : Any] = [
@@ -66,6 +68,31 @@ class SearchViewModel: ObservableObject {
                 case .success(let result):
                     self.searchResults = result
                     self.productListDataLoaded = true
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 상품 목록 다음 페이지 조회
+    func searchMoreProducts() {
+        let parameters: [String : Any] = [
+            "sortBy": sortBy,
+            "convenienceStoreIds": convenienceStoreIds.toParameter(),
+            "categoryIds": categoryIds.toParameter(),
+            "eventTypes": eventTypes.toParameter(),
+            "lowestPrice": lowestPrice,
+            "highestPrice": highestPrice,
+            "keyword": keyword,
+            "page": page
+        ]
+        
+        apiManager.request(for: ProductsAPI.search(parameters))
+            .sink { (result: Result<ProductModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.searchResults?.data.content += result.data.content
+                    self.searchResults?.data.last = result.data.last
                 case .failure(let error):
                     print(error)
                 }
