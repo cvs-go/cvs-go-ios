@@ -22,7 +22,7 @@ struct ProductListView: View {
          searchViewModel: SearchViewModel,
          searchAgain: Binding<Bool> = .constant(false)
     ) {
-        self.type = type    
+        self.type = type
         self.homeViewModel = homeViewModel
         self.searchViewModel = searchViewModel
         self._searchAgain = searchAgain
@@ -42,9 +42,9 @@ struct ProductListView: View {
                     VStack {
                         ScrollView {
                             ForEach(
-                                type == .event ? homeViewModel.eventProducts : homeViewModel.popularProducts,
-                                id: \.self) { product in
-                                    VStack {
+                                type == .event ? homeViewModel.eventProducts.enumeratedArray() : homeViewModel.popularProducts.enumeratedArray(),
+                                id: \.element) { index, product in
+                                    LazyVStack {
                                         SearchResultItemView(
                                             selectedProduct: $selectedProduct,
                                             isHeartMark: product.isLiked,
@@ -64,6 +64,13 @@ struct ProductListView: View {
                                                 homeViewModel.requestProductUnBookmark(productID: product.productId)
                                             }
                                         )
+                                        .onAppear {
+                                            if homeViewModel.eventProducts.count - 3 == index,
+                                               !homeViewModel.eventProductsLast {
+                                                homeViewModel.eventProductsPage += 1
+                                                homeViewModel.requestMoreEventProducts()
+                                            }
+                                        }
                                     }
                                     .padding(.vertical, 10)
                                 }
@@ -121,7 +128,7 @@ struct ProductListView: View {
     @ViewBuilder
     private func topView(_ type: ProductListType) -> some View {
         if type == .event {
-            HStack(alignment: .top) {   
+            HStack(alignment: .top) {
                 Spacer().frame(width: 20)
                 Text("행사상품 총 \(homeViewModel.eventProductCount)개")
                     .font(.pretendard(.regular, 12))

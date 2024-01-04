@@ -71,7 +71,7 @@ struct SortSelectView: View {
         }
         .cornerRadius(10)
         .onAppear {
-            self.currentSort = sortType == .product ? "랭킹순" : "최신순"
+            initCurrentSort()
         }
     }
     
@@ -86,6 +86,22 @@ struct SortSelectView: View {
             return "REVIEW_COUNT"
         } else {
             return "RATING"
+        }
+    }
+    
+    private func initCurrentSort() {
+        if sortBy.isEmpty {
+            self.currentSort = sortType == .product ? "랭킹순" : "최신순"
+        } else if sortBy == "LIKE" {
+            self.currentSort = "도움순"
+        } else if sortBy == "REVIEW_COUNT" {
+            self.currentSort = "리뷰순"
+        } else if sortBy == "RATING" {
+            self.currentSort = "별점순"
+        } else if sortBy == "LATEST" {
+            self.currentSort = "최신순"
+        } else if sortBy == "SCORE" {
+            self.currentSort = "랭킹순"
         }
     }
 }

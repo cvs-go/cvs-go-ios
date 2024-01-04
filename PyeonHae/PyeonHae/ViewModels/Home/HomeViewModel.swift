@@ -19,11 +19,19 @@ class HomeViewModel: ObservableObject {
     @Published var searchAgain: Bool = false // 행사 상품 재검색
     @Published var sortBy: String = String() // 상품 정렬
     
+    // 페이징 처리
+    @Published var eventProductsPage = 0
+    @Published var eventProductsLast = false
+    
     var eventProductCount = 0
     
     // 행사 상품 조회
     private var eventProductsPublisher: AnyPublisher<Result<ProductModel, Error>, Never> {
-        return apiManager.request(for: ProductsAPI.search(["isEvent": true, "sortBy": sortBy]))
+        return apiManager.request(for: ProductsAPI.search([
+            "isEvent": true,
+            "sortBy": sortBy,
+            "page": eventProductsPage
+        ]))
     }
     
     var bag = Set<AnyCancellable>()
@@ -63,6 +71,7 @@ class HomeViewModel: ObservableObject {
             case .success(let result):
                 self.eventProducts = result.data.content
                 self.eventProductCount = result.data.totalElements
+                self.eventProductsLast = result.data.last
             case .failure(let error):
                 print(error)
             }
@@ -85,6 +94,8 @@ class HomeViewModel: ObservableObject {
     
     // 정렬 값에 따른 행사 상품 재요청
     func requestEventProducts() {
+        self.eventProductsPage = 0
+        
         eventProductsPublisher
             .sink { result in
                 self.searchAgain = false
@@ -92,6 +103,22 @@ class HomeViewModel: ObservableObject {
                 case .success(let result):
                     self.eventProducts = result.data.content
                     self.eventProductCount = result.data.totalElements
+                    self.eventProductsLast = result.data.last
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 행사 상품 다음 페이지 조회
+    func requestMoreEventProducts() {
+        eventProductsPublisher
+            .sink { result in
+                self.searchAgain = false
+                switch result {
+                case .success(let result):
+                    self.eventProducts += result.data.content
+                    self.eventProductsLast = result.data.last
                 case .failure(let error):
                     print(error)
                 }
