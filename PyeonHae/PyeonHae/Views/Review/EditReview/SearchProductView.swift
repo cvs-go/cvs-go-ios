@@ -20,32 +20,49 @@ struct SearchProductView: View {
             Spacer().frame(height: 31)
             searchBar
                 .padding(.horizontal, 20)
-            ScrollView {
-                VStack {
-                    ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
-                        VStack {
-                            SearchResultItemView(
-                                selectedProduct: $selectedProduct,
-                                isHeartMark: product.isLiked,
-                                isBookMark: product.isBookmarked,
-                                product: product,
-                                productViewType: .review,
-                                likeAction: {
-                                    searchViewModel.requestProductLike(productID: product.productId)
-                                },
-                                unlikeAction: {
-                                    searchViewModel.requestProductUnLike(productID: product.productId)
-                                },
-                                bookmarkAction: {
-                                    searchViewModel.requestProductBookmark(productID: product.productId)
-                                },
-                                unBookmarkAction: {
-                                    searchViewModel.requestProductUnBookmark(productID: product.productId)
-                                }
-                            )
+            if let searchResults = searchViewModel.searchResults {
+                ScrollView {
+                    LazyVStack {
+                        ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                            VStack {
+                                SearchResultItemView(
+                                    selectedProduct: $selectedProduct,
+                                    isHeartMark: product.isLiked,
+                                    isBookMark: product.isBookmarked,
+                                    product: product,
+                                    productViewType: .review,
+                                    likeAction: {
+                                        searchViewModel.requestProductLike(productID: product.productId)
+                                    },
+                                    unlikeAction: {
+                                        searchViewModel.requestProductUnLike(productID: product.productId)
+                                    },
+                                    bookmarkAction: {
+                                        searchViewModel.requestProductBookmark(productID: product.productId)
+                                    },
+                                    unBookmarkAction: {
+                                        searchViewModel.requestProductUnBookmark(productID: product.productId)
+                                    }
+                                )
+                            }
+                            .padding(.vertical, 10)
                         }
-                        .padding(.vertical, 10)
                     }
+                }
+            } else {
+                GeometryReader { geometry in
+                    VStack(alignment: .center, spacing: 0) {
+                        Image(name: .findProduct)
+                        Spacer().frame(height: 12)
+                        Text("어떤 상품을 찾고 싶으신가요?")
+                            .font(.pretendard(.semiBold, 16))
+                            .foregroundColor(.grayscale85)
+                        Spacer().frame(height: 2)
+                        Text("원하는 상품을 입력해주세요.")
+                            .font(.pretendard(.light, 14))
+                            .foregroundColor(.grayscale70)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
                 }
             }
         }

@@ -42,7 +42,7 @@ struct SearchBar: View {
                 }
                 ZStack(alignment: .leading) {
                     if text.isEmpty {
-                        Text("찾고싶은 상품을 입력하세요.")
+                        Text("찾고 싶은 상품을 입력하세요.")
                             .font(.pretendard(.regular, 14))
                             .foregroundColor(.grayscale50)
                     }
