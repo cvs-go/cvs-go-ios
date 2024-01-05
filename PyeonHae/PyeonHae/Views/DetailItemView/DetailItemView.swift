@@ -18,7 +18,7 @@ struct DetailItemView: View {
     @State private var selectedReviewerId = -1
     
     @State private var showFilter = false
-    @State private var filterClicked = false // 필터 값 바꼈을 경우
+    @State private var filterOrSortClicked = false // 필터 값 바꼈을 경우
     @State private var searchAgain = false // 정렬 값 바꼈을 경우
     
     @Binding var selectedProduct: Product?
@@ -125,12 +125,7 @@ struct DetailItemView: View {
             .onDisappear {
                 self.selectedProduct = nil
             }
-            .onChange(of: filterClicked) { _ in
-                if let selectedProduct = selectedProduct {
-                    self.searchViewModel.requestReview(productID: selectedProduct.productId)
-                }
-            }
-            .onChange(of: searchAgain) { _ in
+            .onChange(of: filterOrSortClicked) { _ in
                 if let selectedProduct = selectedProduct {
                     self.searchViewModel.requestReview(productID: selectedProduct.productId)
                 }
@@ -175,7 +170,7 @@ struct DetailItemView: View {
             ReviewFilterView(
                 reviewType: .detail,
                 showFilter: $showFilter,
-                filterClicked: $filterClicked,
+                filterClicked: $filterOrSortClicked,
                 tagIds: $searchViewModel.tagIds,
                 ratings: $searchViewModel.ratings
             )
@@ -185,7 +180,7 @@ struct DetailItemView: View {
                     SortSelectView(
                         sortType: .review,
                         sortBy: $searchViewModel.reviewSortBy,
-                        searchAgain: $searchAgain
+                        sortClicked: $filterOrSortClicked
                     )
                     Spacer().frame(width: 20)
                 }

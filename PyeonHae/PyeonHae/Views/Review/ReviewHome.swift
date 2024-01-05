@@ -15,7 +15,7 @@ struct ReviewHome: View {
     @State private var tabItems = ReviewTapType.allCases.map { $0.rawValue }
     @State private var selectedElements: [String] = []
     @State private var showFilter = false
-    @State private var filterClicked = false
+    @State private var filterOrSortClicked = false
     @State private var searchAgain = false
     
     @State private var showUserPage = false
@@ -88,7 +88,7 @@ struct ReviewHome: View {
     private func allReviewTab() -> some View {
         ReviewFilterView(
             showFilter: $showFilter,
-            filterClicked: $filterClicked,
+            filterClicked: $filterOrSortClicked,
             categoryIds: $reviewViewModel.categoryIds,
             tagIds: $reviewViewModel.tagIds,
             ratings: $reviewViewModel.ratings
@@ -105,7 +105,7 @@ struct ReviewHome: View {
                 SortSelectView(
                     sortType: .review,
                     sortBy: $reviewViewModel.sortBy,
-                    searchAgain: $searchAgain
+                    sortClicked: $filterOrSortClicked
                 ).padding(.top, 7)
                 Spacer().frame(width: 20)
             }
@@ -206,7 +206,7 @@ struct ReviewHome: View {
                 .refreshable {
                     reviewViewModel.requestReviews()
                 }
-                .onChange(of: filterClicked) { _ in
+                .onChange(of: filterOrSortClicked) { _ in
                     reviewViewModel.isLoading = true
                     reviewViewModel.requestReviews()
                 }

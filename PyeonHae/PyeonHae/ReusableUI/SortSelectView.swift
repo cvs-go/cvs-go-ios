@@ -12,7 +12,7 @@ struct SortSelectView: View {
     @State private var isDropdownOpen = false
     @State private var currentSort = String() // 최근에 선택된 정렬 값 ex) 별점순, 랭킹순
     @Binding var sortBy: String // 정렬 파라미터로 쓰이는 값 ex) RATING, SCORE
-    @Binding var searchAgain: Bool
+    @Binding var sortClicked: Bool
     
     private var sortValues: [String] {
         if sortType == .product {
@@ -51,7 +51,7 @@ struct SortSelectView: View {
                                 Button(action: {
                                     currentSort = value
                                     sortBy = convertToParameter(value)
-                                    searchAgain.toggle()
+                                    sortClicked.toggle()
                                     isDropdownOpen.toggle()
                                 }) {
                                     HStack(spacing: 6) {

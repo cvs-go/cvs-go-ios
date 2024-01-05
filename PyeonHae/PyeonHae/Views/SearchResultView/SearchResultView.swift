@@ -15,7 +15,7 @@ struct SearchResultView: View {
     @State private var showFilter = false
     @State private var searchAgain = false
     @State private var selectedProduct: Product? = nil
-    @State private var filterClicked = false
+    @State private var filterOrSortClicked = false
     @State private var minPrice: CGFloat = 0
     @State private var maxPrice: CGFloat = 1
     
@@ -104,11 +104,12 @@ struct SearchResultView: View {
                     if let filtersData = UserShared.filterData {
                         SearchFilterView(
                             filterDatas: filtersData,
+                            selectedElements: $searchViewModel.selectedElements,
                             showFilter: $showFilter,
                             convenienceStoreIds: $searchViewModel.convenienceStoreIds,
                             categoryIds: $searchViewModel.categoryIds,
                             eventTypes: $searchViewModel.eventTypes,
-                            filterClicked: $filterClicked,
+                            filterClicked: $filterOrSortClicked,
                             minPrice: $minPrice,
                             maxPrice: $maxPrice
                         )
@@ -123,7 +124,7 @@ struct SearchResultView: View {
                         SortSelectView(
                             sortType: .product,
                             sortBy: $searchViewModel.sortBy,
-                            searchAgain: $searchAgain
+                            sortClicked: $filterOrSortClicked
                         )
                         .padding(.top, 7)
                         Spacer().frame(width: 20)
@@ -145,10 +146,11 @@ struct SearchResultView: View {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
         }
         .onChange(of: searchAgain) { _ in
+            searchViewModel.initParameters()
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
         }
-        .onChange(of: filterClicked) { _ in
+        .onChange(of: filterOrSortClicked) { _ in
             searchViewModel.searchProducts()
         }
         .onChange(of: selectedProduct) { product in

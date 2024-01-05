@@ -10,17 +10,18 @@ import WrappingHStack
 
 struct SearchFilterView: View {
     let filterDatas: FiltersDataModel
-    @State private var selectedElements: [String] = []
-    @Binding private var showFilter: Bool
-    @Binding private var convenienceStoreIds: [Int]
-    @Binding private var categoryIds: [Int]
-    @Binding private var eventTypes: [String]
-    @Binding private var filterClicked: Bool
-    @Binding private var minPrice: CGFloat
-    @Binding private var maxPrice: CGFloat
+    @Binding var selectedElements: [String]
+    @Binding var showFilter: Bool
+    @Binding var convenienceStoreIds: [Int]
+    @Binding var categoryIds: [Int]
+    @Binding var eventTypes: [String]
+    @Binding var filterClicked: Bool
+    @Binding var minPrice: CGFloat
+    @Binding var maxPrice: CGFloat
     
     init(
         filterDatas: FiltersDataModel,
+        selectedElements: Binding<[String]>,
         showFilter: Binding<Bool>,
         convenienceStoreIds: Binding<[Int]>,
         categoryIds: Binding<[Int]>,
@@ -30,6 +31,7 @@ struct SearchFilterView: View {
         maxPrice: Binding<CGFloat>
     ) {
         self.filterDatas = filterDatas
+        self._selectedElements = selectedElements
         self._showFilter = showFilter
         self._convenienceStoreIds = convenienceStoreIds
         self._categoryIds = categoryIds
@@ -60,7 +62,7 @@ struct SearchFilterView: View {
                 .foregroundColor(.grayscale100)
             Image(name: showFilter ? .arrowUp : .arrowDown)
             Spacer()
-            ForEach(Array(selectedElements.enumerated()), id: \.element) { index, element in
+            ForEach(selectedElements.enumeratedArray(), id: \.element) { index, element in
                 if index < 3 {
                     if index != 0 {
                         Image(name: .grayCircle)

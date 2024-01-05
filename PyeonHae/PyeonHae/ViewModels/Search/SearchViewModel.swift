@@ -40,6 +40,9 @@ class SearchViewModel: ObservableObject {
     @Published var resultListIsLoading = false
     @Published var detailIsLoading = false
     
+    // 선택된 필터 값
+    @Published var selectedElements: [String] = []
+    
     var bag = Set<AnyCancellable>()
     
     init() {
@@ -214,7 +217,9 @@ class SearchViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    func initFilters() {
+    func initParameters() {
+        selectedElements.removeAll()
+        sortBy.removeAll()
         convenienceStoreIds.removeAll()
         categoryIds.removeAll()
         eventTypes.removeAll()

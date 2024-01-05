@@ -138,7 +138,7 @@ struct ProductListView: View {
                 SortSelectView(
                     sortType: .product,
                     sortBy: $homeViewModel.sortBy,
-                    searchAgain: $searchAgain
+                    sortClicked: $searchAgain
                 )
                 .padding(.top, 7)
                 Spacer().frame(width: 20)

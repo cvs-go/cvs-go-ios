@@ -11,8 +11,7 @@ struct WriteReviewsView: View {
     @ObservedObject var reviewViewModel: ReviewViewModel
     @Binding var selectedReviewerId: Int
     @State private var showFilter = false
-    @State private var filterClicked = false
-    @State private var searchAgain = false
+    @State private var filterOrSortClicked = false
     
     var body: some View {
         if let userReviews = reviewViewModel.userReviews {
@@ -45,7 +44,7 @@ struct WriteReviewsView: View {
                         SortSelectView(
                             sortType: .review,
                             sortBy: $reviewViewModel.sortBy,
-                            searchAgain: $searchAgain
+                            sortClicked: $filterOrSortClicked
                         )
                         Spacer().frame(width: 20)
                     }
@@ -63,10 +62,7 @@ struct WriteReviewsView: View {
             }
             .padding(.top, 14)
             .background(Color.white)
-            .onChange(of: filterClicked) { _ in
-                self.reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
-            }
-            .onChange(of: searchAgain) { _ in
+            .onChange(of: filterOrSortClicked) { _ in
                 self.reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
             }
         } else {
