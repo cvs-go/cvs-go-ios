@@ -41,6 +41,19 @@ struct SearchResultView: View {
                                 }
                                 .frame(width: geometry.size.width)
                                 .frame(minHeight: geometry.size.height)
+                            } else if searchViewModel.searchResults?.data.content.count == 0 {
+                                VStack(alignment: .center, spacing: 0) {
+                                    Image(name: .findProduct)
+                                    Spacer().frame(height: 12)
+                                    Text("찾으시는 상품이 없어요!")
+                                        .font(.pretendard(.semiBold, 16))
+                                        .foregroundColor(.grayscale85)
+                                    Spacer().frame(height: 2)
+                                    Text("다른 상품은 어떠신가요?")
+                                        .font(.pretendard(.light, 14))
+                                        .foregroundColor(.grayscale70)
+                                }
+                                .frame(width: geometry.size.width, height: geometry.size.height)
                             } else {
                                 ForEach(searchViewModel.searchResults?.data.content.enumeratedArray() ?? [], id: \.element) { index, product in
                                     LazyVStack {
