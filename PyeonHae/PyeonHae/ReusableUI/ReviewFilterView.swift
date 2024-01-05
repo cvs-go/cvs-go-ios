@@ -44,6 +44,11 @@ struct ReviewFilterView: View {
             Text("필터")
                 .font(.pretendard(.bold, 14))
                 .foregroundColor(.grayscale100)
+            if selectedElements.count != 0, reviewType == .detail, !showFilter {
+                Text("\(selectedElements.count)")
+                    .font(.pretendard(.bold, 14))
+                    .foregroundColor(.red100)
+            }
             Image(name: showFilter ? .arrowUp : .arrowDown)
             Spacer()
             HStack(spacing: 0) {
