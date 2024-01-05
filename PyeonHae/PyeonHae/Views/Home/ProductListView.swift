@@ -65,7 +65,7 @@ struct ProductListView: View {
                                             }
                                         )
                                         .onAppear {
-                                            if homeViewModel.eventProducts.count - 3 == index,
+                                            if type == .event, homeViewModel.eventProducts.count - 3 == index,
                                                !homeViewModel.eventProductsLast {
                                                 homeViewModel.eventProductsPage += 1
                                                 homeViewModel.requestMoreEventProducts()
