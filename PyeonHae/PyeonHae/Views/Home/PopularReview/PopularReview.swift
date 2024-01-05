@@ -18,8 +18,6 @@ struct PopularReview: View {
                     .font(.pretendard(.bold, 18))
                     .foregroundColor(.grayscale100)
                 Spacer()
-                Image(name: .arrowRight)
-                Spacer().frame(width: 16)
             }
             Spacer().frame(height: 16)
             ScrollView(.horizontal, showsIndicators: false) {
@@ -43,7 +41,7 @@ struct PopularReview: View {
                         .frame(width: UIWindow().screen.bounds.width - 75)
                     }
                 }
-                .padding(.horizontal, 20)
+                .padding(.trailing, 20)
             }
         }
         .padding(.vertical, 16)

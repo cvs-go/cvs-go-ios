@@ -63,7 +63,7 @@ struct ReviewContents: View {
                 }
             }
             .padding(.horizontal, 24)
-            if let imageUrls = imageUrls {
+            if let imageUrls = imageUrls, reviewType != .popular {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
                         Spacer().frame(width: 24)
