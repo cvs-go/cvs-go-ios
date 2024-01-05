@@ -137,7 +137,7 @@ struct ReviewHome: View {
                         } else {
                             ForEach(reviewViewModel.reviewList.enumeratedArray(), id: \.element) { index, review in
                                 LazyVStack(alignment: .leading) {
-                                    VStack(spacing: 0) {
+                                    VStack {
                                         ReviewUserInfo(
                                             reviewType: .normal,
                                             profileUrl: review.reviewerProfileImageUrl,

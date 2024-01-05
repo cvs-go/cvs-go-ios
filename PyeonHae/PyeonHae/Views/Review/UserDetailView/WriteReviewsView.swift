@@ -16,28 +16,27 @@ struct WriteReviewsView: View {
     var body: some View {
         if let userReviews = reviewViewModel.userReviews {
             VStack {
-                HStack {
-                    Text("작성한 리뷰")
-                        .font(.pretendard(.semiBold, 20))
-                        .foregroundColor(.grayscale100)
-                    Text("\(userReviews.totalElements)")
-                        .font(.pretendard(.semiBold, 20))
-                        .foregroundColor(.red100)
-                    Spacer()
-                    //                    Image(name: .fillLike)
-                    //                    Text("14245명")
-                    //                        .font(.pretendard(.semiBold, 12))
-                    //                        .foregroundColor(.grayscale50)
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("작성한 리뷰")
+                            .font(.pretendard(.semiBold, 20))
+                            .foregroundColor(.grayscale100)
+                        Text("\(userReviews.totalElements)")
+                            .font(.pretendard(.semiBold, 20))
+                            .foregroundColor(.red100)
+                        Spacer()
+                    }
+                    HStack(spacing: 2) {
+                        Image(name: .fillLike)
+                            .renderingMode(.template)
+                            .foregroundColor(.grayscale70)
+                        Text("14245명에게 도움을 줬어요.")
+                            .font(.pretendard(.semiBold, 12))
+                            .foregroundColor(.grayscale50)
+                        Spacer()
+                    }
                 }
-                .padding(.horizontal, 20)
-                // TODO: 기획 후 수정하기
-//                ReviewFilterView(
-//                    reviewType: .detail,
-//                    showFilter: $showFilter,
-//                    filterClicked: $filterClicked,
-//                    tagIds: $reviewViewModel.tagIds,
-//                    ratings: $reviewViewModel.ratings
-//                )
+                .padding(EdgeInsets(top: 0, leading: 20, bottom: 12, trailing: 20))
                 ZStack(alignment: .top) {
                     HStack(alignment: .top) {
                         Spacer()
