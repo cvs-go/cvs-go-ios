@@ -55,13 +55,13 @@ struct ReviewHome: View {
         .task {
             if !reviewLoaded {
                 reviewViewModel.isLoading = true
-                reviewViewModel.requestReviewList()
+                reviewViewModel.requestReviews()
                 self.reviewLoaded = true
             }
         }
         .onChange(of: searchAgain) { _ in
             self.reviewViewModel.isLoading = true
-            self.reviewViewModel.requestReviewList()
+            self.reviewViewModel.requestReviews()
         }
     }
     
@@ -135,9 +135,9 @@ struct ReviewHome: View {
                             .frame(width: geometry.size.width)
                             .frame(minHeight: geometry.size.height)
                         } else {
-                            ForEach(reviewViewModel.reviewList, id: \.self) { review in
-                                VStack(alignment: .leading) {
-                                    Group {
+                            ForEach(reviewViewModel.reviewList.enumeratedArray(), id: \.element) { index, review in
+                                LazyVStack(alignment: .leading) {
+                                    VStack(spacing: 0) {
                                         ReviewUserInfo(
                                             reviewType: .normal,
                                             profileUrl: review.reviewerProfileImageUrl,
@@ -155,38 +155,45 @@ struct ReviewHome: View {
                                             showUserPage: $showUserPage,
                                             selectedReviewerId: $selectedReviewerId
                                         )
-                                    }
-                                    HStack(spacing: 0) {
-                                        ReviewContents(
-                                            reviewerId: review.reviewerId,
-                                            rating: review.reviewRating,
-                                            imageUrls: review.reviewImageUrls,
-                                            content: review.reviewContent,
-                                            isReviewLiked: review.isReviewLiked,
-                                            likeCount: review.reviewLikeCount,
-                                            likeAction: {
-                                                reviewViewModel.requestLikeReview(id: review.reviewId)
+                                        HStack(spacing: 0) {
+                                            ReviewContents(
+                                                reviewerId: review.reviewerId,
+                                                rating: review.reviewRating,
+                                                imageUrls: review.reviewImageUrls,
+                                                content: review.reviewContent,
+                                                isReviewLiked: review.isReviewLiked,
+                                                likeCount: review.reviewLikeCount,
+                                                likeAction: {
+                                                    reviewViewModel.requestLikeReview(id: review.reviewId)
+                                                },
+                                                unlikeAction: {
+                                                    reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                                }
+                                            )
+                                        }
+                                        ReviewProduct(
+                                            imageUrl: review.productImageUrl,
+                                            manufacturer: review.productManufacturer,
+                                            name: review.productName,
+                                            isBookmarked: review.isProductBookmarked,
+                                            bookmarkAction: {
+                                                reviewViewModel.requestProductBookmark(productID: review.productId)
                                             },
-                                            unlikeAction: {
-                                                reviewViewModel.requestUnlikeReview(id: review.reviewId)
+                                            unBookmarkAction:  {
+                                                reviewViewModel.requestProductUnBookmark(productID: review.productId)
                                             }
                                         )
+                                        Color.grayscale30.opacity(0.5).frame(height: 1)
+                                            .padding(.bottom, 16)
                                     }
-                                    ReviewProduct(
-                                        imageUrl: review.productImageUrl,
-                                        manufacturer: review.productManufacturer,
-                                        name: review.productName,
-                                        isBookmarked: review.isProductBookmarked,
-                                        bookmarkAction: {
-                                            reviewViewModel.requestProductBookmark(productID: review.productId)
-                                        },
-                                        unBookmarkAction:  {
-                                            reviewViewModel.requestProductUnBookmark(productID: review.productId)
+                                    .onAppear {
+                                        if reviewViewModel.reviewList.count - 3 == index,
+                                           !reviewViewModel.last {
+                                            reviewViewModel.page += 1
+                                            reviewViewModel.requestMoreReviews()
                                         }
-                                    )
+                                    }
                                 }
-                                Color.grayscale30.opacity(0.5).frame(height: 1)
-                                    .padding(.bottom, 16)
                             }
                         }
                     }
@@ -197,11 +204,11 @@ struct ReviewHome: View {
                     }
                 })
                 .refreshable {
-                    reviewViewModel.requestReviewList()
+                    reviewViewModel.requestReviews()
                 }
                 .onChange(of: filterClicked) { _ in
                     reviewViewModel.isLoading = true
-                    reviewViewModel.requestReviewList()
+                    reviewViewModel.requestReviews()
                 }
             }.offset(y: 50)
         }.padding(.bottom, 50)

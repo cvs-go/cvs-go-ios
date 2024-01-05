@@ -34,9 +34,12 @@ class ReviewViewModel: ObservableObject {
     @Published var categoryIds: [Int] = []
     @Published var tagIds: [Int] = []
     @Published var ratings: [String] = []
+    @Published var page = 0
     
     @Published var userInfo: UserInfoDataModel? = nil
     @Published var tagMatchPercentage = -1
+    
+    @Published var last = false // 페이징 처리
     
     var bag = Set<AnyCancellable>()
     
@@ -63,7 +66,7 @@ class ReviewViewModel: ObservableObject {
             case .success:
                 self.showWriteView = false
                 self.showToastMessage = true
-                self.requestReviewList()
+                self.requestReviews()
             case .failure:
                 self.showAlertMessage = true
             }
@@ -94,7 +97,7 @@ class ReviewViewModel: ObservableObject {
                 case .success:
                     self.showWriteView = false
                     self.showToastMessage = true
-                    self.requestReviewList()
+                    self.requestReviews()
                 case .failure:
                     self.showAlertMessage = true
                 }
@@ -103,7 +106,10 @@ class ReviewViewModel: ObservableObject {
             .store(in: &bag)
     }
     
-    func requestReviewList() {
+    func requestReviews() {
+        self.page = 0
+        self.last = false
+        
         let parameters: [String : Any] = [
             "sortBy": sortBy,
             "categoryIds": categoryIds.toParameter(),
@@ -112,43 +118,67 @@ class ReviewViewModel: ObservableObject {
         ]
         
         apiManager.request(for: ReviewAPI.reviewList(parameters: parameters))
-        .sink { (result: Result<ReviewListModel, Error>) in
-            switch result {
-            case .success(let result):
-                self.latestReviewCount = result.data.latestReviewCount
-                self.reviewList = result.data.reviews
-            case .failure(let error):
-                print(error)
+            .sink { (result: Result<ReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.latestReviewCount = result.data.latestReviewCount
+                    self.reviewList = result.data.reviews
+                case .failure(let error):
+                    print(error)
+                }
+                self.isLoading = false
             }
-            self.isLoading = false
-        }
-        .store(in: &bag)
+            .store(in: &bag)
+    }
+    
+    func requestMoreReviews() {
+        let parameters: [String : Any] = [
+            "sortBy": sortBy,
+            "categoryIds": categoryIds.toParameter(),
+            "tagIds": tagIds.toParameter(),
+            "ratings": ratings.toParameter(),
+            "page": page
+        ]
+        
+        apiManager.request(for: ReviewAPI.reviewList(parameters: parameters))
+            .sink { (result: Result<ReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    if result.data.reviews.count < 20 {
+                        self.last = true
+                    }
+                    self.reviewList += result.data.reviews
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &bag)
     }
     
     func requestLikeReview(id: Int) {
         apiManager.request(for: ReviewAPI.like(id: id))
-        .sink { (result: Result<EmptyResponse, Error>) in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                print(error)
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
             }
-        }
-        .store(in: &bag)
+            .store(in: &bag)
     }
     
     func requestUnlikeReview(id: Int) {
         apiManager.request(for: ReviewAPI.unlike(id: id))
-        .sink { (result: Result<EmptyResponse, Error>) in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                print(error)
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
             }
-        }
-        .store(in: &bag)
+            .store(in: &bag)
     }
     
     // 상품 북마크 생성
