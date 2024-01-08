@@ -9,6 +9,9 @@ import SwiftUI
 
 struct PopularReview: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var searchViewModel: SearchViewModel
+    @Binding var selectedProduct: Product?
+    @Binding var showProductDetail: Bool
     
     var body: some View {
         VStack {
@@ -36,6 +39,12 @@ struct PopularReview: View {
                             },
                             unBookmarkAction: {
                                 homeViewModel.requestProductUnBookmark(productID: review.productId.wrappedValue)
+                            },
+                            showDetailAction: {
+                                searchViewModel.requestReview(productID: review.productId.wrappedValue)
+                                searchViewModel.requestProductDetail(productID: review.productId.wrappedValue)
+                                searchViewModel.requestProductTag(productId: review.productId.wrappedValue)
+                                showProductDetail = true
                             }
                         )
                         .frame(width: UIWindow().screen.bounds.width - 75)

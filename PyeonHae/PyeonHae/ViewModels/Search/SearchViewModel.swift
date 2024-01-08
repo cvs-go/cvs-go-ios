@@ -223,6 +223,9 @@ class SearchViewModel: ObservableObject {
         convenienceStoreIds.removeAll()
         categoryIds.removeAll()
         eventTypes.removeAll()
+        reviewSortBy.removeAll()
+        tagIds.removeAll()
+        ratings.removeAll()
         lowestPrice = 0
         highestPrice = UserShared.filterData?.highestPrice ?? 0
     }

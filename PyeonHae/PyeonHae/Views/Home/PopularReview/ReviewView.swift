@@ -14,6 +14,7 @@ struct ReviewView: View {
     let unlikeAction: () -> Void
     let bookmarkAction: () -> Void
     let unBookmarkAction: () -> Void
+    let showDetailAction: () -> Void
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -57,6 +58,9 @@ struct ReviewView: View {
                     unBookmarkAction()
                 }
             )
+            .onTapGesture {
+                showDetailAction()
+            }
         }
     }
 }

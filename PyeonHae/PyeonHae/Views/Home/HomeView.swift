@@ -50,11 +50,19 @@ struct HomeView: View {
                             showProductDetail: $showProductDetail
                         )
                         Spacer().frame(height: 14)
-                        PopularReview(homeViewModel: homeViewModel)
+                        PopularReview(
+                            homeViewModel: homeViewModel,
+                            searchViewModel: searchViewModel,
+                            selectedProduct: $selectedProduct,
+                            showProductDetail: $showProductDetail
+                        )
                         Spacer().frame(height: 22)
                     }
                 }
                 .background(Color.grayscale20)
+                .onAppear {
+                    self.searchViewModel.initParameters()
+                }
                 
                 NavigationLink(
                     destination: ProductListView(

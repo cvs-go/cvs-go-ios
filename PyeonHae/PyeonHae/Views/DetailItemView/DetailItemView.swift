@@ -128,6 +128,8 @@ struct DetailItemView: View {
             .onChange(of: filterOrSortClicked) { _ in
                 if let selectedProduct = selectedProduct {
                     self.searchViewModel.requestReview(productID: selectedProduct.productId)
+                } else {
+                    self.searchViewModel.requestReview(productID: searchViewModel.productDetail?.data.productId ?? -1)
                 }
             }
         }
@@ -158,12 +160,14 @@ struct DetailItemView: View {
                     .font(.pretendard(.semiBold, 16))
                     .foregroundColor(.grayscale100)
                 Spacer()
-                Image(name: .redStar)
-                    .resizable()
-                    .frame(width: 16, height: 16)
-                Text(selectedProduct?.reviewRating ?? String())
-                    .font(.pretendard(.semiBold, 16))
-                    .foregroundColor(.grayscale100)
+                if let selectedProduct = selectedProduct {
+                    Image(name: .redStar)
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                    Text(selectedProduct.reviewRating)
+                        .font(.pretendard(.semiBold, 16))
+                        .foregroundColor(.grayscale100)
+                }
             }
             .padding(.top, 12)
             .padding(.horizontal, 20)
