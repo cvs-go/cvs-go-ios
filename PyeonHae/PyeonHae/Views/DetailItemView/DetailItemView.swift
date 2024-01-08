@@ -18,8 +18,7 @@ struct DetailItemView: View {
     @State private var selectedReviewerId = -1
     
     @State private var showFilter = false
-    @State private var filterOrSortClicked = false // 필터 값 바꼈을 경우
-    @State private var searchAgain = false // 정렬 값 바꼈을 경우
+    @State private var filterOrSortClicked = false // 필터, 정렬 값 바꼈을 경우
     
     @Binding var selectedProduct: Product?
     @Binding var productList: Products?
