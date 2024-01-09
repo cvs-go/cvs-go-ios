@@ -33,37 +33,34 @@ struct SignupNicknameView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
-            
-            NavigationLink(
-                destination: SignupSelectTagView(loginViewModel: loginViewModel),
-                isActive: $loginViewModel.checkNicknameValue
-            ) {
-                Text("다음")
-                    .font(.pretendard(.bold, 18))
-                    .foregroundColor(.white)
-                    .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
-                    .background(backgroundColor)
-                    .cornerRadius(isFocused ? 0 : 10)
-                    .onTapGesture {
-                        loginViewModel.checkNickname()
-                    }
-            }
-            .disabled(isDisabled)
+            Text("다음")
+                .font(.pretendard(.bold, 18))
+                .foregroundColor(.white)
+                .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
+                .background(backgroundColor)
+                .cornerRadius(isFocused ? 0 : 10)
+                .onTapGesture {
+                    loginViewModel.checkNickname()
+                }
+                .disabled(isDisabled)
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {
             self.isFocused = true
             self.loginViewModel.textFieldType = .nickname
         }
+        .navigationDestination(isPresented: $loginViewModel.checkNicknameValue) {
+            SignupSelectTagView(loginViewModel: loginViewModel)
+        }
     }
     var backgroundColor: Color {
-        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count < 8
+        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count <= 8
         ? Color.red100
         : Color.grayscale50
     }
     
     var isDisabled: Bool {
-        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count < 8
+        return 2 <= loginViewModel.nickname.count && loginViewModel.nickname.count <= 8
         ? false
         : true
     }

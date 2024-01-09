@@ -54,6 +54,7 @@ struct SignupPasswordView: View {
             self.loginViewModel.textFieldType = .signupPassword
         }
     }
+    
     var backgroundColor: Color {
         return loginViewModel.password.isValidPassword()
         ? Color.red100

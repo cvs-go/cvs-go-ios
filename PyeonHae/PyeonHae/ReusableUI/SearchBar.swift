@@ -78,6 +78,7 @@ struct SearchBar: View {
                 trailing: 18)
             )
         }
+        .navigationBarBackButtonHidden()
         .onAppear {
             if searchBarType == .home {
                 self.isFocused = false

@@ -93,7 +93,6 @@ struct SearchStartView: View {
                         }
                     }
                 }
-                
                 // 인기 검색어
                 VStack {
                     HStack {
@@ -118,30 +117,6 @@ struct SearchStartView: View {
                     ))
                 }
             }
-            
-            NavigationLink(
-                destination: SearchResultView(
-                    searchViewModel: searchViewModel,
-                    text: $text
-                ).navigationBarHidden(true),
-                isActive: $showResultView
-            ) {
-                EmptyView()
-            }
-            
-            NavigationLink(
-                destination: DetailItemView(
-                    searchViewModel: searchViewModel,
-                    selectedProduct: $selectedProduct
-                ),
-                isActive: $showDetailView
-            ) {
-                EmptyView()
-            }
-        }
-        .onAppear {
-            self.searchedProducts = UserShared.searchedProducts.sorted(by: { $0.timestamp > $1.timestamp })
-            self.searchedKeywords = UserShared.searchedKeywords.sorted(by: { $0.timestamp > $1.timestamp })
         }
         .showDestructiveAlert(
             message: "검색 기록을 모두 삭제하겠습니까?",
@@ -151,6 +126,22 @@ struct SearchStartView: View {
                 deleteAction?()
             }
         )
+        .onAppear {
+            self.searchedProducts = UserShared.searchedProducts.sorted(by: { $0.timestamp > $1.timestamp })
+            self.searchedKeywords = UserShared.searchedKeywords.sorted(by: { $0.timestamp > $1.timestamp })
+        }
+        .navigationDestination(isPresented: $showResultView) {
+            SearchResultView(
+                searchViewModel: searchViewModel,
+                text: $text
+            )
+        }
+        .navigationDestination(isPresented: $showDetailView) {
+            DetailItemView(
+                searchViewModel: searchViewModel,
+                selectedProduct: $selectedProduct
+            )
+        }
     }
     
     private func deleteSearchedProduct(_ productId: Int) {

@@ -132,15 +132,6 @@ struct SearchResultView: View {
                     Spacer()
                 }
             }
-            NavigationLink(
-                destination: DetailItemView(
-                    searchViewModel: searchViewModel,
-                    selectedProduct: $selectedProduct
-                ),
-                isActive: $showDetailView
-            ) {
-                EmptyView()
-            }
         }
         .onAppear {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
@@ -182,6 +173,12 @@ struct SearchResultView: View {
             }.sink { _ in
                 searchViewModel.searchProducts()
             }
+        }
+        .navigationDestination(isPresented: $showDetailView) {
+            DetailItemView(
+                searchViewModel: searchViewModel,
+                selectedProduct: $selectedProduct
+            )
         }
     }
 }

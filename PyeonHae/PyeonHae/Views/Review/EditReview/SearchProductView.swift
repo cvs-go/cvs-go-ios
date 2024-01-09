@@ -23,7 +23,7 @@ struct SearchProductView: View {
             if let searchResults = searchViewModel.searchResults {
                 ScrollView {
                     LazyVStack {
-                        ForEach(searchViewModel.searchResults?.data.content ?? [], id: \.self) { product in
+                        ForEach(searchResults.data.content, id: \.self) { product in
                             VStack {
                                 SearchResultItemView(
                                     selectedProduct: $selectedProduct,

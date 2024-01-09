@@ -24,27 +24,21 @@ struct SearchHomeView: View {
             Spacer().frame(height: 20)
             ProductCategories
             Spacer()
-            NavigationLink(
-                destination: SearchStartView(
-                    searchViewModel: searchViewModel,
-                    text: $text
-                ).navigationBarHidden(true),
-                isActive: $startSearch)
-            {
-                EmptyView()
-            }
-            NavigationLink(
-                destination: SearchResultView(
-                    searchViewModel: searchViewModel,
-                    text: $text
-                ).navigationBarHidden(true),
-                isActive: $showSearchResult
-            ) {
-                EmptyView()
-            }
+                .navigationDestination(isPresented: $startSearch) {
+                    SearchStartView(
+                        searchViewModel: searchViewModel,
+                        text: $text
+                    )
+                }
+                .navigationDestination(isPresented: $showSearchResult) {
+                    SearchResultView(
+                        searchViewModel: searchViewModel,
+                        text: $text
+                    )
+                }
         }
     }
-   
+    
     var ProductCategories: some View {
         VStack {
             HStack {

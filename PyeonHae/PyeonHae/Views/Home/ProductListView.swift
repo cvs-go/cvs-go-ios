@@ -78,17 +78,6 @@ struct ProductListView: View {
                     .padding(.bottom, 20)
                 }
             }
-            .navigationBarBackButtonHidden()
-            
-            NavigationLink(
-                destination: DetailItemView(
-                    searchViewModel: searchViewModel,
-                    selectedProduct: $selectedProduct
-                ),
-                isActive: $showDetailView
-            ) {
-                EmptyView()
-            }
         }
         .onChange(of: selectedProduct) { _ in
             if let selectedProduct = selectedProduct {
@@ -101,6 +90,12 @@ struct ProductListView: View {
         .onChange(of: searchAgain) { _ in
             self.homeViewModel.searchAgain = true
             self.homeViewModel.requestEventProducts()
+        }
+        .navigationDestination(isPresented: $showDetailView) {
+            DetailItemView(
+                searchViewModel: searchViewModel,
+                selectedProduct: $selectedProduct
+            )
         }
     }
     

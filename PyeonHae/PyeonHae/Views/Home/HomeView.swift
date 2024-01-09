@@ -63,38 +63,26 @@ struct HomeView: View {
                 .onAppear {
                     self.searchViewModel.initParameters()
                 }
-                
-                NavigationLink(
-                    destination: ProductListView(
+                .navigationDestination(isPresented: $showEventProducts) {
+                    ProductListView(
                         type: .event,
                         homeViewModel: homeViewModel,
                         searchViewModel: searchViewModel,
                         searchAgain: $searchAgain
-                    ),
-                    isActive: $showEventProducts
-                ) {
-                    EmptyView()
+                    )
                 }
-                
-                NavigationLink(
-                    destination: ProductListView(
+                .navigationDestination(isPresented: $showPopularProducts) {
+                    ProductListView(
                         type: .popular,
                         homeViewModel: homeViewModel,
                         searchViewModel: searchViewModel
-                    ),
-                    isActive: $showPopularProducts
-                ) {
-                    EmptyView()
+                    )
                 }
-                
-                NavigationLink(
-                    destination: DetailItemView(
+                .navigationDestination(isPresented: $showProductDetail) {
+                    DetailItemView(
                         searchViewModel: searchViewModel,
                         selectedProduct: $selectedProduct
-                    ),
-                    isActive: $showProductDetail
-                ) {
-                    EmptyView()
+                    )
                 }
             }
         }

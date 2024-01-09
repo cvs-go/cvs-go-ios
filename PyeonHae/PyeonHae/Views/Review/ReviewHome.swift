@@ -32,15 +32,6 @@ struct ReviewHome: View {
                 ],
                 type: .review
             )
-            NavigationLink(
-                destination: UserPageView(
-                    reviewViewModel: reviewViewModel,
-                    selectedReviewerId: $selectedReviewerId
-                ).navigationBarHidden(true),
-                isActive: $showUserPage)
-            {
-                EmptyView()
-            }
         }
         .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
             EditReviewView(
@@ -62,6 +53,12 @@ struct ReviewHome: View {
         .onChange(of: searchAgain) { _ in
             self.reviewViewModel.isLoading = true
             self.reviewViewModel.requestReviews()
+        }
+        .navigationDestination(isPresented: $showUserPage) {
+            UserPageView(
+                reviewViewModel: reviewViewModel,
+                selectedReviewerId: $selectedReviewerId
+            )
         }
     }
     

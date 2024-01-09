@@ -43,24 +43,6 @@ struct MyInfoView: View {
                 type: .myInfo
             )
             Spacer()
-            
-            NavigationLink(
-                destination: UserSettingView(myInfoViewModel: myInfoViewModel).navigationBarHidden(true),
-                isActive: $showSettingView
-            ) {
-                EmptyView()
-            }
-            
-            NavigationLink(
-                destination: DetailItemView(
-                    searchViewModel: searchViewModel,
-                    selectedProduct: $selectedProduct,
-                    productList: $myInfoViewModel.myLikeData
-                ),
-                isActive: $showProductDetail
-            ) {
-                EmptyView()
-            }
         }
         .fullScreenCover(isPresented: $showEditView) {
             MyInfoEditView(myInfoViewModel: myInfoViewModel, showEditView: $showEditView)
@@ -73,6 +55,16 @@ struct MyInfoView: View {
                 self.selectedProduct = selectedProduct
                 self.showProductDetail = true
             }
+        }
+        .navigationDestination(isPresented: $showSettingView) {
+            UserSettingView(myInfoViewModel: myInfoViewModel)
+        }
+        .navigationDestination(isPresented: $showProductDetail) {
+            DetailItemView(
+                searchViewModel: searchViewModel,
+                selectedProduct: $selectedProduct,
+                productList: $myInfoViewModel.myLikeData
+            )
         }
     }
     

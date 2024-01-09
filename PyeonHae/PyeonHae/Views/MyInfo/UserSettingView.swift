@@ -49,14 +49,10 @@ struct UserSettingView: View {
             }
         )
         .edgesIgnoringSafeArea(.bottom)
-        
-        NavigationLink(
-            destination: NoticeListView(
+        .navigationDestination(isPresented: $showNoticeList) {
+            NoticeListView(
                 myInfoViewModel: myInfoViewModel
-            ).navigationBarHidden(true),
-            isActive: $showNoticeList
-        ) {
-            EmptyView()
+            )
         }
     }
     

@@ -23,15 +23,11 @@ struct NoticeListView: View {
         .onAppear {
             self.myInfoViewModel.requestNoticeList()
         }
-        
-        NavigationLink(
-            destination: NoticeDetailView(
+        .navigationDestination(isPresented: $showNoticeDetail) {
+            NoticeDetailView(
                 myInfoViewModel: myInfoViewModel,
                 noticeId: noticeId
-            ).navigationBarHidden(true),
-            isActive: $showNoticeDetail
-        ) {
-            EmptyView()
+            )
         }
     }
     

@@ -12,7 +12,7 @@ struct LoginView: View {
     @FocusState private var isFocused
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Spacer().frame(height: 120)
                 Image(name: .pyeonHaeImage)
@@ -73,15 +73,6 @@ struct LoginView: View {
                         loginViewModel.checkEmail()
                     }
                     .disabled(isDisabled)
-                
-                // 존재하는 이메일인 경우 로그인 화면으로 푸시
-                NavigationLink(destination: InputPasswordView(loginViewModel: loginViewModel), isActive: $loginViewModel.pushToLogin) {
-                    EmptyView()
-                }
-                // 존재하지 않는 이메일인 경우 회원가입 화면으로 푸시
-                NavigationLink(destination: SignupPasswordView(loginViewModel: loginViewModel), isActive: $loginViewModel.pushToSignUp) {
-                    EmptyView()
-                }
             }
             .background(
                 Image(name: .backgroundImage)
@@ -96,8 +87,13 @@ struct LoginView: View {
             .onDisappear{
                 self.isFocused = false
             }
+            .navigationDestination(isPresented: $loginViewModel.pushToLogin) {
+                InputPasswordView(loginViewModel: loginViewModel) // 존재하는 이메일인 경우 로그인 화면으로 이동
+            }
+            .navigationDestination(isPresented: $loginViewModel.pushToSignUp) {
+                SignupPasswordView(loginViewModel: loginViewModel) // 존재하지 않는 이메일인 경우 회원가입 화면으로 이동
+            }
         }
-        .navigationViewStyle(.stack)
     }
     
     var backgroundColor: Color {

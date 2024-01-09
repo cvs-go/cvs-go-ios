@@ -11,7 +11,7 @@ struct MainTabView: View {
     @State var selectedIndex: Int = 0
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             CustomTabView(
                 tabs: TabType.allCases.map({ $0.tabItem }),
                 selectedIndex: $selectedIndex
@@ -20,7 +20,6 @@ struct MainTabView: View {
                 getTabView(type: type)
             }
         }
-        .navigationViewStyle(.stack)
     }
     
     @ViewBuilder

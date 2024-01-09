@@ -38,22 +38,21 @@ struct SignupSelectTagView: View {
                 }
             }
             Spacer()
-            NavigationLink(
-                destination: SignUpSuccessView(loginViewModel: loginViewModel).navigationBarHidden(true),
-                isActive: $loginViewModel.pushToSuccess) {
-                    Text("확인")
-                        .font(.pretendard(.bold, 18))
-                        .foregroundColor(.white)
-                        .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
-                        .background(Color.red100)
-                        .cornerRadius(10)
-                        .onTapGesture {
-                            loginViewModel.requestSignUp()
-                        }
+            Text("확인")
+                .font(.pretendard(.bold, 18))
+                .foregroundColor(.white)
+                .frame(width: UIWindow().screen.bounds.width - 40, height: 50)
+                .background(Color.red100)
+                .cornerRadius(10)
+                .onTapGesture {
+                    loginViewModel.requestSignUp()
                 }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.leading, 20)
+        .navigationDestination(isPresented: $loginViewModel.pushToSuccess) {
+            SignUpSuccessView(loginViewModel: loginViewModel)
+        }
     }
     
     private func handleTagSelection(_ tag: TagModel) {
