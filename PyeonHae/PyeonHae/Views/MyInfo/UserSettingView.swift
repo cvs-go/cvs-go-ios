@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct UserSettingView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var myInfoViewModel: MyInfoViewModel
-    
     @State private var isOn = false
     
     // TODO: 얼럿 취소할 시에 MyInfoView로 pop 되는 버그 수정하기
@@ -19,7 +17,7 @@ struct UserSettingView: View {
     
     var body: some View {
         VStack {
-            settingTopBar
+            NavigationBar(title: "설정")
             VStack(alignment: .leading, spacing: 0) {
                 titleView("서비스")
                 contentsView("공지사항", completion: {
@@ -60,22 +58,6 @@ struct UserSettingView: View {
         ) {
             EmptyView()
         }
-    }
-    
-    var settingTopBar: some View {
-        HStack(spacing: 0) {
-            Spacer().frame(width: 14)
-            Image(name: .arrowLeft)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            Spacer().frame(width: 9)
-            Text("설정")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.black)
-            Spacer()
-        }
-        .frame(height: 44)
     }
     
     @ViewBuilder

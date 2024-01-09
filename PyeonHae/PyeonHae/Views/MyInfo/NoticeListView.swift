@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct NoticeListView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var myInfoViewModel: MyInfoViewModel
     @State private var showNoticeDetail = false
     @State private var noticeId = -1
     
     var body: some View {
         VStack(spacing: 16) {
-            noticeTopBar
+            NavigationBar(title: "공지사항")
             ForEach(myInfoViewModel.noticeList, id: \.self) { notice in
                 noticeCell(notice)
             }
@@ -34,22 +33,6 @@ struct NoticeListView: View {
         ) {
             EmptyView()
         }
-    }
-    
-    var noticeTopBar: some View {
-        HStack(spacing: 0) {
-            Spacer().frame(width: 14)
-            Image(name: .arrowLeft)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            Spacer().frame(width: 9)
-            Text("공지사항")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.black)
-            Spacer()
-        }
-        .frame(height: 44)
     }
     
     @ViewBuilder

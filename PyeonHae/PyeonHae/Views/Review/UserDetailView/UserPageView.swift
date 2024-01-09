@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct UserPageView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var reviewViewModel: ReviewViewModel
-    
     @Binding var selectedReviewerId: Int
     
     var body: some View {
@@ -20,7 +18,7 @@ struct UserPageView: View {
                     .position(x: geo.size.width/2, y: geo.size.height/2)
             } else {
                 VStack {
-                    userPageTopBar
+                    NavigationBar(title: "회원 정보")
                     ScrollView {
                         UserInfoView(
                             userInfo: reviewViewModel.userInfo,
@@ -42,21 +40,5 @@ struct UserPageView: View {
             reviewViewModel.requestSelectedUserInfo(userId: selectedReviewerId)
             reviewViewModel.requestUserReviewList(userId: selectedReviewerId)
         }
-    }
-    
-    var userPageTopBar: some View {
-        HStack(spacing: 0) {
-            Spacer().frame(width: 14)
-            Image(name: .arrowLeft)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            Spacer().frame(width: 9)
-            Text("회원 정보")
-                .font(.pretendard(.bold, 20))
-                .foregroundColor(.grayscale100)
-            Spacer()
-        }
-        .frame(height: 44)
     }
 }

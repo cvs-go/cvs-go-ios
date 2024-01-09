@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct DetailItemView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     @ObservedObject var searchViewModel: SearchViewModel
     @ObservedObject var reviewViewModel = ReviewViewModel()
-    @State private var isReviewButtonVisible = false
+    @State private var titleIsVisiable = false
     
     @State private var showUserPage = false
     @State private var selectedReviewerId = -1
@@ -39,7 +37,10 @@ struct DetailItemView: View {
         } else {
             ZStack {
                 VStack(alignment: .leading) {
-                    DetailItemViewTopBar
+                    NavigationBar(
+                        title: searchViewModel.productDetail?.data.productName ?? String(),
+                        isVisiable: $titleIsVisiable
+                    )
                     ScrollView {
                         if let product = searchViewModel.productDetail {
                             ItemDetailView(
@@ -69,7 +70,7 @@ struct DetailItemView: View {
                                 GeometryReader { geometry -> Color in
                                     let maxY = geometry.frame(in: .global).midY
                                     DispatchQueue.main.async {
-                                        isReviewButtonVisible = maxY <= 0
+                                        titleIsVisiable = maxY <= 0
                                     }
                                     return Color.clear
                                 }
@@ -132,24 +133,6 @@ struct DetailItemView: View {
                 }
             }
         }
-    }
-    
-    var DetailItemViewTopBar: some View {
-        HStack(spacing: 0) {
-            Spacer().frame(width: 14)
-            Image(name: .arrowLeft)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            Spacer().frame(width: 18)
-            if isReviewButtonVisible {
-                Text(searchViewModel.productDetail?.data.productName ?? String())
-                    .font(.pretendard(.bold, 18))
-                    .foregroundColor(.black)
-            }
-            Spacer()
-        }
-        .frame(height: 44)
     }
     
     var DetailItemReviewsView: some View {

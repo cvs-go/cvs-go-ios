@@ -13,6 +13,7 @@ struct SignupPasswordView: View {
     
     var body: some View {
         VStack {
+            NavigationBar()
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("비밀번호를\n입력해주세요.")

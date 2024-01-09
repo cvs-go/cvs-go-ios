@@ -12,6 +12,7 @@ struct SignupSelectTagView: View {
     @ObservedObject var loginViewModel: LoginViewModel
     
     var body: some View {
+        NavigationBar()
         VStack(alignment: .leading) {
             Spacer().frame(height: 23)
             Text("‘\(loginViewModel.nickname)’님의\n취향이 궁금해요.")

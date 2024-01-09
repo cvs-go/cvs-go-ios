@@ -8,14 +8,12 @@
 import SwiftUI
 
 struct NoticeDetailView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var myInfoViewModel: MyInfoViewModel
-    
     var noticeId: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 13) {
-            noticeTopBar
+            NavigationBar(title: "공지사항")
             Spacer().frame(height: 7)
             if let notice = myInfoViewModel.noticeDetail {
                 Group {
@@ -37,21 +35,5 @@ struct NoticeDetailView: View {
         .onAppear {
             myInfoViewModel.requestNoticeDetail(id: noticeId)
         }
-    }
-    
-    var noticeTopBar: some View {
-        HStack(spacing: 0) {
-            Spacer().frame(width: 14)
-            Image(name: .arrowLeft)
-                .onTapGesture {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            Spacer().frame(width: 9)
-            Text("공지사항")
-                .font(.pretendard(.bold, 18))
-                .foregroundColor(.black)
-            Spacer()
-        }
-        .frame(height: 44)
     }
 }

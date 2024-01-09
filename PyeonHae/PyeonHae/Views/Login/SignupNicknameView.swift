@@ -13,6 +13,7 @@ struct SignupNicknameView: View {
     
     var body: some View {
         VStack {
+            NavigationBar()
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("사용할 닉네임을\n입력해 주세요.")
@@ -22,7 +23,7 @@ struct SignupNicknameView: View {
                     TextFieldWithTitle(
                         text: $loginViewModel.nickname,
                         title: "닉네임",
-                        placeholder: "8자 이내의 닉네임을 입력해주세요.",
+                        placeholder: "2자 이상 8자 이내의 닉네임을 입력해주세요.",
                         isSecure: false,
                         type: .nickname,
                         state: $loginViewModel.textFieldState
@@ -32,7 +33,7 @@ struct SignupNicknameView: View {
                 }
                 .padding(EdgeInsets(top: 23, leading: 20, bottom: 0, trailing: 20))
             }
-
+            
             NavigationLink(
                 destination: SignupSelectTagView(loginViewModel: loginViewModel),
                 isActive: $loginViewModel.checkNicknameValue
@@ -43,11 +44,11 @@ struct SignupNicknameView: View {
                     .frame(width: UIWindow().screen.bounds.width - (isFocused ? 0 : 40), height: 50)
                     .background(backgroundColor)
                     .cornerRadius(isFocused ? 0 : 10)
-                    .disabled(isDisabled)
                     .onTapGesture {
                         loginViewModel.checkNickname()
                     }
             }
+            .disabled(isDisabled)
             Spacer().frame(height: isFocused ? 0 : 52)
         }
         .onAppear {

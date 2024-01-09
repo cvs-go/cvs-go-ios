@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ProductListView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
     let type: ProductListType
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var searchViewModel: SearchViewModel
@@ -30,7 +28,7 @@ struct ProductListView: View {
     
     var body: some View {
         VStack {
-            navigationBar
+            NavigationBar(title: type == .event ? "행사상품" : "인기상품")
             ZStack(alignment: .topLeading) {
                 topView(type)
                 if homeViewModel.searchAgain {
@@ -104,25 +102,6 @@ struct ProductListView: View {
             self.homeViewModel.searchAgain = true
             self.homeViewModel.requestEventProducts()
         }
-    }
-    
-    @ViewBuilder
-    private var navigationBar: some View {
-        VStack {
-            HStack {
-                Spacer().frame(width: 14)
-                Image(name: .arrowLeft)
-                    .onTapGesture {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                Spacer().frame(width: 6)
-                Text(type == .event ? "행사상품" : "인기상품")
-                    .font(.pretendard(.bold, 20))
-                    .foregroundColor(.grayscale100)
-                Spacer()
-            }
-        }
-        .frame(height: 44)
     }
     
     @ViewBuilder

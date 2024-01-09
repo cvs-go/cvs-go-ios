@@ -63,7 +63,7 @@ struct MyInfoView: View {
             }
         }
         .fullScreenCover(isPresented: $showEditView) {
-            MyInfoEditView(myInfoViewModel: myInfoViewModel)
+            MyInfoEditView(myInfoViewModel: myInfoViewModel, showEditView: $showEditView)
         }
         .onChange(of: selectedProduct) { _ in
             if let selectedProduct = selectedProduct {

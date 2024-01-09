@@ -14,29 +14,18 @@ class ImageSelect: ObservableObject {
 
 struct MyInfoEditView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
-    
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject private var keyboardResponder = KeyboardResponder()
     @State var nickName: String = ""
     @State var nickNameFieldState: TextFieldState = .normal
     @State private var showImagePicker = false
     @State private var selectedTags: [TagModel] = []
     @StateObject var imageSelect = ImageSelect()
+    @Binding var showEditView: Bool
     
     var body: some View {
         ZStack {
             VStack {
-                HStack(spacing: 10) {
-                    Image(name: .close)
-                        .onTapGesture {
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                    Text("내정보 수정")
-                        .font(.pretendard(.bold, 20))
-                        .foregroundColor(.grayscale100)
-                    Spacer()
-                }
-                .padding(.horizontal, 15)
+                NavigationBar(type: .close, title: "내정보 수정")
                 Spacer().frame(height: 60)
                 Button(action: {
                     showImagePicker.toggle()
@@ -82,7 +71,24 @@ struct MyInfoEditView: View {
                 Spacer()
                 HStack {
                     Button(action: {
-                        //add action
+                        if imageSelect.images.isEmpty {
+                            myInfoViewModel.requestEditInfo(
+                                nickname: nickName,
+                                tagIds: selectedTags.map { $0.id },
+                                completion: {
+                                    showEditView = false
+                                }
+                            )
+                        } else {
+                            myInfoViewModel.requestEditInfoWithImage(
+                                nickname: nickName,
+                                tagIds: selectedTags.map { $0.id },
+                                images: imageSelect.images,
+                                completion: {
+                                    showEditView = false
+                                }
+                            )
+                        }
                     }) {
                         ZStack {
                             if(keyboardResponder.currentHeight > 0) {
@@ -95,26 +101,6 @@ struct MyInfoEditView: View {
                             Text("수정완료")
                                 .font(.pretendard(.bold, 18))
                                 .foregroundColor(.white)
-                        }
-                        .onTapGesture {
-                            if imageSelect.images.isEmpty {
-                                myInfoViewModel.requestEditInfo(
-                                    nickname: nickName,
-                                    tagIds: selectedTags.map { $0.id },
-                                    completion: {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                )
-                            } else {
-                                myInfoViewModel.requestEditInfoWithImage(
-                                    nickname: nickName,
-                                    tagIds: selectedTags.map { $0.id },
-                                    images: imageSelect.images,
-                                    completion: {
-                                        presentationMode.wrappedValue.dismiss()
-                                    }
-                                )
-                            }
                         }
                         .frame(height: 50)
                     }
