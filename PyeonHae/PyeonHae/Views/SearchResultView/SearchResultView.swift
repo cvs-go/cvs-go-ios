@@ -116,10 +116,18 @@ struct SearchResultView: View {
                     }
                     HStack(alignment: .top) {
                         Spacer().frame(width: 20)
-                        Text("'\(searchViewModel.keyword)' 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                            .padding(.top, 12)
+                        HStack(spacing: 0) {
+                            if !searchViewModel.keyword.isEmpty {
+                                Text("'\(searchViewModel.keyword)'")
+                                    .font(.pretendard(.regular, 12))
+                                    .foregroundColor(.grayscale85)
+                                    .padding(.top, 12)
+                            }
+                            Text(" 검색 결과 \(searchViewModel.searchResults?.data.totalElements ?? 0)개")
+                                .font(.pretendard(.regular, 12))
+                                .foregroundColor(.grayscale85)
+                                .padding(.top, 12)
+                        }
                         Spacer()
                         SortSelectView(
                             sortType: .product,

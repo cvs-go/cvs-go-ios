@@ -24,18 +24,22 @@ struct SearchHomeView: View {
             Spacer().frame(height: 20)
             ProductCategories
             Spacer()
-                .navigationDestination(isPresented: $startSearch) {
-                    SearchStartView(
-                        searchViewModel: searchViewModel,
-                        text: $text
-                    )
-                }
-                .navigationDestination(isPresented: $showSearchResult) {
-                    SearchResultView(
-                        searchViewModel: searchViewModel,
-                        text: $text
-                    )
-                }
+        }
+        .onAppear {
+            searchViewModel.initParameters()
+            searchViewModel.keyword.removeAll()
+        }
+        .navigationDestination(isPresented: $startSearch) {
+            SearchStartView(
+                searchViewModel: searchViewModel,
+                text: $text
+            )
+        }
+        .navigationDestination(isPresented: $showSearchResult) {
+            SearchResultView(
+                searchViewModel: searchViewModel,
+                text: $text
+            )
         }
     }
     

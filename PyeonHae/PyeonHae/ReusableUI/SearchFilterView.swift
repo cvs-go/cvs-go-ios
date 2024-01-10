@@ -47,7 +47,7 @@ struct SearchFilterView: View {
                 if !categoryIds.isEmpty,
                    let categoryName = filterDatas.categories
                     .filter({ categoryIds.contains($0.id) })
-                    .map({ $0.name }).first {
+                    .map({ $0.name }).first, !selectedElements.contains(categoryName) {
                     selectedElements.append(categoryName)
                 }
             }
