@@ -81,10 +81,10 @@ extension View {
         opacity(shouldHide ? 0 : 1)
     }
     
-    func switchRootView(rootview: some View) {
+    func switchRootView(rootview: some View, direction: UIWindow.TransitionOptions.Direction) {
         let hostingController = UIHostingController(rootView: rootview)
-        let option = UIWindow.TransitionOptions(direction: .toRight, style: .easeInOut)
+        let option = UIWindow.TransitionOptions(direction: direction, style: .easeInOut)
         option.duration = 0.25
-        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
+        UIApplication.keyWindow?.set(rootViewController: hostingController, options: option, nil)
     }
 }

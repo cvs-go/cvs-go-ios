@@ -45,7 +45,7 @@ struct UserSettingView: View {
             showAlert: $showLogoutAlert,
             destructiveAction: {
                 myInfoViewModel.requestLogout()
-                switchRootView(rootview: LoginView())
+                switchRootView(rootview: LoginView(), direction: .toRight)
             }
         )
         .edgesIgnoringSafeArea(.bottom)

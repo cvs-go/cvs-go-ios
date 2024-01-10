@@ -48,7 +48,7 @@ struct InputPasswordView: View {
                 .disabled(isDisabled)
                 .onTapGesture {
                     loginViewModel.tryToLogin {
-                        switchRootView(rootview: MainTabView())
+                        switchRootView(rootview: MainTabView(),direction: .toRight)
                     }
                 }
             Spacer().frame(height: isFocused ? 0 : 52)

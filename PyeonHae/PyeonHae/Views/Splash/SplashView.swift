@@ -21,24 +21,12 @@ struct SplashView: View {
         }
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                UserShared.isLoggedIn ? switchRootViewToMain() : switchRootViewToLogin()
+                UserShared.isLoggedIn 
+                ? switchRootView(rootview: MainTabView(), direction: .fade)
+                : switchRootView(rootview: LoginView(), direction: .fade)
+                
             }
         }
-    }
-    
-    private func switchRootView<Content: View>(to rootView: Content) {
-        let hostingController = UIHostingController(rootView: rootView)
-        let option = UIWindow.TransitionOptions(direction: .fade, style: .easeInOut)
-        option.duration = 0.25
-        UIApplication.shared.keyWindow?.set(rootViewController: hostingController, options: option, nil)
-    }
-
-    private func switchRootViewToMain() {
-        switchRootView(to: MainTabView())
-    }
-
-    private func switchRootViewToLogin() {
-        switchRootView(to: LoginView())
     }
 }
 

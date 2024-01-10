@@ -97,6 +97,7 @@
 		54D0101F295F412600FACB90 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D0101E295F412600FACB90 /* StringExtension.swift */; };
 		54D879672B1D8C9D008A43E1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D879662B1D8C9D008A43E1 /* HomeViewModel.swift */; };
 		54D8796C2B1D8F3A008A43E1 /* PromotionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D8796B2B1D8F3A008A43E1 /* PromotionsModel.swift */; };
+		54DCA7E62B4E71F700ABE546 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54DCA7E52B4E71F700ABE546 /* UIApplicationExtension.swift */; };
 		54E58D6829B620E900958789 /* UIWindowTransitions in Frameworks */ = {isa = PBXBuildFile; productRef = 54E58D6729B620E900958789 /* UIWindowTransitions */; };
 		54F0C23129F9684900CBF83C /* ProductDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23029F9684900CBF83C /* ProductDetail.swift */; };
 		54F0C23529F9782D00CBF83C /* ProductLikeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F0C23429F9782D00CBF83C /* ProductLikeModel.swift */; };
@@ -234,6 +235,7 @@
 		54D0101E295F412600FACB90 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		54D879662B1D8C9D008A43E1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		54D8796B2B1D8F3A008A43E1 /* PromotionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromotionsModel.swift; path = PyeonHae/Model/PromotionsModel.swift; sourceTree = SOURCE_ROOT; };
+		54DCA7E52B4E71F700ABE546 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		54F0C23029F9684900CBF83C /* ProductDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetail.swift; sourceTree = "<group>"; };
 		54F0C23429F9782D00CBF83C /* ProductLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLikeModel.swift; sourceTree = "<group>"; };
 		54F0C23629F9783900CBF83C /* ProductUnLikeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUnLikeModel.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				54915CCD2A63F3510076E442 /* DateExtension.swift */,
 				548018732B42CF14001A64BA /* UIDeviceExtension.swift */,
 				54349A532B468E2A00FD7E99 /* CollectionExtension.swift */,
+				54DCA7E52B4E71F700ABE546 /* UIApplicationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -959,6 +962,7 @@
 				5490B4A42A93976800A49949 /* UserInfoModel.swift in Sources */,
 				54AFA1F129ACFFB50058DB39 /* TagsModel.swift in Sources */,
 				54AFA1EE29ACF9840058DB39 /* APIManager.swift in Sources */,
+				54DCA7E62B4E71F700ABE546 /* UIApplicationExtension.swift in Sources */,
 				54F406D02B4D141400ED281C /* NavigationBar.swift in Sources */,
 				549CBA832A2F1BF20074AFA5 /* ReviewViewModel.swift in Sources */,
 				D53658BF2A236A3400B484F9 /* reviewStarButton.swift in Sources */,
