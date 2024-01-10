@@ -94,15 +94,15 @@ struct SearchStartView: View {
                     }
                 }
                 // 인기 검색어
-                VStack {
-                    HStack {
-                        Text("인기 검색어")
-                            .font(.pretendard(.bold, 14))
-                            .foregroundColor(.grayscale100)
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                }
+//                VStack {
+//                    HStack {
+//                        Text("인기 검색어")
+//                            .font(.pretendard(.bold, 14))
+//                            .foregroundColor(.grayscale100)
+//                        Spacer()
+//                    }
+//                    .padding(.horizontal, 20)
+//                }
                 Spacer()
             }
             .onChange(of: showResultView) { _ in
@@ -110,12 +110,13 @@ struct SearchStartView: View {
                 searchViewModel.keyword = text
                 searchViewModel.searchProducts()
                 // 이전 검색어 저장
-                if !UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
-                    UserShared.searchedKeywords.append(.init(
-                        timestamp: Date().currentTime(),
-                        keyword: text
-                    ))
+                if UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
+                    UserShared.searchedKeywords.removeAll(where: { $0.keyword == text })
                 }
+                UserShared.searchedKeywords.append(.init(
+                    timestamp: Date().currentTime(),
+                    keyword: text
+                ))
             }
         }
         .showDestructiveAlert(

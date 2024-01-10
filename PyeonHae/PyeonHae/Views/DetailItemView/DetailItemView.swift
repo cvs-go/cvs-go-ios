@@ -113,12 +113,13 @@ struct DetailItemView: View {
             .onAppear {
                 // 최근 찾은 상품 저장
                 if let product = selectedProduct {
-                    if !UserShared.searchedProducts.map({ $0.product }).contains(product) {
-                        UserShared.searchedProducts.append(.init(
-                            product: product,
-                            timestamp: Date().currentTime()
-                        ))
+                    if UserShared.searchedProducts.map({ $0.product.productId }).contains(product.productId) {
+                        UserShared.searchedProducts.removeAll(where: { $0.product.productId == product.productId })
                     }
+                    UserShared.searchedProducts.append(.init(
+                        product: product,
+                        timestamp: Date().currentTime()
+                    ))
                 }
             }
             .onDisappear {
