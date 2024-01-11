@@ -113,23 +113,24 @@ struct ItemDetailView: View {
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale70)
                     Spacer()
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(Color.grayscale20)
-                        .frame(height: 22)
-                        .overlay(
-                            HStack(spacing: 12) {
-                                ForEach(productTags, id: \.self) { tag in
-                                    HStack(spacing: 2) {
-                                        Text(tag.name)
-                                            .font(.pretendard(.regular, 12))
-                                            .foregroundColor(.grayscale85)
-                                        Text(" \(tag.tagCount)")
-                                            .font(.pretendard(.bold, 12))
-                                            .foregroundColor(.grayscale85)
-                                    }
-                                }
+                    HStack(spacing: 12) {
+                        ForEach(productTags, id: \.self) { tag in
+                            HStack(spacing: 2) {
+                                Text(tag.name)
+                                    .font(.pretendard(.regular, 12))
+                                    .foregroundColor(.grayscale85)
+                                Text(" \(tag.tagCount)")
+                                    .font(.pretendard(.bold, 12))
+                                    .foregroundColor(.grayscale85)
                             }
-                        )
+                        }
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .foregroundColor(Color.grayscale20)
+                            .padding(.horizontal, -8)
+                            .frame(height: 22)
+                    )
                 }
                 .padding(.top, 24)
             }
