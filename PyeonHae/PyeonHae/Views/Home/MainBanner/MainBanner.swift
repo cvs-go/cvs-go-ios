@@ -69,13 +69,15 @@ struct MainBanner: View {
                     }
             )
             .onAppear {
-                currentImage = images[safe: 0]
-                titleViewWidth = geo.size.width - 70
-                contentOffsetX = -titleViewWidth + spacing
-                promotions.forEach { promotion in
-                    promotion.imageUrl.toImage { image in
-                        if let image = image {
-                            images.append(Image(uiImage: image))
+                if self.images.isEmpty {
+                    titleViewWidth = geo.size.width - 70
+                    contentOffsetX = -titleViewWidth + spacing
+                    currentImage = images[safe: 0]
+                    promotions.forEach { promotion in
+                        promotion.imageUrl.toImage { image in
+                            if let image = image {
+                                images.append(Image(uiImage: image))
+                            }
                         }
                     }
                 }
