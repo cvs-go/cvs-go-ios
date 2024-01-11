@@ -113,10 +113,12 @@ struct SearchStartView: View {
                 if UserShared.searchedKeywords.map({ $0.keyword }).contains(text) {
                     UserShared.searchedKeywords.removeAll(where: { $0.keyword == text })
                 }
-                UserShared.searchedKeywords.append(.init(
-                    timestamp: Date().currentTime(),
-                    keyword: text
-                ))
+                if !text.isEmpty {
+                    UserShared.searchedKeywords.append(.init(
+                        timestamp: Date().currentTime(),
+                        keyword: text
+                    ))
+                }
             }
         }
         .showDestructiveAlert(
