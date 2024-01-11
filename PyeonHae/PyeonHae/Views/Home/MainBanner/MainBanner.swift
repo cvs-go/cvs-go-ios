@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct MainBanner: View {
+    @Environment(\.openURL) private var openURL
+    
     @Binding var promotions: [PromotionContent]
     @State private var images: [Image] = []
+    @State private var urls: [String] = []
     
     @State var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     @State var currentImage: Image?
@@ -33,17 +36,23 @@ struct MainBanner: View {
                         HStack(spacing: spacing) {
                             Group {
                                 ForEach(-1..<images.count + 1, id: \.self) { i in
-                                    images[safe: i < 0 ? images.count - 1 : (i >= images.count ? 0 : i)]?
+                                    let index = i < 0 ? images.count - 1 : (i >= images.count ? 0 : i)
+                                    images[safe: index]?
                                         .resizable()
                                         .frame(width: titleViewWidth, height: 200)
                                         .cornerRadius(10)
+                                        .onTapGesture {
+                                            if let url = URL(string: urls[index]) {
+                                                openURL(url)
+                                            }
+                                        }
                                 }
                             }
                         }
                         .offset(x: contentOffsetX - 20, y: 0)
                         .cornerRadius(10)
                     }
-                    .disabled(true)
+                    .scrollDisabled(true)
                     .offset(x: 20)
                 }
                 ZStack(alignment: .center) {
@@ -74,6 +83,7 @@ struct MainBanner: View {
                     contentOffsetX = -titleViewWidth + spacing
                     currentImage = images[safe: 0]
                     promotions.forEach { promotion in
+                        urls.append(promotion.landingUrl)
                         promotion.imageUrl.toImage { image in
                             if let image = image {
                                 images.append(Image(uiImage: image))
