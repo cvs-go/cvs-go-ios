@@ -106,7 +106,7 @@ struct SearchStartView: View {
                 Spacer()
             }
             .onChange(of: showResultView) { _ in
-                searchViewModel.initParameters()
+                searchViewModel.initSearchParameters()
                 searchViewModel.keyword = text
                 searchViewModel.searchProducts()
                 // 이전 검색어 저장

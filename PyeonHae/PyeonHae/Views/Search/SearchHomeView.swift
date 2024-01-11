@@ -26,7 +26,7 @@ struct SearchHomeView: View {
             Spacer()
         }
         .onAppear {
-            searchViewModel.initParameters()
+            searchViewModel.initSearchParameters()
             searchViewModel.keyword.removeAll()
         }
         .navigationDestination(isPresented: $startSearch) {

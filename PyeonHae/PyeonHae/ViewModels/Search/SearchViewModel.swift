@@ -17,7 +17,7 @@ class SearchViewModel: ObservableObject {
     @Published var reviewDatas: ReviewDatas?
     @Published var productTags: [ProductTagsModel]?
 
-    // 검색 api parameters
+    // 검색 목록 파라미터
     @Published var sortBy: String = String()
     @Published var keyword: String = String()
     @Published var convenienceStoreIds: [Int] = []
@@ -217,17 +217,20 @@ class SearchViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    func initParameters() {
+    func initSearchParameters() {
         selectedElements.removeAll()
         sortBy.removeAll()
         convenienceStoreIds.removeAll()
         categoryIds.removeAll()
         eventTypes.removeAll()
+        lowestPrice = 0
+        highestPrice = UserShared.filterData?.highestPrice ?? 0
+    }
+    
+    func initReviewParameters() {
         reviewSortBy.removeAll()
         tagIds.removeAll()
         ratings.removeAll()
-        lowestPrice = 0
-        highestPrice = UserShared.filterData?.highestPrice ?? 0
     }
     
     func subscribeDetailLoadState() {

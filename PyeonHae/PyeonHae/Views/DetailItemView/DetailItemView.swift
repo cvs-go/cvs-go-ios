@@ -124,6 +124,7 @@ struct DetailItemView: View {
             }
             .onDisappear {
                 self.selectedProduct = nil
+                self.searchViewModel.initReviewParameters()
             }
             .onChange(of: filterOrSortClicked) { _ in
                 if let selectedProduct = selectedProduct {

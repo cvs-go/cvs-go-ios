@@ -145,7 +145,7 @@ struct SearchResultView: View {
             UIScrollView.appearance().keyboardDismissMode = .onDrag
         }
         .onChange(of: searchAgain) { _ in
-            searchViewModel.initParameters()
+            searchViewModel.initSearchParameters()
             searchViewModel.keyword = text
             searchViewModel.searchProducts()
         }

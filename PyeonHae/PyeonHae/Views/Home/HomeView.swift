@@ -60,9 +60,6 @@ struct HomeView: View {
                     }
                 }
                 .background(Color.grayscale20)
-                .onAppear {
-                    self.searchViewModel.initParameters()
-                }
                 .navigationDestination(isPresented: $showEventProducts) {
                     ProductListView(
                         type: .event,
