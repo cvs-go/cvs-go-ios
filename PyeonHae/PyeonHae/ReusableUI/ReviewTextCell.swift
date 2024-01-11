@@ -26,6 +26,11 @@ struct ReviewContents: View {
     @State private var showImageDetail = false
     @State private var detailImageUrl = String()
     
+    // 리뷰 삭제 및 수정 변수
+    @State private var showActionSheet = false
+    @State private var showDeleteAlert = false
+    @State private var showModifyView = false
+    
     init(
         reviewType: ReviewType = .normal,
         reviewerId: Int,
@@ -60,6 +65,9 @@ struct ReviewContents: View {
                 if reviewerId == UserShared.userId, reviewType == .normal {
                     Spacer()
                     Image(name: .more)
+                        .onTapGesture {
+                            showActionSheet = true
+                        }
                 }
             }
             .padding(.horizontal, 24)
@@ -132,5 +140,25 @@ struct ReviewContents: View {
                 }
             )
         }
+        .confirmationDialog(String(), isPresented: $showActionSheet) {
+            Button("수정") {
+                showModifyView = true
+            }
+            Button("삭제", role: .destructive) {
+                showDeleteAlert = true
+            }
+            Button("닫기", role: .cancel) {}
+        }
+        .fullScreenCover(isPresented: $showModifyView) {
+            // TODO: 수정 뷰 및 api 추가
+        }
+        .showDestructiveAlert(
+            message: "정말로 삭제하시겠습니까?",
+            secondaryButtonText: "삭제",
+            showAlert: $showDeleteAlert,
+            destructiveAction: {
+                // TODO: 삭제 api 추가
+            }
+        )
     }
 }
