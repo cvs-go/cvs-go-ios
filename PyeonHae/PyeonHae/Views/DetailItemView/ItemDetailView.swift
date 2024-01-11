@@ -95,7 +95,11 @@ struct ItemDetailView: View {
                 if let event = productDetail?.convenienceStoreEvents {
                     ForEach(event, id: \.self) { event in
                         if let type = event.eventType {
-                            Image("\(event.name)_\(type)")
+                            if type == "DISCOUNT" {
+                                discountLogo(name: event.name, discount: event.discountAmount ?? 0)
+                            } else {
+                                Image("\(event.name)_\(type)")
+                            }
                         } else {
                             Image(event.name)
                         }
@@ -128,10 +132,46 @@ struct ItemDetailView: View {
                         )
                 }
                 .padding(.top, 24)
-                .padding(.bottom, 16)
             }
+            Spacer().frame(height: 16)
         }
         .padding(.top, 21)
         .padding(.horizontal, 20)
+    }
+    
+    @ViewBuilder
+    private func discountLogo(name: String, discount: Int) -> some View {
+        let color = decideColor(name)
+        
+        HStack(spacing: 2) {
+            Image("\(name)")
+            ZStack {
+                HStack(spacing: 0) {
+                    Text("-\(String(discount))원")
+                        .foregroundColor(color)
+                        .font(.pretendard(.semiBold, 9))
+                        .padding(.trailing, 3)
+                }
+            }
+        }
+        .overlay(RoundedRectangle(cornerRadius: 10)
+            .stroke(color.opacity(0.3), lineWidth: 1)
+        )
+    }
+    
+    private func decideColor(_ name: String) -> Color {
+        var color: Color = .cuColor
+        
+        if name == "GS" {
+            color = .gsColor
+        } else if name == "Emart24" {
+            color = .emart24Color
+        } else if name == "세븐일레븐" {
+            color = .sevenElevenColor
+        } else if name == "미니스톱" {
+            color = .miniStopColor
+        }
+        
+        return color
     }
 }
