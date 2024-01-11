@@ -45,4 +45,10 @@ extension Color {
     static let borderColor = Color(hex: "#000000").opacity(0.05)
     
     static let rollingBannerColor = Color(hex: "#242424").opacity(0.5)
+    
+    static let cuColor = Color(hex: "#6C21D5")
+    static let gsColor = Color(hex: "#0071B9")
+    static let emart24Color = Color(hex: "#F9B233")
+    static let sevenElevenColor = Color(hex: "#258E37")
+    static let miniStopColor = Color(hex: "#213A8F")
 }
