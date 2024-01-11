@@ -80,10 +80,10 @@ struct WriteReviewsView: View {
                     isReviewLiked: review.isReviewLiked,
                     likeCount: review.reviewLikeCount,
                     likeAction: {
-                        //                        likeAction()
+                        reviewViewModel.requestLikeReview(id: review.reviewId)
                     },
                     unlikeAction: {
-                        //                        unlikeAction()
+                        reviewViewModel.requestUnlikeReview(id: review.reviewId)
                     }
                 )
             }
@@ -93,10 +93,10 @@ struct WriteReviewsView: View {
                 name: review.productName,
                 isBookmarked: review.isProductBookmarked,
                 bookmarkAction: {
-                    //                    bookmarkAction()
+                    reviewViewModel.requestProductBookmark(productID: review.productId)
                 },
                 unBookmarkAction:  {
-                    //                    unBookmarkAction()
+                    reviewViewModel.requestProductUnBookmark(productID: review.productId)
                 }
             )
         }

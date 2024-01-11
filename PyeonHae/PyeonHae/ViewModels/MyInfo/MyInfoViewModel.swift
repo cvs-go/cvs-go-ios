@@ -224,4 +224,32 @@ class MyInfoViewModel: ObservableObject {
                 }
             }.store(in: &bag)
     }
+    
+    // 리뷰 좋아요
+    func requestLikeReview(id: Int) {
+        apiManager.request(for: ReviewAPI.like(id: id))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &bag)
+    }
+    
+    // 리뷰 좋아요 취소
+    func requestUnlikeReview(id: Int) {
+        apiManager.request(for: ReviewAPI.unlike(id: id))
+            .sink { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success(let result):
+                    print(result)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            .store(in: &bag)
+    }
 }

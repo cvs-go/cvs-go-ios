@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyReviewView: View {
+    @ObservedObject var myInfoViewModel: MyInfoViewModel
     @Binding var reviewContent: UserReviewsModel?
     
     var body: some View {
@@ -59,10 +60,10 @@ struct MyReviewView: View {
                     isReviewLiked: review.isReviewLiked,
                     likeCount: review.reviewLikeCount,
                     likeAction: {
-//                        likeAction()
+                        myInfoViewModel.requestLikeReview(id: review.reviewId)
                     },
                     unlikeAction: {
-//                        unlikeAction()
+                        myInfoViewModel.requestUnlikeReview(id: review.reviewId)
                     }
                 )
             }
@@ -72,10 +73,10 @@ struct MyReviewView: View {
                 name: review.productName,
                 isBookmarked: review.isProductBookmarked,
                 bookmarkAction: {
-//                    bookmarkAction()
+                    myInfoViewModel.requestProductBookmark(productID: review.productId)
                 },
                 unBookmarkAction:  {
-//                    unBookmarkAction()
+                    myInfoViewModel.requestProductUnBookmark(productID: review.productId)
                 }
             )
         }
