@@ -137,7 +137,7 @@ struct DetailItemView: View {
     }
     
     var DetailItemReviewsView: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Text("리뷰 \(String(searchViewModel.reviewDatas?.totalElements ?? 0))개")
                     .font(.pretendard(.semiBold, 16))
@@ -152,8 +152,7 @@ struct DetailItemView: View {
                         .foregroundColor(.grayscale100)
                 }
             }
-            .padding(.top, 12)
-            .padding(.horizontal, 20)
+            .padding(EdgeInsets(top: 12, leading: 20, bottom: 16, trailing: 20))
             ReviewFilterView(
                 reviewType: .detail,
                 showFilter: $showFilter,
@@ -161,6 +160,7 @@ struct DetailItemView: View {
                 tagIds: $searchViewModel.tagIds,
                 ratings: $searchViewModel.ratings
             )
+            .padding(.bottom, 8)
             ZStack(alignment: .top) {
                 HStack(alignment: .top) {
                     Spacer()
@@ -171,7 +171,7 @@ struct DetailItemView: View {
                     )
                     Spacer().frame(width: 20)
                 }
-                .offset(y: -40)
+                .offset(y: -38)
                 .zIndex(1)
                 .hidden(showFilter)
                 if let reviewDatas = searchViewModel.reviewDatas,
