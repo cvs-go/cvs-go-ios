@@ -21,11 +21,11 @@ struct MyLikeView: View {
                     Text("좋아요한 제품")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale85)
-                        .padding(.top, 7)
+                        .padding(.top, 6)
                     Text("\(myInfoViewModel.myLikeData?.totalElements ?? 0)개")
                         .font(.pretendard(.bold, 12))
                         .foregroundColor(.grayscale85)
-                        .padding(.top, 7)
+                        .padding(.top, 6)
                     Spacer()
                     SortSelectView(
                         sortType: .product,
