@@ -39,7 +39,11 @@ struct MyInfoView: View {
                         selectedProduct: $selectedProduct,
                         showProductDetail: $showProductDetail
                     )),
-                    AnyView(MyBookmarkView()),
+                    AnyView(MyBookmarkView(
+                        myInfoViewModel: myInfoViewModel,
+                        selectedProduct: $selectedProduct,
+                        showProductDetail: $showProductDetail)
+                    ),
                 ],
                 type: .myInfo
             )

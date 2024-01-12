@@ -14,6 +14,7 @@ class MyInfoViewModel: ObservableObject {
     @Published var noticeDetail: NoticeDetailContent? = nil
     @Published var myReviewData: UserReviewsModel? = nil
     @Published var myLikeData: Products? = nil
+    @Published var myBookmarkData: Products? = nil
     
     var bag = Set<AnyCancellable>()
     
@@ -21,6 +22,7 @@ class MyInfoViewModel: ObservableObject {
         requestMyReviewList()
         requestMyLikeList()
         requestUserInfo()
+        requestUserBookmarkList()
     }
     
     func requestUserInfo() {
@@ -122,7 +124,19 @@ class MyInfoViewModel: ObservableObject {
     }
     
     func requestUserBookmarkList() {
+        let parameters: [String: Any] = [
+            "sortBy": "SCORE"
+        ]
         
+        apiManager.request(for: UserAPI.userBookmarkList(id: UserShared.userId, parameters: parameters))
+            .sink { (result: Result<UserBookmarkList, Error>) in
+                switch result {
+                case .success(let result):
+                    self.myBookmarkData = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
     }
     
     func requestNoticeList() {

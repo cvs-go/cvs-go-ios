@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct MyBookmarkView: View {
+    @ObservedObject var myInfoViewModel: MyInfoViewModel
+    @Binding var selectedProduct: Product?
+    @Binding var showProductDetail: Bool
+    
     var body: some View {
         VStack(spacing: 0) {
             Spacer().frame(height: 12)
@@ -16,7 +20,7 @@ struct MyBookmarkView: View {
                     Text("북마크한 제품")
                         .font(.pretendard(.regular, 12))
                         .foregroundColor(.grayscale85)
-                    Text("14개")
+                    Text("\(myInfoViewModel.myBookmarkData?.totalElements ?? 0)개")
                         .font(.pretendard(.bold, 12))
                         .foregroundColor(.grayscale85)
                     Spacer()
@@ -34,19 +38,35 @@ struct MyBookmarkView: View {
             .frame(height: 40)
         }
         .padding(.horizontal,20)
-        ForEach(0..<10) { _ in
-            VStack {
-                //ReviewCell()
+        if let myBookmarkData = myInfoViewModel.myBookmarkData {
+            ScrollView {
+                ForEach(myBookmarkData.content, id: \.self) { product in
+                    VStack {
+                        SearchResultItemView(
+                            selectedProduct: $selectedProduct,
+                            isHeartMark: product.isLiked,
+                            isBookMark: product.isBookmarked,
+                            product: product,
+                            productViewType: .search,
+                            likeAction: {
+                                myInfoViewModel.requestProductLike(productID: product.productId)
+                            },
+                            unlikeAction: {
+                                myInfoViewModel.requestProductUnlike(productID: product.productId)
+                            },
+                            bookmarkAction: {
+                                myInfoViewModel.requestProductBookmark(productID: product.productId)
+                            },
+                            unBookmarkAction: {
+                                myInfoViewModel.requestProductUnBookmark(productID: product.productId)
+                                myInfoViewModel.myBookmarkData?.content.removeAll(where: { $0.productId == product.productId })
+                                myInfoViewModel.myBookmarkData?.totalElements -= 1
+                            }
+                        )
+                    }
+                    .padding(.vertical, 10)
+                }
             }
-            Color.grayscale30.opacity(0.5).frame(height: 1)
-                .padding(.bottom, 16)
         }
-        .padding(.horizontal,10)
-    }
-}
-
-struct MyBookmarkView_Previews: PreviewProvider {
-    static var previews: some View {
-        MyBookmarkView()
     }
 }
