@@ -66,6 +66,9 @@ struct MyLikeView: View {
                     }
                     .offset(y: 50)
                     .padding(.bottom, 50)
+                    .refreshable {
+                        myInfoViewModel.requestMyLikeList()
+                    }
                 }
             }
         }

@@ -44,6 +44,9 @@ struct MyReviewView: View {
                     }
                     .offset(y: 50)
                     .padding(.bottom, 50)
+                    .refreshable {
+                        myInfoViewModel.requestMyReviewList()
+                    }
                 }
             }
             .onChange(of: sortClicked) { _ in
