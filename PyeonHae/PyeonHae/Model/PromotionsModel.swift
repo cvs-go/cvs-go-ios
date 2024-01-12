@@ -9,15 +9,10 @@ import Foundation
 
 struct PromotionsModel: Codable {
     let timestamp: String
-    let data: PromotionData
+    let data: [PromotionData]
 }
 
-struct PromotionData: Codable {
-    let content: [PromotionContent]
-    let totalElements: Int
-}
-
-struct PromotionContent: Codable, Equatable {
+struct PromotionData: Codable, Equatable {
     let id: Int
     let imageUrl: String
     let landingUrl: String

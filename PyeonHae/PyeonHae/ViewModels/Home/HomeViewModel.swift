@@ -10,7 +10,7 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     private let apiManager = APIManager()
-    @Published var promotions: [PromotionContent] = []
+    @Published var promotions: [PromotionData] = []
     @Published var eventProducts: [Product] = []
     @Published var popularProducts: [Product] = []
     @Published var productTags: [Int: String] = [:]
@@ -62,7 +62,7 @@ class HomeViewModel: ObservableObject {
             
             switch promotionsResult {
             case .success(let data):
-                self.promotions = data.data.content
+                self.promotions = data.data
             case .failure(let error):
                 print(error)
             }

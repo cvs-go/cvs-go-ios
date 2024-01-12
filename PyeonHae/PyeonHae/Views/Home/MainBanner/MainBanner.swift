@@ -10,7 +10,7 @@ import SwiftUI
 struct MainBanner: View {
     @Environment(\.openURL) private var openURL
     
-    @Binding var promotions: [PromotionContent]
+    @Binding var promotions: [PromotionData]
     @State private var images: [Image] = []
     @State private var urls: [String] = []
     
