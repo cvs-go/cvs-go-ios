@@ -16,6 +16,11 @@ class MyInfoViewModel: ObservableObject {
     @Published var myLikeData: Products? = nil
     @Published var myBookmarkData: Products? = nil
     
+    // 정렬 파라미터
+    @Published var reviewSortBy = String()
+    @Published var likeSortBy = String()
+    @Published var bookmarkSortBy = String()
+    
     var bag = Set<AnyCancellable>()
     
     init() {
@@ -93,8 +98,10 @@ class MyInfoViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    private func requestMyReviewList() {
-        let parameters: [String: Any] = [:]
+    func requestMyReviewList() {
+        let parameters: [String: Any] = [
+            "sortBy": reviewSortBy
+        ]
         
         apiManager.request(for: ReviewAPI.userReviews(id: UserShared.userId, parameters: parameters))
             .sink { (result: Result<UserReviewListModel, Error>) in
@@ -109,7 +116,7 @@ class MyInfoViewModel: ObservableObject {
     
     func requestMyLikeList() {
         let parameters: [String: Any] = [
-            "sortBy": "SCORE"
+            "sortBy": likeSortBy
         ]
         
         apiManager.request(for: UserAPI.userLikeList(id: UserShared.userId, parameters: parameters))
@@ -125,7 +132,7 @@ class MyInfoViewModel: ObservableObject {
     
     func requestUserBookmarkList() {
         let parameters: [String: Any] = [
-            "sortBy": "SCORE"
+            "sortBy": bookmarkSortBy
         ]
         
         apiManager.request(for: UserAPI.userBookmarkList(id: UserShared.userId, parameters: parameters))

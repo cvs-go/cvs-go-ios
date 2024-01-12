@@ -10,41 +10,44 @@ import SwiftUI
 struct MyReviewView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
     @Binding var reviewContent: UserReviewsModel?
+    @State private var sortClicked = false
     
     var body: some View {
         if let reviewContent = reviewContent {
             VStack(spacing: 0) {
                 Spacer().frame(height: 10)
-                HStack {
-                    HStack(spacing: 2) {
+                ZStack(alignment: .top) {
+                    HStack(alignment: .top, spacing: 2) {
                         Text("작성한 리뷰")
                             .font(.pretendard(.regular, 12))
                             .foregroundColor(.grayscale85)
-                        Text("\(reviewContent.totalElements)")
+                            .padding(.top, 7)
+                        Text("\(reviewContent.totalElements)개")
                             .font(.pretendard(.bold, 12))
                             .foregroundColor(.grayscale85)
+                            .padding(.top, 7)
                         Spacer()
-                        HStack(spacing: 6) {
-                            Text("최신순")
-                                .font(.pretendard(.regular, 12))
-                                .foregroundColor(.grayscale85)
-                            Image(name: .invertedTriangle)
+                        SortSelectView(
+                            sortType: .review,
+                            sortBy: $myInfoViewModel.reviewSortBy,
+                            sortClicked: $sortClicked
+                        )
+                    }
+                    .padding(.horizontal,20)
+                    .zIndex(1)
+                    ScrollView {
+                        ForEach(reviewContent.content, id: \.self) { review in
+                            myReviewCell(review)
+                            Color.grayscale30.opacity(0.5).frame(height: 1)
+                                .padding(.bottom, 16)
                         }
-                        .frame(width: 64.5, height: 26)
-                        .background(Color.grayscale10)
-                        .cornerRadius(10)
                     }
+                    .offset(y: 50)
+                    .padding(.bottom, 50)
                 }
-                .frame(height: 40)
-                .padding(.horizontal,20)
-                Spacer().frame(height: 10)
-                ScrollView {
-                    ForEach(reviewContent.content, id: \.self) { review in
-                        myReviewCell(review)
-                        Color.grayscale30.opacity(0.5).frame(height: 1)
-                            .padding(.bottom, 16)
-                    }
-                }
+            }
+            .onChange(of: sortClicked) { _ in
+                myInfoViewModel.requestMyReviewList()
             }
         }
     }
