@@ -15,28 +15,13 @@ struct MyBookmarkView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 12)
-            ZStack(alignment: .top) {
-                HStack(alignment: .top, spacing: 2) {
-                    Text("북마크한 제품")
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale85)
-                        .padding(.top, 6)
-                    Text("\(myInfoViewModel.myBookmarkData?.totalElements ?? 0)개")
-                        .font(.pretendard(.bold, 12))
-                        .foregroundColor(.grayscale85)
-                        .padding(.top, 6)
-                    Spacer()
-                    SortSelectView(
-                        sortType: .product,
-                        sortBy: $myInfoViewModel.bookmarkSortBy,
-                        sortClicked: $sortClicked
-                    )
-                }
-                .padding(.horizontal,20)
-                .zIndex(1)
-                if let myBookmarkData = myInfoViewModel.myBookmarkData {
-                    ScrollView {
+            SortView(
+                type: .myInfoBookmark,
+                elementCount: myInfoViewModel.myBookmarkData?.totalElements ?? 0,
+                sortBy: $myInfoViewModel.bookmarkSortBy,
+                sortClicked: $sortClicked,
+                content: {
+                    if let myBookmarkData = myInfoViewModel.myBookmarkData {
                         ForEach(myBookmarkData.content, id: \.self) { product in
                             VStack {
                                 SearchResultItemView(
@@ -64,16 +49,11 @@ struct MyBookmarkView: View {
                             .padding(.vertical, 10)
                         }
                     }
-                    .offset(y: 50)
-                    .padding(.bottom, 50)
-                    .refreshable {
-                        myInfoViewModel.requestUserBookmarkList()
-                    }
+                },
+                searchAction: {
+                    myInfoViewModel.requestUserBookmarkList()
                 }
-            }
-        }
-        .onChange(of: sortClicked) { _ in
-            myInfoViewModel.requestUserBookmarkList()
+            )
         }
     }
 }

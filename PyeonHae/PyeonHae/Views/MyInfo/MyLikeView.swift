@@ -15,28 +15,13 @@ struct MyLikeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 12)
-            ZStack(alignment: .top) {
-                HStack(alignment: .top, spacing: 2) {
-                    Text("좋아요한 제품")
-                        .font(.pretendard(.regular, 12))
-                        .foregroundColor(.grayscale85)
-                        .padding(.top, 6)
-                    Text("\(myInfoViewModel.myLikeData?.totalElements ?? 0)개")
-                        .font(.pretendard(.bold, 12))
-                        .foregroundColor(.grayscale85)
-                        .padding(.top, 6)
-                    Spacer()
-                    SortSelectView(
-                        sortType: .product,
-                        sortBy: $myInfoViewModel.likeSortBy,
-                        sortClicked: $sortClicked
-                    )
-                }
-                .padding(.horizontal,20)
-                .zIndex(1)
-                if let myLikeData = myInfoViewModel.myLikeData {
-                    ScrollView {
+            SortView(
+                type: .myInfoLike,
+                elementCount: myInfoViewModel.myLikeData?.totalElements ?? 0,
+                sortBy: $myInfoViewModel.likeSortBy,
+                sortClicked: $sortClicked,
+                content: {
+                    if let myLikeData = myInfoViewModel.myLikeData {
                         ForEach(myLikeData.content, id: \.self) { product in
                             VStack {
                                 SearchResultItemView(
@@ -64,16 +49,11 @@ struct MyLikeView: View {
                             .padding(.vertical, 10)
                         }
                     }
-                    .offset(y: 50)
-                    .padding(.bottom, 50)
-                    .refreshable {
-                        myInfoViewModel.requestMyLikeList()
-                    }
+                },
+                searchAction: {
+                    myInfoViewModel.requestMyLikeList()
                 }
-            }
-        }
-        .onChange(of: sortClicked) { _ in
-            myInfoViewModel.requestMyLikeList()
+            )
         }
     }
 }

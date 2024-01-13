@@ -13,45 +13,25 @@ struct MyReviewView: View {
     @State private var sortClicked = false
     
     var body: some View {
-        if let reviewContent = reviewContent {
-            VStack(spacing: 0) {
-                Spacer().frame(height: 10)
-                ZStack(alignment: .top) {
-                    HStack(alignment: .top, spacing: 2) {
-                        Text("작성한 리뷰")
-                            .font(.pretendard(.regular, 12))
-                            .foregroundColor(.grayscale85)
-                            .padding(.top, 7)
-                        Text("\(reviewContent.totalElements)개")
-                            .font(.pretendard(.bold, 12))
-                            .foregroundColor(.grayscale85)
-                            .padding(.top, 7)
-                        Spacer()
-                        SortSelectView(
-                            sortType: .review,
-                            sortBy: $myInfoViewModel.reviewSortBy,
-                            sortClicked: $sortClicked
-                        )
-                    }
-                    .padding(.horizontal,20)
-                    .zIndex(1)
-                    ScrollView {
+        VStack(spacing: 0) {
+            SortView(
+                type: .myInfoReview,
+                elementCount: reviewContent?.totalElements ?? 0,
+                sortBy: $myInfoViewModel.reviewSortBy,
+                sortClicked: $sortClicked,
+                content: {
+                    if let reviewContent = reviewContent {
                         ForEach(reviewContent.content, id: \.self) { review in
                             myReviewCell(review)
                             Color.grayscale30.opacity(0.5).frame(height: 1)
                                 .padding(.bottom, 16)
                         }
                     }
-                    .offset(y: 50)
-                    .padding(.bottom, 50)
-                    .refreshable {
-                        myInfoViewModel.requestMyReviewList()
-                    }
+                },
+                searchAction: {
+                    myInfoViewModel.requestMyReviewList()
                 }
-            }
-            .onChange(of: sortClicked) { _ in
-                myInfoViewModel.requestMyReviewList()
-            }
+            )
         }
     }
     

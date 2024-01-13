@@ -37,6 +37,7 @@
 		5427B71C2A729B1B00523048 /* UserLikeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427B71B2A729B1B00523048 /* UserLikeList.swift */; };
 		542F03A62997893A00DBF9C8 /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542F03A52997893A00DBF9C8 /* TopTabBar.swift */; };
 		54349A542B468E2A00FD7E99 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54349A532B468E2A00FD7E99 /* CollectionExtension.swift */; };
+		543921392B52AD3D00FC7BFB /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543921382B52AD3D00FC7BFB /* SortView.swift */; };
 		543CEAB829CEF70C00CDB0C8 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEAB729CEF70C00CDB0C8 /* SplashView.swift */; };
 		543CEABC29CF142B00CDB0C8 /* UserShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEABB29CF142B00CDB0C8 /* UserShared.swift */; };
 		543CEABE29CF1B1000CDB0C8 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */; };
@@ -178,6 +179,7 @@
 		5427B71B2A729B1B00523048 /* UserLikeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLikeList.swift; sourceTree = "<group>"; };
 		542F03A52997893A00DBF9C8 /* TopTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = PyeonHae/TopTabBar.swift; sourceTree = SOURCE_ROOT; };
 		54349A532B468E2A00FD7E99 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
+		543921382B52AD3D00FC7BFB /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		543CEAB729CEF70C00CDB0C8 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		543CEABB29CF142B00CDB0C8 /* UserShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShared.swift; sourceTree = "<group>"; };
 		543CEABD29CF1B1000CDB0C8 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				5496CBF82A530A2A003DF7E3 /* ImageDetailView.swift */,
 				548FF9012A59680E00C5875F /* ReviewFilterView.swift */,
 				54F406CF2B4D141400ED281C /* NavigationBar.swift */,
+				543921382B52AD3D00FC7BFB /* SortView.swift */,
 			);
 			path = ReusableUI;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				5427B7162A7292B200523048 /* MyBookmarkView.swift in Sources */,
 				54F6B33229AF991000914889 /* CheckEmailModel.swift in Sources */,
 				5496CBF92A530A2A003DF7E3 /* ImageDetailView.swift in Sources */,
+				543921392B52AD3D00FC7BFB /* SortView.swift in Sources */,
 				54F6E8A92B50CF06009CF287 /* UserBookmarkList.swift in Sources */,
 				D5D1BCB32993982E00F25941 /* WriteReviewsView.swift in Sources */,
 				54C9DC032AA4BF08001AC84D /* NoticeListView.swift in Sources */,
