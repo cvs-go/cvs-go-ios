@@ -22,31 +22,33 @@ struct MyLikeView: View {
                 sortClicked: $sortClicked,
                 content: {
                     if let myLikeData = myInfoViewModel.myLikeData {
-                        ForEach(myLikeData.content, id: \.self) { product in
-                            VStack {
-                                SearchResultItemView(
-                                    selectedProduct: $selectedProduct,
-                                    isHeartMark: product.isLiked,
-                                    isBookMark: product.isBookmarked,
-                                    product: product,
-                                    productViewType: .search,
-                                    likeAction: {
-                                        myInfoViewModel.requestProductLike(productID: product.productId)
-                                    },
-                                    unlikeAction: {
-                                        myInfoViewModel.requestProductUnlike(productID: product.productId)
-                                        myInfoViewModel.myLikeData?.content.removeAll(where: { $0.productId == product.productId })
-                                        myInfoViewModel.myLikeData?.totalElements -= 1
-                                    },
-                                    bookmarkAction: {
-                                        myInfoViewModel.requestProductBookmark(productID: product.productId)
-                                    },
-                                    unBookmarkAction: {
-                                        myInfoViewModel.requestProductUnBookmark(productID: product.productId)
-                                    }
-                                )
+                        ScrollView {
+                            ForEach(myLikeData.content, id: \.self) { product in
+                                VStack {
+                                    SearchResultItemView(
+                                        selectedProduct: $selectedProduct,
+                                        isHeartMark: product.isLiked,
+                                        isBookMark: product.isBookmarked,
+                                        product: product,
+                                        productViewType: .search,
+                                        likeAction: {
+                                            myInfoViewModel.requestProductLike(productID: product.productId)
+                                        },
+                                        unlikeAction: {
+                                            myInfoViewModel.requestProductUnlike(productID: product.productId)
+                                            myInfoViewModel.myLikeData?.content.removeAll(where: { $0.productId == product.productId })
+                                            myInfoViewModel.myLikeData?.totalElements -= 1
+                                        },
+                                        bookmarkAction: {
+                                            myInfoViewModel.requestProductBookmark(productID: product.productId)
+                                        },
+                                        unBookmarkAction: {
+                                            myInfoViewModel.requestProductUnBookmark(productID: product.productId)
+                                        }
+                                    )
+                                }
+                                .padding(.vertical, 10)
                             }
-                            .padding(.vertical, 10)
                         }
                     }
                 },

@@ -21,10 +21,12 @@ struct MyReviewView: View {
                 sortClicked: $sortClicked,
                 content: {
                     if let reviewContent = reviewContent {
-                        ForEach(reviewContent.content, id: \.self) { review in
-                            myReviewCell(review)
-                            Color.grayscale30.opacity(0.5).frame(height: 1)
-                                .padding(.bottom, 16)
+                        ScrollView {
+                            ForEach(reviewContent.content, id: \.self) { review in
+                                myReviewCell(review)
+                                Color.grayscale30.opacity(0.5).frame(height: 1)
+                                    .padding(.bottom, 16)
+                            }
                         }
                     }
                 },

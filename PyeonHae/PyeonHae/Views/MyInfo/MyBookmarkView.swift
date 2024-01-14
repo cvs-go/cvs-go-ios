@@ -22,31 +22,33 @@ struct MyBookmarkView: View {
                 sortClicked: $sortClicked,
                 content: {
                     if let myBookmarkData = myInfoViewModel.myBookmarkData {
-                        ForEach(myBookmarkData.content, id: \.self) { product in
-                            VStack {
-                                SearchResultItemView(
-                                    selectedProduct: $selectedProduct,
-                                    isHeartMark: product.isLiked,
-                                    isBookMark: product.isBookmarked,
-                                    product: product,
-                                    productViewType: .search,
-                                    likeAction: {
-                                        myInfoViewModel.requestProductLike(productID: product.productId)
-                                    },
-                                    unlikeAction: {
-                                        myInfoViewModel.requestProductUnlike(productID: product.productId)
-                                    },
-                                    bookmarkAction: {
-                                        myInfoViewModel.requestProductBookmark(productID: product.productId)
-                                    },
-                                    unBookmarkAction: {
-                                        myInfoViewModel.requestProductUnBookmark(productID: product.productId)
-                                        myInfoViewModel.myBookmarkData?.content.removeAll(where: { $0.productId == product.productId })
-                                        myInfoViewModel.myBookmarkData?.totalElements -= 1
-                                    }
-                                )
+                        ScrollView {
+                            ForEach(myBookmarkData.content, id: \.self) { product in
+                                VStack {
+                                    SearchResultItemView(
+                                        selectedProduct: $selectedProduct,
+                                        isHeartMark: product.isLiked,
+                                        isBookMark: product.isBookmarked,
+                                        product: product,
+                                        productViewType: .search,
+                                        likeAction: {
+                                            myInfoViewModel.requestProductLike(productID: product.productId)
+                                        },
+                                        unlikeAction: {
+                                            myInfoViewModel.requestProductUnlike(productID: product.productId)
+                                        },
+                                        bookmarkAction: {
+                                            myInfoViewModel.requestProductBookmark(productID: product.productId)
+                                        },
+                                        unBookmarkAction: {
+                                            myInfoViewModel.requestProductUnBookmark(productID: product.productId)
+                                            myInfoViewModel.myBookmarkData?.content.removeAll(where: { $0.productId == product.productId })
+                                            myInfoViewModel.myBookmarkData?.totalElements -= 1
+                                        }
+                                    )
+                                }
+                                .padding(.vertical, 10)
                             }
-                            .padding(.vertical, 10)
                         }
                     }
                 },

@@ -57,17 +57,15 @@ struct SortView<Content: View>: View {
             }
             .padding(.horizontal,20)
             .zIndex(1)
-            ScrollView {
-                content
-            }
-            .offset(y: 40)
-            .padding(.bottom, 40)
-            .refreshable {
-                searchAction()
-            }
-            .onChange(of: sortClicked) { _ in
-                searchAction()
-            }
+            content
+                .offset(y: 40)
+                .padding(.bottom, 40)
+                .refreshable {
+                    searchAction()
+                }
+                .onChange(of: sortClicked) { _ in
+                    searchAction()
+                }
         }
         .onAppear {
             if type == .eventProduct {
