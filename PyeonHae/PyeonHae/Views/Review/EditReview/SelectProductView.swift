@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct SelectProductView: View {
+    let type: EditReviewType
     @State var isSelectProduct: Bool = false
     @Binding var showSearchProductView: Bool
     @Binding var selectedProduct: Product?
@@ -42,11 +43,13 @@ struct SelectProductView: View {
                                     .frame(height: 20)
                             }
                             Spacer()
-                            Image(name: .close)
-                                .onTapGesture {
-                                    self.selectedProduct = nil
-                                }
-                            Spacer().frame(width: 16)
+                            if type == .write {
+                                Image(name: .close)
+                                    .onTapGesture {
+                                        self.selectedProduct = nil
+                                    }
+                                Spacer().frame(width: 16)
+                            }
                         }
                     }
                     .background(Color.grayscale10)

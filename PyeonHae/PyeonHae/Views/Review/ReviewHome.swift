@@ -35,7 +35,7 @@ struct ReviewHome: View {
                 type: .review
             )
         }
-        .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
+        .fullScreenCover(isPresented: $reviewViewModel.showEditView) {
             EditReviewView(
                 reviewViewModel: reviewViewModel,
                 fixedProduct: nil
@@ -75,7 +75,7 @@ struct ReviewHome: View {
                 Spacer()
                 Image(name: .addSquare)
                     .onTapGesture {
-                        reviewViewModel.showWriteView = true
+                        reviewViewModel.showEditView = true
                     }
                 Spacer().frame(width: 18)
             }

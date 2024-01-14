@@ -12,6 +12,7 @@ class ImageSelection: ObservableObject {
 }
 
 struct EditReviewView: View {
+    private let type: EditReviewType
     @ObservedObject var reviewViewModel: ReviewViewModel
     
     @StateObject private var keyboardResponder = KeyboardResponder()
@@ -29,6 +30,16 @@ struct EditReviewView: View {
     
     let fixedProduct: Product?
     
+    init(
+        type: EditReviewType = .write,
+        reviewViewModel: ReviewViewModel,
+        fixedProduct: Product?
+    ) {
+        self.type = type
+        self.reviewViewModel = reviewViewModel
+        self.fixedProduct = fixedProduct
+    }
+    
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -36,6 +47,7 @@ struct EditReviewView: View {
                 VStack(spacing: 0) {
                     reviewTopBar
                     SelectProductView(
+                        type: type,
                         showSearchProductView: $showSearchProductView,
                         selectedProduct: $selectedProduct
                     )
@@ -114,10 +126,10 @@ struct EditReviewView: View {
             Spacer().frame(width: 14)
             Image(name: .close)
                 .onTapGesture {
-                    reviewViewModel.showWriteView = false
+                    reviewViewModel.showEditView = false
                 }
             Spacer().frame(width: 9)
-            Text("리뷰 작성")
+            Text(type == .write ? "리뷰 작성" : "리뷰 수정")
                 .font(.pretendard(.bold, 20))
                 .foregroundColor(.grayscale100)
             Spacer()
@@ -155,4 +167,9 @@ struct EditReviewView: View {
         }
         .frame(height: 44)
     }
+}
+
+enum EditReviewType {
+    case write
+    case modify
 }

@@ -88,7 +88,7 @@ struct DetailItemView: View {
                 VStack {
                     Spacer()
                     Button(action: {
-                        reviewViewModel.showWriteView = true
+                        reviewViewModel.showEditView = true
                     }){
                         ZStack {
                             RoundedRectangle(cornerRadius: UIDevice().hasNotch ? 10 : 0)
@@ -104,7 +104,7 @@ struct DetailItemView: View {
                     .buttonStyle(.plain)
                 }
             }
-            .fullScreenCover(isPresented: $reviewViewModel.showWriteView) {
+            .fullScreenCover(isPresented: $reviewViewModel.showEditView) {
                 EditReviewView(
                     reviewViewModel: reviewViewModel,
                     fixedProduct: selectedProduct

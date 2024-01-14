@@ -17,7 +17,7 @@ struct ImageResponse: Codable {
 class ReviewViewModel: ObservableObject {
     private let apiManager = APIManager()
     
-    @Published var showWriteView = false
+    @Published var showEditView = false
     @Published var showToastMessage = false
     @Published var showAlertMessage = false
     @Published var errorMessage = String()
@@ -67,7 +67,7 @@ class ReviewViewModel: ObservableObject {
         .sink { (result: Result<EmptyResponse, Error>) in
             switch result {
             case .success:
-                self.showWriteView = false
+                self.showEditView = false
                 self.showToastMessage = true
                 self.requestReviews()
             case .failure:
@@ -98,7 +98,7 @@ class ReviewViewModel: ObservableObject {
             .sink { result in
                 switch result {
                 case .success:
-                    self.showWriteView = false
+                    self.showEditView = false
                     self.showToastMessage = true
                     self.requestReviews()
                 case .failure:
