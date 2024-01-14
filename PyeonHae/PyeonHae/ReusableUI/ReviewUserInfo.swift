@@ -111,4 +111,5 @@ enum ReviewType {
     case normal // 일반 리뷰
     case popular // 인기 리뷰
     case detail // 제품 상세 화면 내의 리뷰
+    case myInfo // 내정보 리뷰
 }

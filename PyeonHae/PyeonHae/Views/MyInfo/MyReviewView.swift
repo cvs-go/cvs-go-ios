@@ -49,6 +49,7 @@ struct MyReviewView: View {
         VStack {
             HStack(spacing: 0) {
                 ReviewContents(
+                    reviewType: .myInfo,
                     reviewerId: review.reviewerId,
                     rating: review.reviewRating,
                     imageUrls: review.reviewImageUrls,

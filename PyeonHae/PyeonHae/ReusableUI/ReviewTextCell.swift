@@ -62,7 +62,7 @@ struct ReviewContents: View {
                 ForEach(1..<6) { index in
                     Image(name: rating >= index ? .yellowStar : .emptyStar)
                 }
-                if reviewerId == UserShared.userId, reviewType == .normal {
+                if reviewerId == UserShared.userId, reviewType == .myInfo {
                     Spacer()
                     Image(name: .more)
                         .onTapGesture {
