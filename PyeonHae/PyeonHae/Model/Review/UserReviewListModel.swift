@@ -13,8 +13,9 @@ struct UserReviewListModel: Codable {
 }
 
 struct UserReviewsModel: Codable {
-    let content: [UserReviewDataModel]
+    var content: [UserReviewDataModel]
     let totalElements: Int
+    let last: Bool
 }
 
 struct UserReviewDataModel: Codable, Hashable {

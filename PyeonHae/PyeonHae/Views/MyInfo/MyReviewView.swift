@@ -9,23 +9,31 @@ import SwiftUI
 
 struct MyReviewView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
-    @Binding var reviewContent: UserReviewsModel?
     @State private var sortClicked = false
     
     var body: some View {
         VStack(spacing: 0) {
             SortView(
                 type: .myInfoReview,
-                elementCount: reviewContent?.totalElements ?? 0,
+                elementCount: myInfoViewModel.myReviewData?.totalElements ?? 0,
                 sortBy: $myInfoViewModel.reviewSortBy,
                 sortClicked: $sortClicked,
                 content: {
-                    if let reviewContent = reviewContent {
+                    if let reviewContent = myInfoViewModel.myReviewData {
                         ScrollView {
-                            ForEach(reviewContent.content, id: \.self) { review in
-                                myReviewCell(review)
-                                Color.grayscale30.opacity(0.5).frame(height: 1)
-                                    .padding(.bottom, 16)
+                            ForEach(reviewContent.content.enumeratedArray(), id: \.element) { index, review in
+                                LazyVStack(alignment: .leading, spacing: 10) {
+                                    myReviewCell(review)
+                                    Color.grayscale30.opacity(0.5).frame(height: 1)
+                                        .padding(.bottom, 16)
+                                        .onAppear {
+                                            if reviewContent.content.count - 3 == index,
+                                               !myInfoViewModel.reviewLast {
+                                                myInfoViewModel.reviewPage += 1
+                                                myInfoViewModel.requestMoreMyReviewList()
+                                            }
+                                        }
+                                }
                             }
                         }
                     }
@@ -38,7 +46,7 @@ struct MyReviewView: View {
     }
     
     private func myReviewCell(_ review: UserReviewDataModel) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack {
             HStack(spacing: 0) {
                 ReviewContents(
                     reviewerId: review.reviewerId,

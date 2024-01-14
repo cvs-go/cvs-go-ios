@@ -23,8 +23,8 @@ struct MyLikeView: View {
                 content: {
                     if let myLikeData = myInfoViewModel.myLikeData {
                         ScrollView {
-                            ForEach(myLikeData.content, id: \.self) { product in
-                                VStack {
+                            ForEach(myLikeData.content.enumeratedArray(), id: \.element) { index, product in
+                                LazyVStack {
                                     SearchResultItemView(
                                         selectedProduct: $selectedProduct,
                                         isHeartMark: product.isLiked,
@@ -46,6 +46,13 @@ struct MyLikeView: View {
                                             myInfoViewModel.requestProductUnBookmark(productID: product.productId)
                                         }
                                     )
+                                    .onAppear {
+                                        if myLikeData.content.count - 3 == index,
+                                           !myInfoViewModel.likeLast {
+                                            myInfoViewModel.likePage += 1
+                                            myInfoViewModel.requestMoreMyLikeList()
+                                        }
+                                    }
                                 }
                                 .padding(.vertical, 10)
                             }

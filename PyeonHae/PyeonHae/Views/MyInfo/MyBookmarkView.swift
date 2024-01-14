@@ -23,8 +23,8 @@ struct MyBookmarkView: View {
                 content: {
                     if let myBookmarkData = myInfoViewModel.myBookmarkData {
                         ScrollView {
-                            ForEach(myBookmarkData.content, id: \.self) { product in
-                                VStack {
+                            ForEach(myBookmarkData.content.enumeratedArray(), id: \.element) { index, product in
+                                LazyVStack {
                                     SearchResultItemView(
                                         selectedProduct: $selectedProduct,
                                         isHeartMark: product.isLiked,
@@ -46,6 +46,13 @@ struct MyBookmarkView: View {
                                             myInfoViewModel.myBookmarkData?.totalElements -= 1
                                         }
                                     )
+                                    .onAppear {
+                                        if myBookmarkData.content.count - 3 == index,
+                                           !myInfoViewModel.bookmarkLast {
+                                            myInfoViewModel.bookmarkPage += 1
+                                            myInfoViewModel.requestMoreMyBookmarkList()
+                                        }
+                                    }
                                 }
                                 .padding(.vertical, 10)
                             }
@@ -53,7 +60,7 @@ struct MyBookmarkView: View {
                     }
                 },
                 searchAction: {
-                    myInfoViewModel.requestUserBookmarkList()
+                    myInfoViewModel.requestMyBookmarkList()
                 }
             )
         }

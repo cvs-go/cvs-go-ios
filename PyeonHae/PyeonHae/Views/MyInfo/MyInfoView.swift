@@ -31,8 +31,7 @@ struct MyInfoView: View {
                 tabItems: tabItems,
                 contents: [
                     AnyView(MyReviewView(
-                        myInfoViewModel: myInfoViewModel,
-                        reviewContent: $myInfoViewModel.myReviewData
+                        myInfoViewModel: myInfoViewModel
                     )),
                     AnyView(MyLikeView(
                         myInfoViewModel: myInfoViewModel,

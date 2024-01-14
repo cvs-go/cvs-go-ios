@@ -21,13 +21,21 @@ class MyInfoViewModel: ObservableObject {
     @Published var likeSortBy = String()
     @Published var bookmarkSortBy = String()
     
+    // 페이징
+    @Published var reviewPage = 0
+    @Published var likePage = 0
+    @Published var bookmarkPage = 0
+    @Published var reviewLast = false
+    @Published var likeLast = false
+    @Published var bookmarkLast = false
+    
     var bag = Set<AnyCancellable>()
     
     init() {
         requestMyReviewList()
         requestMyLikeList()
+        requestMyBookmarkList()
         requestUserInfo()
-        requestUserBookmarkList()
     }
     
     func requestUserInfo() {
@@ -98,7 +106,10 @@ class MyInfoViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
+    // 내가 쓴 리뷰 조회
     func requestMyReviewList() {
+        self.reviewPage = 0
+        self.reviewLast = false
         let parameters: [String: Any] = [
             "sortBy": reviewSortBy
         ]
@@ -114,7 +125,29 @@ class MyInfoViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
+    // 내가 쓴 리뷰 다음 페이지 조회
+    func requestMoreMyReviewList() {
+        let parameters: [String: Any] = [
+            "sortBy": reviewSortBy,
+            "page": reviewPage
+        ]
+        
+        apiManager.request(for: ReviewAPI.userReviews(id: UserShared.userId, parameters: parameters))
+            .sink { (result: Result<UserReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.myReviewData?.content += result.data.content
+                    self.reviewLast = result.data.last
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 내가 좋아요한 상품 조회
     func requestMyLikeList() {
+        self.likePage = 0
+        self.likeLast = false
         let parameters: [String: Any] = [
             "sortBy": likeSortBy
         ]
@@ -130,7 +163,29 @@ class MyInfoViewModel: ObservableObject {
             }.store(in: &bag)
     }
     
-    func requestUserBookmarkList() {
+    // 내가 좋아요한 상품 다음 페이지 조회
+    func requestMoreMyLikeList() {
+        let parameters: [String: Any] = [
+            "sortBy": likeSortBy,
+            "page": likePage
+        ]
+        
+        apiManager.request(for: UserAPI.userLikeList(id: UserShared.userId, parameters: parameters))
+            .sink { (result: Result<UserLikeList, Error>) in
+                switch result {
+                case .success(let result):
+                    self.myLikeData?.content += result.data.content
+                    self.likeLast = result.data.last
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 내가 북마크한 상품 조회
+    func requestMyBookmarkList() {
+        self.bookmarkPage = 0
+        self.bookmarkLast = false
         let parameters: [String: Any] = [
             "sortBy": bookmarkSortBy
         ]
@@ -140,6 +195,25 @@ class MyInfoViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.myBookmarkData = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 내가 북마크한 상품 다음 페이지 조회
+    func requestMoreMyBookmarkList() {
+        let parameters: [String: Any] = [
+            "sortBy": bookmarkSortBy,
+            "page": bookmarkPage
+        ]
+        
+        apiManager.request(for: UserAPI.userBookmarkList(id: UserShared.userId, parameters: parameters))
+            .sink { (result: Result<UserBookmarkList, Error>) in
+                switch result {
+                case .success(let result):
+                    self.myBookmarkData?.content += result.data.content
+                    self.bookmarkLast = result.data.last
                 case .failure(let error):
                     print(error)
                 }
