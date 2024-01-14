@@ -45,10 +45,19 @@ struct UserPageView: View {
                                 sortClicked: $sortClicked,
                                 content: {
                                     VStack {
-                                        ForEach(userReviews.content, id: \.self) { review in
-                                            ReviewCell(review)
-                                            Color.grayscale30.opacity(0.5).frame(height: 1)
-                                                .padding(.bottom, 16)
+                                        ForEach(userReviews.content.enumeratedArray(), id: \.element) { index, review in
+                                            LazyVStack {
+                                                ReviewCell(review)
+                                                Color.grayscale30.opacity(0.5).frame(height: 1)
+                                                    .padding(.bottom, 16)
+                                                    .onAppear {
+                                                        if userReviews.content.count - 3 == index,
+                                                           !reviewViewModel.userLast {
+                                                            reviewViewModel.userPage += 1
+                                                            reviewViewModel.requestMoreUserReviewList(userId: selectedReviewerId)
+                                                        }
+                                                    }
+                                            }
                                         }
                                     }
                                 },

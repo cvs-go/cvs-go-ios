@@ -34,12 +34,15 @@ class ReviewViewModel: ObservableObject {
     @Published var categoryIds: [Int] = []
     @Published var tagIds: [Int] = []
     @Published var ratings: [String] = []
-    @Published var page = 0
     
     @Published var userInfo: UserInfoDataModel? = nil
     @Published var tagMatchPercentage = -1
     
-    @Published var last = false // 페이징 처리
+    // 페이징
+    @Published var last = false // 리뷰
+    @Published var page = 0 // 리뷰 페이징
+    @Published var userLast = false // 특정 유저의 리뷰
+    @Published var userPage = 0 // 특정 유저의 리뷰 페이징
     
     var bag = Set<AnyCancellable>()
     
@@ -286,6 +289,8 @@ class ReviewViewModel: ObservableObject {
     }
     
     func requestUserReviewList(userId: Int) {
+        self.userPage = 0
+        self.userLast  = false
         let parameters: [String: Any] = [
             "sortBy": sortBy
         ]
@@ -295,6 +300,24 @@ class ReviewViewModel: ObservableObject {
                 switch result {
                 case .success(let result):
                     self.userReviews = result.data
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    func requestMoreUserReviewList(userId: Int) {
+        let parameters: [String: Any] = [
+            "sortBy": sortBy,
+            "page": userPage
+        ]
+        
+        apiManager.request(for: ReviewAPI.userReviews(id: userId, parameters: parameters))
+            .sink { (result: Result<UserReviewListModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.userReviews?.content += result.data.content
+                    self.userLast = result.data.last
                 case .failure(let error):
                     print(error)
                 }
