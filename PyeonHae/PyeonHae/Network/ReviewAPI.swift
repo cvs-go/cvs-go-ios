@@ -10,6 +10,7 @@ import Alamofire
 
 enum ReviewAPI: API {
     case writeReview(id: Int, parameters: [String : Any])
+    case modifyReview(id: Int, parameters: [String : Any])
     case reviewList(parameters: [String : Any])
     case productReview(id: Int, parameters: [String : Any])
     case userReviews(id: Int, parameters: [String : Any])
@@ -25,6 +26,8 @@ extension ReviewAPI {
             return .post
         case .reviewList, .productReview, .userReviews:
             return .get
+        case .modifyReview:
+            return .put
         case .unlike:
             return .delete
         }
@@ -34,6 +37,8 @@ extension ReviewAPI {
         switch self {
         case .writeReview(let id, _):
             return "/products/\(id)/reviews"
+        case .modifyReview(let id, _):
+            return "reviews/\(id)"
         case .reviewList:
             return "/reviews"
         case .productReview(let id, _):
@@ -47,8 +52,8 @@ extension ReviewAPI {
     
     var parameters: [String : Any]? {
         switch self {
-        case .writeReview(_, let parameters), .productReview(_, let parameters),
-                .userReviews(_, let parameters):
+        case .writeReview(_, let parameters), .modifyReview(_, let parameters),
+                .productReview(_, let parameters), .userReviews(_, let parameters):
             return parameters
         case .reviewList(let parameters):
             return parameters
