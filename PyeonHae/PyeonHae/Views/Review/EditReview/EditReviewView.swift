@@ -29,15 +29,27 @@ struct EditReviewView: View {
     @FocusState private var contentIsFocused: Bool
     
     let fixedProduct: Product?
+    let modifyProduct: (Int, String?, String, String)? // reviewId, productImageUrl, productManufacturer, productName
+    let writtenContent: String?
+    let reviewImageUrls: [String]?
+    let givenRating: Int?
     
     init(
         type: EditReviewType = .write,
         reviewViewModel: ReviewViewModel,
-        fixedProduct: Product?
+        fixedProduct: Product?,
+        modifyProduct: (Int, String?, String, String)? = nil,
+        writtenContent: String? = nil,
+        reviewImageUrls: [String]? = nil,
+        givenRating: Int? = nil
     ) {
         self.type = type
         self.reviewViewModel = reviewViewModel
         self.fixedProduct = fixedProduct
+        self.modifyProduct = modifyProduct
+        self.writtenContent = writtenContent
+        self.reviewImageUrls = reviewImageUrls
+        self.givenRating = givenRating
     }
     
     var body: some View {
@@ -49,9 +61,10 @@ struct EditReviewView: View {
                     SelectProductView(
                         type: type,
                         showSearchProductView: $showSearchProductView,
-                        selectedProduct: $selectedProduct
+                        selectedProduct: $selectedProduct,
+                        modifyProduct: modifyProduct
                     )
-                    if selectedProduct != nil {
+                    if selectedProduct != nil || type == .modify {
                         reviewStarButton(rating: self.$rating)
                     }
                     Rectangle()
@@ -118,6 +131,9 @@ struct EditReviewView: View {
             if let fixedProduct = fixedProduct {
                 self.selectedProduct = fixedProduct
             }
+            if type == .modify {
+                updateInfos()
+            }
         }
     }
     
@@ -166,6 +182,25 @@ struct EditReviewView: View {
             Spacer().frame(width: 20)
         }
         .frame(height: 44)
+    }
+    
+    // 리뷰 수정일 경우, 이전 데이터 삽입
+    private func updateInfos() {
+        if let writtenContent = writtenContent {
+            self.content = writtenContent
+        }
+        if let imageUrls = reviewImageUrls, !imageUrls.isEmpty {
+            imageUrls.forEach { imageUrl in
+                imageUrl.toImage { image in
+                    if let image = image {
+                        imageSelection.images.append(image)
+                    }
+                }
+            }
+       }
+        if let givenRating = givenRating {
+            self.rating = givenRating
+        }
     }
 }
 

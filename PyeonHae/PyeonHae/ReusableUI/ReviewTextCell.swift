@@ -20,6 +20,7 @@ struct ReviewContents: View {
     let likeCount: Int
     let likeAction: () -> Void
     let unlikeAction: () -> Void
+    let modifyProduct: (Int, String?, String, String)? // reviewId, productImageUrl, productManufacturer, productName
     
     @State private var isReviewLikedValue: Bool
     @State private var likeCountValue: Int
@@ -40,7 +41,8 @@ struct ReviewContents: View {
         isReviewLiked: Bool,
         likeCount: Int,
         likeAction: @escaping () -> Void,
-        unlikeAction: @escaping () -> Void
+        unlikeAction: @escaping () -> Void,
+        modifyProduct: (Int, String?, String, String)? = nil
     ) {
         self.reviewType = reviewType
         self.reviewerId = reviewerId
@@ -51,6 +53,7 @@ struct ReviewContents: View {
         self.likeCount = likeCount
         self.likeAction = likeAction
         self.unlikeAction = unlikeAction
+        self.modifyProduct = modifyProduct
         
         _isReviewLikedValue = State(initialValue: isReviewLiked)
         _likeCountValue = State(initialValue: likeCount)
@@ -150,11 +153,14 @@ struct ReviewContents: View {
             Button("닫기", role: .cancel) {}
         }
         .fullScreenCover(isPresented: $reviewViewModel.showEditView) {
-            // TODO: 수정 뷰 및 api 추가
             EditReviewView(
                 type: .modify,
                 reviewViewModel: reviewViewModel,
-                fixedProduct: nil
+                fixedProduct: nil,
+                modifyProduct: modifyProduct,
+                writtenContent: content,
+                reviewImageUrls: imageUrls,
+                givenRating: rating - 1
             )
         }
         .showDestructiveAlert(

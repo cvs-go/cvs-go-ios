@@ -61,7 +61,13 @@ struct MyReviewView: View {
                     },
                     unlikeAction: {
                         myInfoViewModel.requestUnlikeReview(id: review.reviewId)
-                    }
+                    },
+                    modifyProduct: (
+                        review.reviewId,
+                        review.productImageUrl,
+                        review.productManufacturer,
+                        review.productName
+                    )
                 )
             }
             ReviewProduct(
