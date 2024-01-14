@@ -40,17 +40,28 @@ struct SortView<Content: View>: View {
         Spacer().frame(height: 12)
         ZStack(alignment: .top) {
             HStack(alignment: .top, spacing: 2) {
-                Text(elementType)
-                    .font(.pretendard(.regular, 12))
-                    .foregroundColor(.grayscale85)
-                    .padding(.top, 6)
-                Text("\(elementCount)개")
-                    .font(.pretendard(.bold, 12))
-                    .foregroundColor(.grayscale85)
-                    .padding(.top, 6)
+                if type == .userPage {
+                    HStack(spacing: 2) {
+                        Image(name: .fillLike)
+                            .renderingMode(.template)
+                            .foregroundColor(.grayscale70)
+                        Text("\(elementCount)명에게 도움을 줬어요.")
+                            .font(.pretendard(.semiBold, 12))
+                            .foregroundColor(.grayscale50)
+                    }
+                } else {
+                    Text(elementType)
+                        .font(.pretendard(.regular, 12))
+                        .foregroundColor(.grayscale85)
+                        .padding(.top, 6)
+                    Text("\(elementCount)개")
+                        .font(.pretendard(.bold, 12))
+                        .foregroundColor(.grayscale85)
+                        .padding(.top, 6)
+                }
                 Spacer()
                 SortSelectView(
-                    sortType: type == .review || type == .myInfoReview ? .review : .product,
+                    sortType: type == .userPage || type == .review || type == .myInfoReview ? .review : .product,
                     sortBy: $sortBy,
                     sortClicked: $sortClicked
                 )
@@ -68,7 +79,7 @@ struct SortView<Content: View>: View {
                 }
         }
         .onAppear {
-            if type == .eventProduct {
+            if type == .userPage {
                 elementType = "행사상품 총"
             } else if type == .review {
                 elementType = "새로운 리뷰"
@@ -89,7 +100,7 @@ struct SortView<Content: View>: View {
 }
 
 enum SortViewType {
-    case eventProduct
+    case userPage
     case review
     case searchResult
     case myInfoReview
