@@ -73,7 +73,7 @@ struct SortView<Content: View>: View {
             } else if type == .review {
                 elementType = "새로운 리뷰"
             } else if type == .searchResult {
-                elementType = "'\(keyword)' 검색 결과"
+                elementType = keyword.isEmpty ? "검색 결과" : "'\(keyword)' 검색 결과"
             } else if type == .myInfoReview {
                 elementType = "작성한 리뷰"
             } else if type == .myInfoLike {
@@ -81,6 +81,9 @@ struct SortView<Content: View>: View {
             } else if type == .myInfoBookmark {
                 elementType = "북마크한 제품"
             }
+        }
+        .onChange(of: keyword) { keyword in
+            elementType = keyword.isEmpty ? "검색 결과" : "'\(keyword)' 검색 결과"
         }
     }
 }
