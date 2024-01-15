@@ -109,6 +109,56 @@ class ReviewViewModel: ObservableObject {
             .store(in: &bag)
     }
     
+    func modifyReview(reviewID: Int, parameters: [String : Any]) {
+        apiManager.request(for: ReviewAPI.modifyReview(
+            id: reviewID,
+            parameters: parameters
+        ))
+        .sink { (result: Result<EmptyResponse, Error>) in
+            switch result {
+            case .success:
+                self.showEditView = false
+                self.showToastMessage = true
+                self.requestReviews()
+            case .failure:
+                self.showAlertMessage = true
+            }
+            self.isLoading = false
+        }
+        .store(in: &bag)
+    }
+    
+    func modifyPhotoReview(reviewID: Int, parameters: [String: Any], images: [UIImage]) {
+        let api = ImageAPI(images: images, folder: .review)
+        
+        apiManager.upload(api: api)
+            .flatMap { (response: Result<ImageResponse, Error>) ->
+                AnyPublisher<Result<EmptyResponse, Error>, Never> in
+                switch response {
+                case .success(let success):
+                    var updatedParameters = parameters
+                    updatedParameters["imageUrls"] = success.data
+                    
+                    let modifyReviewAPI = ReviewAPI.modifyReview(id: reviewID, parameters: updatedParameters)
+                    return self.apiManager.request(for: modifyReviewAPI)
+                case .failure(let failure):
+                    return Just.eraseToAnyPublisher(.init(.failure(failure)))()
+                }
+            }
+            .sink { result in
+                switch result {
+                case .success:
+                    self.showEditView = false
+                    self.showToastMessage = true
+                    self.requestReviews()
+                case .failure:
+                    self.showAlertMessage = true
+                }
+                self.isLoading = false
+            }
+            .store(in: &bag)
+    }
+    
     func requestReviews() {
         self.page = 0
         self.last = false

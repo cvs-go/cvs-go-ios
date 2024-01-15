@@ -38,7 +38,7 @@ extension ReviewAPI {
         case .writeReview(let id, _):
             return "/products/\(id)/reviews"
         case .modifyReview(let id, _):
-            return "reviews/\(id)"
+            return "/reviews/\(id)"
         case .reviewList:
             return "/reviews"
         case .productReview(let id, _):

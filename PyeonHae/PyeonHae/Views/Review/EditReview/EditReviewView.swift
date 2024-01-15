@@ -103,7 +103,6 @@ struct EditReviewView: View {
                         }
                     }
                 }
-                
                 if reviewViewModel.isLoading {
                     LoadingView()
                 }
@@ -159,23 +158,44 @@ struct EditReviewView: View {
                 .onTapGesture {
                     self.contentIsFocused = false
                     self.reviewViewModel.isLoading = true
-                    if let product = selectedProduct, !content.isEmpty {
-                        let parameters: [String : Any] = [
-                            "content": content,
-                            "rating": rating + 1
-                        ]
-                        
-                        if imageSelection.images.isEmpty {
-                            reviewViewModel.writeReview(
-                                productID: product.productId,
-                                parameters: parameters
-                            )
-                        } else {
-                            reviewViewModel.writePhotoReview(
-                                productID: product.productId,
-                                parameters: parameters,
-                                images: imageSelection.images
-                            )
+                    if type == .write {
+                        if let product = selectedProduct, !content.isEmpty {
+                            let parameters: [String : Any] = [
+                                "content": content,
+                                "rating": rating + 1
+                            ]
+                            if imageSelection.images.isEmpty {
+                                reviewViewModel.writeReview(
+                                    productID: product.productId,
+                                    parameters: parameters
+                                )
+                            } else {
+                                reviewViewModel.writePhotoReview(
+                                    productID: product.productId,
+                                    parameters: parameters,
+                                    images: imageSelection.images
+                                )
+                            }
+                        }
+                    } else {
+                        if let product = modifyProduct, !content.isEmpty {
+                            let parameters: [String : Any] = [
+                                "content": content,
+                                "rating": rating + 1,
+                                "imageUrls": []
+                            ]
+                            if imageSelection.images.isEmpty {
+                                reviewViewModel.modifyReview(
+                                    reviewID: product.0,
+                                    parameters: parameters
+                                )
+                            } else {
+                                reviewViewModel.modifyPhotoReview(
+                                    reviewID: product.0,
+                                    parameters: parameters,
+                                    images: imageSelection.images
+                                )
+                            }
                         }
                     }
                 }
