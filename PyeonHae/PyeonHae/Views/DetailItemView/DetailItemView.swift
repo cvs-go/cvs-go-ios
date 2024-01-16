@@ -21,14 +21,18 @@ struct DetailItemView: View {
     @Binding var selectedProduct: Product?
     @Binding var productList: Products?
     
+    private let clickedReviewId: Int?
+    
     init(
         searchViewModel: SearchViewModel,
         selectedProduct: Binding<Product?>,
-        productList: Binding<Products?> = .constant(nil)
+        productList: Binding<Products?> = .constant(nil),
+        clickedReviewId: Int? = nil
     ) {
         self.searchViewModel = searchViewModel
         self._selectedProduct = selectedProduct
         self._productList = productList
+        self.clickedReviewId = clickedReviewId
     }
     
     var body: some View {
@@ -42,47 +46,58 @@ struct DetailItemView: View {
                         isVisiable: $titleIsVisiable
                     )
                     ScrollView {
-                        if let product = searchViewModel.productDetail {
-                            ItemDetailView(
-                                productDetail: product.data,
-                                productTags: searchViewModel.productTags,
-                                isHeartMark: product.data.isLiked,
-                                isBookMark: product.data.isBookmarked,
-                                likeAction: {
-                                    searchViewModel.requestProductLike(productID: product.data.productId)
-                                },
-                                unlikeAction: {
-                                    searchViewModel.requestProductUnLike(productID: product.data.productId)
-                                    // 내정보에서 좋아요 취소 시 리스트에서 제거
-                                    if let _ = productList {
-                                        productList?.content.removeAll(where: { $0.productId == product.data.productId })
-                                        productList?.totalElements -= 1
+                        ScrollViewReader { proxy in
+                            if let product = searchViewModel.productDetail {
+                                ItemDetailView(
+                                    productDetail: product.data,
+                                    productTags: searchViewModel.productTags,
+                                    isHeartMark: product.data.isLiked,
+                                    isBookMark: product.data.isBookmarked,
+                                    likeAction: {
+                                        searchViewModel.requestProductLike(productID: product.data.productId)
+                                    },
+                                    unlikeAction: {
+                                        searchViewModel.requestProductUnLike(productID: product.data.productId)
+                                        // 내정보에서 좋아요 취소 시 리스트에서 제거
+                                        if let _ = productList {
+                                            productList?.content.removeAll(where: { $0.productId == product.data.productId })
+                                            productList?.totalElements -= 1
+                                        }
+                                    },
+                                    bookmarkAction: {
+                                        searchViewModel.requestProductBookmark(productID: product.data.productId)
+                                    },
+                                    unBookmarkAction: {
+                                        searchViewModel.requestProductUnBookmark(productID: product.data.productId)
                                     }
-                                },
-                                bookmarkAction: {
-                                    searchViewModel.requestProductBookmark(productID: product.data.productId)
-                                },
-                                unBookmarkAction: {
-                                    searchViewModel.requestProductUnBookmark(productID: product.data.productId)
-                                }
-                            )
-                            .background(
-                                GeometryReader { geometry -> Color in
-                                    let maxY = geometry.frame(in: .global).midY
-                                    DispatchQueue.main.async {
-                                        titleIsVisiable = maxY <= 0
+                                )
+                                .background(
+                                    GeometryReader { geometry -> Color in
+                                        let maxY = geometry.frame(in: .global).midY
+                                        DispatchQueue.main.async {
+                                            titleIsVisiable = maxY <= 0
+                                        }
+                                        return Color.clear
                                     }
-                                    return Color.clear
+                                )
+                            }
+                            Rectangle()
+                                .frame(height: 14)
+                                .foregroundColor(Color.grayscale10)
+                            DetailItemReviewsView
+                                .onAppear {
+                                    if let clickedReviewId = clickedReviewId {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                            withAnimation(.easeInOut(duration: 0.25)) {
+                                                proxy.scrollTo(clickedReviewId,anchor: .top)
+                                            }
+                                        }
+                                    }
                                 }
-                            )
+                            Rectangle()
+                                .frame(height: 30)
+                                .foregroundColor(Color.white)
                         }
-                        Rectangle()
-                            .frame(height: 14)
-                            .foregroundColor(Color.grayscale10)
-                        DetailItemReviewsView
-                        Rectangle()
-                            .frame(height: 30)
-                            .foregroundColor(Color.white)
                     }
                 }
                 VStack {
@@ -229,9 +244,10 @@ struct DetailItemView: View {
                                             }
                                         )
                                     }
+                                    Color.grayscale30.opacity(0.5).frame(height: 1)
+                                        .padding(.vertical, 16)
                                 }
-                                Color.grayscale30.opacity(0.5).frame(height: 1)
-                                    .padding(.vertical, 16)
+                                .id(review.reviewId)
                             }
                         }
                     }

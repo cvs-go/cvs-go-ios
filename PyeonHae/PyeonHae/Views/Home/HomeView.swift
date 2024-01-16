@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var showProductDetail = false
     @State private var selectedProduct: Product? = nil
     @State private var searchAgain = false
+    @State private var clickedReviewId = -1
     
     var body: some View {
         if homeViewModel.isLoading {
@@ -54,7 +55,8 @@ struct HomeView: View {
                             homeViewModel: homeViewModel,
                             searchViewModel: searchViewModel,
                             selectedProduct: $selectedProduct,
-                            showProductDetail: $showProductDetail
+                            showProductDetail: $showProductDetail,
+                            clickedReviewId: $clickedReviewId
                         )
                         Spacer().frame(height: 22)
                     }
@@ -78,7 +80,8 @@ struct HomeView: View {
                 .navigationDestination(isPresented: $showProductDetail) {
                     DetailItemView(
                         searchViewModel: searchViewModel,
-                        selectedProduct: $selectedProduct
+                        selectedProduct: $selectedProduct,
+                        clickedReviewId: clickedReviewId
                     )
                 }
             }

@@ -12,6 +12,7 @@ struct PopularReview: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @Binding var selectedProduct: Product?
     @Binding var showProductDetail: Bool
+    @Binding var clickedReviewId: Int
     
     var body: some View {
         VStack {
@@ -41,9 +42,11 @@ struct PopularReview: View {
                                 homeViewModel.requestProductUnBookmark(productID: review.productId.wrappedValue)
                             },
                             showDetailAction: {
+                                searchViewModel.reviewSortBy = "LIKE"
                                 searchViewModel.requestReview(productID: review.productId.wrappedValue)
                                 searchViewModel.requestProductDetail(productID: review.productId.wrappedValue)
                                 searchViewModel.requestProductTag(productId: review.productId.wrappedValue)
+                                clickedReviewId = review.reviewId.wrappedValue
                                 showProductDetail = true
                             }
                         )
