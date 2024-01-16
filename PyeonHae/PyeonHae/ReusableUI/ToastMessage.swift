@@ -14,6 +14,7 @@ struct ToastMessage: ViewModifier {
     let message: String
     @Binding var isShowing: Bool
     let config: Config
+    let bottomPadding: CGFloat
     
     func body(content: Content) -> some View {
         ZStack {
@@ -46,7 +47,7 @@ struct ToastMessage: ViewModifier {
             }
         }
         .padding(.horizontal, 16)
-        .padding(.bottom, 90)
+        .padding(.bottom, bottomPadding)
         .animation(config.animation, value: isShowing)
         .transition(config.transition)
     }

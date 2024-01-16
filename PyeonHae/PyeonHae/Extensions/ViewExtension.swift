@@ -16,13 +16,15 @@ extension View {
     
     func toast(message: String,
                isShowing: Binding<Bool>,
-               config: ToastMessage.Config = .init()
+               config: ToastMessage.Config = .init(),
+               bottomPadding: CGFloat = 50
     ) -> some View {
         self.modifier(
             ToastMessage(
                 message: message,
                 isShowing: isShowing,
-                config: config
+                config: config,
+                bottomPadding: bottomPadding
             )
         )
     }

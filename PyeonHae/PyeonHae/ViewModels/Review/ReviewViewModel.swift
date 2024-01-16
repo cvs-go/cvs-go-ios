@@ -21,6 +21,7 @@ class ReviewViewModel: ObservableObject {
     @Published var showToastMessage = false
     @Published var showAlertMessage = false
     @Published var errorMessage = String()
+    @Published var reviewIsModified = false
     
     @Published var isLoading = false
     @Published var userInfoLoading = false
@@ -109,7 +110,7 @@ class ReviewViewModel: ObservableObject {
             .store(in: &bag)
     }
     
-    func modifyReview(reviewID: Int, parameters: [String : Any]) {
+    func modifyReview(reviewID: Int, parameters: [String : Any], completion: @escaping () -> Void) {
         apiManager.request(for: ReviewAPI.modifyReview(
             id: reviewID,
             parameters: parameters
@@ -117,9 +118,8 @@ class ReviewViewModel: ObservableObject {
         .sink { (result: Result<EmptyResponse, Error>) in
             switch result {
             case .success:
-                self.showEditView = false
-                self.showToastMessage = true
-                self.requestReviews()
+                self.reviewIsModified = true
+                completion()
             case .failure:
                 self.showAlertMessage = true
             }
@@ -128,7 +128,7 @@ class ReviewViewModel: ObservableObject {
         .store(in: &bag)
     }
     
-    func modifyPhotoReview(reviewID: Int, parameters: [String: Any], images: [UIImage]) {
+    func modifyPhotoReview(reviewID: Int, parameters: [String: Any], images: [UIImage], completion: @escaping () -> Void) {
         let api = ImageAPI(images: images, folder: .review)
         
         apiManager.upload(api: api)
@@ -148,9 +148,8 @@ class ReviewViewModel: ObservableObject {
             .sink { result in
                 switch result {
                 case .success:
-                    self.showEditView = false
-                    self.showToastMessage = true
-                    self.requestReviews()
+                    self.reviewIsModified = true
+                    completion()
                 case .failure:
                     self.showAlertMessage = true
                 }

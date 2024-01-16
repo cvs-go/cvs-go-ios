@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MyReviewView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
+    @ObservedObject var reviewViewModel = ReviewViewModel()
     @State private var sortClicked = false
+    @State private var showToastMessage = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -21,18 +23,26 @@ struct MyReviewView: View {
                 content: {
                     if let reviewContent = myInfoViewModel.myReviewData {
                         ScrollView {
-                            ForEach(reviewContent.content.enumeratedArray(), id: \.element) { index, review in
-                                LazyVStack(alignment: .leading, spacing: 10) {
-                                    myReviewCell(review)
-                                    Color.grayscale30.opacity(0.5).frame(height: 1)
-                                        .padding(.bottom, 16)
-                                        .onAppear {
-                                            if reviewContent.content.count - 3 == index,
-                                               !myInfoViewModel.reviewLast {
-                                                myInfoViewModel.reviewPage += 1
-                                                myInfoViewModel.requestMoreMyReviewList()
-                                            }
+                            ScrollViewReader { proxy in
+                                ForEach(reviewContent.content.enumeratedArray(), id: \.element) { index, review in
+                                    LazyVStack(alignment: .leading, spacing: 10) {
+                                        VStack(spacing: 0) {
+                                            myReviewCell(review)
+                                            Color.grayscale30.opacity(0.5).frame(height: 1)
+                                                .padding(.bottom, 16)
+                                                .onAppear {
+                                                    if reviewContent.content.count - 3 == index,
+                                                       !myInfoViewModel.reviewLast {
+                                                        myInfoViewModel.reviewPage += 1
+                                                        myInfoViewModel.requestMoreMyReviewList()
+                                                    }
+                                                }
                                         }
+                                    }
+                                    .id(index)
+                                }
+                                .onChange(of: reviewViewModel.reviewIsModified) { _ in
+                                    proxy.scrollTo(0)
                                 }
                             }
                         }
@@ -43,12 +53,21 @@ struct MyReviewView: View {
                 }
             )
         }
+        .onChange(of: reviewViewModel.reviewIsModified) { _ in
+            myInfoViewModel.requestMyReviewList()
+            showToastMessage = true
+        }
+        .toast(
+            message: "리뷰가 수정되었습니다!",
+            isShowing: $showToastMessage
+        )
     }
     
     private func myReviewCell(_ review: UserReviewDataModel) -> some View {
         VStack {
             HStack(spacing: 0) {
                 ReviewContents(
+                    reviewViewModel: reviewViewModel,
                     reviewType: .myInfo,
                     reviewerId: review.reviewerId,
                     rating: review.reviewRating,

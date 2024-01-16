@@ -10,7 +10,7 @@ import Kingfisher
 import ExpandableText
 
 struct ReviewContents: View {
-    @ObservedObject var reviewViewModel = ReviewViewModel()
+    @ObservedObject var reviewViewModel: ReviewViewModel
     let reviewType: ReviewType
     let reviewerId: Int
     let rating: Int
@@ -31,8 +31,10 @@ struct ReviewContents: View {
     // 리뷰 삭제 및 수정 변수
     @State private var showActionSheet = false
     @State private var showDeleteAlert = false
+    @State private var showEditView = false
     
     init(
+        reviewViewModel: ReviewViewModel? = nil,
         reviewType: ReviewType = .normal,
         reviewerId: Int,
         rating: Int,
@@ -44,6 +46,7 @@ struct ReviewContents: View {
         unlikeAction: @escaping () -> Void,
         modifyProduct: (Int, String?, String, String)? = nil
     ) {
+        self.reviewViewModel = reviewViewModel ?? ReviewViewModel.init()
         self.reviewType = reviewType
         self.reviewerId = reviewerId
         self.rating = rating
@@ -145,14 +148,14 @@ struct ReviewContents: View {
         }
         .confirmationDialog(String(), isPresented: $showActionSheet) {
             Button("수정") {
-                reviewViewModel.showEditView = true
+                showEditView = true
             }
             Button("삭제", role: .destructive) {
                 showDeleteAlert = true
             }
             Button("닫기", role: .cancel) {}
         }
-        .fullScreenCover(isPresented: $reviewViewModel.showEditView) {
+        .fullScreenCover(isPresented: $showEditView) {
             EditReviewView(
                 type: .modify,
                 reviewViewModel: reviewViewModel,

@@ -12,6 +12,8 @@ class ImageSelection: ObservableObject {
 }
 
 struct EditReviewView: View {
+    @Environment(\.dismiss) var dismiss
+    
     private let type: EditReviewType
     @ObservedObject var reviewViewModel: ReviewViewModel
     
@@ -114,7 +116,8 @@ struct EditReviewView: View {
             }
             .toast(
                 message: "사진은 최대 3장까지 추가할 수 있습니다.",
-                isShowing: $showToast
+                isShowing: $showToast,
+                bottomPadding: 90
             )
             .showAlert(
                 message: reviewViewModel.errorMessage,
@@ -146,7 +149,7 @@ struct EditReviewView: View {
             Spacer().frame(width: 14)
             Image(name: .close)
                 .onTapGesture {
-                    reviewViewModel.showEditView = false
+                    dismiss()
                 }
             Spacer().frame(width: 9)
             Text(type == .write ? "리뷰 작성" : "리뷰 수정")
@@ -193,13 +196,17 @@ struct EditReviewView: View {
                                 reviewViewModel.modifyReview(
                                     reviewID: product.0,
                                     parameters: parameters
-                                )
+                                ) {
+                                    dismiss()
+                                }
                             } else {
                                 reviewViewModel.modifyPhotoReview(
                                     reviewID: product.0,
                                     parameters: parameters,
                                     images: imageSelection.images
-                                )
+                                ) {
+                                    dismiss()
+                                }
                             }
                         }
                     }
