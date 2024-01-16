@@ -17,8 +17,10 @@ struct ReviewView: View {
     let showDetailAction: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Group {
+        Button(action: {
+            showDetailAction()
+        }) {
+            VStack(alignment: .leading, spacing: 10) {
                 ReviewUserInfo(
                     reviewType: .popular,
                     profileUrl: review.reviewerProfileImageUrl,
@@ -28,38 +30,35 @@ struct ReviewView: View {
                     isFollowing: review.isFollowing,
                     reviewerId: review.reviewerId
                 )
-            }
-            HStack(spacing: 0) {
-                ReviewContents(
-                    reviewType: .popular,
-                    reviewerId: review.reviewerId,
-                    rating: review.reviewRating,
-                    imageUrls: review.reviewImageUrls,
-                    content: review.reviewContent,
-                    isReviewLiked: review.isReviewLiked,
-                    likeCount: review.reviewLikeCount,
-                    likeAction: {
-                        likeAction()
+                HStack(spacing: 0) {
+                    ReviewContents(
+                        reviewType: .popular,
+                        reviewerId: review.reviewerId,
+                        rating: review.reviewRating,
+                        imageUrls: review.reviewImageUrls,
+                        content: review.reviewContent,
+                        isReviewLiked: review.isReviewLiked,
+                        likeCount: review.reviewLikeCount,
+                        likeAction: {
+                            likeAction()
+                        },
+                        unlikeAction: {
+                            unlikeAction()
+                        }
+                    )
+                }
+                ReviewProduct(
+                    imageUrl: review.productImageUrl,
+                    manufacturer: review.productManufacturer,
+                    name: review.productName,
+                    isBookmarked: review.isProductBookmarked,
+                    bookmarkAction: {
+                        bookmarkAction()
                     },
-                    unlikeAction: {
-                        unlikeAction()
+                    unBookmarkAction:  {
+                        unBookmarkAction()
                     }
                 )
-            }
-            ReviewProduct(
-                imageUrl: review.productImageUrl,
-                manufacturer: review.productManufacturer,
-                name: review.productName,
-                isBookmarked: review.isProductBookmarked,
-                bookmarkAction: {
-                    bookmarkAction()
-                },
-                unBookmarkAction:  {
-                    unBookmarkAction()
-                }
-            )
-            .onTapGesture {
-                showDetailAction()
             }
         }
     }

@@ -97,12 +97,16 @@ struct ReviewContents: View {
                 }
             }
             if reviewType == .popular {
-                Text(content)
-                    .lineLimit(2)
-                    .font(.pretendard(.regular, 14))
-                    .foregroundColor(.grayscale85)
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 24)
+                VStack(alignment: .leading) {
+                    Text(content)
+                        .lineLimit(2)
+                        .font(.pretendard(.regular, 14))
+                        .foregroundColor(.grayscale85)
+                        .padding(.horizontal, 24)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                .frame(height: 42)
             } else {
                 ExpandableText(text: content)
                     .lineLimit(2)
