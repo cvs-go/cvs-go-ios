@@ -62,7 +62,7 @@ struct SelectProductView: View {
                 .frame(height: 64)
             } else {
                 Button(action: {
-                    showSearchProductView.toggle()
+                    showSearchProductView = true
                 }) {
                     if let selectedProduct = selectedProduct {
                         ZStack {

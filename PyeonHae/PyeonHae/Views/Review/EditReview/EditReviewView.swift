@@ -16,6 +16,7 @@ struct EditReviewView: View {
     
     private let type: EditReviewType
     @ObservedObject var reviewViewModel: ReviewViewModel
+    @ObservedObject var searchViewModel = SearchViewModel()
     
     @StateObject private var keyboardResponder = KeyboardResponder()
     @StateObject var imageSelection = ImageSelection()
@@ -130,6 +131,7 @@ struct EditReviewView: View {
         .blur(radius: showSearchProductView ? 2 : 0)
         .bottomSheet(isPresented: $showSearchProductView) {
             SearchProductView(
+                searchViewModel: searchViewModel,
                 showSearchProductView: $showSearchProductView,
                 selectedProduct: $selectedProduct
             )

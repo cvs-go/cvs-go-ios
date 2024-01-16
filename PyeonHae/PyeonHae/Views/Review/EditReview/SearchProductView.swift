@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct SearchProductView: View {
-    @ObservedObject var searchViewModel = SearchViewModel()
+    @ObservedObject var searchViewModel: SearchViewModel
     
     @State private var searchText = String()
     @Binding var showSearchProductView: Bool
     @Binding var selectedProduct: Product?
+    
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         VStack {
@@ -20,37 +22,60 @@ struct SearchProductView: View {
             Spacer().frame(height: 31)
             searchBar
                 .padding(.horizontal, 20)
-            if let searchResults = searchViewModel.searchResults {
-                ScrollView {
-                    LazyVStack {
-                        ForEach(searchResults.data.content, id: \.self) { product in
-                            VStack {
-                                SearchResultItemView(
-                                    selectedProduct: $selectedProduct,
-                                    isHeartMark: product.isLiked,
-                                    isBookMark: product.isBookmarked,
-                                    product: product,
-                                    productViewType: .review,
-                                    likeAction: {
-                                        searchViewModel.requestProductLike(productID: product.productId)
-                                    },
-                                    unlikeAction: {
-                                        searchViewModel.requestProductUnLike(productID: product.productId)
-                                    },
-                                    bookmarkAction: {
-                                        searchViewModel.requestProductBookmark(productID: product.productId)
-                                    },
-                                    unBookmarkAction: {
-                                        searchViewModel.requestProductUnBookmark(productID: product.productId)
+            GeometryReader { geometry in
+                if let searchResults = searchViewModel.searchResults {
+                    if searchResults.data.totalElements == 0 {
+                        VStack(alignment: .center, spacing: 0) {
+                            Image(name: .findProduct)
+                            Spacer().frame(height: 12)
+                            Text("찾으시는 상품이 없어요!")
+                                .font(.pretendard(.semiBold, 16))
+                                .foregroundColor(.grayscale85)
+                            Spacer().frame(height: 2)
+                            Text("다른 상품은 어떠신가요?")
+                                .font(.pretendard(.light, 14))
+                                .foregroundColor(.grayscale70)
+                        }
+                        .frame(width: geometry.size.width)
+                        .frame(height: isFocused ? geometry.size.height / 2 : geometry.size.height)
+                    }
+                    ScrollView {
+                        VStack {
+                            ForEach(searchResults.data.content.enumeratedArray(), id: \.element) { index, product in
+                                LazyVStack {
+                                    SearchResultItemView(
+                                        selectedProduct: $selectedProduct,
+                                        isHeartMark: product.isLiked,
+                                        isBookMark: product.isBookmarked,
+                                        product: product,
+                                        productViewType: .review,
+                                        likeAction: {
+                                            searchViewModel.requestProductLike(productID: product.productId)
+                                        },
+                                        unlikeAction: {
+                                            searchViewModel.requestProductUnLike(productID: product.productId)
+                                        },
+                                        bookmarkAction: {
+                                            searchViewModel.requestProductBookmark(productID: product.productId)
+                                        },
+                                        unBookmarkAction: {
+                                            searchViewModel.requestProductUnBookmark(productID: product.productId)
+                                        }
+                                    )
+                                    .onAppear {
+                                        if let data = searchViewModel.searchResults?.data,
+                                           data.content.count - 3 == index, !data.last {
+                                            searchViewModel.page += 1
+                                            searchViewModel.searchMoreProducts()
+                                        }
                                     }
-                                )
+                                }
+                                .padding(.vertical, 10)
                             }
-                            .padding(.vertical, 10)
                         }
                     }
-                }
-            } else {
-                GeometryReader { geometry in
+                    .scrollDismissesKeyboard(.immediately)
+                } else {
                     VStack(alignment: .center, spacing: 0) {
                         Image(name: .findProduct)
                         Spacer().frame(height: 12)
@@ -62,7 +87,8 @@ struct SearchProductView: View {
                             .font(.pretendard(.light, 14))
                             .foregroundColor(.grayscale70)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .frame(width: geometry.size.width)
+                    .frame(height: isFocused ? geometry.size.height / 2 : geometry.size.height)
                 }
             }
         }
@@ -71,6 +97,9 @@ struct SearchProductView: View {
                 selectedProduct = product
                 showSearchProductView = false
             }
+        }
+        .onDisappear {
+            searchViewModel.searchResults = nil
         }
     }
     
@@ -106,6 +135,12 @@ struct SearchProductView: View {
             .font(.pretendard(.regular, 16))
             .background(Color.grayscale10)
             .cornerRadius(10)
+            .focused($isFocused)
+            .submitLabel(.done)
+            .onSubmit {
+                searchViewModel.keyword = searchText
+                searchViewModel.searchProducts()
+            }
             Spacer()
             Image(name: .searchIcon)
                 .resizable()
@@ -114,6 +149,7 @@ struct SearchProductView: View {
                 .padding(.vertical, 10)
                 .padding(.trailing, 20)
                 .onTapGesture {
+                    isFocused = false
                     searchViewModel.keyword = searchText
                     searchViewModel.searchProducts()
                 }
