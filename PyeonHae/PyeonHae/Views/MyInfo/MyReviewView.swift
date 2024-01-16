@@ -26,18 +26,14 @@ struct MyReviewView: View {
                             ScrollViewReader { proxy in
                                 ForEach(reviewContent.content.enumeratedArray(), id: \.element) { index, review in
                                     LazyVStack(alignment: .leading, spacing: 10) {
-                                        VStack(spacing: 0) {
-                                            myReviewCell(review)
-                                            Color.grayscale30.opacity(0.5).frame(height: 1)
-                                                .padding(.bottom, 16)
-                                                .onAppear {
-                                                    if reviewContent.content.count - 3 == index,
-                                                       !myInfoViewModel.reviewLast {
-                                                        myInfoViewModel.reviewPage += 1
-                                                        myInfoViewModel.requestMoreMyReviewList()
-                                                    }
+                                        myReviewCell(review)
+                                            .onAppear {
+                                                if reviewContent.content.count - 3 == index,
+                                                   !myInfoViewModel.reviewLast {
+                                                    myInfoViewModel.reviewPage += 1
+                                                    myInfoViewModel.requestMoreMyReviewList()
                                                 }
-                                        }
+                                            }
                                     }
                                     .id(index)
                                 }
@@ -101,6 +97,8 @@ struct MyReviewView: View {
                     myInfoViewModel.requestProductUnBookmark(productID: review.productId)
                 }
             )
+            Color.grayscale30.opacity(0.5).frame(height: 1)
+                .padding(.bottom, 16)
         }
     }
 }

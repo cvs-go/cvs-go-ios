@@ -48,8 +48,6 @@ struct UserPageView: View {
                                         ForEach(userReviews.content.enumeratedArray(), id: \.element) { index, review in
                                             LazyVStack {
                                                 ReviewCell(review)
-                                                Color.grayscale30.opacity(0.5).frame(height: 1)
-                                                    .padding(.bottom, 16)
                                                     .onAppear {
                                                         if userReviews.content.count - 3 == index,
                                                            !reviewViewModel.userLast {
@@ -107,6 +105,8 @@ struct UserPageView: View {
                     reviewViewModel.requestProductUnBookmark(productID: review.productId)
                 }
             )
+            Color.grayscale30.opacity(0.5).frame(height: 1)
+                .padding(.bottom, 16)
         }
     }
 }
