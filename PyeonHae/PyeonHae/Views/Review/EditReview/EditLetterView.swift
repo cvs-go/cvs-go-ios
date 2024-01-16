@@ -18,8 +18,7 @@ struct EditLetterView: View {
                 TextEditor(text: $content)
                     .font(.pretendard(.regular, 16))
                     .foregroundColor(.grayscale85)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 20)
+                    .padding(EdgeInsets(top: 20, leading: 15, bottom: 36, trailing: 15))
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
                     .focused($isFocused)
                 if content.isEmpty {

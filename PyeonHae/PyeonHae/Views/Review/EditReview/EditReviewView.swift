@@ -95,10 +95,15 @@ struct EditReviewView: View {
                                     .font(.pretendard(.medium, 16))
                                     .foregroundColor(.grayscale70)
                                 Spacer()
+                                Image(systemName: "keyboard.chevron.compact.down")
+                                    .renderingMode(.template)
+                                    .foregroundColor(.grayscale70)
+                                    .onTapGesture {
+                                        contentIsFocused = false
+                                    }
                             }
                             .padding(.horizontal, 22)
                             .padding(.vertical, 12)
-                            .frame(height: 44)
                             .background(Color.grayscale20)
                         }
                     }
@@ -151,7 +156,7 @@ struct EditReviewView: View {
             Text("완료")
                 .font(.pretendard(.bold, 16))
                 .foregroundColor(
-                    content.isEmpty || selectedProduct == nil
+                    (content.isEmpty || selectedProduct == nil && type == .write)
                     ? .grayscale50
                     : .red100
                 )
