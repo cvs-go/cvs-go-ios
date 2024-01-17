@@ -14,7 +14,7 @@ class SearchViewModel: ObservableObject {
     // api 통신으로 받아온 데이터
     @Published var searchResults: ProductModel?
     @Published var productDetail: ProductDetail?
-    @Published var reviewDatas: ReviewDatas?
+    @Published var reviewDatas: ReviewDatas? = nil
     @Published var productTags: [ProductTagsModel]?
 
     // 검색 목록 파라미터
@@ -31,6 +31,7 @@ class SearchViewModel: ObservableObject {
     @Published var reviewSortBy: String = String()
     @Published var tagIds: [Int] = []
     @Published var ratings: [String] = []
+    @Published var reviewPage: Int = 0
     
     // 로딩뷰를 위한 변수
     @Published var productDataLoaded = false
@@ -186,7 +187,9 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    // 제품 상세 화면 리뷰
     func requestReview(productID: Int) {
+        self.reviewPage = 0
         let parameters: [String : Any] = [
             "sortBy": reviewSortBy,
             "tagIds": tagIds.toParameter(),
@@ -199,6 +202,27 @@ class SearchViewModel: ObservableObject {
                 case .success(let result):
                     self.reviewDatas = result.data
                     self.reviewDataLoaded = true
+                case .failure(let error):
+                    print(error)
+                }
+            }.store(in: &bag)
+    }
+    
+    // 제품 상세 화면 리뷰 페이징
+    func requestMoreReview(productID: Int) {
+        let parameters: [String : Any] = [
+            "sortBy": reviewSortBy,
+            "tagIds": tagIds.toParameter(),
+            "ratings": ratings.toParameter(),
+            "page": reviewPage
+        ]
+        
+        apiManager.request(for: ReviewAPI.productReview(id: productID, parameters: parameters))
+            .sink { (result: Result<ProductReviewsModel, Error>) in
+                switch result {
+                case .success(let result):
+                    self.reviewDatas?.content += result.data.content
+                    self.reviewDatas?.last = result.data.last
                 case .failure(let error):
                     print(error)
                 }

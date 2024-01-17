@@ -9,15 +9,15 @@ import Foundation
 
 struct ProductReviewsModel: Codable {
     let timestamp: String
-    let data: ReviewDatas?
+    let data: ReviewDatas
 }
 
 struct ReviewDatas: Codable {
-    let content: [ReviewContent]?
+    var content: [ReviewContent]
     let pageable: Pageable
     let totalElements: Int
     let totalPages: Int
-    let last: Bool
+    var last: Bool
     let size: Int
     let number: Int
     let sort: ReviewSort

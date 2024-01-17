@@ -189,8 +189,7 @@ struct DetailItemView: View {
                 .offset(y: -38)
                 .zIndex(1)
                 .hidden(showFilter)
-                if let reviewDatas = searchViewModel.reviewDatas,
-                   let content = reviewDatas.content {
+                if let reviewDatas = searchViewModel.reviewDatas {
                     if reviewDatas.totalElements == 0 {
                         VStack {
                             Spacer().frame(height: 53)
@@ -207,8 +206,8 @@ struct DetailItemView: View {
                         }
                     } else {
                         VStack(alignment: .leading, spacing: 0) {
-                            ForEach(content, id: \.self) { review in
-                                Group {
+                            ForEach(reviewDatas.content.enumeratedArray(), id: \.element) { index, review in
+                                LazyVStack {
                                     ReviewUserInfo(
                                         reviewType: .normal,
                                         profileUrl: review.reviewerProfileImageUrl,
@@ -246,6 +245,13 @@ struct DetailItemView: View {
                                     }
                                     Color.grayscale30.opacity(0.5).frame(height: 1)
                                         .padding(.vertical, 16)
+                                        .onAppear {
+                                            if reviewDatas.content.count - 3 == index, !reviewDatas.last,
+                                               let productId = selectedProduct?.productId {
+                                                searchViewModel.reviewPage += 1
+                                                searchViewModel.requestMoreReview(productID: productId)
+                                            }
+                                        }
                                 }
                                 .id(review.reviewId)
                             }

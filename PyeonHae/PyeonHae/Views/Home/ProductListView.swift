@@ -75,7 +75,7 @@ struct ProductListView: View {
                         }
                     }
                     .offset(y: 40)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 40)
                 }
             }
         }
