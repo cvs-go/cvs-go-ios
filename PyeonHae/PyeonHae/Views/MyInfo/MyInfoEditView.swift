@@ -21,98 +21,117 @@ struct MyInfoEditView: View {
     @State private var selectedTags: [TagModel] = []
     @StateObject var imageSelect = ImageSelect()
     @Binding var showEditView: Bool
+    @FocusState private var isFocused
     
     var body: some View {
-        ZStack {
-            VStack {
-                NavigationBar(type: .close, title: "내정보 수정")
+        VStack {
+            NavigationBar(type: .close, title: "내정보 수정")
+            ScrollView {
                 Spacer().frame(height: 60)
-                Button(action: {
-                    showImagePicker.toggle()
-                }) {
-                    if imageSelect.images.isEmpty {
-                        Image(name: .emptyImage)
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                    } else {
-                        Image(uiImage: imageSelect.images.first ?? UIImage())
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                    }
-                }
-                .cornerRadius(10)
-                .buttonStyle(.plain)
+                imageView
                 Spacer().frame(height: 30)
-                HStack {
-                    TextFieldWithTitle(text: $nickName, title: "닉네임", placeholder: "2자 이상 8자 이내의 닉네임을 입력해주세요.", isSecure: false, type: .nickname, state: $nickNameFieldState)
-                }
-                .padding(.horizontal, 20)
+                textFieldView
                 Spacer().frame(height: 50)
-                HStack {
-                    Text("유저태그")
-                        .font(.pretendard(.bold, 14))
-                        .foregroundColor(.grayscale100)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-                WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { tag in
-                    SelectableButton(
-                        text: tag.name,
-                        isSelected: selectedTags.contains { $0 == tag }
-                    )
-                    .onTapGesture {
-                        handleTagSelection(tag)
-                    }
-                }
-                .padding(.horizontal, 20)
+                userTagView
                 Spacer()
             }
-            VStack {
-                Spacer()
-                HStack {
-                    Button(action: {
-                        if imageSelect.images.isEmpty {
-                            myInfoViewModel.requestEditInfo(
-                                nickname: nickName,
-                                tagIds: selectedTags.map { $0.id },
-                                completion: {
-                                    showEditView = false
-                                }
-                            )
-                        } else {
-                            myInfoViewModel.requestEditInfoWithImage(
-                                nickname: nickName,
-                                tagIds: selectedTags.map { $0.id },
-                                images: imageSelect.images,
-                                completion: {
-                                    showEditView = false
-                                }
-                            )
-                        }
-                    }) {
-                        ZStack {
-                            if(keyboardResponder.currentHeight > 0) {
-                                Rectangle()
-                                    .foregroundColor(.red100)
-                            } else {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(.red100)
-                            }
-                            Text("수정완료")
-                                .font(.pretendard(.bold, 18))
-                                .foregroundColor(.white)
-                        }
-                        .frame(height: 50)
-                    }
-                }
-                .padding(.horizontal, keyboardResponder.currentHeight > 0 ? 0 : 20)
-            }
+            completeButton
         }
         .sheet(isPresented: $showImagePicker) {
             MyInfoEditImagePicker(images: $imageSelect.images)
         }
         .onAppear {
             initUserInfo()
+        }
+    }
+    
+    var imageView: some View {
+        Button(action: {
+            showImagePicker.toggle()
+        }) {
+            if imageSelect.images.isEmpty {
+                Image(name: .emptyImage)
+                    .resizable()
+                    .frame(width: 120, height: 120)
+            } else {
+                Image(uiImage: imageSelect.images.first ?? UIImage())
+                    .resizable()
+                    .frame(width: 120, height: 120)
+            }
+        }
+        .cornerRadius(10)
+        .buttonStyle(.plain)
+    }
+    
+    var textFieldView: some View {
+        HStack {
+            TextFieldWithTitle(
+                text: $nickName, title: "닉네임",
+                placeholder: "2자 이상 8자 이내의 닉네임을 입력해주세요.",
+                isSecure: false,
+                type: .nickname,
+                state: $nickNameFieldState
+            )
+            .focused($isFocused)
+        }
+        .padding(.horizontal, 20)
+    }
+    
+    var userTagView: some View {
+        VStack {
+            HStack {
+                Text("유저태그")
+                    .font(.pretendard(.bold, 14))
+                    .foregroundColor(.grayscale100)
+                Spacer()
+            }
+            WrappingHStack(UserShared.tags, id: \.self, lineSpacing: 6) { tag in
+                SelectableButton(
+                    text: tag.name,
+                    isSelected: selectedTags.contains { $0 == tag }
+                )
+                .onTapGesture {
+                    handleTagSelection(tag)
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+    }
+    
+    var completeButton: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    if imageSelect.images.isEmpty {
+                        myInfoViewModel.requestEditInfo(
+                            nickname: nickName,
+                            tagIds: selectedTags.map { $0.id },
+                            completion: {
+                                showEditView = false
+                            }
+                        )
+                    } else {
+                        myInfoViewModel.requestEditInfoWithImage(
+                            nickname: nickName,
+                            tagIds: selectedTags.map { $0.id },
+                            images: imageSelect.images,
+                            completion: {
+                                showEditView = false
+                            }
+                        )
+                    }
+                }) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: isFocused || !UIDevice().hasNotch ? 0 : 10)
+                            .foregroundColor(.red100)
+                        Text("수정완료")
+                            .font(.pretendard(.bold, 18))
+                            .foregroundColor(.white)
+                    }
+                    .frame(height: 50)
+                }
+            }
+            .padding(.horizontal, isFocused || !UIDevice().hasNotch ? 0 : 20)
         }
     }
     
