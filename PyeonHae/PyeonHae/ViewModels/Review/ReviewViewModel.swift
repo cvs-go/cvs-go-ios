@@ -21,7 +21,9 @@ class ReviewViewModel: ObservableObject {
     @Published var showToastMessage = false
     @Published var showAlertMessage = false
     @Published var errorMessage = String()
+    @Published var needToRefresh = false
     @Published var reviewIsModified = false
+    @Published var reviewIsDeleted = false
     
     @Published var isLoading = false
     @Published var userInfoLoading = false
@@ -118,6 +120,7 @@ class ReviewViewModel: ObservableObject {
         .sink { (result: Result<EmptyResponse, Error>) in
             switch result {
             case .success:
+                self.needToRefresh = true
                 self.reviewIsModified = true
                 completion()
             case .failure:
@@ -148,6 +151,7 @@ class ReviewViewModel: ObservableObject {
             .sink { result in
                 switch result {
                 case .success:
+                    self.needToRefresh = true
                     self.reviewIsModified = true
                     completion()
                 case .failure:
@@ -156,6 +160,21 @@ class ReviewViewModel: ObservableObject {
                 self.isLoading = false
             }
             .store(in: &bag)
+    }
+    
+    func requestDeleteReview(reviewID: Int) {
+        apiManager.request(for: ReviewAPI.deleteReview(id: reviewID))
+        .sink { (result: Result<EmptyResponse, Error>) in
+            switch result {
+            case .success:
+                self.needToRefresh = true
+                self.reviewIsDeleted = true
+            case .failure:
+                self.showAlertMessage = true
+            }
+            self.isLoading = false
+        }
+        .store(in: &bag)
     }
     
     func requestReviews() {

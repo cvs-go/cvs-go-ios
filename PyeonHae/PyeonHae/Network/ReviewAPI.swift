@@ -16,6 +16,7 @@ enum ReviewAPI: API {
     case userReviews(id: Int, parameters: [String : Any])
     case like(id: Int)
     case unlike(id: Int)
+    case deleteReview(id: Int)
 }
 
 extension ReviewAPI {
@@ -28,7 +29,7 @@ extension ReviewAPI {
             return .get
         case .modifyReview:
             return .put
-        case .unlike:
+        case .unlike, .deleteReview:
             return .delete
         }
     }
@@ -47,6 +48,8 @@ extension ReviewAPI {
             return "/users/\(id)/reviews"
         case .like(let id), .unlike(let id):
             return "/reviews/\(id)/likes"
+        case .deleteReview(let id):
+            return "/reviews/\(id)"
         }
     }
     
@@ -57,7 +60,7 @@ extension ReviewAPI {
             return parameters
         case .reviewList(let parameters):
             return parameters
-        case .like, .unlike:
+        case .like, .unlike, .deleteReview:
             return nil
         }
     }

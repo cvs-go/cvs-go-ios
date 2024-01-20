@@ -175,7 +175,9 @@ struct ReviewContents: View {
             secondaryButtonText: "삭제",
             showAlert: $showDeleteAlert,
             destructiveAction: {
-                // TODO: 삭제 api 추가
+                if let modifyProduct = modifyProduct {
+                    reviewViewModel.requestDeleteReview(reviewID: modifyProduct.0)
+                }
             }
         )
     }

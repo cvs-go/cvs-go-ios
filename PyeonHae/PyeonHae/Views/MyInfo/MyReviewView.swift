@@ -11,7 +11,8 @@ struct MyReviewView: View {
     @ObservedObject var myInfoViewModel: MyInfoViewModel
     @ObservedObject var reviewViewModel = ReviewViewModel()
     @State private var sortClicked = false
-    @State private var showToastMessage = false
+    @State private var showModifiedMessage = false
+    @State private var showDeletedMessage = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -37,7 +38,7 @@ struct MyReviewView: View {
                                     }
                                     .id(index)
                                 }
-                                .onChange(of: reviewViewModel.reviewIsModified) { _ in
+                                .onChange(of: reviewViewModel.needToRefresh) { _ in
                                     proxy.scrollTo(0)
                                 }
                             }
@@ -49,13 +50,22 @@ struct MyReviewView: View {
                 }
             )
         }
-        .onChange(of: reviewViewModel.reviewIsModified) { _ in
+        .onChange(of: reviewViewModel.needToRefresh) { _ in
             myInfoViewModel.requestMyReviewList()
-            showToastMessage = true
+        }
+        .onChange(of: reviewViewModel.reviewIsModified) { _ in
+            self.showModifiedMessage = true
+        }
+        .onChange(of: reviewViewModel.reviewIsDeleted) { _ in
+            self.showDeletedMessage = true
         }
         .toast(
-            message: "리뷰가 수정되었습니다!",
-            isShowing: $showToastMessage
+            message:  "리뷰가 수정되었습니다!",
+            isShowing: $showModifiedMessage
+        )
+        .toast(
+            message:  "리뷰가 삭제되었습니다!",
+            isShowing: $showDeletedMessage
         )
     }
     
