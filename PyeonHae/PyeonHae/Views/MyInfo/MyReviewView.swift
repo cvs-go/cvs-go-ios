@@ -23,10 +23,10 @@ struct MyReviewView: View {
                 sortClicked: $sortClicked,
                 content: {
                     if let reviewContent = myInfoViewModel.myReviewData {
-                        ScrollView {
+                        DefaultList {
                             ScrollViewReader { proxy in
                                 ForEach(reviewContent.content.enumeratedArray(), id: \.element) { index, review in
-                                    LazyVStack(alignment: .leading, spacing: 10) {
+                                    VStack(alignment: .leading, spacing: 10) {
                                         myReviewCell(review)
                                             .onAppear {
                                                 if reviewContent.content.count - 3 == index,

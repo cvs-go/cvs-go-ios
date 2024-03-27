@@ -20,7 +20,7 @@ struct UserPageView: View {
             } else {
                 VStack {
                     NavigationBar(title: "회원 정보")
-                    ScrollView {
+                    DefaultList {
                         UserInfoView(
                             userInfo: reviewViewModel.userInfo,
                             userInfoType: selectedReviewerId == UserShared.userId ? .me : .other,
@@ -46,16 +46,14 @@ struct UserPageView: View {
                                 content: {
                                     VStack {
                                         ForEach(userReviews.content.enumeratedArray(), id: \.element) { index, review in
-                                            LazyVStack {
-                                                ReviewCell(review)
-                                                    .onAppear {
-                                                        if userReviews.content.count - 3 == index,
-                                                           !reviewViewModel.userLast {
-                                                            reviewViewModel.userPage += 1
-                                                            reviewViewModel.requestMoreUserReviewList(userId: selectedReviewerId)
-                                                        }
+                                            ReviewCell(review)
+                                                .onAppear {
+                                                    if userReviews.content.count - 3 == index,
+                                                       !reviewViewModel.userLast {
+                                                        reviewViewModel.userPage += 1
+                                                        reviewViewModel.requestMoreUserReviewList(userId: selectedReviewerId)
                                                     }
-                                            }
+                                                }
                                         }
                                     }
                                 },

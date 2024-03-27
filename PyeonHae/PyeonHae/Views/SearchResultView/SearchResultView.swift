@@ -74,9 +74,9 @@ struct SearchResultView: View {
                                     }
                                     .frame(width: geometry.size.width, height: geometry.size.height)
                                 } else {
-                                    ScrollView {
+                                    DefaultList {
                                         ForEach(searchViewModel.searchResults?.data.content.enumeratedArray() ?? [], id: \.element) { index, product in
-                                            LazyVStack {
+                                            VStack {
                                                 SearchResultItemView(
                                                     selectedProduct: $selectedProduct,
                                                     isHeartMark: product.isLiked,
@@ -100,12 +100,12 @@ struct SearchResultView: View {
                                                         selectedProduct?.isBookmarked = true
                                                     }
                                                 )
-                                                .onAppear {
-                                                    if let data = searchViewModel.searchResults?.data,
-                                                       data.content.count - 3 == index, !data.last {
-                                                        searchViewModel.page += 1
-                                                        searchViewModel.searchMoreProducts()
-                                                    }
+                                            }
+                                            .onAppear {
+                                                if let data = searchViewModel.searchResults?.data,
+                                                   data.content.count - 3 == index, !data.last {
+                                                    searchViewModel.page += 1
+                                                    searchViewModel.searchMoreProducts()
                                                 }
                                             }
                                             .padding(.vertical, 10)

@@ -39,10 +39,10 @@ struct SearchProductView: View {
                         .frame(width: geometry.size.width)
                         .frame(height: isFocused ? geometry.size.height / 2 : geometry.size.height)
                     }
-                    ScrollView {
+                     DefaultList {
                         VStack {
                             ForEach(searchResults.data.content.enumeratedArray(), id: \.element) { index, product in
-                                LazyVStack {
+                                VStack {
                                     SearchResultItemView(
                                         selectedProduct: $selectedProduct,
                                         isHeartMark: product.isLiked,

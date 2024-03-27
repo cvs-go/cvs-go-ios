@@ -22,9 +22,9 @@ struct MyLikeView: View {
                 sortClicked: $sortClicked,
                 content: {
                     if let myLikeData = myInfoViewModel.myLikeData {
-                        ScrollView {
+                        DefaultList {
                             ForEach(myLikeData.content.enumeratedArray(), id: \.element) { index, product in
-                                LazyVStack {
+                                VStack {
                                     SearchResultItemView(
                                         selectedProduct: $selectedProduct,
                                         isHeartMark: product.isLiked,

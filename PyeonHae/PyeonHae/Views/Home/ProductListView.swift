@@ -38,11 +38,11 @@ struct ProductListView: View {
                     }
                 } else {
                     VStack {
-                        ScrollView {
+                        DefaultList {
                             ForEach(
                                 type == .event ? homeViewModel.eventProducts.enumeratedArray() : homeViewModel.popularProducts.enumeratedArray(),
                                 id: \.element) { index, product in
-                                    LazyVStack {
+                                    VStack {
                                         SearchResultItemView(
                                             selectedProduct: $selectedProduct,
                                             isHeartMark: product.isLiked,

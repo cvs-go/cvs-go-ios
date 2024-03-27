@@ -45,7 +45,7 @@ struct DetailItemView: View {
                         title: searchViewModel.productDetail?.data.productName ?? String(),
                         isVisiable: $titleIsVisiable
                     )
-                    ScrollView {
+                    DefaultList {
                         ScrollViewReader { proxy in
                             if let product = searchViewModel.productDetail {
                                 ItemDetailView(
@@ -207,7 +207,7 @@ struct DetailItemView: View {
                     } else {
                         VStack(alignment: .leading, spacing: 0) {
                             ForEach(reviewDatas.content.enumeratedArray(), id: \.element) { index, review in
-                                LazyVStack {
+                                VStack {
                                     ReviewUserInfo(
                                         reviewType: .normal,
                                         profileUrl: review.reviewerProfileImageUrl,

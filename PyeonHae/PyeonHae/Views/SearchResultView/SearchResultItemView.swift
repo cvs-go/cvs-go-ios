@@ -77,18 +77,27 @@ struct SearchResultItemView: View {
                             .foregroundColor(.grayscale100)
                         Spacer()
                         Group {
-                            Button(action: {
-                                isLikedValue.toggle()
-                                isLikedValue ? likeAction() : unlikeAction()
-                            }){
-                                isLikedValue ? Image(name: .heartMarkFill) : Image(name: .heartMark)
-                            }
-                            Button(action: {
-                                isBookMarkedValue.toggle()
-                                isBookMarkedValue ? bookmarkAction() : unBookmarkAction()
-                            }){
-                                isBookMarkedValue ? Image(name: .bookMarkFill) : Image(name: .bookMark)
-                            }
+                            Image(name: isLikedValue ? .heartMarkFill : .heartMark)
+                                .onTapGesture {
+                                    isLikedValue.toggle()
+                                    isLikedValue ? likeAction() : unlikeAction()
+                                }
+                            Image(name: isBookMarkedValue ? .bookMarkFill : .bookMark)
+                                .onTapGesture {
+                                    isBookMarkedValue.toggle()
+                                    isBookMarkedValue ? bookmarkAction() : unBookmarkAction()
+                                }
+//                            Button(action: {
+
+//                            }){
+//                                isLikedValue ? Image(name: .heartMarkFill) : Image(name: .heartMark)
+//                            }
+//                            Button(action: {
+//                                isBookMarkedValue.toggle()
+//                                isBookMarkedValue ? bookmarkAction() : unBookmarkAction()
+//                            }){
+//                                isBookMarkedValue ? Image(name: .bookMarkFill) : Image(name: .bookMark)
+//                            }
                         }
                         .hidden(productViewType == .review ? true : false)
                     }
